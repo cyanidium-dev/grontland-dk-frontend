@@ -1,30 +1,49 @@
-import { Container, InfoBox, Star } from "@/components/ui";
+import Image from "next/image";
+
+import { Container, Heading, StarChip } from "@/components/ui";
 import { ONETEAM } from "@/constants/home";
 
-/* SHELL — "Flere fag samlet i én plan": intro + 4 benefit cards. */
+/* OneTeam ("Flere fag samlet i én plan") — Figma #1009:1604 (file zq0o0GOkllffjjIomgnQ5p).
+   Full-bleed photo + gradient; left intro 340px; right StarChip stack 420px. */
 export function OneTeam() {
   return (
-    <section className="py-16 xl:py-24">
-      <Container className="grid gap-12 xl:grid-cols-2 xl:gap-16">
-        <div className="max-w-[420px]">
-          <h2 className="mb-6 font-display text-[28px] font-bold uppercase leading-none text-pine xl:text-[44px]">
-            {ONETEAM.h2}
-          </h2>
-          <p className="font-light leading-[1.5] text-pine/70 xl:text-[16px]">{ONETEAM.intro}</p>
+    <section className="relative overflow-hidden py-16 text-white xl:min-h-[580px] xl:py-24">
+      <Image
+        src={ONETEAM.background.src}
+        alt={ONETEAM.background.alt}
+        fill
+        className="object-cover"
+        sizes="100vw"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-[linear-gradient(104.68deg,rgba(0,0,0,0.6)_25.04%,rgba(0,0,0,0)_108.03%)]"
+      />
+      <Container className="relative z-10">
+        <div className="mx-auto flex max-w-[1200px] flex-col gap-10 xl:flex-row xl:items-center xl:gap-[440px]">
+          <div className="max-w-[340px] shrink-0">
+            <Heading as="h2" size="section" className="text-white">
+              {ONETEAM.h2}
+            </Heading>
+            <div aria-hidden className="my-6 size-[26px] rounded-full bg-leaf" />
+            <p className="font-light leading-[1.35] text-white/90 xl:text-[18px]">
+              {ONETEAM.intro}
+            </p>
+          </div>
+          <ul className="flex w-full flex-col gap-3 xl:w-[420px] xl:shrink-0">
+            {ONETEAM.cards.map((card) => (
+              <li key={card.title}>
+                <StarChip
+                  text={`${card.title} — ${card.desc}`}
+                  boxVariant="light"
+                  starVariant="leaf"
+                  textSize="sm"
+                  className="h-full border border-line"
+                />
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul className="grid gap-3 sm:grid-cols-2">
-          {ONETEAM.cards.map((card) => (
-            <li key={card.title}>
-              <InfoBox variant="mist" className="h-full border border-line p-5">
-                <Star variant="leaf" className="mb-3 size-8" />
-                <h3 className="mb-1.5 text-[15px] font-bold uppercase leading-tight text-pine">
-                  {card.title}
-                </h3>
-                <p className="text-sm font-light leading-relaxed text-pine/60">{card.desc}</p>
-              </InfoBox>
-            </li>
-          ))}
-        </ul>
       </Container>
     </section>
   );

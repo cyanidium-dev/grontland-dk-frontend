@@ -83,6 +83,10 @@ export const ONETEAM = {
   h2: "Flere fag samlet i én plan",
   intro:
     "Når murerarbejde, tømrerarbejde, maling, belægning og udearealer planlægges samlet, bliver processen lettere for kunden. Du får færre kontaktpersoner, mindre koordinering og en tydeligere vej fra start til aflevering.",
+  background: {
+    src: "/images/cases/oneteam-bg.jpg",
+    alt: "Anlagt græsplæne med stenbelægning og beplantning",
+  },
   cards: [
     { title: "Én kontaktperson", desc: "Du ved, hvem der har ansvar for projektet." },
     { title: "Mindre koordinering", desc: "Du slipper for at styre flere håndværkere separat." },
