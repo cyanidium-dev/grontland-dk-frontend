@@ -5,6 +5,7 @@ const VARIANTS = {
   leaf: "bg-leaf text-white",
   pine: "bg-pine text-leaf",
   light: "bg-white text-leaf",
+  black: "bg-black text-white",
   plain: "text-leaf",
 } as const;
 

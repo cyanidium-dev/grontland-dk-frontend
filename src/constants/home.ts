@@ -1,8 +1,8 @@
 /**
  * Home-page copy — Danish, verbatim from the Figma "Главная2" (#1018:77) design
  * and the PDF spec. Images point at /public/images placeholders until the real
- * assets are exported. Section ORDER (per new design):
- *   Hero → Audiences → OneTeam → Services → Projects → Process
+ * assets are exported. Section ORDER (per Figma y-position in #1018:77):
+ *   Hero → Services → Audiences → OneTeam → Projects → Process
  */
 
 export const NAV_MENU = [
@@ -64,7 +64,7 @@ export const AUDIENCES = {
       title: "For private kunder",
       text: "Til boligejere, der har brug for renovering, terrasse, facade, belægning, havearbejde eller andre opgaver omkring boligen.",
       cta: { label: "Se løsninger for private kunder", href: "/private" },
-      image: "/images/cases/havearbejde.jpg",
+      image: "/images/cases/havearbejde-private.png",
       imageAlt: "Plejet have med græsplæne og beplantning",
       dark: false,
     },
@@ -72,7 +72,7 @@ export const AUDIENCES = {
       title: "For entreprenører",
       text: "Til entreprenører og projektledere, der har brug for et stabilt team til delopgaver, ekstra kapacitet eller praktisk udførelse på byggeprojekter.",
       cta: { label: "Se samarbejde for entreprenører", href: "/entreprenorer" },
-      image: "/images/cases/fundament-b2b.jpg",
+      image: "/images/cases/fundament-b2b.png",
       imageAlt: "Armeret fundament klargjort til støbning på byggeplads",
       dark: true,
     },
