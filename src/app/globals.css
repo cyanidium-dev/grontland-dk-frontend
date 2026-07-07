@@ -1,20 +1,368 @@
 @import "tailwindcss";
-@import "@heroui/react/styles";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ------------------------------------------------------------------ *
+ * Grontland DK theme — Tailwind v4 tokens.
+ * Generates utilities: bg-pine, text-leaf, border-line, font-display…
+ * ------------------------------------------------------------------ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --breakpoint-xs: 27rem;
+
+  --color-pine: #1f3d2e;
+  --color-leaf: #7ab547;
+  --color-moss: #2f6f57;
+  --color-mist: #f7faf8;
+  --color-line: #e3eae4;
+  --color-white: #ffffff;
+  --color-black: #201f23;
+
+  --font-sans: var(--font-manrope), Arial, Helvetica, sans-serif;
+  --font-display: var(--font-manrope), Arial, Helvetica, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  --font-montserrat: var(--font-montserrat), Arial, sans-serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+@layer base {
+  html,
+  body {
+    max-width: 100vw;
+    /* `clip` (not `hidden`) so we still prevent horizontal scroll without
+       creating a scroll container that would break `position: sticky`. */
+    overflow-x: clip;
+  }
+
+  body {
+    background: var(--color-white);
+    color: var(--color-pine);
+    font-family: var(--font-sans);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}
+
+@layer utilities {
+  /* Frosted-glass surface used on hero cards ("скло" in the Figma). */
+  .glass {
+    box-shadow: inset 0 4px 12.6px 0 rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+  }
+
+  /* Infinite horizontal marquee — the moving GRØNT LAND DK ✦ … strip. */
+  .marquee-track {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: marquee var(--marquee-duration, 22s) linear infinite;
+  }
+
+  .marquee-track[data-paused="true"],
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* --------------------------------------------------------------- *
+   * Scroll-reveal — set `--rd` (ms) as a stagger delay on each item.
+   * Elements start hidden/offset and rise into place. Respects RM.
+   * --------------------------------------------------------------- */
+  .rise {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--rd, 0ms);
+  }
+
+  @keyframes rise {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* --------------------------------------------------------------- *
+   * ImageCarousel — pure-CSS 3-card cycling stack (ported from the
+   * CO2Lab site referenced in the Figma comments). No dependencies.
+   * Cards overlap; right→center→left→back on a 15s (desktop 10s) loop.
+   * --------------------------------------------------------------- */
+  .carousel-card-stack {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-card-item {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: calc(100% - 15px);
+    transform-origin: right center;
+    transition: all 2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-card-item {
+      width: calc(100% - 30px);
+    }
+  }
+
+  .carousel-right-card {
+    height: 193px;
+    transform: translate(-15px, -50%);
+    z-index: 30;
+    animation: carouselMoveToLeft 15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  }
+
+  .carousel-center-card {
+    height: 172px;
+    transform: translate(-7px, -50%);
+    z-index: 20;
+    animation: carouselMoveToRight 15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  }
+
+  .carousel-left-card {
+    height: 139px;
+    transform: translate(0, -50%);
+    z-index: 10;
+    animation: carouselMoveToMiddle 15s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  }
+
+  /* N > 3: static backstack (no animation), same size as center. */
+  .carousel-extended .carousel-right-card,
+  .carousel-extended .carousel-center-card,
+  .carousel-extended .carousel-left-card {
+    animation: none;
+  }
+
+  .carousel-backstack-card {
+    height: 172px;
+    transform: translate(-7px, -50%);
+    z-index: 5;
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-right-card {
+      height: 252px;
+      transform: translate(-30px, -50%);
+      animation: carouselMoveToLeftDesktop 10s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    }
+    .carousel-center-card {
+      height: 224px;
+      transform: translate(-14px, -50%);
+      animation: carouselMoveToRightDesktop 10s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    }
+    .carousel-left-card {
+      height: 181px;
+      animation: carouselMoveToMiddleDesktop 10s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+    }
+    .carousel-backstack-card {
+      height: 224px;
+      transform: translate(-14px, -50%);
+    }
+  }
+
+  @keyframes carouselMoveToLeft {
+    0%, 28% { transform: translate(-15px, -50%); height: 193px; z-index: 30; }
+    33%, 61% { transform: translate(0, -50%); height: 139px; z-index: 10; }
+    66%, 94% { transform: translate(-7px, -50%); height: 172px; z-index: 20; }
+    99%, 100% { transform: translate(-15px, -50%); height: 193px; z-index: 30; }
+  }
+  @keyframes carouselMoveToRight {
+    0%, 28% { transform: translate(-7px, -50%); height: 172px; z-index: 20; }
+    33%, 61% { transform: translate(-15px, -50%); height: 193px; z-index: 30; }
+    66%, 94% { transform: translate(0, -50%); height: 139px; z-index: 10; }
+    99%, 100% { transform: translate(-7px, -50%); height: 172px; z-index: 20; }
+  }
+  @keyframes carouselMoveToMiddle {
+    0%, 28% { transform: translate(0, -50%); height: 139px; z-index: 10; }
+    33%, 61% { transform: translate(-7px, -50%); height: 172px; z-index: 20; }
+    66%, 94% { transform: translate(-15px, -50%); height: 193px; z-index: 30; }
+    99%, 100% { transform: translate(0, -50%); height: 139px; z-index: 10; }
+  }
+  @keyframes carouselMoveToLeftDesktop {
+    0%, 28% { transform: translate(-30px, -50%); height: 252px; z-index: 30; }
+    33%, 61% { transform: translate(0, -50%); height: 181px; z-index: 10; }
+    66%, 94% { transform: translate(-14px, -50%); height: 224px; z-index: 20; }
+    99%, 100% { transform: translate(-30px, -50%); height: 252px; z-index: 30; }
+  }
+  @keyframes carouselMoveToRightDesktop {
+    0%, 28% { transform: translate(-14px, -50%); height: 224px; z-index: 20; }
+    33%, 61% { transform: translate(-30px, -50%); height: 252px; z-index: 30; }
+    66%, 94% { transform: translate(0, -50%); height: 181px; z-index: 10; }
+    99%, 100% { transform: translate(-14px, -50%); height: 224px; z-index: 20; }
+  }
+  @keyframes carouselMoveToMiddleDesktop {
+    0%, 28% { transform: translate(0, -50%); height: 181px; z-index: 10; }
+    33%, 61% { transform: translate(-14px, -50%); height: 224px; z-index: 20; }
+    66%, 94% { transform: translate(-30px, -50%); height: 252px; z-index: 30; }
+    99%, 100% { transform: translate(0, -50%); height: 181px; z-index: 10; }
+  }
+
+  /* --------------------------------------------------------------- *
+   * ImageCarousel — VERTICAL variant. Same 3-card cycling stack, but
+   * cards are anchored bottom-centre and peek upward (top→bottom flow).
+   * Reuses the right/center/left slot classes; the parent adds
+   * `.carousel-vertical`. Cards keep a fixed landscape height and vary
+   * scale + translateY for depth.
+   * --------------------------------------------------------------- */
+  .carousel-vertical .carousel-card-item {
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    height: 168px;
+    transform-origin: bottom center;
+  }
+
+  .carousel-vertical .carousel-right-card {
+    transform: translate(-50%, 0) scale(1);
+    z-index: 30;
+    animation: carouselVBack 12s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  }
+  .carousel-vertical .carousel-center-card {
+    transform: translate(-50%, -16px) scale(0.93);
+    z-index: 20;
+    animation: carouselVFront 12s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  }
+  .carousel-vertical .carousel-left-card {
+    transform: translate(-50%, -30px) scale(0.86);
+    z-index: 10;
+    animation: carouselVMid 12s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  }
+  .carousel-vertical .carousel-backstack-card {
+    transform: translate(-50%, -30px) scale(0.86);
+    z-index: 5;
+    height: 168px;
+  }
+  .carousel-vertical.carousel-extended .carousel-right-card,
+  .carousel-vertical.carousel-extended .carousel-center-card,
+  .carousel-vertical.carousel-extended .carousel-left-card {
+    animation: none;
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-vertical .carousel-card-item {
+      height: 200px;
+    }
+    .carousel-vertical .carousel-center-card {
+      transform: translate(-50%, -20px) scale(0.93);
+    }
+    .carousel-vertical .carousel-left-card,
+    .carousel-vertical .carousel-backstack-card {
+      transform: translate(-50%, -38px) scale(0.86);
+    }
+  }
+
+  /* front → back → mid → front */
+  @keyframes carouselVBack {
+    0%, 28% { transform: translate(-50%, 0) scale(1); z-index: 30; }
+    33%, 61% { transform: translate(-50%, -30px) scale(0.86); z-index: 10; }
+    66%, 94% { transform: translate(-50%, -16px) scale(0.93); z-index: 20; }
+    99%, 100% { transform: translate(-50%, 0) scale(1); z-index: 30; }
+  }
+  /* mid → front → back → mid */
+  @keyframes carouselVFront {
+    0%, 28% { transform: translate(-50%, -16px) scale(0.93); z-index: 20; }
+    33%, 61% { transform: translate(-50%, 0) scale(1); z-index: 30; }
+    66%, 94% { transform: translate(-50%, -30px) scale(0.86); z-index: 10; }
+    99%, 100% { transform: translate(-50%, -16px) scale(0.93); z-index: 20; }
+  }
+  /* back → mid → front → back */
+  @keyframes carouselVMid {
+    0%, 28% { transform: translate(-50%, -30px) scale(0.86); z-index: 10; }
+    33%, 61% { transform: translate(-50%, -16px) scale(0.93); z-index: 20; }
+    66%, 94% { transform: translate(-50%, 0) scale(1); z-index: 30; }
+    99%, 100% { transform: translate(-50%, -30px) scale(0.86); z-index: 10; }
+  }
+
+  /* --------------------------------------------------------------- *
+   * ImageCarousel — VERTICAL-FLIP variant. Mirror of `.carousel-vertical`:
+   * cards anchored TOP-centre and peek downward (bottom→top flow — the
+   * front/largest card sits on top, smaller ones below it).
+   * --------------------------------------------------------------- */
+  .carousel-vertical-flip .carousel-card-item {
+    top: 0;
+    bottom: auto;
+    right: auto;
+    left: 50%;
+    width: 100%;
+    height: 176px;
+    transform-origin: top center;
+  }
+  @media (min-width: 1024px) {
+    .carousel-vertical-flip .carousel-card-item {
+      height: 196px;
+    }
+  }
+
+  .carousel-vertical-flip .carousel-right-card {
+    transform: translate(-50%, 0) scale(1);
+    z-index: 30;
+    animation: carouselVFlipBack 12s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  }
+  .carousel-vertical-flip .carousel-center-card {
+    transform: translate(-50%, 40px) scale(0.94);
+    z-index: 20;
+    animation: carouselVFlipFront 12s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  }
+  .carousel-vertical-flip .carousel-left-card {
+    transform: translate(-50%, 76px) scale(0.88);
+    z-index: 10;
+    animation: carouselVFlipMid 12s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+  }
+  .carousel-vertical-flip .carousel-backstack-card {
+    transform: translate(-50%, 76px) scale(0.88);
+    z-index: 5;
+  }
+  .carousel-vertical-flip.carousel-extended .carousel-right-card,
+  .carousel-vertical-flip.carousel-extended .carousel-center-card,
+  .carousel-vertical-flip.carousel-extended .carousel-left-card {
+    animation: none;
+  }
+
+  /* front → back → mid → front (positive Y = downward peek).
+     Offsets are consistent across breakpoints so the animation matches the
+     static rest state (front on top, mid + back peeking further below). */
+  @keyframes carouselVFlipBack {
+    0%, 28% { transform: translate(-50%, 0) scale(1); z-index: 30; }
+    33%, 61% { transform: translate(-50%, 76px) scale(0.88); z-index: 10; }
+    66%, 94% { transform: translate(-50%, 40px) scale(0.94); z-index: 20; }
+    99%, 100% { transform: translate(-50%, 0) scale(1); z-index: 30; }
+  }
+  @keyframes carouselVFlipFront {
+    0%, 28% { transform: translate(-50%, 40px) scale(0.94); z-index: 20; }
+    33%, 61% { transform: translate(-50%, 0) scale(1); z-index: 30; }
+    66%, 94% { transform: translate(-50%, 76px) scale(0.88); z-index: 10; }
+    99%, 100% { transform: translate(-50%, 40px) scale(0.94); z-index: 20; }
+  }
+  @keyframes carouselVFlipMid {
+    0%, 28% { transform: translate(-50%, 76px) scale(0.88); z-index: 10; }
+    33%, 61% { transform: translate(-50%, 40px) scale(0.94); z-index: 20; }
+    66%, 94% { transform: translate(-50%, 0) scale(1); z-index: 30; }
+    99%, 100% { transform: translate(-50%, 76px) scale(0.88); z-index: 10; }
+  }
 }
