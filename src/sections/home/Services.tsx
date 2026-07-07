@@ -47,11 +47,14 @@ export function Services() {
       {/* Leaf marquee band */}
       <div className="mt-14 xl:mt-20">
         <Marquee
-          durationSec={26}
+          durationSec={40}
           className="bg-leaf py-4"
           separator={<StarIcon className="mx-6 size-3.5 shrink-0 text-white" />}
-          items={MARQUEE_WORDS.map((w) => (
-            <span key={w} className="text-[14px] font-bold uppercase tracking-wide text-white">
+          // Repeat the words so one copy is wider than the viewport → seamless loop.
+          items={Array.from({ length: 5 }).flatMap(() =>
+            MARQUEE_WORDS.map((w) => w),
+          ).map((w, i) => (
+            <span key={i} className="text-[14px] font-bold uppercase tracking-wide text-white">
               {w}
             </span>
           ))}

@@ -26,7 +26,7 @@ export function ServicesSlider({ items }: { items: readonly Item[] }) {
       <Container>
         <ul
           ref={trackRef}
-          className="flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto px-1 py-6 [scrollbar-width:none] xl:overflow-visible [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory items-stretch gap-5 overflow-x-auto px-1 py-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {items.map((item) => (
             <li key={item.name} className="w-[285px] shrink-0 snap-start">

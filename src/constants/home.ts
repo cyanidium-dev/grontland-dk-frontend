@@ -15,15 +15,17 @@ export const NAV_MENU = [
   { label: "Kontakt", href: "/kontakt" },
 ] as const;
 
+// Client taxonomy (2026-07): facade work is grouped under murerarbejde
+// (masonry/brick), and cleaning work (rengøring) is added for private homes.
 export const SERVICES_MENU = [
   { label: "Havearbejde", href: "/ydelser/havearbejde" },
   { label: "Belægningsarbejde", href: "/ydelser/belaegningsarbejde" },
-  { label: "Facadearbejde", href: "/ydelser/facadearbejde" },
+  { label: "Murerarbejde", href: "/ydelser/murerarbejde" },
   { label: "Malerservice", href: "/ydelser/malerservice" },
   { label: "Tømrerarbejde", href: "/ydelser/tomrerarbejde" },
-  { label: "Murerarbejde", href: "/ydelser/murerarbejde" },
   { label: "Totalentreprise", href: "/ydelser/totalentreprise" },
   { label: "Demonteringsarbejde", href: "/ydelser/demonteringsarbejde" },
+  { label: "Rengøringsarbejde", href: "/ydelser/rengoringsarbejde" },
 ] as const;
 
 export const HERO = {
@@ -89,8 +91,9 @@ export const ONETEAM = {
   ],
 } as const;
 
-// Second block per the designer's note: 4 cards, one column, no slider,
-// plus a "Se alle ydelser" CTA into the full list above.
+// Full service set. Facade work is folded into Murerarbejde, and
+// Rengøringsarbejde (cleaning, private homes) is added — per client.
+// Some card images are reused where a dedicated Figma asset doesn't exist.
 export const SERVICES = {
   h2: "Vores ydelser",
   sub: "Vi udfører både indvendige og udvendige opgaver - fra havearbejde og belægning til facade, maling, tømrerarbejde, murerarbejde og totalentreprise.",
@@ -111,9 +114,9 @@ export const SERVICES = {
       imageAlt: "Belægning i natursten ved bolig",
     },
     {
-      name: "Facadearbejde",
-      desc: "Renovering, reparation og vedligeholdelse af facader, så bygningen står stærkere og ser bedre ud.",
-      href: "/ydelser/facadearbejde",
+      name: "Murerarbejde",
+      desc: "Murer- og facadearbejde til renovering, fliser og konstruktioner med fokus på stabilitet, styrke og finish.",
+      href: "/ydelser/murerarbejde",
       image: "/images/carousel/carousel-3.png",
       imageAlt: "Facade på privat bolig med beplantning",
     },
@@ -123,6 +126,34 @@ export const SERVICES = {
       href: "/ydelser/malerservice",
       image: "/images/carousel/carousel-4.png",
       imageAlt: "Nymalet indvendigt rum",
+    },
+    {
+      name: "Tømrerarbejde",
+      desc: "Tømreropgaver fra konstruktion til detaljer, udført som del af renovering eller som selvstændig opgave.",
+      href: "/ydelser/tomrerarbejde",
+      image: "/images/hero/hero-card-terrasse.png",
+      imageAlt: "Træterrasse under opbygning",
+    },
+    {
+      name: "Totalentreprise",
+      desc: "Samlet renovering med flere fag, én plan og én ansvarlig kontakt fra start til aflevering.",
+      href: "/ydelser/totalentreprise",
+      image: "/images/cases/fundament-b2b.png",
+      imageAlt: "Byggeplads med armeret fundament under opbygning",
+    },
+    {
+      name: "Demonteringsarbejde",
+      desc: "Nedtagning og forberedende arbejde før renovering eller ny opbygning.",
+      href: "/ydelser/demonteringsarbejde",
+      image: "/images/cases/projekt-terrasse.png",
+      imageAlt: "Udeareal under omlægning",
+    },
+    {
+      name: "Rengøringsarbejde",
+      desc: "Rengøring efter renovering og byggeopgaver samt praktisk rengøring i private hjem.",
+      href: "/ydelser/rengoringsarbejde",
+      image: "/images/cases/havearbejde-private.png",
+      imageAlt: "Plejet privat bolig og have",
     },
   ],
 } as const;
