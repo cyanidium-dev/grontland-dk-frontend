@@ -39,7 +39,7 @@ export function Projects() {
               </p>
             </div>
             <div className="shrink-0 xl:pt-4">
-              <Button href={PROJECTS.cta.href} variant="pine" size="md">
+              <Button href={PROJECTS.cta.href} variant="pine" size="md" className="w-full sm:w-auto">
                 {PROJECTS.cta.label}
               </Button>
             </div>

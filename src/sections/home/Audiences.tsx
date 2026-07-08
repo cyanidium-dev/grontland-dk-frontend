@@ -65,8 +65,10 @@ export function Audiences() {
               className="relative z-20 overflow-hidden bg-leaf py-12 text-white xl:py-[90px]"
             >
               <Container className="relative z-10">
-                {/* Private row — Figma #1009:1545: 1200×340, gap 172, items-center */}
-                <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-10 px-6 xl:flex-row xl:gap-[172px]">
+                {/* Private row — Figma #1009:1545: 1200×340, gap 172, items-center.
+                    No extra px here — the Container already pads x by 24 (px-6);
+                    a second px-6 made the private band inset wider than B2B. */}
+                <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-10 xl:flex-row xl:gap-[172px]">
                   <div className="relative z-10 h-[260px] w-full shrink-0 xl:h-[340px] xl:w-[584px]">
                     {/* Photo clip #1009:1547 — 697×340 frame, -24px left bleed */}
                     <div className="absolute -left-6 top-0 h-full overflow-hidden rounded-r-xl max-xl:relative max-xl:left-0 max-xl:w-full max-xl:rounded-xl xl:left-[-24px] xl:h-[340px] xl:w-[697px]">
@@ -93,7 +95,7 @@ export function Audiences() {
                     <p className="mb-8 font-light leading-[1.35] text-white/80 xl:text-[16px]">
                       {card.text}
                     </p>
-                    <Button href={card.cta.href} variant="white">
+                    <Button href={card.cta.href} variant="white" className="w-full sm:w-auto">
                       {card.cta.label}
                     </Button>
                   </div>
@@ -131,7 +133,7 @@ export function Audiences() {
                     <p className="mb-8 font-light leading-[1.35] text-white/80 xl:text-[16px]">
                       {card.text}
                     </p>
-                    <Button href={card.cta.href} variant="leaf">
+                    <Button href={card.cta.href} variant="leaf" className="w-full sm:w-auto">
                       {card.cta.label}
                     </Button>
                   </div>

@@ -36,7 +36,7 @@ export function Gallery() {
         </ul>
 
         <div className="mt-12 text-center">
-          <Button href={GALLERY.cta.href} variant="leaf" withArrow>
+          <Button href={GALLERY.cta.href} variant="leaf" withArrow className="w-full sm:w-auto">
             {GALLERY.cta.label}
           </Button>
         </div>

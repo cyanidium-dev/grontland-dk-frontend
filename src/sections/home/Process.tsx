@@ -97,7 +97,7 @@ export function Process() {
           </ol>
 
           <div>
-            <Button href={PROCESS.cta.href} variant="leaf" size="md">
+            <Button href={PROCESS.cta.href} variant="leaf" size="md" className="w-full sm:w-auto">
               {PROCESS.cta.label}
             </Button>
           </div>

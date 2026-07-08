@@ -32,7 +32,7 @@ export function About() {
               ))}
             </div>
             <div className="mt-8">
-              <Button href={ABOUT.cta.href} variant="pine" withArrow>
+              <Button href={ABOUT.cta.href} variant="pine" withArrow className="w-full sm:w-auto">
                 {ABOUT.cta.label}
               </Button>
             </div>
