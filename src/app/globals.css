@@ -64,6 +64,15 @@
     backdrop-filter: blur(5px);
   }
 
+  /* Hide the scrollbar while keeping the element scrollable (drag/touch strips). */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Infinite horizontal marquee — the moving GRØNT LAND DK ✦ … strip. */
   .marquee-track {
     display: inline-flex;

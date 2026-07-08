@@ -2,23 +2,7 @@ import Image from "next/image";
 
 import { Container, Button, Heading, Dots, ImageCarousel } from "@/components/ui";
 import { HERO } from "@/constants/home";
-
-type OverlayCard = (typeof HERO.overlayCards)[number];
-
-/* Glass "PROJEKT" card overlaid on the hero image (thumbnail + label + caption). */
-function ProjectCard({ card }: { card: OverlayCard }) {
-  return (
-    <figure className="glass flex w-[310px] items-center gap-3 rounded-[18px] bg-white/[0.17] p-2.5">
-      <div className="relative h-[107px] w-[98px] shrink-0 overflow-hidden rounded-[10px]">
-        <Image src={card.image.src} alt={card.image.alt} fill className="object-cover" sizes="98px" />
-      </div>
-      <div className="min-w-0">
-        <p className="text-[12px] font-bold uppercase leading-none text-white">{card.label}</p>
-        <p className="mt-1.5 text-[11px] font-light leading-snug text-white/85">{card.caption}</p>
-      </div>
-    </figure>
-  );
-}
+import { HeroProjectCards } from "./HeroProjectCards";
 
 /* Hero — left copy column (dots → heading → description → CTAs → auto slider)
    + right full-bleed image with glass project cards. Concentric-ring decor on
@@ -42,11 +26,9 @@ export function Hero() {
           aria-hidden
           className="absolute inset-0 bg-[linear-gradient(170deg,rgba(0,0,0,0.8)_0%,rgba(0,0,0,0.06)_66%,rgba(0,0,0,0.8)_100%)]"
         />
-        {/* Overlay cards, left-aligned; the 2nd clips off the seam (as in Figma). */}
-        <div className="absolute bottom-7 left-7 flex gap-4">
-          {HERO.overlayCards.map((card) => (
-            <ProjectCard key={card.image.src} card={card} />
-          ))}
+        {/* Overlay cards — scrollable/looped strip (drag + touch), no buttons. */}
+        <div className="absolute inset-x-0 bottom-7 z-10">
+          <HeroProjectCards cards={HERO.overlayCards} className="px-7" />
         </div>
       </div>
 
@@ -97,8 +79,8 @@ export function Hero() {
           aria-hidden
           className="absolute inset-0 bg-[linear-gradient(170deg,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.05)_55%,rgba(0,0,0,0.7)_100%)]"
         />
-        <div className="absolute inset-x-4 bottom-4">
-          <ProjectCard card={HERO.overlayCards[0]} />
+        <div className="absolute inset-x-0 bottom-4">
+          <HeroProjectCards cards={HERO.overlayCards} className="px-4" />
         </div>
       </div>
     </section>
