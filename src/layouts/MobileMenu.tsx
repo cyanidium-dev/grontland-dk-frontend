@@ -27,14 +27,41 @@ export function MobileMenu() {
 
   useEffect(() => {
     if (!open) return;
-    const prev = document.body.style.overflow;
+    const html = document.documentElement;
+    const scrollY = window.scrollY;
+    const prevHtmlOverflow = html.style.overflow;
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevBodyPosition = document.body.style.position;
+    const prevBodyTop = document.body.style.top;
+    const prevBodyWidth = document.body.style.width;
+
+    html.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
+    // iOS Safari ignores overflow:hidden alone — pin body at current scroll.
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+
+    const preventTouch = (e: TouchEvent) => {
+      const nav = document.querySelector('[aria-label="Mobilmenu"]');
+      if (nav?.contains(e.target as Node)) return;
+      e.preventDefault();
+    };
+    document.addEventListener("touchmove", preventTouch, { passive: false });
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
     window.addEventListener("keydown", onKey);
+
     return () => {
-      document.body.style.overflow = prev;
+      html.style.overflow = prevHtmlOverflow;
+      document.body.style.overflow = prevBodyOverflow;
+      document.body.style.position = prevBodyPosition;
+      document.body.style.top = prevBodyTop;
+      document.body.style.width = prevBodyWidth;
+      window.scrollTo(0, scrollY);
+      document.removeEventListener("touchmove", preventTouch);
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
@@ -54,14 +81,14 @@ export function MobileMenu() {
     >
       <nav
         aria-label="Mobilmenu"
-        className="mx-auto flex h-full max-w-7xl flex-col overflow-y-auto px-6 pb-10 pt-8"
+        className="mx-auto flex h-full max-w-7xl flex-col overflow-y-auto overscroll-contain px-6 pb-6 pt-4"
       >
         <ul className="flex flex-col">
           <li>
             <Link
               href="/"
               onClick={close}
-              className="block border-b border-line py-4 text-[20px] font-bold uppercase leading-tight text-pine transition-colors hover:text-leaf"
+              className="block border-b border-line py-3 text-[15px] font-bold uppercase leading-tight text-pine transition-colors hover:text-leaf"
             >
               Forside
             </Link>
@@ -72,12 +99,12 @@ export function MobileMenu() {
               type="button"
               onClick={() => setServicesOpen((v) => !v)}
               aria-expanded={servicesOpen}
-              className="flex w-full items-center justify-between py-4 text-[20px] font-bold uppercase leading-tight text-pine transition-colors hover:text-leaf"
+              className="flex w-full items-center justify-between py-3 text-[15px] font-bold uppercase leading-tight text-pine transition-colors hover:text-leaf"
             >
               Ydelser
               <ChevronIcon
                 className={cn(
-                  "size-5 transition-transform duration-300",
+                  "size-4 transition-transform duration-300",
                   servicesOpen && "rotate-180",
                 )}
               />
@@ -96,7 +123,7 @@ export function MobileMenu() {
                     <Link
                       href={item.href}
                       onClick={close}
-                      className="block py-2.5 pl-4 text-[15px] font-medium text-pine/80 transition-colors hover:text-leaf"
+                      className="block py-1.5 pl-3 text-[14px] font-medium text-pine/80 transition-colors hover:text-leaf"
                     >
                       {item.label}
                     </Link>
@@ -111,7 +138,7 @@ export function MobileMenu() {
               <Link
                 href={item.href}
                 onClick={close}
-                className="block border-b border-line py-4 text-[20px] font-bold uppercase leading-tight text-pine transition-colors hover:text-leaf"
+                className="block border-b border-line py-3 text-[15px] font-bold uppercase leading-tight text-pine transition-colors hover:text-leaf"
               >
                 {item.label}
               </Link>
@@ -122,8 +149,8 @@ export function MobileMenu() {
         <Button
           href="/kontakt"
           variant="black"
-          size="md"
-          className="mt-8 w-full font-semibold normal-case"
+          size="sm"
+          className="mt-5 w-full font-semibold normal-case"
         >
           Få et tilbud
         </Button>
