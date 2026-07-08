@@ -110,8 +110,10 @@ export function Audiences() {
           >
             <div className="absolute inset-0 z-0 bg-black" aria-hidden />
             <Container>
-              {/* B2B band — Figma #1009:1563: 1280×340 wrapper; decor #1009:1564 sibling of row */}
-              <div className="relative isolate mx-auto h-[260px] w-full max-w-[1280px] xl:h-[340px]">
+              {/* B2B band — Figma #1009:1563: 1280×340 wrapper; decor #1009:1564 sibling of row.
+                  Height fixed only at xl (decor alignment); auto on mobile/tablet so the
+                  stacked content isn't clipped by the parent's overflow-hidden. */}
+              <div className="relative isolate mx-auto w-full max-w-[1280px] xl:h-[340px]">
                 {/* B2B ring decor — z-0 inside wrapper (not -z-10 behind band bg) */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
