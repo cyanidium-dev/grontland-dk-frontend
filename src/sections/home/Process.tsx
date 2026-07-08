@@ -1,31 +1,106 @@
-import { Container, Button } from "@/components/ui";
+import { Container, Heading, Button, Dots, InfoBox } from "@/components/ui";
+import type { InfoBoxVariant } from "@/components/ui";
+import { cn } from "@/util/cn";
 import { PROCESS } from "@/constants/home";
 
-/* SHELL — "Sådan foregår arbejdet": 5 numbered steps + closing CTA. */
+/* "Sådan foregår arbejdet" — Figma #1019:924 / #1018:583 (file zq0o0GOkllffjjIomgnQ5p).
+   White band; Dots + right H2; 5 alternating step cards; left CTA; ring decor. */
+type StepStyle = {
+  box: InfoBoxVariant;
+  bordered: boolean;
+  num: string;
+  title: string;
+  desc: string;
+};
+
+function stepStyle(i: number): StepStyle {
+  if (i === 4) {
+    return {
+      box: "leaf",
+      bordered: false,
+      num: "text-white",
+      title: "text-white",
+      desc: "text-white/80",
+    };
+  }
+  if (i % 2 === 1) {
+    return {
+      box: "pine",
+      bordered: false,
+      num: "text-leaf",
+      title: "text-white",
+      desc: "text-white/65",
+    };
+  }
+  return {
+    box: "light",
+    bordered: true,
+    num: "text-leaf",
+    title: "text-pine",
+    desc: "text-pine/60",
+  };
+}
+
 export function Process() {
   return (
-    <section className="bg-pine py-16 text-white xl:py-24">
-      <Container>
-        <h2 className="mb-10 font-display text-[28px] font-bold uppercase leading-none xl:mb-16 xl:text-[52px]">
-          {PROCESS.h2}
-        </h2>
+    <section className="relative overflow-hidden bg-white py-16 xl:py-24">
+      {/* Ring decor #1018:641 — Figma inset + rotate on #1019:924 wrapper (not baked into SVG) */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/svg/decor-rings-process.svg"
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute z-0 inset-[42.91%_0.93%_-1.31%_70.16%] hidden max-w-none rotate-[-36.67deg] opacity-90 xl:block"
+      />
 
-        <ol className="grid gap-6 sm:grid-cols-2 xl:grid-cols-5">
-          {PROCESS.steps.map((step, i) => (
-            <li key={step.title} className="rounded-[16px] bg-white/[0.06] p-5">
-              <span className="mb-4 block font-display text-[32px] font-bold leading-none text-leaf">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mb-2 text-[15px] font-bold uppercase leading-tight">{step.title}</h3>
-              <p className="text-sm font-light leading-relaxed text-white/70">{step.desc}</p>
-            </li>
-          ))}
-        </ol>
+      <Container className="relative z-10">
+        <div className="flex flex-col gap-10">
+          <div className="flex items-center justify-between gap-8">
+            <Dots size="md" className="hidden shrink-0 xl:flex" />
+            <Heading as="h2" size="section" className="xl:text-right">
+              {PROCESS.h2}
+            </Heading>
+          </div>
 
-        <div className="mt-12 text-center">
-          <Button href={PROCESS.cta.href} variant="leaf" size="lg" withArrow>
-            {PROCESS.cta.label}
-          </Button>
+          <ol className="grid gap-3 pt-4 sm:grid-cols-2 xl:grid-cols-5">
+            {PROCESS.steps.map((step, i) => {
+              const s = stepStyle(i);
+              return (
+                <li key={step.title} className="h-full">
+                  <InfoBox
+                    variant={s.box}
+                    className={cn(
+                      "flex h-full flex-col rounded-[12px] px-5 py-6",
+                      s.bordered && "border border-line",
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "font-display text-[32px] font-bold leading-none xl:text-[44px]",
+                        s.num,
+                      )}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3
+                      className={cn("mt-4 text-[13px] font-bold uppercase leading-tight", s.title)}
+                    >
+                      {step.title}
+                    </h3>
+                    <p className={cn("mt-2 text-sm font-light leading-relaxed", s.desc)}>
+                      {step.desc}
+                    </p>
+                  </InfoBox>
+                </li>
+              );
+            })}
+          </ol>
+
+          <div>
+            <Button href={PROCESS.cta.href} variant="leaf" size="md">
+              {PROCESS.cta.label}
+            </Button>
+          </div>
         </div>
       </Container>
     </section>

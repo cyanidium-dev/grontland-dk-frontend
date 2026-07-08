@@ -4,3 +4,8 @@ export { OneTeam } from "./OneTeam";
 export { Services } from "./Services";
 export { Projects } from "./Projects";
 export { Process } from "./Process";
+export { Gallery } from "./Gallery";
+export { About } from "./About";
+export { SeoText } from "./SeoText";
+export { Faq } from "./Faq";
+export { QuoteForm } from "./QuoteForm";

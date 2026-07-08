@@ -7,11 +7,16 @@ import {
   Services,
   Projects,
   Process,
+  Gallery,
+  About,
+  SeoText,
+  Faq,
+  QuoteForm,
 } from "@/sections/home";
 
-/* Home — section order follows the new Figma "Главная2" design (by y-position):
-   Hero → Services → Audiences → OneTeam → Projects → Process.
-   (Gallery / About / SeoText / Faq / QuoteForm to be added next.) */
+/* Home — section order per Preview/docs/Структура главной страницы.md:
+   Hero → Services → Audiences → OneTeam → Process → Projects → Gallery →
+   About → SeoText → Faq → QuoteForm. */
 export default function HomePage() {
   return (
     <>
@@ -22,8 +27,13 @@ export default function HomePage() {
           <Services />
           <Audiences />
           <OneTeam />
-          <Projects />
           <Process />
+          <Projects />
+          <Gallery />
+          <About />
+          <SeoText />
+          <Faq />
+          <QuoteForm />
         </main>
       </div>
       <Footer />

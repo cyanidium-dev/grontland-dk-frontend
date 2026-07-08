@@ -1,8 +1,8 @@
 /**
  * Home-page copy — Danish, verbatim from the Figma "Главная2" (#1018:77) design
  * and the PDF spec. Images point at /public/images placeholders until the real
- * assets are exported. Section ORDER (per Figma y-position in #1018:77):
- *   Hero → Services → Audiences → OneTeam → Projects → Process
+ * assets are exported. Section ORDER (per Структура главной страницы.md):
+ *   Hero → Services → Audiences → OneTeam → Process → Projects
  */
 
 export const NAV_MENU = [
@@ -222,3 +222,108 @@ export const MARQUEE_WORDS = [
   "BYGGEARBEJDE",
   "KØBENHAVN",
 ] as const;
+
+// Photo archive → links to the standalone /galleri page. Distinct from
+// PROJECTS (which carries context per case). Image slots are placeholders
+// until real assets are exported (same shell convention as Projects).
+export const GALLERY = {
+  h2: "Galleri fra udførte opgaver",
+  sub: "Se billeder fra facade, belægning, renovering, havearbejde, tømrerarbejde og andre opgaver.",
+  cta: { label: "Åbn galleri", href: "/galleri" },
+  tags: ["Facade", "Belægning", "Renovering", "Havearbejde", "Tømrerarbejde", "Murerarbejde"],
+  photos: [
+    { image: "/images/cases/terrasse-jatoba.jpg", imageAlt: "Færdig træterrasse i hårdttræ ved hvid villa" },
+    { image: "/images/cases/badevaerelse-marmor.jpg", imageAlt: "Renoveret baderum med marmorfliser og indbygget belysning" },
+    { image: "/images/cases/belaegning-kyst.jpg", imageAlt: "Ny belægning og terrænarbejde ved bolig" },
+    { image: "/images/cases/havemur-vand.jpg", imageAlt: "Havemur i natursten i have med vandløb" },
+    { image: "/images/cases/trappe-sten.jpg", imageAlt: "Udvendig trappe under renovering med ny stenoverflade" },
+    { image: "/images/cases/facade-trappe.jpg", imageAlt: "Nyrenoveret trappe og pudset facade ved etageejendom" },
+    { image: "/images/cases/terrasse-konstruktion.jpg", imageAlt: "Bærende konstruktion til træterrasse under opbygning" },
+    { image: "/images/cases/havearbejde.jpg", imageAlt: "Plejet have med græsplæne og beplantning" },
+  ],
+} as const;
+
+export const ABOUT = {
+  h2: "Om Grønt Land DK",
+  text: "Grønt Land DK arbejder med renovering, byggeopgaver og udearealer i København og Storkøbenhavn. Teamet samler flere fag under én plan, så kunden får en mere enkel proces, tydeligere ansvar og bedre sammenhæng fra start til aflevering.",
+  facts: [
+    { label: "Arbejdsområde", value: "København og Storkøbenhavn" },
+    { label: "Kundetyper", value: "private kunder og entreprenører" },
+    { label: "Fokus", value: "renovering, facade, belægning, havearbejde og totalentreprise" },
+    { label: "Princip", value: "klare aftaler og ordentlig aflevering" },
+  ],
+  team: {
+    h3: "Et team med ansvar på pladsen",
+    text: "Hos Grønt Land DK møder du fagpersoner, der forstår både planlægning og praktisk udførelse. Teamet dækker flere fagområder og arbejder efter en samlet plan.",
+    trades: ["Murerarbejde", "Tømrerarbejde", "Malerarbejde", "Belægning", "Havearbejde"],
+  },
+  cta: { label: "Læs mere om os", href: "/om-os" },
+  image: "/images/cases/terrasse-konstruktion.jpg",
+  imageAlt: "Bærende konstruktion til træterrasse under opbygning",
+} as const;
+
+// Short, natural SEO block placed just before the FAQ (per PDF spec: ~120-180
+// words, not a separate SEO wall).
+export const SEOTEXT = {
+  h2: "Renovering og byggeopgaver i København",
+  text: "Grønt Land DK er en entreprenørvirksomhed, der udfører renovering og byggeopgaver i København og Storkøbenhavn — for både private boligejere og entreprenører. Vi arbejder med havearbejde, belægningsarbejde, facadearbejde, malerservice, tømrerarbejde, murerarbejde, demonteringsarbejde og totalentreprise, hvor flere fag samles i én plan med én ansvarlig kontakt. Uanset om opgaven er en ny terrasse, en renoveret facade, ny belægning i indkørslen eller en samlet renovering af boligen, planlægger vi arbejdet fra start til aflevering med en tydelig tidsramme og en klar aftale. Entreprenører bruger os som et stabilt team til delopgaver og ekstra kapacitet på byggeprojekter. Send en kort beskrivelse af din opgave — så vurderer vi den og vender tilbage med næste skridt.",
+} as const;
+
+export const FAQ = {
+  h2: "Ofte stillede spørgsmål",
+  items: [
+    {
+      q: "Arbejder I både for private og entreprenører?",
+      a: "Ja, Grønt Land DK hjælper både private boligejere og entreprenører med renovering, byggeopgaver og udearealer.",
+    },
+    { q: "Hvilke områder dækker I?", a: "Vi arbejder i København og Storkøbenhavn." },
+    {
+      q: "Hvilke typer arbejde udfører I?",
+      a: "Vi udfører blandt andet havearbejde, belægningsarbejde, facadearbejde, malerservice, tømrerarbejde, murerarbejde og totalentreprise.",
+    },
+    {
+      q: "Kan I håndtere flere fag i samme projekt?",
+      a: "Ja, flere fag kan samles i én plan, så processen bliver lettere at styre for kunden.",
+    },
+    {
+      q: "Hvordan får jeg et tilbud?",
+      a: "Send en kort beskrivelse af opgaven. Hvis det er relevant, kan du også sende billeder. Herefter vurderer vi opgaven og vender tilbage med næste skridt.",
+    },
+    {
+      q: "Kan I hjælpe som samarbejdspartner for entreprenører?",
+      a: "Ja, Grønt Land DK kan hjælpe entreprenører med delopgaver, ekstra kapacitet og praktisk udførelse på byggeprojekter.",
+    },
+  ],
+} as const;
+
+// Final lead form. View-only shell (no submit handling yet), same as the other
+// SHELL sections; fields match the PDF spec.
+export const QUOTE_FORM = {
+  h2: "Få et tilbud på dit projekt",
+  sub: "Send en kort beskrivelse af opgaven, så vender vi tilbage med næste skridt.",
+  fields: { name: "Navn", phone: "Telefon", email: "E-mail" },
+  whoLabel: "Jeg er:",
+  whoOptions: ["Privatkunde", "Entreprenør / virksomhed"],
+  taskLabel: "Hvilken type opgave?",
+  taskPlaceholder: "Vælg opgavetype",
+  taskOptions: [
+    "Havearbejde",
+    "Belægningsarbejde",
+    "Facadearbejde",
+    "Malerservice",
+    "Tømrerarbejde",
+    "Murerarbejde",
+    "Totalentreprise",
+    "Andet",
+  ],
+  message: "Besked",
+  upload: "Upload billeder",
+  uploadHint: "Træk billeder hertil, eller klik for at vælge",
+  button: "Send forespørgsel",
+  micro: "Vi vender tilbage med en klar næste handling.",
+  reassurance: [
+    { label: "Svar", value: "Vi svarer inden 24 timer" },
+    { label: "Område", value: "København og Storkøbenhavn" },
+    { label: "CVR", value: "45514374" },
+  ],
+} as const;

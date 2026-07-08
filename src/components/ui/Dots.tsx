@@ -1,12 +1,24 @@
 import { cn } from "@/util/cn";
 
+const SIZES = {
+  sm: { dot: "size-3", gap: "gap-1.5" },
+  md: { dot: "size-[18px]", gap: "gap-1.5" },
+} as const;
+
 /** Three brand dots (leaf → moss → pine) used as a heading eyebrow. */
-export function Dots({ className = "" }: { className?: string }) {
+export function Dots({
+  className = "",
+  size = "sm",
+}: {
+  className?: string;
+  size?: keyof typeof SIZES;
+}) {
+  const { dot, gap } = SIZES[size];
   return (
-    <span aria-hidden className={cn("flex gap-1.5", className)}>
-      <span className="size-3 rounded-full bg-leaf" />
-      <span className="size-3 rounded-full bg-moss" />
-      <span className="size-3 rounded-full bg-pine" />
+    <span aria-hidden className={cn("flex", gap, className)}>
+      <span className={cn("rounded-full bg-leaf", dot)} />
+      <span className={cn("rounded-full bg-moss", dot)} />
+      <span className={cn("rounded-full bg-pine", dot)} />
     </span>
   );
 }
