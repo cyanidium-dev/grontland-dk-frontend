@@ -3,11 +3,13 @@ import Link from "next/link";
 import { cn } from "@/util/cn";
 import { Container, Button, Dropdown } from "@/components/ui";
 import { Logo } from "@/components/brand/Logo";
+import { MobileMenu } from "./MobileMenu";
 import { NAV_MENU, SERVICES_MENU } from "@/constants/home";
 
 /* Desktop header: logo + nav (with a "Ydelser" dropdown) on the left, CTA on
    the right. `overlay` floats it transparently over the hero; `solid` is the
-   default sticky bar for inner pages. Mobile burger menu is a TODO. */
+   default sticky bar for inner pages. Below xl, a morphing burger opens the
+   mobile drawer (see MobileMenu). */
 export function Header({ variant = "solid" }: { variant?: "solid" | "overlay" }) {
   const overlay = variant === "overlay";
 
@@ -41,14 +43,17 @@ export function Header({ variant = "solid" }: { variant?: "solid" | "overlay" })
           ))}
         </nav>
 
-        <Button
-          href="/kontakt"
-          variant="black"
-          size="sm"
-          className="ml-auto hidden min-w-[176px] font-semibold normal-case sm:inline-flex"
-        >
-          Få et tilbud
-        </Button>
+        <div className="ml-auto flex items-center gap-1">
+          <Button
+            href="/kontakt"
+            variant="black"
+            size="sm"
+            className="hidden min-w-[176px] font-semibold normal-case sm:inline-flex"
+          >
+            Få et tilbud
+          </Button>
+          <MobileMenu />
+        </div>
       </Container>
     </header>
   );
