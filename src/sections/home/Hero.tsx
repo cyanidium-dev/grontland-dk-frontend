@@ -12,7 +12,7 @@ export function Hero() {
     <section className="relative -mt-[72px] overflow-hidden bg-white">
       {/* Right image panel + overlay cards (desktop) — floats below the header,
           vertically inset from the section, above the ring decor (z-10). */}
-      <div className="absolute right-0 top-0 bottom-8 z-10 hidden w-[43.5%] overflow-hidden rounded-l-[20px] xl:block">
+      <div className="absolute right-0 top-0 bottom-8 z-20 hidden w-[43.5%] overflow-hidden rounded-l-[20px] xl:block">
         <Image
           src={HERO.image.src}
           alt={HERO.image.alt}
