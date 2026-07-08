@@ -9,11 +9,13 @@ import { Button } from "@/components/ui";
 import { ChevronIcon } from "@/components/icons";
 import { NAV_MENU, SERVICES_MENU } from "@/constants/home";
 
-/* Mobile/tablet nav (below xl). Morphing burger↔X button + full-screen drawer
-   with a collapsible "Ydelser" accordion. Pure Tailwind transitions (no
-   framer-motion); body scroll locked and closes on Escape / link tap. The
-   drawer is portalled to <body> so the header's backdrop-blur (a containing
-   block) doesn't trap the fixed positioning. */
+/* Mobile/tablet nav (below xl). Morphing burger↔X button + drawer under the
+   sticky header with a collapsible "Ydelser" accordion. Pure Tailwind
+   transitions (no framer-motion); closes on Escape / link tap. The drawer is
+   portalled to <body> so the header's backdrop-blur (a containing block)
+   doesn't trap the fixed positioning. Background scroll is locked via event
+   handlers rather than overflow/position, which would disable the sticky
+   header; the drawer's own <nav> scrolls internally. */
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -27,41 +29,47 @@ export function MobileMenu() {
 
   useEffect(() => {
     if (!open) return;
-    const html = document.documentElement;
-    const scrollY = window.scrollY;
-    const prevHtmlOverflow = html.style.overflow;
-    const prevBodyOverflow = document.body.style.overflow;
-    const prevBodyPosition = document.body.style.position;
-    const prevBodyTop = document.body.style.top;
-    const prevBodyWidth = document.body.style.width;
 
-    html.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
-    // iOS Safari ignores overflow:hidden alone — pin body at current scroll.
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = "100%";
-
-    const preventTouch = (e: TouchEvent) => {
+    // Lock background scroll WITHOUT touching overflow/position on html/body:
+    // both disable the header's `position: sticky`, shifting it off-screen and
+    // taking the close button with it. Instead we swallow scroll gestures that
+    // originate outside the drawer's scroll area.
+    const inDrawer = (target: EventTarget | null) => {
       const nav = document.querySelector('[aria-label="Mobilmenu"]');
-      if (nav?.contains(e.target as Node)) return;
+      return !!(nav && target instanceof Node && nav.contains(target));
+    };
+
+    const preventScroll = (e: Event) => {
+      if (inDrawer(e.target)) return;
       e.preventDefault();
     };
-    document.addEventListener("touchmove", preventTouch, { passive: false });
 
+    const SCROLL_KEYS = new Set([
+      "ArrowUp",
+      "ArrowDown",
+      "PageUp",
+      "PageDown",
+      "Home",
+      "End",
+      " ",
+    ]);
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (SCROLL_KEYS.has(e.key) && !inDrawer(document.activeElement)) {
+        e.preventDefault();
+      }
     };
+
+    window.addEventListener("wheel", preventScroll, { passive: false });
+    window.addEventListener("touchmove", preventScroll, { passive: false });
     window.addEventListener("keydown", onKey);
 
     return () => {
-      html.style.overflow = prevHtmlOverflow;
-      document.body.style.overflow = prevBodyOverflow;
-      document.body.style.position = prevBodyPosition;
-      document.body.style.top = prevBodyTop;
-      document.body.style.width = prevBodyWidth;
-      window.scrollTo(0, scrollY);
-      document.removeEventListener("touchmove", preventTouch);
+      window.removeEventListener("wheel", preventScroll);
+      window.removeEventListener("touchmove", preventScroll);
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
