@@ -35,12 +35,13 @@ export function ProjectsListing() {
               label={item.label}
               active={filter === item.id}
               onClick={() => setFilter(item.id)}
+              className="min-h-11"
             />
           ))}
         </div>
 
         {projects.length > 0 ? (
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 xl:mt-14 xl:grid-cols-3">
+          <ul className="mt-10 grid gap-6 sm:grid-cols-2 xl:mt-14 xl:grid-cols-2">
             {projects.map((project) => (
               <li key={project.slug}>
                 <ProjectCard project={project} />

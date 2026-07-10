@@ -10,7 +10,7 @@ export function ProjectCta() {
 
   return (
     <section className="relative overflow-hidden bg-black text-white">
-      <Container className="relative z-10 grid items-stretch gap-10 py-16 xl:grid-cols-2 xl:gap-14 xl:py-20">
+      <Container className="relative z-10 grid items-stretch gap-10 py-16 md:grid-cols-2 md:gap-12 md:py-20 xl:gap-14">
         <div className="max-w-xl">
           <Heading as="h2" size="section" className="text-white">
             {h2}
@@ -27,12 +27,12 @@ export function ProjectCta() {
           </OpenQuoteButton>
         </div>
 
-        <div className="relative aspect-[2/1] overflow-hidden rounded-2xl xl:aspect-auto xl:min-h-0">
+        <div className="relative aspect-[21/9] overflow-hidden rounded-2xl md:aspect-auto md:min-h-0">
           <Image
             src={image}
             alt={imageAlt}
             fill
-            sizes="(max-width: 1280px) 100vw, 560px"
+            sizes="(max-width: 768px) 100vw, 560px"
             className="object-cover"
           />
         </div>

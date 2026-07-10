@@ -12,10 +12,10 @@ export function ProjectRelated({ project }: { project: Project }) {
         <Heading as="h2" size="section">
           Andre projekter
         </Heading>
-        <ul className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        <ul className="mt-10 grid gap-6 xl:grid-cols-3">
           {related.map((item) => (
             <li key={item.slug}>
-              <ProjectCard project={item} />
+              <ProjectCard project={item} showServiceTags={false} />
             </li>
           ))}
         </ul>

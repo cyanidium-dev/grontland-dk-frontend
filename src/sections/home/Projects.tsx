@@ -49,10 +49,10 @@ export function Projects() {
             </div>
           </div>
 
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 xl:mt-14 xl:grid-cols-3">
+          <ul className="mt-10 grid gap-6 sm:grid-cols-2 xl:mt-14 xl:grid-cols-2">
             {PROJECTS.map((project) => (
               <li key={project.slug}>
-                <ProjectCard project={project} />
+                <ProjectCard project={project} showServiceTags={false} />
               </li>
             ))}
           </ul>

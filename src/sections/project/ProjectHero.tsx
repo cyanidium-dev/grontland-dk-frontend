@@ -20,7 +20,7 @@ export function ProjectHero({ project }: { project: Project }) {
           <span className="text-pine">{project.title}</span>
         </nav>
 
-        <div className="mt-8 grid gap-10 xl:grid-cols-2 xl:items-center xl:gap-14">
+        <div className="mt-8 grid gap-10 md:grid-cols-2 md:items-center md:gap-12 xl:gap-14">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.35px] text-leaf">
               {PROJECT_CATEGORY_LABEL[project.category]}
