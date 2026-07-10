@@ -429,7 +429,11 @@
     will-change: transform, opacity;
   }
 
+  /* Lock document scroll for modals/lightbox. Prefer class on both html and
+     body — body-only can fail when html also has overflow-x: clip. */
+  html.no-doc-scroll,
   body.no-doc-scroll {
     overflow: hidden;
+    overscroll-behavior: none;
   }
 }

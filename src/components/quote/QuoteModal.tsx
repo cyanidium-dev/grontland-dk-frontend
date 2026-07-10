@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 
-import { cn } from "@/util/cn";
-
 export function QuoteModal({
   isOpen,
   onClose,
@@ -32,21 +30,23 @@ export function QuoteModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4"
       role="presentation"
+      onClick={onClose}
     >
       <div
         ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-label={QUOTE_MODAL_LABEL}
-        className="max-h-[90dvh] w-[calc(100%-2rem)] max-w-[687px] overflow-y-auto rounded-[24px] bg-white p-8 text-pine shadow-md"
+        className="relative max-h-[calc(100dvh-1.5rem)] w-[calc(100%-1.5rem)] max-w-[687px] overflow-y-auto overscroll-contain rounded-[24px] bg-white p-5 text-pine shadow-md sm:max-h-[calc(100dvh-2rem)] sm:w-[calc(100%-2rem)] sm:p-6"
+        onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
           onClick={onClose}
           aria-label="Luk"
-          className="float-right -mt-1 mb-2 flex size-8 cursor-pointer items-center justify-center text-pine transition-opacity hover:opacity-70"
+          className="absolute right-4 top-4 z-10 flex size-8 cursor-pointer items-center justify-center text-pine transition-opacity hover:opacity-70 sm:right-5 sm:top-5"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
             <path
@@ -57,7 +57,7 @@ export function QuoteModal({
             />
           </svg>
         </button>
-        <div className={cn("clear-both")}>{children}</div>
+        {children}
       </div>
     </div>
   );

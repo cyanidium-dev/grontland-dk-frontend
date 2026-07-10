@@ -23,6 +23,16 @@ type QuoteModalContextValue = {
 
 const QuoteModalContext = createContext<QuoteModalContextValue | null>(null);
 
+const SCROLL_KEYS = new Set([
+  "ArrowUp",
+  "ArrowDown",
+  "PageUp",
+  "PageDown",
+  "Home",
+  "End",
+  " ",
+]);
+
 export function useQuoteModal() {
   const context = useContext(QuoteModalContext);
   if (!context) {
@@ -40,8 +50,39 @@ export function QuoteModalProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!isOpen) return;
 
+    const html = document.documentElement;
+    html.classList.add("no-doc-scroll");
     document.body.classList.add("no-doc-scroll");
-    return () => document.body.classList.remove("no-doc-scroll");
+
+    // Swallow scroll gestures outside the dialog (overflow:hidden alone can
+    // fail when html also has overflow-x: clip).
+    const inDialog = (target: EventTarget | null) => {
+      const dialog = document.querySelector('[role="dialog"][aria-modal="true"]');
+      return !!(dialog && target instanceof Node && dialog.contains(target));
+    };
+
+    const preventScroll = (e: Event) => {
+      if (inDialog(e.target)) return;
+      e.preventDefault();
+    };
+
+    const onKey = (e: KeyboardEvent) => {
+      if (!SCROLL_KEYS.has(e.key)) return;
+      if (inDialog(document.activeElement)) return;
+      e.preventDefault();
+    };
+
+    window.addEventListener("wheel", preventScroll, { passive: false });
+    window.addEventListener("touchmove", preventScroll, { passive: false });
+    window.addEventListener("keydown", onKey);
+
+    return () => {
+      html.classList.remove("no-doc-scroll");
+      document.body.classList.remove("no-doc-scroll");
+      window.removeEventListener("wheel", preventScroll);
+      window.removeEventListener("touchmove", preventScroll);
+      window.removeEventListener("keydown", onKey);
+    };
   }, [isOpen]);
 
   return (
