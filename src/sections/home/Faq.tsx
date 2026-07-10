@@ -2,15 +2,28 @@ import { Container } from "@/components/ui";
 import { StarIcon, ChevronIcon } from "@/components/icons";
 import { FAQ } from "@/constants/home";
 
-/* "Ofte stillede spørgsmål" — leaf banner with a star cluster, then a native
-   <details> accordion (no client JS; chevron rotates via group-open). */
+/* Faq — Figma #3023:1098. Full-width leaf pill banner + star cluster, native
+   <details> accordion, ring decor #3023:1099 (rotate 117.04°) bottom-right. */
 export function Faq() {
   return (
-    <section className="pb-10 pt-16 xl:pt-24">
-      <Container>
-        <div className="mx-auto max-w-4xl">
-          <div className="relative mb-8 overflow-hidden rounded-[28px] bg-leaf px-6 py-6 xl:mb-10 xl:px-11 xl:py-10">
-            <h2 className="font-display text-[18px] font-bold uppercase leading-[1.2] text-white xl:text-[40px]">
+    <section className="relative overflow-x-clip pb-10 pt-16 xl:min-h-[765px] xl:pb-[91px] xl:pt-[68px]">
+      {/* Ring decor #3023:1099 — AABB inset from MCP; CSS rotate (not in SVG) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-[50.2%_-7.56%_-10.93%_68.91%] z-0 hidden items-center justify-center xl:flex"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/svg/decor-rings-faq.svg"
+          alt=""
+          className="h-[393px] w-[324px] max-w-none shrink-0 origin-center rotate-[117.04deg] opacity-90"
+        />
+      </div>
+
+      <Container className="relative z-10">
+        <div className="flex flex-col gap-10">
+          <div className="relative overflow-hidden rounded-full bg-leaf px-6 py-6 xl:px-11 xl:py-10">
+            <h2 className="font-display text-[18px] font-bold uppercase leading-[1.2] text-white xl:text-[40px] xl:leading-[48px]">
               {FAQ.h2}
             </h2>
             <StarIcon className="absolute -bottom-3 right-[88px] size-[44px] text-white/40 xl:-bottom-8 xl:right-[180px] xl:size-[90px]" />
@@ -19,13 +32,13 @@ export function Faq() {
             <StarIcon className="absolute -right-1 bottom-0 size-[28px] text-white/40 xl:size-[60px]" />
           </div>
 
-          <div className="space-y-3">
+          <div className="flex flex-col gap-3">
             {FAQ.items.map((item) => (
               <details
                 key={item.q}
-                className="group rounded-2xl border border-line bg-white px-6 py-1"
+                className="group rounded-2xl border border-line bg-white px-[25px] py-[5px]"
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[14px] font-bold uppercase text-pine">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[14px] font-bold uppercase leading-[21px] text-pine">
                   {item.q}
                   <ChevronIcon className="text-leaf transition-transform duration-200 group-open:rotate-180" />
                 </summary>
