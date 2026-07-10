@@ -60,6 +60,13 @@ export const PROJECTS_LIST = {
     { id: "b2b" as const, label: "B2B" },
   ],
   emptyFilter: "Ingen projekter i denne kategori endnu.",
+  ctaBand: {
+    h2: "Diskuter dit projekt",
+    sub: "Fortæl kort om opgaven — så vender vi tilbage med næste skridt, uanset om du er privat kunde eller entreprenør.",
+    button: "Få et tilbud",
+    image: "/images/cases/quote-cta-band.png",
+    imageAlt: "Nybelagte betontrin foran bolig med hvid balustrade",
+  },
 } as const;
 
 export const PROJECTS: readonly Project[] = [
