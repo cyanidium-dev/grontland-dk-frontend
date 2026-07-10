@@ -45,7 +45,7 @@ export function Projects() {
             </div>
           </div>
 
-          <ul className="mt-10 grid gap-6 md:grid-cols-3 xl:mt-14">
+          <ul className="mt-10 grid gap-6 sm:grid-cols-2 xl:mt-14 xl:grid-cols-3">
             {PROJECTS.cards.map((card) => (
               <li key={card.href}>
                 <Link href={card.href} className="group block">

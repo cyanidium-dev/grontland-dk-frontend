@@ -62,7 +62,7 @@ export function Process() {
             </Heading>
           </div>
 
-          <ol className="grid gap-3 pt-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+          <ol className="grid gap-3 pt-4 sm:grid-cols-2 xl:grid-cols-5">
             {PROCESS.steps.map((step, i) => {
               const s = stepStyle(i);
               return (

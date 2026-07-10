@@ -26,10 +26,10 @@ export function Faq() {
             <h2 className="font-display text-[18px] font-bold uppercase leading-[1.2] text-white xl:text-[40px] xl:leading-[48px]">
               {FAQ.h2}
             </h2>
-            <StarIcon className="absolute -bottom-3 right-[88px] size-[44px] text-white/40 xl:-bottom-8 xl:right-[180px] xl:size-[90px]" />
-            <StarIcon className="absolute right-[64px] top-0 size-[30px] text-white/40 xl:right-[130px] xl:size-[60px]" />
-            <StarIcon className="absolute -top-2 right-[8px] size-[50px] text-white/40 xl:-top-5 xl:right-[10px] xl:size-[110px]" />
-            <StarIcon className="absolute -right-1 bottom-0 size-[28px] text-white/40 xl:size-[60px]" />
+            <StarIcon className="absolute -bottom-3 right-[88px] hidden size-[44px] text-white/40 xl:block xl:-bottom-8 xl:right-[180px] xl:size-[90px]" />
+            <StarIcon className="absolute right-[64px] top-0 hidden size-[30px] text-white/40 xl:block xl:right-[130px] xl:size-[60px]" />
+            <StarIcon className="absolute -top-2 right-[8px] hidden size-[50px] text-white/40 xl:-top-5 xl:right-[10px] xl:block xl:size-[110px]" />
+            <StarIcon className="absolute -right-1 bottom-0 hidden size-[28px] text-white/40 xl:block xl:size-[60px]" />
           </div>
 
           <div className="flex flex-col gap-3">

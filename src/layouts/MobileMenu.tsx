@@ -131,7 +131,7 @@ export function MobileMenu() {
                     <Link
                       href={item.href}
                       onClick={close}
-                      className="block py-1.5 pl-3 text-[14px] font-medium text-pine/80 transition-colors hover:text-leaf"
+                      className="block py-3 pl-3 text-[14px] font-medium text-pine/80 transition-colors hover:text-leaf"
                     >
                       {item.label}
                     </Link>
@@ -173,7 +173,7 @@ export function MobileMenu() {
         aria-label={open ? "Luk menu" : "Åbn menu"}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="relative z-60 flex size-10 items-center justify-center outline-none"
+        className="relative z-60 flex size-11 items-center justify-center outline-none"
       >
         <span className="relative block h-4 w-6">
           <span

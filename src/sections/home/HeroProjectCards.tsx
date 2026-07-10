@@ -14,7 +14,7 @@ export type HeroProjectCard = {
 /* Glass "PROJEKT" card overlaid on the hero image (thumbnail + label + caption). */
 function ProjectCard({ card }: { card: HeroProjectCard }) {
   return (
-    <figure className="glass flex w-[310px] items-center gap-3 rounded-[18px] bg-white/17 p-2.5">
+    <figure className="glass flex w-[310px] max-w-[calc(100vw-2rem)] items-center gap-3 rounded-[18px] bg-white/17 p-2.5">
       <div className="relative h-[107px] w-[98px] shrink-0 overflow-hidden rounded-[10px]">
         <Image
           src={card.image.src}
