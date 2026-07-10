@@ -1,3 +1,4 @@
+import { QuoteModalProvider } from "@/components/quote";
 import { Header } from "@/layouts/Header";
 import { Footer } from "@/layouts/Footer";
 import {
@@ -11,15 +12,15 @@ import {
   About,
   SeoText,
   Faq,
-  QuoteForm,
+  QuoteCta,
 } from "@/sections/home";
 
 /* Home — section order per Preview/docs/Структура главной страницы.md:
    Hero → Services → Audiences → OneTeam → Process → Projects → Gallery →
-   About → SeoText → Faq → QuoteForm. */
+   About → SeoText → Faq → QuoteCta. */
 export default function HomePage() {
   return (
-    <>
+    <QuoteModalProvider>
       <div className="relative">
         <Header variant="overlay" />
         <main className="flex-1">
@@ -33,10 +34,10 @@ export default function HomePage() {
           <About />
           <SeoText />
           <Faq />
-          <QuoteForm />
+          <QuoteCta />
         </main>
       </div>
       <Footer />
-    </>
+    </QuoteModalProvider>
   );
 }

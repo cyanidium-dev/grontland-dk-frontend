@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { Container, Button, Heading, Dots, ImageCarousel } from "@/components/ui";
+import { OpenQuoteButton } from "@/components/quote";
 import { HERO } from "@/constants/home";
 import { HeroProjectCards } from "./HeroProjectCards";
 
@@ -51,9 +52,9 @@ export function Hero() {
             {HERO.sub}
           </p>
           <div className="mb-12 flex flex-col gap-3 sm:flex-row">
-            <Button href={HERO.ctaPrimary.href} variant="black" size="md" className="min-w-[220px]">
+            <OpenQuoteButton variant="black" size="md" className="min-w-[220px]">
               {HERO.ctaPrimary.label}
-            </Button>
+            </OpenQuoteButton>
             <Button href={HERO.ctaSecondary.href} variant="leaf" size="md">
               {HERO.ctaSecondary.label}
             </Button>

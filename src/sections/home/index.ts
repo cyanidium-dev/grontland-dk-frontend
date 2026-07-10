@@ -8,4 +8,4 @@ export { Gallery } from "./Gallery";
 export { About } from "./About";
 export { SeoText } from "./SeoText";
 export { Faq } from "./Faq";
-export { QuoteForm } from "./QuoteForm";
+export { QuoteCta } from "./QuoteCta";

@@ -302,6 +302,7 @@ export const FAQ = {
 // SHELL sections; fields match the PDF spec.
 export const QUOTE_FORM = {
   h2: "Få et tilbud på dit projekt",
+  h2Lines: ["Få et tilbud på dit", "projekt"] as const,
   sub: "Send en kort beskrivelse af opgaven, så vender vi tilbage med næste skridt.",
   fields: { name: "Navn", phone: "Telefon", email: "E-mail" },
   whoLabel: "Jeg er:",
@@ -323,6 +324,9 @@ export const QUOTE_FORM = {
   uploadHint: "Træk billeder hertil, eller klik for at vælge",
   button: "Send forespørgsel",
   micro: "Vi vender tilbage med en klar næste handling.",
+  cta: { label: "Kontakt os" },
+  image: "/images/cases/quote-cta-band.png",
+  imageAlt: "Nybelagte betontrin foran bolig med hvid balustrade",
   reassurance: [
     { label: "Svar", value: "Vi svarer inden 24 timer" },
     { label: "Område", value: "København og Storkøbenhavn" },

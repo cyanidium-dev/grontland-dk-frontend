@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 import { cn } from "@/util/cn";
-import { Container, Button, Dropdown } from "@/components/ui";
+import { Container, Dropdown } from "@/components/ui";
+import { OpenQuoteButton } from "@/components/quote";
 import { Logo } from "@/components/brand/Logo";
 import { MobileMenu } from "./MobileMenu";
 import { NAV_MENU, SERVICES_MENU } from "@/constants/home";
@@ -44,14 +45,13 @@ export function Header({ variant = "solid" }: { variant?: "solid" | "overlay" })
         </nav>
 
         <div className="ml-auto flex items-center gap-1">
-          <Button
-            href="/kontakt"
+          <OpenQuoteButton
             variant="black"
             size="sm"
             className="hidden min-w-[176px] font-semibold normal-case sm:inline-flex"
           >
             Få et tilbud
-          </Button>
+          </OpenQuoteButton>
           <MobileMenu />
         </div>
       </Container>

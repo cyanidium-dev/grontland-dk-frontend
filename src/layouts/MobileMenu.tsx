@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 
 import { cn } from "@/util/cn";
-import { Button } from "@/components/ui";
+import { OpenQuoteButton } from "@/components/quote";
 import { ChevronIcon } from "@/components/icons";
 import { NAV_MENU, SERVICES_MENU } from "@/constants/home";
 
@@ -154,14 +154,14 @@ export function MobileMenu() {
           ))}
         </ul>
 
-        <Button
-          href="/kontakt"
+        <OpenQuoteButton
           variant="black"
           size="sm"
+          onOpen={close}
           className="mt-5 w-full font-semibold normal-case"
         >
           Få et tilbud
-        </Button>
+        </OpenQuoteButton>
       </nav>
     </div>
   );
