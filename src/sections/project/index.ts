@@ -4,3 +4,4 @@ export { ProjectGallery } from "./ProjectGallery";
 export { ProjectResult } from "./ProjectResult";
 export { ProjectRelated } from "./ProjectRelated";
 export { ProjectCta } from "./ProjectCta";
+export { ProjectsListing } from "./ProjectsListing";

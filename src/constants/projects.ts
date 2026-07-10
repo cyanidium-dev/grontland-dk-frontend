@@ -1,7 +1,8 @@
 /**
  * Project cases — listing + detail pages.
- * `category` is audience (private | b2b) for future filters.
- * `serviceLabel` is the trade chip shown on cards (formerly home `category`).
+ * `category` is audience (private | b2b) for listing filters.
+ * `serviceLabel` is the primary trade chip on cards.
+ * `services` are service-type tags shown on cards.
  */
 
 export type ProjectCategory = "private" | "b2b";
@@ -12,6 +13,11 @@ export type ProjectGalleryItem = {
   kind: "process" | "result" | "before" | "after";
 };
 
+export type ProjectService = {
+  label: string;
+  href: string;
+};
+
 export type Project = {
   slug: string;
   title: string;
@@ -19,6 +25,7 @@ export type Project = {
   category: ProjectCategory;
   serviceLabel: string;
   serviceHref: string;
+  services: readonly ProjectService[];
   cardDesc: string;
   cardImage: string;
   cardImageAlt: string;
@@ -34,6 +41,8 @@ export type Project = {
   relatedSlugs: readonly string[];
 };
 
+export type ProjectFilterId = "all" | ProjectCategory;
+
 export const PROJECT_CATEGORY_LABEL: Record<ProjectCategory, string> = {
   private: "Privatkunde",
   b2b: "Entreprenør",
@@ -45,6 +54,12 @@ export const PROJECTS_LIST = {
   sub: "Se eksempler på renovering, belægning, facade, havearbejde og andre opgaver udført for private og erhverv.",
   cta: { label: "Se projekter", href: "/projekter" },
   linkLabel: "Se projekt",
+  filters: [
+    { id: "all" as const, label: "Alle" },
+    { id: "private" as const, label: "Privat" },
+    { id: "b2b" as const, label: "B2B" },
+  ],
+  emptyFilter: "Ingen projekter i denne kategori endnu.",
 } as const;
 
 export const PROJECTS: readonly Project[] = [
@@ -55,6 +70,7 @@ export const PROJECTS: readonly Project[] = [
     category: "private",
     serviceLabel: "Havearbejde / terrasse",
     serviceHref: "/ydelser/havearbejde",
+    services: [{ label: "Havearbejde", href: "/ydelser/havearbejde" }],
     cardDesc:
       "Et nyt udeareal skabt med fokus på funktion, brug og et færdigt visuelt udtryk.",
     cardImage: "/images/cases/terrasse-jatoba.jpg",
@@ -94,7 +110,7 @@ export const PROJECTS: readonly Project[] = [
         kind: "result",
       },
     ],
-    relatedSlugs: ["belaegning-ved-bolig", "facadeopgave"],
+    relatedSlugs: ["belaegning-ved-bolig", "facadeopgave", "belaegning-arc-amager"],
   },
   {
     slug: "belaegning-ved-bolig",
@@ -103,6 +119,7 @@ export const PROJECTS: readonly Project[] = [
     category: "private",
     serviceLabel: "Belægningsarbejde",
     serviceHref: "/ydelser/belaegningsarbejde",
+    services: [{ label: "Belægningsarbejde", href: "/ydelser/belaegningsarbejde" }],
     cardDesc:
       "Adgangsareal og belægning udført med fokus på stabilitet og en pæn afslutning.",
     cardImage: "/images/cases/belaegning-kyst.jpg",
@@ -139,7 +156,7 @@ export const PROJECTS: readonly Project[] = [
         kind: "result",
       },
     ],
-    relatedSlugs: ["terrasse-og-haveomraade", "facadeopgave"],
+    relatedSlugs: ["terrasse-og-haveomraade", "facadeopgave", "belaegning-arc-amager"],
   },
   {
     slug: "facadeopgave",
@@ -148,6 +165,7 @@ export const PROJECTS: readonly Project[] = [
     category: "private",
     serviceLabel: "Facadearbejde",
     serviceHref: "/ydelser/murerarbejde",
+    services: [{ label: "Facadearbejde", href: "/ydelser/murerarbejde" }],
     cardDesc:
       "Vedligeholdelse og forbedring af facade med fokus på bygningens udtryk og holdbarhed.",
     cardImage: "/images/cases/facade-trappe.jpg",
@@ -186,9 +204,53 @@ export const PROJECTS: readonly Project[] = [
         kind: "result",
       },
     ],
-    relatedSlugs: ["terrasse-og-haveomraade", "belaegning-ved-bolig"],
+    relatedSlugs: ["terrasse-og-haveomraade", "belaegning-ved-bolig", "belaegning-arc-amager"],
   },
-] as const;
+  {
+    slug: "belaegning-arc-amager",
+    title: "Belægning og afvanding — ARC",
+    location: "Amager",
+    category: "b2b",
+    serviceLabel: "Belægningsarbejde",
+    serviceHref: "/ydelser/belaegningsarbejde",
+    services: [{ label: "Belægningsarbejde", href: "/ydelser/belaegningsarbejde" }],
+    cardDesc:
+      "Underentreprise med belægning og afvanding i tæt samarbejde med hovedentreprenør på ARC Amager.",
+    cardImage: "/images/cases/fundament-b2b.png",
+    cardImageAlt: "Armeret fundament klargjort til støbning på byggeplads",
+    heroImage: "/images/cases/fundament-b2b.png",
+    heroImageAlt: "Armeret fundament klargjort til støbning på byggeplads",
+    intro:
+      "Vi deltog som underentreprenør i et større projekt ved ARC Amager Ressourcecenter.",
+    task: "Som underentreprenør leverede vi belægning og afvanding i tæt samarbejde med hovedentreprenøren og øvrige faggrupper på pladsen.",
+    work: [
+      "Etablering af dræn- og afvandingssystemer",
+      "Montering af linjedræn og brønde",
+      "Forberedelse af bundopbygning",
+      "Udlægning af betonbelægning",
+    ],
+    focus: [
+      "Korrekt fald og afvanding",
+      "Præcis opmåling og udførelse",
+      "Stabil opbygning og holdbarhed",
+    ],
+    result:
+      "Vi deltog både i udførelsen og den løbende koordinering på pladsen for at sikre, at arbejdet blev udført korrekt og uden forsinkelser.",
+    gallery: [
+      {
+        src: "/images/cases/projekt-belaegning.png",
+        alt: "Belægning under opbygning",
+        kind: "process",
+      },
+      {
+        src: "/images/cases/fundament-b2b.png",
+        alt: "Byggeplads med armeret fundament under opbygning",
+        kind: "result",
+      },
+    ],
+    relatedSlugs: ["belaegning-ved-bolig", "terrasse-og-haveomraade", "facadeopgave"],
+  },
+];
 
 export function getProject(slug: string): Project | undefined {
   return PROJECTS.find((p) => p.slug === slug);
@@ -198,4 +260,9 @@ export function getRelatedProjects(project: Project): Project[] {
   return project.relatedSlugs
     .map((slug) => getProject(slug))
     .filter((p): p is Project => p !== undefined);
+}
+
+export function filterProjects(filter: ProjectFilterId): readonly Project[] {
+  if (filter === "all") return PROJECTS;
+  return PROJECTS.filter((p) => p.category === filter);
 }
