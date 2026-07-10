@@ -1,0 +1,58 @@
+import Link from "next/link";
+
+import { Container, Heading } from "@/components/ui";
+import {
+  PROJECT_CATEGORY_LABEL,
+  type Project,
+} from "@/constants/projects";
+
+export function ProjectHero({ project }: { project: Project }) {
+  return (
+    <section className="bg-mist py-12 xl:py-16">
+      <Container>
+        <nav aria-label="Brødkrumme" className="text-sm text-pine/50">
+          <Link href="/projekter" className="transition-colors hover:text-leaf">
+            Projekter
+          </Link>
+          <span className="mx-2" aria-hidden>
+            /
+          </span>
+          <span className="text-pine">{project.title}</span>
+        </nav>
+
+        <div className="mt-8 grid gap-10 xl:grid-cols-2 xl:items-center xl:gap-14">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.35px] text-leaf">
+              {PROJECT_CATEGORY_LABEL[project.category]}
+              <span className="mx-2 text-pine/30" aria-hidden>
+                ·
+              </span>
+              <span className="text-pine/60">{project.location}</span>
+            </p>
+            <Heading as="h1" size="section" className="mt-3">
+              {project.title}
+            </Heading>
+            <Link
+              href={project.serviceHref}
+              className="mt-4 inline-block text-sm font-medium text-moss underline underline-offset-4 transition-colors hover:text-leaf"
+            >
+              {project.serviceLabel}
+            </Link>
+            <p className="mt-6 max-w-xl text-base font-light leading-relaxed text-pine/70 xl:text-[18px]">
+              {project.intro}
+            </p>
+          </div>
+
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border-4 border-leaf">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={project.heroImage}
+              alt={project.heroImageAlt}
+              className="h-full w-full object-cover"
+            />
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}

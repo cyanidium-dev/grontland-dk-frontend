@@ -197,38 +197,7 @@ export const SERVICES = {
   ],
 } as const;
 
-export const PROJECTS = {
-  h2: "Udvalgte projekter",
-  sub: "Se eksempler på renovering, belægning, facade, havearbejde og andre opgaver udført for private og erhverv.",
-  cta: { label: "Se projekter", href: "/projekter" },
-  linkLabel: "Se projekt",
-  cards: [
-    {
-      title: "Terrasse og haveområde",
-      category: "Havearbejde / terrasse",
-      desc: "Et nyt udeareal skabt med fokus på funktion, brug og et færdigt visuelt udtryk.",
-      href: "/projekter/terrasse-og-haveomraade",
-      image: "/images/cases/terrasse-jatoba.jpg",
-      imageAlt: "Færdig træterrasse i hårdttræ ved hvid villa",
-    },
-    {
-      title: "Belægning ved bolig",
-      category: "Belægningsarbejde",
-      desc: "Adgangsareal og belægning udført med fokus på stabilitet og en pæn afslutning.",
-      href: "/projekter/belaegning-ved-bolig",
-      image: "/images/cases/belaegning-kyst.jpg",
-      imageAlt: "Ny belægning og terrænarbejde ved bolig",
-    },
-    {
-      title: "Facadeopgave",
-      category: "Facadearbejde",
-      desc: "Vedligeholdelse og forbedring af facade med fokus på bygningens udtryk og holdbarhed.",
-      href: "/projekter/facadeopgave",
-      image: "/images/cases/facade-trappe.jpg",
-      imageAlt: "Nyrenoveret trappe og pudset facade ved etageejendom",
-    },
-  ],
-} as const;
+/* Project cases live in constants/projects.ts (listing + detail + home cards). */
 
 export const PROCESS = {
   h2: "Sådan foregår arbejdet",
