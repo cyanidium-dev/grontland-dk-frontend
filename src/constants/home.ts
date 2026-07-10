@@ -233,13 +233,13 @@ export const GALLERY = {
   tags: ["Facade", "Belægning", "Renovering", "Havearbejde", "Tømrerarbejde", "Murerarbejde"],
   photos: [
     { image: "/images/cases/terrasse-jatoba.jpg", imageAlt: "Færdig træterrasse i hårdttræ ved hvid villa" },
-    { image: "/images/cases/badevaerelse-marmor.jpg", imageAlt: "Renoveret baderum med marmorfliser og indbygget belysning" },
+    { image: "/images/cases/projekt-facade.png", imageAlt: "Renoveret baderum med marmorfliser og indbygget belysning" },
     { image: "/images/cases/belaegning-kyst.jpg", imageAlt: "Ny belægning og terrænarbejde ved bolig" },
-    { image: "/images/cases/havemur-vand.jpg", imageAlt: "Havemur i natursten i have med vandløb" },
-    { image: "/images/cases/trappe-sten.jpg", imageAlt: "Udvendig trappe under renovering med ny stenoverflade" },
+    { image: "/images/cases/oneteam-bg.jpg", imageAlt: "Havemur i natursten i have med vandløb" },
+    { image: "/images/cases/fundament-b2b.png", imageAlt: "Udvendig trappe under renovering med ny stenoverflade" },
     { image: "/images/cases/facade-trappe.jpg", imageAlt: "Nyrenoveret trappe og pudset facade ved etageejendom" },
-    { image: "/images/cases/terrasse-konstruktion.jpg", imageAlt: "Bærende konstruktion til træterrasse under opbygning" },
-    { image: "/images/cases/havearbejde.jpg", imageAlt: "Plejet have med græsplæne og beplantning" },
+    { image: "/images/cases/projekt-terrasse.png", imageAlt: "Bærende konstruktion til træterrasse under opbygning" },
+    { image: "/images/cases/havearbejde-private.png", imageAlt: "Plejet have med græsplæne og beplantning" },
   ],
 } as const;
 
@@ -258,7 +258,7 @@ export const ABOUT = {
     trades: ["Murerarbejde", "Tømrerarbejde", "Malerarbejde", "Belægning", "Havearbejde"],
   },
   cta: { label: "Læs mere om os", href: "/om-os" },
-  image: "/images/cases/terrasse-konstruktion.jpg",
+  image: "/images/cases/projekt-terrasse.png",
   imageAlt: "Bærende konstruktion til træterrasse under opbygning",
 } as const;
 
