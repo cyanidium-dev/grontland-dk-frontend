@@ -28,7 +28,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!project) return { title: "Projekt | Grønt Land DK" };
   return {
     title: `${project.title} | Grønt Land DK`,
-    description: project.intro,
+    description: project.seoDescription,
+    openGraph: {
+      title: `${project.title} | Grønt Land DK`,
+      description: project.seoDescription,
+      images: [{ url: project.heroImage, alt: project.heroImageAlt }],
+    },
   };
 }
 

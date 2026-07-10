@@ -41,7 +41,7 @@ export function ProjectsListing() {
         </div>
 
         {projects.length > 0 ? (
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 xl:mt-14 xl:grid-cols-2">
+          <ul className="mt-10 grid gap-6 sm:grid-cols-2 xl:mt-14 xl:grid-cols-3">
             {projects.map((project) => (
               <li key={project.slug}>
                 <ProjectCard project={project} />

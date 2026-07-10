@@ -27,6 +27,10 @@ export function ProjectHero({ project }: { project: Project }) {
               <span className="mx-2 text-pine/30" aria-hidden>
                 ·
               </span>
+              <span className="text-pine/60">{project.objectType}</span>
+              <span className="mx-2 text-pine/30" aria-hidden>
+                ·
+              </span>
               <span className="text-pine/60">{project.location}</span>
             </p>
             <Heading as="h1" size="section" className="mt-3">
