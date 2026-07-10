@@ -1,27 +1,28 @@
-import { Container, Heading, Button, StarChip } from "@/components/ui";
+import Image from "next/image";
+
+import { Heading, Button, StarChip } from "@/components/ui";
 import { ABOUT } from "@/constants/home";
 
-/* SHELL — "Om Grønt Land DK": intro + facts (StarChips) + team trades + a
-   bordered photo slot. Placed after Process/Projects/Gallery per the spec. */
+/* About — Figma #3023:964. Mist 2-col: left copy/trades/CTA, right full-bleed
+   photo with four StarChips overlaid (centered). */
 export function About() {
   return (
-    <section className="py-16 xl:py-24">
-      <Container>
-        <div className="flex flex-col gap-12 xl:flex-row xl:items-start xl:gap-16">
-          <div className="xl:w-[380px] xl:shrink-0">
-            <Heading as="h2" size="section">
-              {ABOUT.h2}
-            </Heading>
-            <div aria-hidden className="my-6 size-[26px] rounded-full bg-leaf" />
-            <p className="font-light leading-normal text-pine/75 xl:text-[17px]">{ABOUT.text}</p>
+    <section className="overflow-hidden bg-mist">
+      <div className="mx-auto grid w-full max-w-7xl xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+        {/* Left — padded like Container inset; ~380px content */}
+        <div className="flex flex-col justify-center px-6 py-14 xl:max-w-[428px] xl:py-24 xl:pl-8 xl:pr-8">
+          <Heading as="h2" size="section">
+            {ABOUT.h2}
+          </Heading>
+          <div aria-hidden className="my-6 size-[26px] rounded-full bg-leaf" />
+          <p className="font-light leading-normal text-pine/75 xl:text-[17px]">{ABOUT.text}</p>
 
-            <h3 className="mt-10 font-display text-[18px] font-bold uppercase text-pine">
+          <div className="mt-10 flex flex-col gap-[10.8px]">
+            <h3 className="font-display text-[18px] font-bold uppercase leading-[27px] text-pine">
               {ABOUT.team.h3}
             </h3>
-            <p className="mt-3 text-sm font-light leading-relaxed text-pine/60">
-              {ABOUT.team.text}
-            </p>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <p className="text-sm font-light leading-relaxed text-pine/60">{ABOUT.team.text}</p>
+            <div className="flex flex-wrap gap-2">
               {ABOUT.team.trades.map((trade) => (
                 <span
                   key={trade}
@@ -31,36 +32,38 @@ export function About() {
                 </span>
               ))}
             </div>
-            <div className="mt-8">
-              <Button href={ABOUT.cta.href} variant="pine" withArrow className="w-full sm:w-auto">
+            <div className="pt-1">
+              <Button href={ABOUT.cta.href} variant="pine" className="w-full sm:w-auto">
                 {ABOUT.cta.label}
               </Button>
             </div>
           </div>
+        </div>
 
-          <ul className="flex flex-col gap-3 xl:w-[420px] xl:shrink-0">
+        {/* Right — full-bleed photo + centered fact chips */}
+        <div className="relative min-h-[380px] xl:min-h-[829px]">
+          <Image
+            src={ABOUT.image}
+            alt={ABOUT.imageAlt}
+            fill
+            sizes="(min-width: 1280px) 55vw, 100vw"
+            className="object-cover"
+          />
+          <ul className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 py-8">
             {ABOUT.facts.map((fact) => (
-              <li key={fact.label}>
+              <li key={fact.label} className="w-full max-w-[420px]">
                 <StarChip
                   text={`${fact.label}: ${fact.value}`}
-                  boxVariant="mist"
+                  boxVariant="light"
                   starVariant="leaf"
                   textSize="sm"
-                  className="h-full border border-line"
+                  className="w-full border border-line"
                 />
               </li>
             ))}
           </ul>
-
-          <div className="xl:flex-1">
-            {/* Image slot — placeholder */}
-            <div
-              className="h-[280px] w-full overflow-hidden rounded-2xl border-4 border-solid border-leaf bg-mist xl:h-[400px]"
-              aria-label={ABOUT.imageAlt}
-            />
-          </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }
