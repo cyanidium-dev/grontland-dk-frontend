@@ -4,15 +4,16 @@ import { Heading, Star } from "@/components/ui";
 import { OpenQuoteButton } from "@/components/quote";
 import { QUOTE_FORM } from "@/constants/home";
 
-/* Quote CTA band — Figma #3023:1045. Full-width black band: copy at 320/96,
-   viewport-right photo (#3023:1069), section ring decor (#3023:1046). */
+/* Quote CTA band — Figma #3023:1045 (1920×737 at x=-261 on 1280 artboard).
+   Desktop coords use artboard crop: viewportX = sectionLocalX - 261.
+   Copy #3023:1070, photo #3023:1069, ring decor #3023:1046. */
 export function QuoteCta() {
   return (
     <section className="relative overflow-hidden bg-black text-white xl:min-h-[737px]">
-      {/* Ring decor #3023:1046 — fixed box from 1280×737 artboard % inset */}
+      {/* Ring decor #3023:1046 — 1920 MCP inset mapped to 1280 crop (offset 261) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-[403px] top-[238px] z-0 hidden h-[465px] w-[330px] xl:block"
+        className="pointer-events-none absolute left-[343px] top-[238px] z-0 hidden h-[465px] w-[495px] xl:block"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -22,22 +23,22 @@ export function QuoteCta() {
         />
       </div>
 
-      {/* Photo #3023:1069 — viewport-right bleed (Figma x=846 on 1280 → 434px / 33.906%) */}
-      <div className="absolute right-0 top-0 z-10 hidden min-h-[737px] w-[33.906%] overflow-hidden xl:block">
+      {/* Photo #3023:1069 — section x=846 → artboard left 585; bleeds to right edge */}
+      <div className="absolute left-[585px] right-0 top-0 z-10 hidden min-h-[737px] overflow-hidden xl:block">
         <Image
           src={QUOTE_FORM.image}
           alt={QUOTE_FORM.imageAlt}
           fill
-          sizes="34vw"
+          sizes="55vw"
           className="object-cover"
         />
       </div>
 
-      {/* Copy #3023:1070 — Figma left 320px, top 96px, width 448px */}
-      <div className="relative z-20 px-6 py-14 xl:absolute xl:left-[320px] xl:top-[96px] xl:w-[448px] xl:p-0">
+      {/* Copy #3023:1070 — section x=320 → artboard left 59; top 96; width 448 */}
+      <div className="relative z-20 px-6 py-14 xl:absolute xl:left-[59px] xl:top-[96px] xl:w-[448px] xl:p-0">
         <div className="flex flex-col gap-11">
           <div className="flex flex-col gap-9">
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-[19px]">
               <Heading
                 as="h2"
                 size="card"
