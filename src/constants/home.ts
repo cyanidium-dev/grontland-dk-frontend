@@ -28,6 +28,41 @@ export const SERVICES_MENU = [
   { label: "Rengøringsarbejde", href: "/ydelser/rengoringsarbejde" },
 ] as const;
 
+/* Footer — Figma #3032:171. Services list is footer-only (Facadearbejde → murer). */
+export const FOOTER = {
+  blurb: "Renovering og byggeopgaver i København",
+  menuTitle: "Menu",
+  servicesTitle: "Ydelser",
+  contactTitle: "Kontakt",
+  contact: ["København og Storkøbenhavn", "CVR 45514374"] as const,
+  copyright: "© Grønt Land DK",
+  credit: {
+    by: "Created by",
+    name: "Code-site.art",
+    href: "https://code-site.art",
+  },
+  menu: [
+    { label: "Forside", href: "/" },
+    { label: "Ydelser", href: "/ydelser" },
+    { label: "Private kunder", href: "/private" },
+    { label: "Entreprenører", href: "/entreprenorer" },
+    { label: "Projekter", href: "/projekter" },
+    { label: "Galleri", href: "/galleri" },
+    { label: "Om os", href: "/om-os" },
+    { label: "Kontakt", href: "/kontakt" },
+  ] as const,
+  services: [
+    { label: "Havearbejde", href: "/ydelser/havearbejde" },
+    { label: "Belægningsarbejde", href: "/ydelser/belaegningsarbejde" },
+    { label: "Facadearbejde", href: "/ydelser/murerarbejde" },
+    { label: "Malerservice", href: "/ydelser/malerservice" },
+    { label: "Tømrerarbejde", href: "/ydelser/tomrerarbejde" },
+    { label: "Murerarbejde", href: "/ydelser/murerarbejde" },
+    { label: "Totalentreprise", href: "/ydelser/totalentreprise" },
+    { label: "Demonteringsarbejde", href: "/ydelser/demonteringsarbejde" },
+  ] as const,
+} as const;
+
 export const HERO = {
   h1: "Komplet renovering og byggearbejde i København",
   sub: "Grønt Land DK hjælper private boligejere og entreprenører med renovering, facadearbejde, belægning, tømrerarbejde, murerarbejde, malerarbejde og havearbejde i København og Storkøbenhavn.",
