@@ -15,7 +15,7 @@ export function ProjectRelated({ project }: { project: Project }) {
         <ul className="mt-10 grid gap-6 xl:grid-cols-3">
           {related.map((item) => (
             <li key={item.slug}>
-              <ProjectCard project={item} showServiceTags={false} />
+              <ProjectCard project={item} />
             </li>
           ))}
         </ul>
