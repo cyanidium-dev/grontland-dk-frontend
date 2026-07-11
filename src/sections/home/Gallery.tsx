@@ -1,17 +1,29 @@
+"use client";
+
+import { useState } from "react";
+
 import { Container, Heading, Button, FilterPill, Marquee } from "@/components/ui";
 import { StarIcon } from "@/components/icons";
 import { GalleryCarousel, type GalleryItem } from "@/components/gallery";
 import { GALLERY, MARQUEE_WORDS } from "@/constants/home";
-
-const galleryItems: GalleryItem[] = GALLERY.photos.map((photo, i) => ({
-  _key: String(i),
-  image: { link: photo.image, alt: photo.imageAlt },
-}));
+import {
+  filterGalleryPhotos,
+  GALLERY_FILTERS,
+  type GalleryFilterId,
+} from "@/constants/gallery";
 
 /* "Galleri fra udførte opgaver" — Figma #3023:761.
-   Right-aligned H2 + sub; left leaf CTA + soft tags; coverflow; pine marquee
-   at bottom (unlike Services/Projects leaf marquees). */
+   Right-aligned H2 + sub; left leaf CTA + service filter pills; coverflow;
+   pine marquee at bottom (unlike Services/Projects leaf marquees).
+   Pills filter the carousel by service (catalog in constants/gallery.ts). */
 export function Gallery() {
+  const [filter, setFilter] = useState<GalleryFilterId>("alle");
+
+  const galleryItems: GalleryItem[] = filterGalleryPhotos(filter).map((photo) => ({
+    _key: photo.src,
+    image: { link: photo.src, alt: photo.alt },
+  }));
+
   return (
     <section className="relative overflow-hidden bg-white pt-16 xl:pt-24">
       {/* Ring decor behind CTA — Figma #3023:781 */}
@@ -37,12 +49,18 @@ export function Gallery() {
           <Button href={GALLERY.cta.href} variant="leaf" className="w-full shrink-0 sm:w-[284px]">
             {GALLERY.cta.label}
           </Button>
-          <div className="flex flex-wrap gap-2">
-            {GALLERY.tags.map((tag) => (
+          <div role="group" aria-label="Filtrer galleri" className="flex flex-wrap gap-2">
+            {GALLERY_FILTERS.map((item) => (
               <FilterPill
-                key={tag}
-                label={tag}
-                className="border-transparent bg-leaf/12 text-moss hover:border-transparent hover:bg-leaf/20"
+                key={item.id}
+                label={item.label}
+                active={filter === item.id}
+                onClick={() => setFilter(item.id)}
+                className={
+                  filter === item.id
+                    ? undefined
+                    : "border-transparent bg-leaf/12 text-moss hover:border-transparent hover:bg-leaf/20"
+                }
               />
             ))}
           </div>
@@ -50,7 +68,8 @@ export function Gallery() {
       </Container>
 
       <div className="relative z-10 mx-auto mt-10 max-w-[416px] sm:max-w-[726px] md:max-w-[867px] lg:max-w-[1141px] xl:mt-12 xl:max-w-[1494px]">
-        <GalleryCarousel items={galleryItems} />
+        {/* key resets the carousel to slide 0 when the filter changes */}
+        <GalleryCarousel key={filter} items={galleryItems} />
       </div>
 
       {/* Pine marquee — Figma #3023:806 (bg-pine, not leaf like Services/Projects) */}

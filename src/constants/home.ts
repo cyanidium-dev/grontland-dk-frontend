@@ -227,24 +227,12 @@ export const MARQUEE_WORDS = [
   "KØBENHAVN",
 ] as const;
 
-// Photo archive → links to the standalone /galleri page. Distinct from
-// PROJECTS (which carries context per case). Image slots are placeholders
-// until real assets are exported (same shell convention as Projects).
+// Photo archive → links to the standalone /galleri page. Photos + filter
+// taxonomy live in constants/gallery.ts (service-categorized catalog).
 export const GALLERY = {
   h2: "Galleri fra udførte opgaver",
   sub: "Se billeder fra facade, belægning, renovering, havearbejde, tømrerarbejde og andre opgaver.",
   cta: { label: "Åbn galleri", href: "/galleri" },
-  tags: ["Facade", "Belægning", "Renovering", "Havearbejde", "Tømrerarbejde", "Murerarbejde"],
-  photos: [
-    { image: "/images/cases/terrasse-jatoba.jpg", imageAlt: "Færdig træterrasse i hårdttræ ved hvid villa" },
-    { image: "/images/cases/projekt-facade.png", imageAlt: "Renoveret baderum med marmorfliser og indbygget belysning" },
-    { image: "/images/cases/belaegning-kyst.jpg", imageAlt: "Ny belægning og terrænarbejde ved bolig" },
-    { image: "/images/cases/oneteam-bg.jpg", imageAlt: "Havemur i natursten i have med vandløb" },
-    { image: "/images/cases/fundament-b2b.png", imageAlt: "Udvendig trappe under renovering med ny stenoverflade" },
-    { image: "/images/cases/facade-trappe.jpg", imageAlt: "Nyrenoveret trappe og pudset facade ved etageejendom" },
-    { image: "/images/cases/projekt-terrasse.png", imageAlt: "Bærende konstruktion til træterrasse under opbygning" },
-    { image: "/images/cases/havearbejde-private.png", imageAlt: "Plejet have med græsplæne og beplantning" },
-  ],
 } as const;
 
 export const ABOUT = {
