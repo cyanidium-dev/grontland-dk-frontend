@@ -39,7 +39,7 @@ export function Hero() {
         src="/svg/decor-leaf.svg"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute left-[54%] top-[64%] hidden h-[491px] w-[526px] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-90 xl:block"
+        className="pointer-events-none absolute left-[calc(54%+100px)] top-[64%] hidden h-[491px] w-[526px] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-90 xl:block"
       />
 
       <Container className="relative z-10">

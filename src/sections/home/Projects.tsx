@@ -1,12 +1,12 @@
 import { Container, Button, Heading, Marquee } from "@/components/ui";
 import { StarIcon } from "@/components/icons";
-import { ProjectCard } from "@/components/project";
 import { MARQUEE_WORDS } from "@/constants/home";
 import { PROJECTS, PROJECTS_LIST } from "@/constants/projects";
+import { ProjectsSlider } from "./ProjectsSlider";
 
 /* "Udvalgte projekter" — Figma #1018:721 + marquee band #1019:780.
-   Leaf marquee above mist band; left H2 + sub, top-right pine CTA; 3 linked
-   cards with leaf-bordered photos + overlapping service badge. */
+   Leaf marquee above mist band; left H2 + sub, top-right pine CTA; card
+   slider (3 visible on desktop) with leaf-bordered photos + service badge. */
 export function Projects() {
   return (
     <>
@@ -49,14 +49,11 @@ export function Projects() {
             </div>
           </div>
 
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 xl:mt-14 xl:grid-cols-2">
-            {PROJECTS.slice(0, 4).map((project) => (
-              <li key={project.slug}>
-                <ProjectCard project={project} />
-              </li>
-            ))}
-          </ul>
         </Container>
+
+        <div className="mt-10 xl:mt-14">
+          <ProjectsSlider projects={PROJECTS} />
+        </div>
       </section>
     </>
   );

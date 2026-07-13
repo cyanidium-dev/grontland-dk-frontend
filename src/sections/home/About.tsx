@@ -3,12 +3,14 @@ import Image from "next/image";
 import { Heading, Button, StarChip } from "@/components/ui";
 import { ABOUT } from "@/constants/home";
 
-/* About — Figma #3023:964. Mist 2-col: left copy/trades/CTA, right full-bleed
-   photo with four StarChips overlaid (centered). */
+/* About — Figma #3023:964. Mist 2-col: left copy/trades/CTA, right photo with
+   four StarChips overlaid (centered). On xl the photo leaves the grid and
+   bleeds to the viewport's right edge (like Hero/QuoteCta); the seam stays at
+   the centered container's column boundary (50% − 30px). */
 export function About() {
   return (
-    <section className="overflow-hidden bg-mist">
-      <div className="mx-auto grid w-full max-w-7xl xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+    <section className="relative overflow-hidden bg-mist">
+      <div className="mx-auto grid w-full max-w-7xl xl:min-h-[829px] xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
         {/* Left — padded like Container inset; ~380px content */}
         <div className="flex flex-col justify-center px-6 py-14 xl:max-w-[428px] xl:py-24 xl:pl-8 xl:pr-8">
           <Heading as="h2" size="section">
@@ -40,8 +42,8 @@ export function About() {
           </div>
         </div>
 
-        {/* Right — full-bleed photo + centered fact chips */}
-        <div className="relative min-h-[380px] xl:min-h-[829px]">
+        {/* Right — photo + centered fact chips; absolute on xl to bleed right */}
+        <div className="relative min-h-[380px] xl:absolute xl:inset-y-0 xl:left-[calc(50%-30px)] xl:right-0 xl:min-h-0">
           <Image
             src={ABOUT.image}
             alt={ABOUT.imageAlt}
