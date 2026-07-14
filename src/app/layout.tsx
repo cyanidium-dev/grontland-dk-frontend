@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Manrope, Montserrat } from "next/font/google";
 import "./globals.css";
 
+import { JsonLd } from "@/components/seo/JsonLd";
+import { localBusiness } from "@/lib/seo/jsonld";
+
 // Manrope — body + display headings (300–800 covers Light…Bold used in the design).
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -37,6 +40,7 @@ export default function RootLayout({
       className={`${manrope.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white font-sans text-pine">
+        <JsonLd data={localBusiness()} />
         {children}
       </body>
     </html>
