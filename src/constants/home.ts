@@ -51,15 +51,16 @@ export const FOOTER = {
     { label: "Om os", href: "/om-os" },
     { label: "Kontakt", href: "/kontakt" },
   ] as const,
+  // Mirrors SERVICES_MENU (facade folded under murer, so no separate row).
   services: [
     { label: "Havearbejde", href: "/ydelser/havearbejde" },
     { label: "Belægningsarbejde", href: "/ydelser/belaegningsarbejde" },
-    { label: "Facadearbejde", href: "/ydelser/murerarbejde" },
+    { label: "Murerarbejde", href: "/ydelser/murerarbejde" },
     { label: "Malerservice", href: "/ydelser/malerservice" },
     { label: "Tømrerarbejde", href: "/ydelser/tomrerarbejde" },
-    { label: "Murerarbejde", href: "/ydelser/murerarbejde" },
     { label: "Totalentreprise", href: "/ydelser/totalentreprise" },
     { label: "Demonteringsarbejde", href: "/ydelser/demonteringsarbejde" },
+    { label: "Rengøringsarbejde", href: "/ydelser/rengoringsarbejde" },
   ] as const,
 } as const;
 
