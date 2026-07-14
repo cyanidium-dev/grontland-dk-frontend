@@ -25,6 +25,8 @@ export type ServiceContent = {
     rows: readonly { label: string; value: string }[];
   };
   process: { h2: string; steps: readonly { title: string; desc: string }[] };
+  processImage?: { src: string; alt: string }; // full-bleed photo behind the step cards
+  ctaImage?: { src: string; alt: string }; // right-bleed photo in the closing CTA band
   caseSlugs: readonly string[]; // -> constants/projects.ts slugs
   galleryFilter: GalleryFilterId;
   faq: { h2: string; items: readonly { q: string; a: string }[] }; // 4–6, unique

@@ -76,6 +76,7 @@ export default async function ServicePageRoute({ params }: PageProps) {
             { label: "Alle ydelser", href: "/ydelser" },
             { label: "Se projekter", href: "/projekter" },
           ]}
+          image={s.ctaImage}
         />
       </main>
       <Footer />

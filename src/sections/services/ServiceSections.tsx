@@ -84,6 +84,7 @@ export function ServiceProcess({ service }: { service: ServiceContent }) {
       steps={service.process.steps}
       cta={{ label: "Start med en kort besked", href: "/kontakt" }}
       background="mist"
+      backgroundImage={service.processImage}
     />
   );
 }

@@ -42,6 +42,7 @@ export default function GalleriPage() {
           text={GALLERI_PAGE.cta.text}
           primary={GALLERI_PAGE.cta.primary}
           crosslinks={GALLERI_PAGE.cta.crosslinks}
+          image={GALLERI_PAGE.cta.image}
         />
       </main>
       <Footer />

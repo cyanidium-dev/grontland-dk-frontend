@@ -24,6 +24,10 @@ export const GALLERI_PAGE = {
     h2: "Skal vi kigge på din opgave?",
     text: "Send en kort beskrivelse og gerne et par billeder. Vi vurderer opgaven og vender tilbage inden 24 timer.",
     primary: { label: "Få et tilbud", href: "/kontakt" },
+    image: {
+      src: "/images/cases/belaegning-kyst.jpg",
+      alt: "Sandstensbelægning ved bolig nær kysten",
+    },
     crosslinks: [
       { label: "Se projekter", href: "/projekter" },
       { label: "Se ydelser", href: "/ydelser" },

@@ -77,6 +77,14 @@ export const HAVEARBEJDE: ServiceContent = {
       },
     ],
   },
+  processImage: {
+    src: "/images/gallery/have-1.jpg",
+    alt: "Støttemur i natursten ved vandløb i have",
+  },
+  ctaImage: {
+    src: "/images/gallery/have-3.jpg",
+    alt: "Klippede hække og plejet græsplæne",
+  },
   caseSlugs: ["terrasse-og-haveomraade", "belaegning-ved-bolig"],
   galleryFilter: "havearbejde",
   faq: {

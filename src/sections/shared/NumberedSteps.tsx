@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { Container, Heading, Button, InfoBox } from "@/components/ui";
 import type { InfoBoxVariant } from "@/components/ui";
 import { cn } from "@/util/cn";
@@ -23,23 +25,54 @@ export function NumberedSteps({
   steps,
   cta,
   background = "white",
+  backgroundImage,
 }: {
   h2: string;
   intro?: string;
   steps: readonly { title: string; desc: string }[];
   cta?: { label: string; href: string };
   background?: "white" | "mist";
+  backgroundImage?: { src: string; alt: string };
 }) {
+  const onPhoto = Boolean(backgroundImage);
   return (
-    <section className={cn("py-16 xl:py-24", background === "mist" ? "bg-mist" : "bg-white")}>
-      <Container>
+    <section
+      className={cn(
+        "relative overflow-hidden py-16 xl:py-24",
+        !onPhoto && (background === "mist" ? "bg-mist" : "bg-white"),
+      )}
+    >
+      {backgroundImage && (
+        <>
+          {/* Full-bleed photo + gradient — home OneTeam treatment. */}
+          <Image
+            src={backgroundImage.src}
+            alt={backgroundImage.alt}
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[linear-gradient(104.68deg,rgba(0,0,0,0.6)_25.04%,rgba(0,0,0,0.2)_108.03%)]"
+          />
+        </>
+      )}
+      <Container className="relative z-10">
         <div className="flex flex-col gap-10">
           <div className="max-w-2xl">
-            <Heading as="h2" size="section">
+            <Heading as="h2" size="section" className={cn(onPhoto && "text-white")}>
               {h2}
             </Heading>
             {intro && (
-              <p className="mt-4 font-light leading-normal text-pine/70 xl:text-[17px]">{intro}</p>
+              <p
+                className={cn(
+                  "mt-4 font-light leading-normal xl:text-[17px]",
+                  onPhoto ? "text-white/80" : "text-pine/70",
+                )}
+              >
+                {intro}
+              </p>
             )}
           </div>
 
