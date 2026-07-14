@@ -18,7 +18,6 @@ export const OM_HERO = {
   image: {
     src: "/images/cases/terrasse-jatoba.jpg",
     alt: "Færdig træterrasse i Jatoba ved hvid villa i Gentofte",
-    layout: "side",
   },
 } as const;
 

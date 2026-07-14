@@ -18,7 +18,6 @@ export const PRIVATE_HERO = {
   image: {
     src: "/images/cases/havearbejde-private.png",
     alt: "Plejet have med græsplæne og beplantning",
-    layout: "side",
   },
 } as const;
 

@@ -15,7 +15,6 @@ export const KONTAKT_HERO = {
   image: {
     src: "/images/cases/quote-cta-band.png",
     alt: "Nybelagte betontrin foran bolig med hvid balustrade",
-    layout: "side",
   },
 } as const;
 

@@ -23,7 +23,7 @@ export default function KontaktPage() {
           label={KONTAKT_HERO.label}
           title={KONTAKT_HERO.h1}
           sub={KONTAKT_HERO.sub}
-          ctas={[{ ...KONTAKT_HERO.cta, variant: "pine" }]}
+          ctas={[KONTAKT_HERO.cta]}
           image={KONTAKT_HERO.image}
         />
         <KontaktForm />
