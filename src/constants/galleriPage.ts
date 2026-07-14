@@ -1,7 +1,10 @@
 /**
  * /galleri page copy — Danish. Photos + filter taxonomy come from
  * constants/gallery.ts (same catalog as the home Gallery section).
+ * Page body is Nbyg-style: one section per service (GALLERY_SECTIONS).
  */
+
+import type { GalleryServiceId } from "@/constants/gallery";
 
 export const GALLERI_PAGE = {
   metaTitle: "Galleri — udførte opgaver i København | Grønt Land DK",
@@ -34,3 +37,57 @@ export const GALLERI_PAGE = {
     ],
   },
 } as const;
+
+export type GallerySectionDef = {
+  id: GalleryServiceId; // anchor id + photo filter
+  title: string;
+  description: string; // 1-2 sentences, right-aligned on desktop
+  cta: { label: string; href: string }; // link to the matching service page
+};
+
+// NOTE the id→slug mismatch for belægning: gallery id "belaegning",
+// service slug "belaegningsarbejde". All other ids equal their slug.
+export const GALLERY_SECTIONS: readonly GallerySectionDef[] = [
+  {
+    id: "havearbejde",
+    title: "Havearbejde",
+    description:
+      "Anlagte bede, græsplæner, støttemure og havezoner fra private haver i København og omegn.",
+    cta: { label: "Læs om havearbejde", href: "/ydelser/havearbejde" },
+  },
+  {
+    id: "belaegning",
+    title: "Belægning",
+    description:
+      "Indkørsler, gangarealer og trapper i beton, granit og sandsten, inklusive dræn og afvanding.",
+    cta: { label: "Læs om belægningsarbejde", href: "/ydelser/belaegningsarbejde" },
+  },
+  {
+    id: "murerarbejde",
+    title: "Murerarbejde",
+    description:
+      "Facadepuds, fliser, tegltag og renoverede trapper, både ude og inde.",
+    cta: { label: "Læs om murerarbejde", href: "/ydelser/murerarbejde" },
+  },
+  {
+    id: "malerservice",
+    title: "Malerservice",
+    description:
+      "Malerarbejde med ren finish: vægge, paneler, tapet og udvendige overflader.",
+    cta: { label: "Læs om malerservice", href: "/ydelser/malerservice" },
+  },
+  {
+    id: "tomrerarbejde",
+    title: "Tømrerarbejde",
+    description:
+      "Træterrasser, gulve, køkkenmontering og konstruktioner, fra bærende dele til detaljer.",
+    cta: { label: "Læs om tømrerarbejde", href: "/ydelser/tomrerarbejde" },
+  },
+  {
+    id: "totalentreprise",
+    title: "Totalentreprise",
+    description:
+      "Uddrag fra samlede renoveringer, blandt andet villaen i Skodsborg med snedkerløsninger og vinkælder.",
+    cta: { label: "Læs om totalentreprise", href: "/ydelser/totalentreprise" },
+  },
+];
