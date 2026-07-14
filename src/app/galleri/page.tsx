@@ -4,7 +4,7 @@ import { QuoteModalProvider } from "@/components/quote";
 import { Container, Heading } from "@/components/ui";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
-import { GalleriGrid } from "@/sections/galleri";
+import { GalleriSections } from "@/sections/galleri";
 import { CtaBand, PageHero } from "@/sections/shared";
 import { GALLERI_PAGE } from "@/constants/galleriPage";
 
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   description: GALLERI_PAGE.metaDescription,
 };
 
-/* /galleri — hero → filterable photo grid (catalog in constants/gallery.ts)
-   → short SEO text → final CTA. */
+/* /galleri — hero → Nbyg-style per-service sections (anchor nav + coverflow
+   sliders, catalog in constants/gallery.ts) → short SEO text → final CTA. */
 export default function GalleriPage() {
   return (
     <QuoteModalProvider>
@@ -26,7 +26,7 @@ export default function GalleriPage() {
           sub={GALLERI_PAGE.hero.sub}
           image={GALLERI_PAGE.hero.image}
         />
-        <GalleriGrid />
+        <GalleriSections />
         <section className="bg-mist py-16 xl:py-20">
           <Container className="max-w-4xl">
             <Heading as="h2" size="section">

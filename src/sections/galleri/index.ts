@@ -1,1 +1,1 @@
-export { GalleriGrid } from "./GalleriGrid";
+export { GalleriSections } from "./GalleriSections";
