@@ -43,7 +43,7 @@ function stepStyle(i: number): StepStyle {
 
 export function Process() {
   return (
-    <section className="relative overflow-hidden bg-white py-16 xl:py-24">
+    <section id="proces" className="relative overflow-hidden bg-white py-16 xl:py-24">
       {/* Ring decor #1018:641 — Figma inset + rotate on #1019:924 wrapper (not baked into SVG) */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img

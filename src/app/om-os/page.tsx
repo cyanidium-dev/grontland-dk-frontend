@@ -1,0 +1,47 @@
+import type { Metadata } from "next";
+
+import { QuoteModalProvider } from "@/components/quote";
+import { Footer } from "@/layouts/Footer";
+import { Header } from "@/layouts/Header";
+import { Process } from "@/sections/home";
+import { PageHero, FeatureGrid, CtaBand } from "@/sections/shared";
+import { OmIntro, OmTeam, OmOnePlan, OmGallery } from "@/sections/om";
+import { OM_META, OM_HERO, OM_VALUES, OM_CTA } from "@/constants/om";
+
+export const metadata: Metadata = {
+  title: OM_META.title,
+  description: OM_META.description,
+};
+
+/* /om-os — docs/content/om-os.md: hero → who-we-are + facts → values → team →
+   one-plan band → Process (shared with home, anchors #proces) → gallery teaser
+   → final CTA. About + Team merged per client. */
+export default function OmOsPage() {
+  return (
+    <QuoteModalProvider>
+      <Header />
+      <main className="flex-1">
+        <PageHero
+          label={OM_HERO.label}
+          title={OM_HERO.h1}
+          sub={OM_HERO.sub}
+          ctas={OM_HERO.ctas}
+          image={OM_HERO.image}
+        />
+        <OmIntro />
+        <FeatureGrid h2={OM_VALUES.h2} items={OM_VALUES.items} background="mist" columns={3} />
+        <OmTeam />
+        <OmOnePlan />
+        <Process />
+        <OmGallery />
+        <CtaBand
+          h2={OM_CTA.h2}
+          text={OM_CTA.text}
+          primary={OM_CTA.primary}
+          crosslinks={OM_CTA.crosslinks}
+        />
+      </main>
+      <Footer />
+    </QuoteModalProvider>
+  );
+}

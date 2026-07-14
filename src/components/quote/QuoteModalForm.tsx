@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui";
 import { QUOTE_FORM } from "@/constants/home";
 import { cn } from "@/util/cn";

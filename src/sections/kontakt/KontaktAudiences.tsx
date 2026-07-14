@@ -1,0 +1,62 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import { Container, Heading, Button, InfoBox } from "@/components/ui";
+import { KONTAKT_AUDIENCES } from "@/constants/kontakt";
+
+/* Routes visitors who landed on /kontakt first — mirrors the home AUDIENCES
+   split, plus proof links to projects/gallery. */
+export function KontaktAudiences() {
+  return (
+    <section className="bg-white py-16 xl:py-24">
+      <Container>
+        <div className="flex flex-col gap-10">
+          <Heading as="h2" size="section">
+            {KONTAKT_AUDIENCES.h2}
+          </Heading>
+
+          <div className="grid gap-3 md:grid-cols-2">
+            {KONTAKT_AUDIENCES.cards.map((card, i) => (
+              <InfoBox key={card.title} variant="mist" className="flex flex-col overflow-hidden">
+                <div className="relative aspect-[21/9]">
+                  <Image
+                    src={card.image.src}
+                    alt={card.image.alt}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-8">
+                  <h3 className="text-[16px] font-bold uppercase leading-6 text-pine">{card.title}</h3>
+                  <p className="mt-3 flex-1 text-sm font-light leading-relaxed text-pine/60">{card.text}</p>
+                  <div className="mt-6">
+                    <Button
+                      href={card.cta.href}
+                      variant={i === 0 ? "leaf" : "pine"}
+                      className="w-full sm:w-auto"
+                    >
+                      {card.cta.label}
+                    </Button>
+                  </div>
+                </div>
+              </InfoBox>
+            ))}
+          </div>
+
+          <p className="flex flex-wrap gap-x-6 gap-y-2">
+            {KONTAKT_AUDIENCES.links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-[12px] font-bold uppercase tracking-[0.3px] text-moss underline underline-offset-4 transition-colors hover:text-leaf"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </p>
+        </div>
+      </Container>
+    </section>
+  );
+}
