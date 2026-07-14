@@ -1,0 +1,1 @@
+export { GalleriGrid } from "./GalleriGrid";
