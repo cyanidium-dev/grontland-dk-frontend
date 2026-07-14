@@ -1,0 +1,158 @@
+import Link from "next/link";
+
+import { GalleryCarousel, type GalleryItem } from "@/components/gallery";
+import { ProjectCard } from "@/components/project";
+import { Container, Heading } from "@/components/ui";
+import { filterGalleryPhotos } from "@/constants/gallery";
+import { getProject } from "@/constants/projects";
+import type { ServiceContent } from "@/constants/services";
+import { FaqList, FeatureGrid, NumberedSteps, PageHero } from "@/sections/shared";
+
+/* Section kit for /ydelser/[slug] — thin wrappers over the shared inner-page
+   components; section order is fixed by the page route. */
+
+export function ServiceHero({ service }: { service: ServiceContent }) {
+  return (
+    <>
+      <PageHero
+        label="Ydelser"
+        title={service.h1}
+        sub={service.heroSub}
+        ctas={[
+          { label: "Få et tilbud", href: "/kontakt" },
+          { label: "Se projekter", href: "/projekter", variant: "leaf" },
+        ]}
+        image={service.heroImage}
+      />
+      <div className="bg-white pb-10">
+        <Container className="flex flex-wrap gap-2">
+          {service.trustChips.map((chip) => (
+            <span
+              key={chip}
+              className="rounded-full bg-leaf/12 px-4 py-2 text-[12px] font-bold uppercase tracking-[0.3px] text-moss"
+            >
+              {chip}
+            </span>
+          ))}
+        </Container>
+      </div>
+    </>
+  );
+}
+
+export function ServiceScope({ service }: { service: ServiceContent }) {
+  return (
+    <FeatureGrid
+      h2={service.scope.h2}
+      items={service.scope.items}
+      background="mist"
+      columns={3}
+    />
+  );
+}
+
+export function ServicePrices({ service }: { service: ServiceContent }) {
+  if (!service.prices) return null;
+  return (
+    <section className="bg-white py-16 xl:py-24">
+      <Container className="max-w-3xl">
+        <Heading as="h2" size="section">
+          {service.prices.h2}
+        </Heading>
+        <dl className="mt-8 divide-y divide-line rounded-2xl border border-line">
+          {service.prices.rows.map((row) => (
+            <div
+              key={row.label}
+              className="flex items-baseline justify-between gap-6 px-6 py-4"
+            >
+              <dt className="text-sm font-medium text-pine">{row.label}</dt>
+              <dd className="whitespace-nowrap text-sm font-bold text-moss">{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <p className="mt-4 text-sm font-light text-pine/60">{service.prices.note}</p>
+      </Container>
+    </section>
+  );
+}
+
+export function ServiceProcess({ service }: { service: ServiceContent }) {
+  return (
+    <NumberedSteps
+      h2={service.process.h2}
+      steps={service.process.steps}
+      cta={{ label: "Start med en kort besked", href: "/kontakt" }}
+      background="mist"
+    />
+  );
+}
+
+export function ServiceCases({ service }: { service: ServiceContent }) {
+  const projects = service.caseSlugs
+    .map((slug) => getProject(slug))
+    .filter((p) => p !== undefined);
+  if (projects.length === 0) return null;
+
+  return (
+    <section className="bg-white py-16 xl:py-24">
+      <Container>
+        <Heading as="h2" size="section">
+          Det har vi lavet
+        </Heading>
+        <div className="mt-10 grid gap-8 sm:grid-cols-2">
+          {projects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+export function ServiceGalleryStrip({ service }: { service: ServiceContent }) {
+  const photos = filterGalleryPhotos(service.galleryFilter);
+  if (photos.length === 0) return null;
+
+  const items: GalleryItem[] = photos.map((photo) => ({
+    _key: photo.src,
+    image: { link: photo.src, alt: photo.alt },
+  }));
+
+  return (
+    <section className="overflow-hidden bg-mist py-16 xl:py-24">
+      <Container className="flex flex-wrap items-baseline justify-between gap-4">
+        <Heading as="h2" size="section">
+          Billeder fra opgaverne
+        </Heading>
+        <Link
+          href="/galleri"
+          className="text-[12px] font-bold uppercase tracking-[0.3px] text-moss underline underline-offset-4 hover:text-leaf"
+        >
+          Åbn hele galleriet
+        </Link>
+      </Container>
+      <div className="mx-auto mt-10 max-w-[416px] sm:max-w-[726px] md:max-w-[867px] lg:max-w-[1141px] xl:max-w-[1494px]">
+        <GalleryCarousel items={items} />
+      </div>
+    </section>
+  );
+}
+
+export function ServiceFaq({ service }: { service: ServiceContent }) {
+  return <FaqList h2={service.faq.h2} items={service.faq.items} />;
+}
+
+export function ServiceSeoText({ service }: { service: ServiceContent }) {
+  return (
+    <section className="bg-mist py-16 xl:py-20">
+      <Container className="max-w-4xl">
+        <Heading as="h2" size="section">
+          {service.seoText.h2}
+        </Heading>
+        <p className="mt-5 font-light leading-relaxed text-pine/80 xl:text-[17px]">
+          {service.seoText.text}
+        </p>
+      </Container>
+    </section>
+  );
+}
