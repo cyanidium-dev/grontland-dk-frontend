@@ -4,6 +4,8 @@ import { BELAEGNINGSARBEJDE } from "./belaegningsarbejde";
 import { HAVEARBEJDE } from "./havearbejde";
 import { MALERSERVICE } from "./malerservice";
 import { MURERARBEJDE } from "./murerarbejde";
+import { TOMRERARBEJDE } from "./tomrerarbejde";
+import { TOTALENTREPRISE } from "./totalentreprise";
 
 export type { ServiceContent } from "./types";
 
@@ -13,6 +15,8 @@ export const SERVICES_PAGES: readonly ServiceContent[] = [
   BELAEGNINGSARBEJDE,
   MURERARBEJDE,
   MALERSERVICE,
+  TOMRERARBEJDE,
+  TOTALENTREPRISE,
 ];
 
 export function getService(slug: string): ServiceContent | undefined {
