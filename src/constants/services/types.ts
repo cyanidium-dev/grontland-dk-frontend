@@ -28,5 +28,9 @@ export type ServiceContent = {
   caseSlugs: readonly string[]; // -> constants/projects.ts slugs
   galleryFilter: GalleryFilterId;
   faq: { h2: string; items: readonly { q: string; a: string }[] }; // 4–6, unique
-  seoText: { h2: string; text: string }; // 120–180 words
+  seoText: {
+    h2: string;
+    text: string; // 120–180 words
+    images: readonly { src: string; alt: string }[]; // 1–2 photos beside the text
+  };
 };

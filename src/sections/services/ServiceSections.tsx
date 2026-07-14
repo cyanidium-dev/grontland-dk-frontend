@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { GalleryCarousel, type GalleryItem } from "@/components/gallery";
@@ -143,15 +144,44 @@ export function ServiceFaq({ service }: { service: ServiceContent }) {
 }
 
 export function ServiceSeoText({ service }: { service: ServiceContent }) {
+  const [primary, secondary] = service.seoText.images;
   return (
     <section className="bg-mist py-16 xl:py-20">
-      <Container className="max-w-4xl">
-        <Heading as="h2" size="section">
-          {service.seoText.h2}
-        </Heading>
-        <p className="mt-5 font-light leading-relaxed text-pine/80 xl:text-[17px]">
-          {service.seoText.text}
-        </p>
+      <Container>
+        <div className="flex flex-col gap-8 xl:flex-row xl:items-center xl:gap-16">
+          <div className="flex w-full shrink-0 flex-col gap-4 xl:w-[460px]">
+            {primary && (
+              <div className="relative h-[240px] overflow-hidden rounded-xl xl:h-[280px]">
+                <Image
+                  src={primary.src}
+                  alt={primary.alt}
+                  fill
+                  sizes="(min-width: 1280px) 460px, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            )}
+            {secondary && (
+              <div className="relative hidden h-[160px] overflow-hidden rounded-xl sm:block xl:h-[180px] xl:w-[75%] xl:self-end">
+                <Image
+                  src={secondary.src}
+                  alt={secondary.alt}
+                  fill
+                  sizes="(min-width: 1280px) 345px, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            )}
+          </div>
+          <div className="min-w-0">
+            <Heading as="h2" size="section">
+              {service.seoText.h2}
+            </Heading>
+            <p className="mt-5 font-light leading-relaxed text-pine/80 xl:text-[17px]">
+              {service.seoText.text}
+            </p>
+          </div>
+        </div>
       </Container>
     </section>
   );

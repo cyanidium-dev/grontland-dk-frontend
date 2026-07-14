@@ -106,6 +106,16 @@ export const HAVEARBEJDE: ServiceContent = {
   },
   seoText: {
     h2: "Havearbejde i København og Storkøbenhavn",
+    images: [
+      {
+        src: "/images/cases/havearbejde-private.png",
+        alt: "Plejet have med græsplæne og beplantning",
+      },
+      {
+        src: "/images/cases/projekt-terrasse.png",
+        alt: "Bærende konstruktion til træterrasse under opbygning",
+      },
+    ],
     text: "Grønt Land DK udfører havearbejde i København og Storkøbenhavn for private boligejere. Vi anlægger træterrasser og havezoner, planter stauder, buske og træer, etablerer græsplæner og bygger højbede og mindre støttemure. Træfældning med rodfræsning klarer vi også, ligesom løbende pleje og vedligeholdelse efter anlægget. Mange kunder kombinerer flere opgaver, fx en ny terrasse sammen med belægning i indkørslen eller ny beplantning, når facaden alligevel renoveres. Fordi fagene er samlet i ét team, planlægges arbejdet i én rækkefølge med én ansvarlig kontakt — det sparer koordinering og giver et resultat, der hænger sammen. Et typisk privat forløb tager 1-3 uger, og du kender prisen, før vi går i gang. Se fx træterrassen i Jatoba i Gentofte under projekter, eller send en kort beskrivelse af din have, så vender vi tilbage inden 24 timer.",
   },
 };
