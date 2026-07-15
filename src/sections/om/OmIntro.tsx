@@ -1,36 +1,48 @@
-import { Container, Heading, StarChip } from "@/components/ui";
+import Image from "next/image";
+
+import { Heading, StarChip } from "@/components/ui";
 import { OM_INTRO } from "@/constants/om";
 
-/* "Hvem er vi?" — 2-col: rewritten company text left, fact StarChips right
-   (home About treatment without the photo bleed). */
+/* "Hvem er vi?" — mirrored home About (#3023:964): photo with the fact
+   StarChips overlaid bleeds to the viewport's LEFT edge on xl; copy column
+   right. Seam mirrors About's (50% − 30px), measured from the right. */
 export function OmIntro() {
   return (
-    <section className="bg-white py-16 xl:py-24">
-      <Container>
-        <div className="grid gap-10 xl:grid-cols-[minmax(0,1fr)_420px] xl:gap-24">
-          <div className="max-w-2xl">
-            <Heading as="h2" size="section">
-              {OM_INTRO.h2}
-            </Heading>
-            <div aria-hidden className="my-6 size-[26px] rounded-full bg-leaf" />
-            <p className="font-light leading-normal text-pine/75 xl:text-[17px]">{OM_INTRO.text}</p>
-          </div>
-
-          <ul className="flex flex-col justify-center gap-3">
+    <section className="relative overflow-hidden bg-white">
+      <div className="mx-auto grid w-full max-w-7xl xl:min-h-[720px] xl:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+        {/* Left — photo + centered fact chips; absolute on xl to bleed left */}
+        <div className="relative min-h-[380px] max-xl:order-last xl:absolute xl:inset-y-0 xl:left-0 xl:right-[calc(50%-30px)] xl:min-h-0">
+          <Image
+            src={OM_INTRO.image.src}
+            alt={OM_INTRO.image.alt}
+            fill
+            sizes="(min-width: 1280px) 55vw, 100vw"
+            className="object-cover"
+          />
+          <ul className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 py-8">
             {OM_INTRO.facts.map((fact) => (
-              <li key={fact.label}>
+              <li key={fact.label} className="w-full max-w-[420px]">
                 <StarChip
                   text={`${fact.label}: ${fact.value}`}
-                  boxVariant="mist"
+                  boxVariant="light"
                   starVariant="leaf"
                   textSize="sm"
-                  className="border border-line"
+                  className="w-full border border-line"
                 />
               </li>
             ))}
           </ul>
         </div>
-      </Container>
+
+        {/* Right — copy column in the grid's second column */}
+        <div className="flex flex-col justify-center px-6 py-14 xl:col-start-2 xl:max-w-[520px] xl:py-24 xl:pl-16 xl:pr-8">
+          <Heading as="h2" size="section">
+            {OM_INTRO.h2}
+          </Heading>
+          <div aria-hidden className="my-6 size-[26px] rounded-full bg-leaf" />
+          <p className="font-light leading-normal text-pine/75 xl:text-[17px]">{OM_INTRO.text}</p>
+        </div>
+      </div>
     </section>
   );
 }

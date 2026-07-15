@@ -6,23 +6,30 @@ export const OM_META = {
     "Mød teamet bag Grønt Land DK. Vi samler murer-, tømrer-, maler-, belægnings- og havearbejde i én plan — med klare aftaler og ordentlig aflevering i København og Storkøbenhavn.",
 } as const;
 
+// H1 rewritten per feedback: "Entreprenørvirksomhed" (21 chars) overflowed the
+// copy column; the keyword moved into the sub. No eyebrow label on this hero.
 export const OM_HERO = {
-  label: "Om os",
-  h1: "Entreprenørvirksomhed med flere fag under samme tag",
-  sub: "Grønt Land DK udfører renovering, byggeopgaver og udearealer i København og Storkøbenhavn — for private boligejere og entreprenører.",
+  h1: "Entreprenør i København — flere fag under samme tag",
+  sub: "Grønt Land DK er en entreprenørvirksomhed, der udfører renovering, byggeopgaver og udearealer i København og Storkøbenhavn — for private boligejere og entreprenører.",
   ctas: [
     { label: "Få et tilbud", href: "/kontakt" },
     { label: "Se vores projekter", href: "/projekter" },
   ],
-  // Jatoba terrace case photo (chat export) — craft showcase.
+  // Figma feedback #3035:127 — villa entrance, gate + cobblestone path.
   image: {
-    src: "/images/cases/terrasse-jatoba.jpg",
-    alt: "Færdig træterrasse i Jatoba ved hvid villa i Gentofte",
+    src: "/images/om/om-hero.jpg",
+    alt: "Indgang med smedejernslåge, brostensbelagt sti og klippede hække ved hvid villa",
   },
 } as const;
 
 export const OM_INTRO = {
   h2: "Hvem er vi?",
+  // Figma feedback #3035:130 — polished natural-stone interior wall; the fact
+  // chips sit on top of this photo (mirrored home About layout).
+  image: {
+    src: "/images/om/om-intro.jpg",
+    alt: "Vægbeklædning i poleret natursten monteret indendørs",
+  },
   text: "Grønt Land DK er en entreprenørvirksomhed, der arbejder med indvendige og udvendige opgaver — fra totalrenovering og murerarbejde til belægning, havearbejde og facader. Hos os får projektet én ansvarlig plan i stedet for flere adskilte håndværkere. Vi tager ejerskab for opgaven, holder tæt dialog undervejs og afleverer til den aftalte tid og pris. Det er den måde, vi ønsker at drive håndværk på: ordentligt arbejde, klare aftaler og et samarbejde, hvor kunden er i centrum.",
   facts: [
     { label: "Arbejdsområde", value: "København og Storkøbenhavn" },
@@ -99,9 +106,10 @@ export const OM_TEAM = {
 export const OM_ONEPLAN = {
   h2: "Flere fag — én plan",
   text: "Fordi teamet dækker flere fagområder, kan en opgave planlægges samlet: forberedelse og konstruktion, oprydning og bortskaffelse, og til sidst landskabsarbejdet. Du slipper for selv at finde, koordinere og følge op på flere håndværkere.",
+  // Figma feedback #3035:160 — concrete stair + balustrade + stone paving.
   background: {
-    src: "/images/cases/oneteam-bg.jpg",
-    alt: "Anlagt græsplæne med stenbelægning og beplantning",
+    src: "/images/om/om-oneplan.jpg",
+    alt: "Nystøbt betontrappe med balustrade og naturstensbelægning ved villa",
   },
   ctas: [
     { label: "Sådan foregår arbejdet", href: "#proces" },
@@ -109,22 +117,22 @@ export const OM_ONEPLAN = {
   ],
 } as const;
 
+// Photos come from constants/gallery.ts (2 per service) via OmGallery.
 export const OM_GALLERY = {
   h2: "Se resultatet af vores arbejde",
   sub: "Billeder fra facade, belægning, renovering og havearbejde.",
   cta: { label: "Åbn galleriet", href: "/galleri" },
-  photos: [
-    { src: "/images/gallery/have-2.jpg", alt: "Anlagt have med beplantning og græs" },
-    { src: "/images/gallery/murer-2.jpg", alt: "Murerarbejde på facade" },
-    { src: "/images/gallery/belaegning-2.jpg", alt: "Belægning i natursten" },
-    { src: "/images/gallery/maler-1.jpg", alt: "Nymalet indvendigt rum" },
-  ],
 } as const;
 
 export const OM_CTA = {
   h2: "Skal vi kigge på din opgave?",
   text: "Send en kort beskrivelse — så vurderer vi opgaven og vender tilbage senest næste hverdag.",
   primary: { label: "Få et tilbud", href: "/kontakt" },
+  // Figma feedback #3035:186 — dark paved garden path along hedges.
+  image: {
+    src: "/images/om/om-cta.jpg",
+    alt: "Havegang i mørk belægning langs klippede hække og bede",
+  },
   crosslinks: [
     { label: "For private kunder", href: "/private" },
     { label: "For entreprenører", href: "/entreprenorer" },

@@ -4,9 +4,9 @@ import { QuoteModalProvider } from "@/components/quote";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import { Process } from "@/sections/home";
-import { PageHero, FeatureGrid, CtaBand } from "@/sections/shared";
-import { OmIntro, OmTeam, OmOnePlan, OmGallery } from "@/sections/om";
-import { OM_META, OM_HERO, OM_VALUES, OM_CTA } from "@/constants/om";
+import { PageHero, CtaBand } from "@/sections/shared";
+import { OmIntro, OmValues, OmTeam, OmOnePlan, OmGallery } from "@/sections/om";
+import { OM_META, OM_HERO, OM_CTA } from "@/constants/om";
 
 export const metadata: Metadata = {
   title: OM_META.title,
@@ -21,15 +21,9 @@ export default function OmOsPage() {
     <QuoteModalProvider>
       <Header />
       <main className="flex-1">
-        <PageHero
-          label={OM_HERO.label}
-          title={OM_HERO.h1}
-          sub={OM_HERO.sub}
-          ctas={OM_HERO.ctas}
-          image={OM_HERO.image}
-        />
+        <PageHero title={OM_HERO.h1} sub={OM_HERO.sub} ctas={OM_HERO.ctas} image={OM_HERO.image} />
         <OmIntro />
-        <FeatureGrid h2={OM_VALUES.h2} items={OM_VALUES.items} background="mist" columns={3} />
+        <OmValues />
         <OmTeam />
         <OmOnePlan />
         <Process />
@@ -39,6 +33,7 @@ export default function OmOsPage() {
           text={OM_CTA.text}
           primary={OM_CTA.primary}
           crosslinks={OM_CTA.crosslinks}
+          image={OM_CTA.image}
         />
       </main>
       <Footer />

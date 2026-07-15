@@ -3,3 +3,4 @@ export { CtaBand } from "./CtaBand";
 export { NumberedSteps } from "./NumberedSteps";
 export { FeatureGrid } from "./FeatureGrid";
 export { FaqList } from "./FaqList";
+export { GalleryStrip } from "./GalleryStrip";

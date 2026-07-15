@@ -1,43 +1,30 @@
-import Image from "next/image";
-
-import { Container, Heading, Button } from "@/components/ui";
+import type { GalleryItem } from "@/components/gallery";
+import { GalleryStrip } from "@/sections/shared";
+import { GALLERY_PHOTOS } from "@/constants/gallery";
 import { OM_GALLERY } from "@/constants/om";
 
-/* Gallery teaser — 4 thumbs + CTA to /galleri. */
+/* Gallery teaser — coverflow slider (shared GalleryStrip), 2 photos per
+   service from the catalog, ring decor per Figma feedback image 14. */
+const PER_SERVICE = 2;
+
+function curatedItems(): GalleryItem[] {
+  const counts = new Map<string, number>();
+  return GALLERY_PHOTOS.filter((photo) => {
+    const n = counts.get(photo.service) ?? 0;
+    if (n >= PER_SERVICE) return false;
+    counts.set(photo.service, n + 1);
+    return true;
+  }).map((photo) => ({ _key: photo.src, image: { link: photo.src, alt: photo.alt } }));
+}
+
 export function OmGallery() {
   return (
-    <section className="bg-mist py-16 xl:py-24">
-      <Container>
-        <div className="flex flex-col gap-10">
-          <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
-            <div className="max-w-2xl">
-              <Heading as="h2" size="section">
-                {OM_GALLERY.h2}
-              </Heading>
-              <p className="mt-4 font-light leading-normal text-pine/70 xl:text-[17px]">
-                {OM_GALLERY.sub}
-              </p>
-            </div>
-            <Button href={OM_GALLERY.cta.href} variant="pine" size="md" className="w-full sm:w-auto">
-              {OM_GALLERY.cta.label}
-            </Button>
-          </div>
-
-          <ul className="grid grid-cols-2 gap-3 xl:grid-cols-4">
-            {OM_GALLERY.photos.map((photo) => (
-              <li key={photo.src} className="relative aspect-[4/3] overflow-hidden rounded-xl">
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  sizes="(min-width: 1280px) 300px, 50vw"
-                  className="object-cover"
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Container>
-    </section>
+    <GalleryStrip
+      h2={OM_GALLERY.h2}
+      sub={OM_GALLERY.sub}
+      cta={OM_GALLERY.cta}
+      items={curatedItems()}
+      decor
+    />
   );
 }

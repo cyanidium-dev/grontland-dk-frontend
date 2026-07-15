@@ -30,9 +30,10 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-hidden bg-white">
-      {/* Right image panel (desktop) — bleeds to the viewport edge, like home */}
+      {/* Right image panel (desktop) — bleeds to the viewport edge; flush with
+          the section top and bottom (feedback on /om-os, applied site-wide). */}
       {image && (
-        <div className="absolute bottom-8 right-0 top-8 z-20 hidden w-[43.5%] overflow-hidden rounded-l-[20px] xl:block">
+        <div className="absolute inset-y-0 right-0 z-20 hidden w-[43.5%] overflow-hidden rounded-l-[20px] xl:block">
           <Image
             src={image.src}
             alt={image.alt}
@@ -56,7 +57,9 @@ export function PageHero({
               {label}
             </p>
           )}
-          <Heading as="h1" size="hero" className="mb-8 max-w-[580px]">
+          {/* hyphens-auto (html lang="da") keeps long Danish compounds from
+              overflowing the column or the photo panel on narrow screens. */}
+          <Heading as="h1" size="hero" className="mb-8 max-w-[580px] break-words hyphens-auto">
             {title}
           </Heading>
           <p className="mb-9 max-w-[472px] border-l-2 border-pine/50 pl-5 font-light leading-[1.35] text-pine xl:text-[18px]">
