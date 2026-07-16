@@ -4,19 +4,20 @@ import { QuoteModalProvider } from "@/components/quote";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
+import { getYdelserIndex } from "@/lib/sanity/queries";
 import { breadcrumbs } from "@/lib/seo/jsonld";
 import { YdelserIndexGrid } from "@/sections/services/YdelserIndexGrid";
 import { CtaBand, PageHero } from "@/sections/shared";
-import { YDELSER_INDEX } from "@/constants/ydelserIndex";
 
-export const metadata: Metadata = {
-  title: YDELSER_INDEX.metaTitle,
-  description: YDELSER_INDEX.metaDescription,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getYdelserIndex();
+  return { title: page.metaTitle, description: page.metaDescription };
+}
 
-/* /ydelser — hub page: hero → card grid (one card per service page) → CTA.
-   Every service page links back here via breadcrumbs and the CTA crosslink. */
-export default function YdelserIndexPage() {
+/* /ydelser — hub page: hero → card grid (one card per service doc) → CTA. */
+export default async function YdelserIndexPage() {
+  const page = await getYdelserIndex();
+
   return (
     <QuoteModalProvider>
       <JsonLd
@@ -28,19 +29,21 @@ export default function YdelserIndexPage() {
       <Header />
       <main className="flex-1">
         <PageHero
-          label={YDELSER_INDEX.hero.label}
-          title={YDELSER_INDEX.hero.h1}
-          sub={YDELSER_INDEX.hero.sub}
-          image={YDELSER_INDEX.hero.image}
+          label={page.hero.label ?? undefined}
+          title={page.hero.h1}
+          sub={page.hero.sub}
+          image={page.hero.image ?? undefined}
         />
-        <YdelserIndexGrid />
-        <CtaBand
-          h2={YDELSER_INDEX.cta.h2}
-          text={YDELSER_INDEX.cta.text}
-          primary={YDELSER_INDEX.cta.primary}
-          crosslinks={YDELSER_INDEX.cta.crosslinks}
-          image={YDELSER_INDEX.cta.image}
-        />
+        <YdelserIndexGrid cards={page.cards} />
+        {page.cta && (
+          <CtaBand
+            h2={page.cta.h2}
+            text={page.cta.text}
+            primary={page.cta.primary}
+            crosslinks={page.cta.crosslinks ?? []}
+            image={page.cta.image ?? undefined}
+          />
+        )}
       </main>
       <Footer />
     </QuoteModalProvider>

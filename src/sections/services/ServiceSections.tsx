@@ -4,15 +4,14 @@ import Link from "next/link";
 import { GalleryCarousel, type GalleryItem } from "@/components/gallery";
 import { ProjectCard } from "@/components/project";
 import { Container, Heading } from "@/components/ui";
-import { filterGalleryPhotos } from "@/constants/gallery";
-import { getProject } from "@/constants/projects";
-import type { ServiceContent } from "@/constants/services";
+import type { ServicePageData } from "@/lib/sanity/queries";
 import { FaqList, FeatureGrid, NumberedSteps, PageHero } from "@/sections/shared";
 
 /* Section kit for /ydelser/[slug] — thin wrappers over the shared inner-page
-   components; section order is fixed by the page route. */
+   components; section order is fixed by the page route. Data comes from the
+   service document (cases + gallery photos embedded by the query). */
 
-export function ServiceHero({ service }: { service: ServiceContent }) {
+export function ServiceHero({ service }: { service: ServicePageData }) {
   return (
     <>
       <PageHero
@@ -41,7 +40,7 @@ export function ServiceHero({ service }: { service: ServiceContent }) {
   );
 }
 
-export function ServiceScope({ service }: { service: ServiceContent }) {
+export function ServiceScope({ service }: { service: ServicePageData }) {
   return (
     <FeatureGrid
       h2={service.scope.h2}
@@ -52,7 +51,7 @@ export function ServiceScope({ service }: { service: ServiceContent }) {
   );
 }
 
-export function ServicePrices({ service }: { service: ServiceContent }) {
+export function ServicePrices({ service }: { service: ServicePageData }) {
   if (!service.prices) return null;
   return (
     <section className="bg-white py-16 xl:py-24">
@@ -77,23 +76,20 @@ export function ServicePrices({ service }: { service: ServiceContent }) {
   );
 }
 
-export function ServiceProcess({ service }: { service: ServiceContent }) {
+export function ServiceProcess({ service }: { service: ServicePageData }) {
   return (
     <NumberedSteps
       h2={service.process.h2}
       steps={service.process.steps}
       cta={{ label: "Start med en kort besked", href: "/kontakt" }}
       background="mist"
-      backgroundImage={service.processImage}
+      backgroundImage={service.processImage ?? undefined}
     />
   );
 }
 
-export function ServiceCases({ service }: { service: ServiceContent }) {
-  const projects = service.caseSlugs
-    .map((slug) => getProject(slug))
-    .filter((p) => p !== undefined);
-  if (projects.length === 0) return null;
+export function ServiceCases({ service }: { service: ServicePageData }) {
+  if (service.cases.length === 0) return null;
 
   return (
     <section className="bg-white py-16 xl:py-24">
@@ -102,7 +98,7 @@ export function ServiceCases({ service }: { service: ServiceContent }) {
           Det har vi lavet
         </Heading>
         <div className="mt-10 grid gap-8 sm:grid-cols-2">
-          {projects.map((project) => (
+          {service.cases.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
@@ -111,11 +107,10 @@ export function ServiceCases({ service }: { service: ServiceContent }) {
   );
 }
 
-export function ServiceGalleryStrip({ service }: { service: ServiceContent }) {
-  const photos = filterGalleryPhotos(service.galleryFilter);
-  if (photos.length === 0) return null;
+export function ServiceGalleryStrip({ service }: { service: ServicePageData }) {
+  if (service.galleryPhotos.length === 0) return null;
 
-  const items: GalleryItem[] = photos.map((photo) => ({
+  const items: GalleryItem[] = service.galleryPhotos.map((photo) => ({
     _key: photo.src,
     image: { link: photo.src, alt: photo.alt },
   }));
@@ -140,12 +135,12 @@ export function ServiceGalleryStrip({ service }: { service: ServiceContent }) {
   );
 }
 
-export function ServiceFaq({ service }: { service: ServiceContent }) {
+export function ServiceFaq({ service }: { service: ServicePageData }) {
   return <FaqList h2={service.faq.h2} items={service.faq.items} />;
 }
 
-export function ServiceSeoText({ service }: { service: ServiceContent }) {
-  const [primary, secondary] = service.seoText.images;
+export function ServiceSeoText({ service }: { service: ServicePageData }) {
+  const [primary, secondary] = service.seoText.images ?? [];
   return (
     <section className="bg-mist py-16 xl:py-20">
       <Container>

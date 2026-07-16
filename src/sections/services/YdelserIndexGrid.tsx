@@ -3,23 +3,11 @@ import Link from "next/link";
 
 import { ArrowIcon } from "@/components/icons";
 import { Container } from "@/components/ui";
-import { SERVICES } from "@/constants/home";
-import { SERVICES_PAGES } from "@/constants/services";
+import type { YdelserIndexData } from "@/lib/sanity/queries";
 
-/* /ydelser card grid — one card per SERVICES_PAGES entry, described with the
-   home SERVICES.items copy (same taxonomy) and illustrated with the service
-   page's own hero photo. */
-export function YdelserIndexGrid() {
-  const cards = SERVICES_PAGES.map((page) => {
-    const homeItem = SERVICES.items.find((i) => i.href === `/ydelser/${page.slug}`);
-    return {
-      slug: page.slug,
-      title: page.nav,
-      desc: homeItem?.desc ?? page.heroSub,
-      image: page.heroImage,
-    };
-  });
-
+/* /ydelser card grid — one card per service document (nav, cardDesc with
+   hero-sub fallback, hero photo), ordered by the service `order` field. */
+export function YdelserIndexGrid({ cards }: { cards: YdelserIndexData["cards"] }) {
   return (
     <section className="bg-mist py-16 xl:py-24">
       <Container>

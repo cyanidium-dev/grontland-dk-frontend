@@ -1,11 +1,15 @@
 import type { MetadataRoute } from "next";
 
-import { PROJECTS } from "@/constants/projects";
-import { SERVICES_PAGES } from "@/constants/services";
+import { getProjectSlugs, getServiceSlugs } from "@/lib/sanity/queries";
 
 const BASE = "https://grontland.dk";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [serviceSlugs, projectSlugs] = await Promise.all([
+    getServiceSlugs(),
+    getProjectSlugs(),
+  ]);
+
   const statics = [
     "",
     "/ydelser",
@@ -21,14 +25,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "" ? 1 : 0.8,
   }));
 
-  const services = SERVICES_PAGES.map((s) => ({
-    url: `${BASE}/ydelser/${s.slug}`,
+  const services = serviceSlugs.map((slug) => ({
+    url: `${BASE}/ydelser/${slug}`,
     changeFrequency: "monthly" as const,
     priority: 0.9,
   }));
 
-  const projects = PROJECTS.map((p) => ({
-    url: `${BASE}/projekter/${p.slug}`,
+  const projects = projectSlugs.map((slug) => ({
+    url: `${BASE}/projekter/${slug}`,
     changeFrequency: "yearly" as const,
     priority: 0.6,
   }));

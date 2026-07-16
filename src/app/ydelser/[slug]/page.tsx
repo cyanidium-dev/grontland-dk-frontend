@@ -5,6 +5,7 @@ import { QuoteModalProvider } from "@/components/quote";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
+import { getServiceBySlug, getServiceSlugs } from "@/lib/sanity/queries";
 import { breadcrumbs, faqPage, servicePage } from "@/lib/seo/jsonld";
 import {
   ServiceCases,
@@ -17,17 +18,17 @@ import {
   ServiceSeoText,
 } from "@/sections/services";
 import { CtaBand } from "@/sections/shared";
-import { getService, SERVICES_PAGES } from "@/constants/services";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return SERVICES_PAGES.map((s) => ({ slug: s.slug }));
+export async function generateStaticParams() {
+  const slugs = await getServiceSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const s = getService(slug);
+  const s = await getServiceBySlug(slug);
   if (!s) return { title: "Ydelser | Grønt Land DK" };
   return {
     title: s.metaTitle,
@@ -42,7 +43,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ServicePageRoute({ params }: PageProps) {
   const { slug } = await params;
-  const s = getService(slug);
+  const s = await getServiceBySlug(slug);
   if (!s) notFound();
 
   return (
@@ -76,7 +77,7 @@ export default async function ServicePageRoute({ params }: PageProps) {
             { label: "Alle ydelser", href: "/ydelser" },
             { label: "Se projekter", href: "/projekter" },
           ]}
-          image={s.ctaImage}
+          image={s.ctaImage ?? undefined}
         />
       </main>
       <Footer />
