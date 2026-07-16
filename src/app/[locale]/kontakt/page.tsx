@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
 import { Footer } from "@/layouts/Footer";
@@ -14,7 +15,9 @@ export const metadata: Metadata = {
 
 /* /kontakt — docs/content/kontakt.md: hero → form + direct contact →
    what-happens-next steps → audience shortcuts. */
-export default function KontaktPage() {
+export default async function KontaktPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <QuoteModalProvider>
       <Header />

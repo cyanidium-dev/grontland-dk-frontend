@@ -1,4 +1,5 @@
 import { QuoteModalProvider } from "@/components/quote";
+import { setRequestLocale } from "next-intl/server";
 import { Header } from "@/layouts/Header";
 import { Footer } from "@/layouts/Footer";
 import {
@@ -21,7 +22,9 @@ import { getGalleryCategories } from "@/lib/sanity/queries";
    Hero → Services → Audiences → OneTeam → Process → Projects → Gallery →
    About → SeoText → Faq → QuoteCta. Copy is local (constants/home.ts);
    the service cards, project cards and gallery photos come from the CMS. */
-export default async function HomePage() {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const categories = await getGalleryCategories();
   return (
     <QuoteModalProvider>

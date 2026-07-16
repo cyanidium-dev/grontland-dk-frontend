@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { QuoteModalProvider } from "@/components/quote";
@@ -19,7 +20,7 @@ import {
 } from "@/sections/services";
 import { CtaBand } from "@/sections/shared";
 
-type PageProps = { params: Promise<{ slug: string }> };
+type PageProps = { params: Promise<{ locale: string; slug: string }> };
 
 export async function generateStaticParams() {
   const slugs = await getServiceSlugs();
@@ -27,7 +28,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const s = await getServiceBySlug(slug);
   if (!s) return { title: "Ydelser | Grønt Land DK" };
   return {
@@ -42,7 +44,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ServicePageRoute({ params }: PageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const s = await getServiceBySlug(slug);
   if (!s) notFound();
 

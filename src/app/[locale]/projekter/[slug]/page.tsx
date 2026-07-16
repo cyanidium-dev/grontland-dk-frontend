@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { QuoteModalProvider } from "@/components/quote";
@@ -19,7 +20,7 @@ import {
 } from "@/sections/project";
 
 type PageProps = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 };
 
 export async function generateStaticParams() {
@@ -28,7 +29,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const project = await getProjectBySlug(slug);
   if (!project) return { title: "Projekt | Grønt Land DK" };
   return {
@@ -43,7 +45,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ProjectDetailPage({ params }: PageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const [project, page] = await Promise.all([getProjectBySlug(slug), getProjekterPage()]);
   if (!project) notFound();
 

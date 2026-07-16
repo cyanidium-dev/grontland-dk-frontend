@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
 import { Footer } from "@/layouts/Footer";
@@ -22,7 +23,9 @@ export const metadata: Metadata = {
 /* /private — docs/content/private.md: hero → benefits → popular project types
    (service + project links) → featured projects → Process (shared with home) →
    FAQ → final CTA. */
-export default function PrivatePage() {
+export default async function PrivatePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <QuoteModalProvider>
       <Header />

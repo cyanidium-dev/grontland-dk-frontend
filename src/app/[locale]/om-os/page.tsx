@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
 import { Footer } from "@/layouts/Footer";
@@ -16,7 +17,9 @@ export const metadata: Metadata = {
 /* /om-os — docs/content/om-os.md: hero → who-we-are + facts → values → team →
    one-plan band → Process (shared with home, anchors #proces) → gallery teaser
    → final CTA. About + Team merged per client. */
-export default function OmOsPage() {
+export default async function OmOsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <QuoteModalProvider>
       <Header />

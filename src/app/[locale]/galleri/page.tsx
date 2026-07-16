@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
 import { Container, Heading } from "@/components/ui";
@@ -8,14 +9,18 @@ import { getGalleriPage } from "@/lib/sanity/queries";
 import { GalleriSections } from "@/sections/galleri";
 import { CtaBand, PageHero } from "@/sections/shared";
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const page = await getGalleriPage();
   return { title: page.metaTitle, description: page.metaDescription };
 }
 
 /* /galleri — hero → Nbyg-style per-service sections (anchor nav + coverflow
    sliders; data from galleryCategory docs) → short SEO text → final CTA. */
-export default async function GalleriPage() {
+export default async function GalleriPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const page = await getGalleriPage();
 
   return (

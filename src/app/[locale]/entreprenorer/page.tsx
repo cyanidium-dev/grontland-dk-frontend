@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
 import { Footer } from "@/layouts/Footer";
@@ -22,7 +23,9 @@ export const metadata: Metadata = {
 /* /entreprenorer — docs/content/entreprenorer.md: dark hero → scenarios →
    expectations → why-integrated band → collaboration model → ARC case →
    trades strip → final CTA. No testimonials by design. */
-export default function EntreprenorerPage() {
+export default async function EntreprenorerPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <QuoteModalProvider>
       <Header />

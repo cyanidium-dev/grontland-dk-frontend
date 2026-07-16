@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
 import { Footer } from "@/layouts/Footer";
@@ -6,12 +7,16 @@ import { Header } from "@/layouts/Header";
 import { getProjekterPage, getProjects } from "@/lib/sanity/queries";
 import { ProjectCta, ProjectsListing } from "@/sections/project";
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const page = await getProjekterPage();
   return { title: page.metaTitle, description: page.metaDescription };
 }
 
-export default async function ProjekterPage() {
+export default async function ProjekterPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const [page, projects] = await Promise.all([getProjekterPage(), getProjects()]);
 
   return (
