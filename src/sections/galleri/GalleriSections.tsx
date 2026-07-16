@@ -2,19 +2,19 @@ import Link from "next/link";
 
 import { GalleryCarousel, type GalleryItem } from "@/components/gallery";
 import { Button, Container, Heading } from "@/components/ui";
-import { filterGalleryPhotos } from "@/constants/gallery";
-import { GALLERY_SECTIONS } from "@/constants/galleriPage";
+import type { GalleriPageData } from "@/lib/sanity/queries";
 import { cn } from "@/util/cn";
 
 /* Nbyg-style gallery body: anchor quick-nav + one section per service
    (title left, description right, coverflow carousel with lightbox, service
-   page button below). Ring decor alternates sides per section. */
-export function GalleriSections() {
+   page button below). Ring decor alternates sides per section. Data comes
+   from galleryCategory documents via /galleri's page query. */
+export function GalleriSections({ sections }: { sections: GalleriPageData["sections"] }) {
   return (
     <div className="bg-white">
       <Container>
         <nav aria-label="Gå til kategori" className="flex flex-wrap gap-2 pb-4">
-          {GALLERY_SECTIONS.map((s) => (
+          {sections.map((s) => (
             <Link
               key={s.id}
               href={`#${s.id}`}
@@ -26,10 +26,9 @@ export function GalleriSections() {
         </nav>
       </Container>
 
-      {GALLERY_SECTIONS.map((section, i) => {
-        const photos = filterGalleryPhotos(section.id);
-        if (photos.length === 0) return null;
-        const items: GalleryItem[] = photos.map((p) => ({
+      {sections.map((section, i) => {
+        if (section.photos.length === 0) return null;
+        const items: GalleryItem[] = section.photos.map((p) => ({
           _key: p.src,
           image: { link: p.src, alt: p.alt },
         }));
@@ -55,23 +54,27 @@ export function GalleriSections() {
               <Heading as="h2" size="section">
                 {section.title}
               </Heading>
-              <p className="max-w-[423px] font-light text-pine/70 md:text-right">
-                {section.description}
-              </p>
+              {section.description && (
+                <p className="max-w-[423px] font-light text-pine/70 md:text-right">
+                  {section.description}
+                </p>
+              )}
             </Container>
             <div className="relative z-10 mx-auto max-w-[416px] sm:max-w-[726px] md:max-w-[867px] lg:max-w-[1141px] xl:max-w-[1494px]">
               <GalleryCarousel items={items} />
             </div>
-            <Container className="relative z-10 mt-8">
-              <Button
-                href={section.cta.href}
-                variant="leaf"
-                size="md"
-                className="w-full sm:w-auto sm:min-w-[284px]"
-              >
-                {section.cta.label}
-              </Button>
-            </Container>
+            {section.cta && (
+              <Container className="relative z-10 mt-8">
+                <Button
+                  href={section.cta.href}
+                  variant="leaf"
+                  size="md"
+                  className="w-full sm:w-auto sm:min-w-[284px]"
+                >
+                  {section.cta.label}
+                </Button>
+              </Container>
+            )}
           </section>
         );
       })}
