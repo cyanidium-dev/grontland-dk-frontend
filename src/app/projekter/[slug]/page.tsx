@@ -5,6 +5,11 @@ import { QuoteModalProvider } from "@/components/quote";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import {
+  getProjekterPage,
+  getProjectBySlug,
+  getProjectSlugs,
+} from "@/lib/sanity/queries";
+import {
   ProjectAbout,
   ProjectCta,
   ProjectGallery,
@@ -12,19 +17,19 @@ import {
   ProjectRelated,
   ProjectResult,
 } from "@/sections/project";
-import { getProject, PROJECTS } from "@/constants/projects";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return PROJECTS.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  const slugs = await getProjectSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return { title: "Projekt | Grønt Land DK" };
   return {
     title: `${project.title} | Grønt Land DK`,
@@ -39,7 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const [project, page] = await Promise.all([getProjectBySlug(slug), getProjekterPage()]);
   if (!project) notFound();
 
   return (
@@ -50,8 +55,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <ProjectAbout project={project} />
         <ProjectGallery project={project} />
         <ProjectResult project={project} />
-        <ProjectRelated project={project} />
-        <ProjectCta />
+        <ProjectRelated related={project.related ?? []} />
+        {page.cta && <ProjectCta cta={page.cta} />}
       </main>
       <Footer />
     </QuoteModalProvider>

@@ -5,24 +5,38 @@ import { useState } from "react";
 import { ProjectCard } from "@/components/project";
 import { Container, FilterPill, Heading } from "@/components/ui";
 import {
-  filterProjects,
   PROJECTS_LIST,
+  type Project,
   type ProjectFilterId,
 } from "@/constants/projects";
 
-export function ProjectsListing() {
+/* Listing body — copy + projects come from the CMS (projekterPage +
+   project docs); the audience filter pills stay code (category enum). */
+export function ProjectsListing({
+  h1,
+  sub,
+  emptyFilter,
+  projects,
+}: {
+  h1: string;
+  sub: string | null;
+  emptyFilter: string | null;
+  projects: Project[];
+}) {
   const [filter, setFilter] = useState<ProjectFilterId>("all");
-  const projects = filterProjects(filter);
+  const visible = filter === "all" ? projects : projects.filter((p) => p.category === filter);
 
   return (
     <section className="bg-mist py-16 xl:py-24">
       <Container>
         <Heading as="h1" size="section">
-          {PROJECTS_LIST.listingH1}
+          {h1}
         </Heading>
-        <p className="mt-4 max-w-2xl font-light leading-normal text-pine/70 xl:text-[18px]">
-          {PROJECTS_LIST.sub}
-        </p>
+        {sub && (
+          <p className="mt-4 max-w-2xl font-light leading-normal text-pine/70 xl:text-[18px]">
+            {sub}
+          </p>
+        )}
 
         <div
           role="group"
@@ -40,9 +54,9 @@ export function ProjectsListing() {
           ))}
         </div>
 
-        {projects.length > 0 ? (
+        {visible.length > 0 ? (
           <ul className="mt-10 grid gap-6 sm:grid-cols-2 xl:mt-14 xl:grid-cols-3">
-            {projects.map((project) => (
+            {visible.map((project) => (
               <li key={project.slug}>
                 <ProjectCard project={project} />
               </li>
@@ -50,7 +64,7 @@ export function ProjectsListing() {
           </ul>
         ) : (
           <p className="mt-10 text-sm font-light text-pine/60">
-            {PROJECTS_LIST.emptyFilter}
+            {emptyFilter ?? PROJECTS_LIST.emptyFilter}
           </p>
         )}
       </Container>

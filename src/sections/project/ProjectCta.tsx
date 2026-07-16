@@ -2,11 +2,15 @@ import Image from "next/image";
 
 import { OpenQuoteButton } from "@/components/quote";
 import { Container, Heading } from "@/components/ui";
-import { PROJECTS_LIST } from "@/constants/projects";
+import type { CtaBandData } from "@/lib/sanity/queries";
 
-/* Project listing + detail CTA — black band (contrasts pine footer), photo + copy. */
-export function ProjectCta() {
-  const { h2, sub, button, image, imageAlt } = PROJECTS_LIST.ctaBand;
+/* Project listing + detail CTA — black band (contrasts pine footer), photo + copy.
+   Data: projekterPage.cta (CMS). */
+export function ProjectCta({ cta }: { cta: CtaBandData }) {
+  const { h2, text: sub, primary, image: img } = cta;
+  const button = primary.label;
+  const image = img?.src ?? "/images/cases/quote-cta-band.png";
+  const imageAlt = img?.alt ?? "Nybelagte betontrin foran bolig med hvid balustrade";
 
   return (
     <section className="relative overflow-hidden bg-black text-white">

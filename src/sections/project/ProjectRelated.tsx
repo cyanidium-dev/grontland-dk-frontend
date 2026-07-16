@@ -1,9 +1,8 @@
 import { Container, Heading } from "@/components/ui";
 import { ProjectCard } from "@/components/project";
-import { getRelatedProjects, type Project } from "@/constants/projects";
+import type { Project } from "@/constants/projects";
 
-export function ProjectRelated({ project }: { project: Project }) {
-  const related = getRelatedProjects(project);
+export function ProjectRelated({ related }: { related: Project[] }) {
   if (related.length === 0) return null;
 
   return (
