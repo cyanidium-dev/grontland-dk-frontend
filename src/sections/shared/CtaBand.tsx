@@ -2,14 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Container, Heading, Button } from "@/components/ui";
-
-const PHONE = { label: "Ring 91 70 01 03", href: "tel:+4591700103" } as const;
+import { getSiteSettings } from "@/lib/sanity/queries";
 
 /* Final CTA band for inner pages — black (contrasts the pine footer, like
-   ProjectCta). Primary button + phone + optional crosslinks row. Optional
-   photo bleeds to the right viewport edge (home QuoteCta treatment); on
-   mobile it sits below the copy as a rounded panel. */
-export function CtaBand({
+   ProjectCta). Primary button + phone (from CMS siteSettings) + optional
+   crosslinks row. Optional photo bleeds to the right viewport edge (home
+   QuoteCta treatment); on mobile it sits below the copy as a rounded panel. */
+export async function CtaBand({
   h2,
   text,
   primary,
@@ -22,6 +21,8 @@ export function CtaBand({
   crosslinks?: readonly { label: string; href: string }[];
   image?: { src: string; alt: string };
 }) {
+  const s = await getSiteSettings();
+  const phone = { label: `Ring ${s.phone}`, href: s.phoneHref };
   return (
     <section className="relative overflow-hidden bg-black text-white">
       {image && (
@@ -43,8 +44,8 @@ export function CtaBand({
             <Button href={primary.href} variant="leaf" size="md" className="w-full sm:w-auto">
               {primary.label}
             </Button>
-            <Button href={PHONE.href} variant="white" size="md" className="w-full sm:w-auto">
-              {PHONE.label}
+            <Button href={phone.href} variant="white" size="md" className="w-full sm:w-auto">
+              {phone.label}
             </Button>
           </div>
           {crosslinks.length > 0 && (

@@ -3,6 +3,7 @@ import { Manrope, Montserrat } from "next/font/google";
 import "./globals.css";
 
 import { JsonLd } from "@/components/seo/JsonLd";
+import { getSiteSettings } from "@/lib/sanity/queries";
 import { localBusiness } from "@/lib/seo/jsonld";
 
 // Manrope — body + display headings (300–800 covers Light…Bold used in the design).
@@ -30,18 +31,19 @@ export const metadata: Metadata = {
     "Grønt Land DK hjælper private boligejere og entreprenører med renovering, facadearbejde, belægning, tømrerarbejde, murerarbejde, malerarbejde og havearbejde i København og Storkøbenhavn.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getSiteSettings();
   return (
     <html
       lang="da"
       className={`${manrope.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white font-sans text-pine">
-        <JsonLd data={localBusiness()} />
+        <JsonLd data={localBusiness(settings)} />
         {children}
       </body>
     </html>

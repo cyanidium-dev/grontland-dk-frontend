@@ -3,10 +3,14 @@ import Link from "next/link";
 import { CodeSiteIcon } from "@/components/brand/CodeSiteIcon";
 import { Logo } from "@/components/brand/Logo";
 import { Container } from "@/components/ui";
+import { getSiteSettings } from "@/lib/sanity/queries";
 import { FOOTER } from "@/constants/home";
 
-/* Footer — Figma #3032:171 (1280×469). Pine 4-col + bottom credit bar. */
-export function Footer() {
+/* Footer — Figma #3032:171 (1280×469). Pine 4-col + bottom credit bar.
+   Menus stay in code (routes); contact facts come from CMS siteSettings. */
+export async function Footer() {
+  const s = await getSiteSettings();
+  const contact = [s.area, `CVR ${s.cvr}`];
   return (
     <footer className="bg-pine py-16 text-white">
       <Container className="flex flex-col gap-12">
@@ -14,7 +18,7 @@ export function Footer() {
           <div>
             <Logo variant="onDark" />
             <p className="mt-2 max-w-[176px] text-sm font-normal leading-5 text-white/60">
-              {FOOTER.blurb}
+              {s.footerBlurb ?? FOOTER.blurb}
             </p>
           </div>
 
@@ -59,7 +63,7 @@ export function Footer() {
               {FOOTER.contactTitle}
             </p>
             <ul className="mt-4 space-y-2 text-sm leading-5 text-white/70">
-              {FOOTER.contact.map((line) => (
+              {contact.map((line) => (
                 <li key={line}>{line}</li>
               ))}
             </ul>
@@ -67,7 +71,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-5 sm:flex-row sm:items-center">
-          <p className="text-xs leading-4 text-white/40">{FOOTER.copyright}</p>
+          <p className="text-xs leading-4 text-white/40">{s.copyright ?? FOOTER.copyright}</p>
           <a
             href={FOOTER.credit.href}
             target="_blank"

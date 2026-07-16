@@ -1,20 +1,20 @@
 /**
- * JSON-LD builders. Facts (CVR, phone, mail, hours) verified against the
- * kontakt page constants and the client's material — do not edit without a
- * confirmed source.
+ * JSON-LD builders. Contact facts come from the CMS siteSettings singleton
+ * (single source; see lib/sanity/queries.ts).
  */
+import type { SiteSettings } from "@/lib/sanity/queries";
 
 const BASE = "https://grontland.dk";
 
-export const localBusiness = () => ({
+export const localBusiness = (s: SiteSettings) => ({
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
   name: "Grønt Land DK",
   url: BASE,
-  telephone: "+4591700103",
-  email: "grontlanddk@gmail.com",
-  vatID: "DK45514374",
-  areaServed: "København og Storkøbenhavn",
+  telephone: s.phoneHref.replace("tel:", ""),
+  email: s.email,
+  vatID: `DK${s.cvr}`,
+  areaServed: s.area,
   openingHours: "Mo-Fr 08:00-17:00",
 });
 
