@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
+import { hasLocale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import { Manrope, Montserrat } from "next/font/google";
-import "./globals.css";
+import { notFound } from "next/navigation";
+import "../globals.css";
 
 import { JsonLd } from "@/components/seo/JsonLd";
+import { routing } from "@/i18n/routing";
 import { getSiteSettings } from "@/lib/sanity/queries";
 import { localBusiness } from "@/lib/seo/jsonld";
 
@@ -31,15 +35,29 @@ export const metadata: Metadata = {
     "Grønt Land DK hjælper private boligejere og entreprenører med renovering, facadearbejde, belægning, tømrerarbejde, murerarbejde, malerarbejde og havearbejde i København og Storkøbenhavn.",
 };
 
+/* /en is GATED until its content is complete: only da prerenders, and
+   dynamicParams=false makes unknown locales (incl. en) 404. To launch
+   English: return routing.locales here and add the language switcher. */
+export function generateStaticParams() {
+  return [{ locale: "da" }];
+}
+export const dynamicParams = false;
+
 export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+
   const settings = await getSiteSettings();
   return (
     <html
-      lang="da"
+      lang={locale}
       className={`${manrope.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white font-sans text-pine">
