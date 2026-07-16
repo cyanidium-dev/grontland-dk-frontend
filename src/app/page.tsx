@@ -15,10 +15,14 @@ import {
   QuoteCta,
 } from "@/sections/home";
 
+import { getGalleryCategories } from "@/lib/sanity/queries";
+
 /* Home — section order per Preview/docs/Структура главной страницы.md:
    Hero → Services → Audiences → OneTeam → Process → Projects → Gallery →
-   About → SeoText → Faq → QuoteCta. */
-export default function HomePage() {
+   About → SeoText → Faq → QuoteCta. Copy is local (constants/home.ts);
+   the service cards, project cards and gallery photos come from the CMS. */
+export default async function HomePage() {
+  const categories = await getGalleryCategories();
   return (
     <QuoteModalProvider>
       <div className="relative">
@@ -30,7 +34,7 @@ export default function HomePage() {
           <OneTeam />
           <Process />
           <Projects />
-          <Gallery />
+          <Gallery categories={categories} />
           <About />
           <SeoText />
           <Faq />

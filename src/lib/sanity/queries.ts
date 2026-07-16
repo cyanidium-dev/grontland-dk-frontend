@@ -227,6 +227,44 @@ export function getYdelserIndex(): Promise<YdelserIndexData> {
   );
 }
 
+// ---------------------------------------------------------------------------
+// collection snippets for the constants-based ("local") pages — home, om-os,
+// private, entreprenorer keep their copy in constants but render gallery/
+// projects/services data from the CMS so it stays in sync with the
+// collection pages.
+// ---------------------------------------------------------------------------
+export type GalleryCategoryData = { id: string; label: string; photos: Img[] };
+
+export function getGalleryCategories(): Promise<GalleryCategoryData[]> {
+  return sanityFetch<GalleryCategoryData[]>(
+    `*[_type == "galleryCategory"] | order(order asc) {
+      "id": key,
+      "label": title.da,
+      "photos": photos[]${IMG}
+    }`,
+  );
+}
+
+export type ServiceCard = {
+  name: string;
+  desc: string;
+  href: string;
+  image: string;
+  imageAlt: string;
+};
+
+export function getServiceCards(): Promise<ServiceCard[]> {
+  return sanityFetch<ServiceCard[]>(
+    `*[_type == "service"] | order(order asc) {
+      "name": nav.da,
+      "desc": coalesce(cardDesc.da, hero.sub.da),
+      "href": "/ydelser/" + slug.current,
+      "image": hero.image.asset->url,
+      "imageAlt": hero.image.alt.da
+    }`,
+  );
+}
+
 export function getGalleriPage(): Promise<GalleriPageData> {
   return sanityFetch<GalleriPageData>(
     `*[_id == "galleriPage"][0]{

@@ -1,13 +1,13 @@
 import Image from "next/image";
 
 import { Container, Heading, Button, StarChip } from "@/components/ui";
-import { getProject } from "@/constants/projects";
+import { getProjectBySlug } from "@/lib/sanity/queries";
 import { B2B_CASE } from "@/constants/b2b";
 
 /* ARC Amager reference — the page's proof section (replaces the old site's
-   testimonials). Photo comes from the project entry in constants/projects.ts. */
-export function B2bCase() {
-  const project = getProject(B2B_CASE.slug);
+   testimonials). Copy is local; the project photo/label come from the CMS. */
+export async function B2bCase() {
+  const project = await getProjectBySlug(B2B_CASE.slug);
 
   return (
     <section className="bg-mist py-16 xl:py-24">

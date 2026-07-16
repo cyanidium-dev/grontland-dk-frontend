@@ -1,12 +1,14 @@
 import { ProjectCard } from "@/components/project";
 import { Container, Heading, Button } from "@/components/ui";
-import { getProject } from "@/constants/projects";
+import { getProjects } from "@/lib/sanity/queries";
 import { PRIVATE_PROJECTS } from "@/constants/privatePage";
 
-/* Featured private cases — reuses the shared ProjectCard on curated slugs. */
-export function PrivateProjects() {
+/* Featured private cases — shared ProjectCard on curated slugs (copy local,
+   project data from the CMS, kept in the curated order). */
+export async function PrivateProjects() {
+  const all = await getProjects();
   const projects = PRIVATE_PROJECTS.slugs
-    .map((slug) => getProject(slug))
+    .map((slug) => all.find((p) => p.slug === slug))
     .filter((project) => project !== undefined);
 
   return (

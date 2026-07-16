@@ -1,13 +1,16 @@
 import { Container, Button, Heading, Marquee } from "@/components/ui";
 import { StarIcon } from "@/components/icons";
 import { MARQUEE_WORDS } from "@/constants/home";
-import { PROJECTS, PROJECTS_LIST } from "@/constants/projects";
+import { PROJECTS_LIST } from "@/constants/projects";
+import { getProjects } from "@/lib/sanity/queries";
 import { ProjectsSlider } from "./ProjectsSlider";
 
 /* "Udvalgte projekter" — Figma #1018:721 + marquee band #1019:780.
    Leaf marquee above mist band; left H2 + sub, top-right pine CTA; card
-   slider (3 visible on desktop) with leaf-bordered photos + service badge. */
-export function Projects() {
+   slider (3 visible on desktop) with leaf-bordered photos + service badge.
+   Copy is local; the project cards come from the CMS. */
+export async function Projects() {
+  const projects = await getProjects();
   return (
     <>
       <Marquee
@@ -52,7 +55,7 @@ export function Projects() {
         </Container>
 
         <div className="mt-10 xl:mt-14">
-          <ProjectsSlider projects={PROJECTS} />
+          <ProjectsSlider projects={projects} />
         </div>
       </section>
     </>

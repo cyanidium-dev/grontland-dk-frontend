@@ -117,7 +117,7 @@ export const OM_ONEPLAN = {
   ],
 } as const;
 
-// Photos come from constants/gallery.ts (2 per service) via OmGallery.
+// Photos come from CMS galleryCategory docs (2 per service) via OmGallery.
 export const OM_GALLERY = {
   h2: "Se resultatet af vores arbejde",
   sub: "Billeder fra facade, belægning, renovering og havearbejde.",

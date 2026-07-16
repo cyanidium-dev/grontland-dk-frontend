@@ -6,20 +6,21 @@ import { Container, Heading, Button, FilterPill, Marquee } from "@/components/ui
 import { StarIcon } from "@/components/icons";
 import { GalleryCarousel, type GalleryItem } from "@/components/gallery";
 import { GALLERY, MARQUEE_WORDS } from "@/constants/home";
-import {
-  filterGalleryPhotos,
-  GALLERY_FILTERS,
-  type GalleryFilterId,
-} from "@/constants/gallery";
+import type { GalleryCategoryData } from "@/lib/sanity/queries";
 
 /* "Galleri fra udførte opgaver" — Figma #3023:761.
    Right-aligned H2 + sub; left leaf CTA + service filter pills; coverflow;
    pine marquee at bottom (unlike Services/Projects leaf marquees).
-   Pills filter the carousel by service (catalog in constants/gallery.ts). */
-export function Gallery() {
-  const [filter, setFilter] = useState<GalleryFilterId>("alle");
+   Copy is local; pills + photos come from CMS galleryCategory docs. */
+export function Gallery({ categories }: { categories: GalleryCategoryData[] }) {
+  const [filter, setFilter] = useState<string>("alle");
 
-  const galleryItems: GalleryItem[] = filterGalleryPhotos(filter).map((photo) => ({
+  const filters = [{ id: "alle", label: "Alle" }, ...categories.map((c) => ({ id: c.id, label: c.label }))];
+  const photos =
+    filter === "alle"
+      ? categories.flatMap((c) => c.photos)
+      : (categories.find((c) => c.id === filter)?.photos ?? []);
+  const galleryItems: GalleryItem[] = photos.map((photo) => ({
     _key: photo.src,
     image: { link: photo.src, alt: photo.alt },
   }));
@@ -50,7 +51,7 @@ export function Gallery() {
             {GALLERY.cta.label}
           </Button>
           <div role="group" aria-label="Filtrer galleri" className="flex flex-wrap gap-2">
-            {GALLERY_FILTERS.map((item) => (
+            {filters.map((item) => (
               <FilterPill
                 key={item.id}
                 label={item.label}

@@ -138,64 +138,7 @@ export const SERVICES = {
   h2: "Vores ydelser",
   sub: "Vi udfører både indvendige og udvendige opgaver - fra havearbejde og belægning til facade, maling, tømrerarbejde, murerarbejde og totalentreprise.",
   cta: { label: "Se alle ydelser", href: "/ydelser" },
-  items: [
-    {
-      name: "Havearbejde",
-      desc: "Terrasser, havezoner og udearealer planlagt efter brug, holdbarhed og et færdigt udtryk.",
-      href: "/ydelser/havearbejde",
-      image: "/images/carousel/carousel-1.png",
-      imageAlt: "Anlagt have med belægning og beplantning",
-    },
-    {
-      name: "Belægningsarbejde",
-      desc: "Indkørsler, stier og adgangsarealer med stærkt underlag, pæn finish og lang levetid.",
-      href: "/ydelser/belaegningsarbejde",
-      image: "/images/carousel/carousel-2.png",
-      imageAlt: "Belægning i natursten ved bolig",
-    },
-    {
-      name: "Murerarbejde",
-      desc: "Murer- og facadearbejde til renovering, fliser og konstruktioner med fokus på stabilitet, styrke og finish.",
-      href: "/ydelser/murerarbejde",
-      image: "/images/carousel/carousel-3.png",
-      imageAlt: "Facade på privat bolig med beplantning",
-    },
-    {
-      name: "Malerservice",
-      desc: "Malerarbejde med korrekt forberedelse, ren finish og præcis afslutning.",
-      href: "/ydelser/malerservice",
-      image: "/images/carousel/carousel-4.png",
-      imageAlt: "Nymalet indvendigt rum",
-    },
-    {
-      name: "Tømrerarbejde",
-      desc: "Tømreropgaver fra konstruktion til detaljer, udført som del af renovering eller som selvstændig opgave.",
-      href: "/ydelser/tomrerarbejde",
-      image: "/images/hero/hero-card-terrasse.png",
-      imageAlt: "Træterrasse under opbygning",
-    },
-    {
-      name: "Totalentreprise",
-      desc: "Samlet renovering med flere fag, én plan og én ansvarlig kontakt fra start til aflevering.",
-      href: "/ydelser/totalentreprise",
-      image: "/images/cases/fundament-b2b.png",
-      imageAlt: "Byggeplads med armeret fundament under opbygning",
-    },
-    {
-      name: "Demonteringsarbejde",
-      desc: "Nedtagning og forberedende arbejde før renovering eller ny opbygning.",
-      href: "/ydelser/demonteringsarbejde",
-      image: "/images/cases/projekt-terrasse.png",
-      imageAlt: "Udeareal under omlægning",
-    },
-    {
-      name: "Rengøringsarbejde",
-      desc: "Rengøring efter renovering og byggeopgaver samt praktisk rengøring i private hjem.",
-      href: "/ydelser/rengoringsarbejde",
-      image: "/images/cases/havearbejde-private.png",
-      imageAlt: "Plejet privat bolig og have",
-    },
-  ],
+  // Card items come from CMS service docs (getServiceCards).
 } as const;
 
 /* Project cases live in constants/projects.ts (listing + detail + home cards). */
@@ -229,7 +172,7 @@ export const MARQUEE_WORDS = [
 ] as const;
 
 // Photo archive → links to the standalone /galleri page. Photos + filter
-// taxonomy live in constants/gallery.ts (service-categorized catalog).
+// taxonomy come from CMS galleryCategory docs (see lib/sanity/queries).
 export const GALLERY = {
   h2: "Galleri fra udførte opgaver",
   sub: "Se billeder fra facade, belægning, renovering, havearbejde, tømrerarbejde og andre opgaver.",

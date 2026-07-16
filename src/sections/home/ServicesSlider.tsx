@@ -6,9 +6,9 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui";
 import { ArrowIcon, ChevronIcon } from "@/components/icons";
-import { SERVICES } from "@/constants/home";
+import type { ServiceCard } from "@/lib/sanity/queries";
 
-type Item = (typeof SERVICES.items)[number];
+type Item = ServiceCard;
 
 const CARD = 285;
 const GAP = 20;
