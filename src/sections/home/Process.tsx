@@ -1,7 +1,9 @@
 import { Container, Heading, Button, Dots, InfoBox } from "@/components/ui";
 import type { InfoBoxVariant } from "@/components/ui";
 import { cn } from "@/util/cn";
-import { PROCESS } from "@/constants/home";
+import { getLocale } from "next-intl/server";
+
+import { homeCopy } from "@/lib/i18n/copy";
 
 /* "Sådan foregår arbejdet" — Figma #1019:924 / #1018:583 (file zq0o0GOkllffjjIomgnQ5p).
    White band; Dots + right H2; 5 alternating step cards; left CTA; ring decor. */
@@ -41,7 +43,8 @@ function stepStyle(i: number): StepStyle {
   };
 }
 
-export function Process() {
+export async function Process() {
+  const PROCESS = homeCopy(await getLocale()).PROCESS;
   return (
     <section id="proces" className="relative overflow-hidden bg-white py-16 xl:py-24">
       {/* Ring decor #1018:641 — Figma inset + rotate on #1019:924 wrapper (not baked into SVG) */}

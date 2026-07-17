@@ -1,9 +1,12 @@
 import { Container, Heading, Button, StarChip } from "@/components/ui";
-import { B2B_WHY } from "@/constants/b2b";
+import { getLocale } from "next-intl/server";
+
+import { b2bCopy } from "@/lib/i18n/copy";
 
 /* Contrast band (pine) — the integrated-partner argument, five proof chips,
    link to the team page. */
-export function B2bWhy() {
+export async function B2bWhy() {
+  const { B2B_WHY } = b2bCopy(await getLocale());
   return (
     <section className="bg-pine py-16 text-white xl:py-24">
       <Container>

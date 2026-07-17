@@ -1,12 +1,15 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { Container, Heading, Button, InfoBox } from "@/components/ui";
-import { KONTAKT_AUDIENCES } from "@/constants/kontakt";
+import { getLocale } from "next-intl/server";
+
+import { kontaktCopy } from "@/lib/i18n/copy";
 
 /* Routes visitors who landed on /kontakt first — mirrors the home AUDIENCES
    split, plus proof links to projects/gallery. */
-export function KontaktAudiences() {
+export async function KontaktAudiences() {
+  const { KONTAKT_AUDIENCES } = kontaktCopy(await getLocale());
   return (
     <section className="bg-white py-16 xl:py-24">
       <Container>

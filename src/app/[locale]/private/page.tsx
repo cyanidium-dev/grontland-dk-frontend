@@ -7,18 +7,17 @@ import { Header } from "@/layouts/Header";
 import { Process } from "@/sections/home";
 import { PageHero, FeatureGrid, FaqList, CtaBand } from "@/sections/shared";
 import { PrivateTypes, PrivateProjects } from "@/sections/private";
-import {
-  PRIVATE_META,
-  PRIVATE_HERO,
-  PRIVATE_BENEFITS,
-  PRIVATE_FAQ,
-  PRIVATE_CTA,
-} from "@/constants/privatePage";
+import { privateCopy } from "@/lib/i18n/copy";
 
-export const metadata: Metadata = {
-  title: PRIVATE_META.title,
-  description: PRIVATE_META.description,
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const { PRIVATE_META } = privateCopy(locale);
+  return { title: PRIVATE_META.title, description: PRIVATE_META.description };
+}
 
 /* /private — docs/content/private.md: hero → benefits → popular project types
    (service + project links) → featured projects → Process (shared with home) →
@@ -26,6 +25,7 @@ export const metadata: Metadata = {
 export default async function PrivatePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const { PRIVATE_HERO, PRIVATE_BENEFITS, PRIVATE_FAQ, PRIVATE_CTA } = privateCopy(locale);
   return (
     <QuoteModalProvider>
       <Header />

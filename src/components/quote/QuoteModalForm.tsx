@@ -1,7 +1,9 @@
 "use client";
 
+import { useLocale } from "next-intl";
+
 import { Button } from "@/components/ui";
-import { QUOTE_FORM } from "@/constants/home";
+import { homeCopy } from "@/lib/i18n/copy";
 import { cn } from "@/util/cn";
 
 export const quoteInputClass =
@@ -11,6 +13,7 @@ const labelClass = "mb-1 block text-sm font-semibold";
 
 /* Quote modal fields — Figma #3023:1206, compacted to fit typical viewports. */
 export function QuoteModalForm() {
+  const QUOTE_FORM = homeCopy(useLocale()).QUOTE_FORM;
   return (
     <form className="text-pine" onSubmit={(e) => e.preventDefault()}>
       <div className="grid gap-3 sm:grid-cols-2">

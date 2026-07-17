@@ -1,12 +1,15 @@
 import Image from "next/image";
 
 import { Heading, StarChip } from "@/components/ui";
-import { OM_INTRO } from "@/constants/om";
+import { getLocale } from "next-intl/server";
+
+import { omCopy } from "@/lib/i18n/copy";
 
 /* "Hvem er vi?" — mirrored home About (#3023:964): photo with the fact
    StarChips overlaid bleeds to the viewport's LEFT edge on xl; copy column
    right. Seam mirrors About's (50% − 30px), measured from the right. */
-export function OmIntro() {
+export async function OmIntro() {
+  const { OM_INTRO } = omCopy(await getLocale());
   return (
     <section className="relative overflow-hidden bg-white">
       <div className="mx-auto grid w-full max-w-7xl xl:min-h-[720px] xl:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">

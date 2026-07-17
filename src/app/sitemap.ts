@@ -4,6 +4,19 @@ import { getProjectSlugs, getServiceSlugs } from "@/lib/sanity/queries";
 
 const BASE = "https://grontland.dk";
 
+/* Emit each route once per locale. da is unprefixed (localePrefix
+   "as-needed"), en lives under /en; both paths cross-reference via
+   alternates.languages for hreflang. */
+function entry(path: string, priority: number, changeFrequency: "monthly" | "yearly") {
+  const da = `${BASE}${path}`;
+  const en = `${BASE}/en${path === "" ? "" : path}`;
+  const languages = { da: da || BASE, en };
+  return [
+    { url: da || BASE, changeFrequency, priority, alternates: { languages } },
+    { url: en, changeFrequency, priority: priority * 0.9, alternates: { languages } },
+  ];
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [serviceSlugs, projectSlugs] = await Promise.all([
     getServiceSlugs(),
@@ -19,23 +32,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/galleri",
     "/om-os",
     "/kontakt",
-  ].map((path) => ({
-    url: `${BASE}${path}`,
-    changeFrequency: "monthly" as const,
-    priority: path === "" ? 1 : 0.8,
-  }));
+  ].flatMap((path) => entry(path, path === "" ? 1 : 0.8, "monthly"));
 
-  const services = serviceSlugs.map((slug) => ({
-    url: `${BASE}/ydelser/${slug}`,
-    changeFrequency: "monthly" as const,
-    priority: 0.9,
-  }));
-
-  const projects = projectSlugs.map((slug) => ({
-    url: `${BASE}/projekter/${slug}`,
-    changeFrequency: "yearly" as const,
-    priority: 0.6,
-  }));
+  const services = serviceSlugs.flatMap((slug) => entry(`/ydelser/${slug}`, 0.9, "monthly"));
+  const projects = projectSlugs.flatMap((slug) => entry(`/projekter/${slug}`, 0.6, "yearly"));
 
   return [...statics, ...services, ...projects];
 }

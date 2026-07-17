@@ -1,10 +1,13 @@
 import { Container, Heading, Dots, InfoBox } from "@/components/ui";
-import { OM_VALUES } from "@/constants/om";
+import { getLocale } from "next-intl/server";
+
+import { omCopy } from "@/lib/i18n/copy";
 
 /* "Det arbejder vi efter" — Figma feedback image 12: mist band, Dots inline
    after the H2, ring decor behind the third card (bbox ≈ right 8% / top 40px /
    264px wide at 1440, fading toward the top-right; FAQ decor treatment). */
-export function OmValues() {
+export async function OmValues() {
+  const { OM_VALUES } = omCopy(await getLocale());
   return (
     <section className="relative overflow-hidden bg-mist py-16 xl:py-24">
       {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -1,12 +1,15 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { Container, Heading, InfoBox } from "@/components/ui";
 import { QuoteModalForm } from "@/components/quote";
-import { KONTAKT_FORM, KONTAKT_INFO } from "@/constants/kontakt";
+import { getLocale } from "next-intl/server";
+
+import { kontaktCopy } from "@/lib/i18n/copy";
 
 /* Full-page quote form + direct-contact column. The form reuses the shared
    QuoteModalForm (same fields as the modal — one source of copy/markup). */
-export function KontaktForm() {
+export async function KontaktForm() {
+  const { KONTAKT_FORM, KONTAKT_INFO } = kontaktCopy(await getLocale());
   return (
     <section className="bg-white py-16 xl:py-24">
       <Container>

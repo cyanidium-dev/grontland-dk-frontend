@@ -6,19 +6,17 @@ import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import { PageHero, FeatureGrid, NumberedSteps, CtaBand } from "@/sections/shared";
 import { B2bWhy, B2bCase, B2bTrades } from "@/sections/b2b";
-import {
-  B2B_META,
-  B2B_HERO,
-  B2B_SCENARIOS,
-  B2B_EXPECTATIONS,
-  B2B_MODEL,
-  B2B_CTA,
-} from "@/constants/b2b";
+import { b2bCopy } from "@/lib/i18n/copy";
 
-export const metadata: Metadata = {
-  title: B2B_META.title,
-  description: B2B_META.description,
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const { B2B_META } = b2bCopy(locale);
+  return { title: B2B_META.title, description: B2B_META.description };
+}
 
 /* /entreprenorer — docs/content/entreprenorer.md: dark hero → scenarios →
    expectations → why-integrated band → collaboration model → ARC case →
@@ -26,6 +24,7 @@ export const metadata: Metadata = {
 export default async function EntreprenorerPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const { B2B_HERO, B2B_SCENARIOS, B2B_EXPECTATIONS, B2B_MODEL, B2B_CTA } = b2bCopy(locale);
   return (
     <QuoteModalProvider>
       <Header />

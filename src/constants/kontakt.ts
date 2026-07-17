@@ -78,3 +78,81 @@ export const KONTAKT_AUDIENCES = {
     { label: "Åbn galleriet", href: "/galleri" },
   ],
 } as const;
+
+/* English copy (docs/content/kontakt.md EN) — sections pick da/en by locale. */
+
+export const KONTAKT_META_EN = {
+  title: "Contact Grønt Land DK — get a quote for renovation in Copenhagen",
+  description:
+    "Send a short description of your project and get a reply by the next business day. Renovation, paving, facades, garden work and turnkey contracting in Greater Copenhagen.",
+} as const;
+
+export const KONTAKT_HERO_EN = {
+  label: "Contact",
+  h1: "Contact us — get a quote for your project",
+  sub: "Describe your project briefly — we assess it and get back to you by the next business day, often sooner. Free and without obligation.",
+  cta: { label: "Call 91 70 01 03", href: "tel:+4591700103" },
+  image: {
+    src: "/images/cases/quote-cta-band.png",
+    alt: "New concrete steps with a white balustrade",
+  },
+} as const;
+
+export const KONTAKT_FORM_EN = {
+  h2: "Get a quote for your project",
+} as const;
+
+export const KONTAKT_INFO_EN = {
+  h2: "Direct contact",
+  items: [
+    {
+      label: "Phone",
+      value: "91 70 01 03",
+      href: "tel:+4591700103",
+      hint: "Monday–Friday 8:00–17:00",
+    },
+    {
+      label: "Email",
+      value: "grontlanddk@gmail.com",
+      href: "mailto:grontlanddk@gmail.com",
+      hint: "We reply by the next business day",
+    },
+    { label: "Service area", value: "Copenhagen and Greater Copenhagen" },
+    { label: "Company", value: "Grønt Land DK · CVR 45514374" },
+  ],
+  note: "Saturday by appointment. Sunday closed.",
+} as const;
+
+export const KONTAKT_STEPS_EN = {
+  h2: "What happens after you write?",
+  steps: [
+    {
+      title: "We assess the project",
+      desc: "We clarify scope, materials, access and timeline — and call if we have questions.",
+    },
+    { title: "You get a quote", desc: "A clear frame for price, process and next steps." },
+    { title: "We agree on a start date", desc: "The work is planned, and you know who is responsible." },
+  ],
+} as const;
+
+export const KONTAKT_AUDIENCES_EN = {
+  h2: "Want to know more before you write?",
+  cards: [
+    {
+      title: "For private customers",
+      text: "See how we handle renovation, terraces, facades and outdoor areas for homeowners.",
+      cta: { label: "See solutions for private customers", href: "/private" },
+      image: { src: "/images/cases/havearbejde-private.png", alt: "A well-kept garden with lawn and planting" },
+    },
+    {
+      title: "For contractors",
+      text: "See how we join projects as a stable team for sub-contracts and larger builds.",
+      cta: { label: "See collaboration for contractors", href: "/entreprenorer" },
+      image: { src: "/images/cases/fundament-b2b.png", alt: "Reinforced foundation ready for casting on a construction site" },
+    },
+  ],
+  links: [
+    { label: "See our projects", href: "/projekter" },
+    { label: "Open the gallery", href: "/galleri" },
+  ],
+} as const;

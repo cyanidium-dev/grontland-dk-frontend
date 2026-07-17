@@ -1,15 +1,18 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { Container, Heading, InfoBox } from "@/components/ui";
-import { PRIVATE_TYPES } from "@/constants/privatePage";
+import { getLocale } from "next-intl/server";
+
+import { privateCopy } from "@/lib/i18n/copy";
 
 const linkClass =
   "text-[12px] font-bold uppercase tracking-[0.3px] text-moss underline underline-offset-4 transition-colors hover:text-leaf";
 
 /* Popular project types — each card pairs a service link with a real completed
    project (the page's main interlink pattern). */
-export function PrivateTypes() {
+export async function PrivateTypes() {
+  const { PRIVATE_TYPES } = privateCopy(await getLocale());
   return (
     <section className="bg-white py-16 xl:py-24">
       <Container>

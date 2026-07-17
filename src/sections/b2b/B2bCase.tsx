@@ -1,12 +1,15 @@
 import Image from "next/image";
 
+import { getLocale } from "next-intl/server";
+
 import { Container, Heading, Button, StarChip } from "@/components/ui";
 import { getProjectBySlug } from "@/lib/sanity/queries";
-import { B2B_CASE } from "@/constants/b2b";
+import { b2bCopy } from "@/lib/i18n/copy";
 
 /* ARC Amager reference — the page's proof section (replaces the old site's
    testimonials). Copy is local; the project photo/label come from the CMS. */
 export async function B2bCase() {
+  const B2B_CASE = b2bCopy(await getLocale()).B2B_CASE;
   const project = await getProjectBySlug(B2B_CASE.slug);
 
   return (

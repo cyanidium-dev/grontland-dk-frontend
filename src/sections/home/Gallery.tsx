@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 
+import { useLocale } from "next-intl";
+
 import { Container, Heading, Button, FilterPill, Marquee } from "@/components/ui";
 import { StarIcon } from "@/components/icons";
 import { GalleryCarousel, type GalleryItem } from "@/components/gallery";
-import { GALLERY, MARQUEE_WORDS } from "@/constants/home";
+import { homeCopy } from "@/lib/i18n/copy";
 import type { GalleryCategoryData } from "@/lib/sanity/queries";
 
 /* "Galleri fra udførte opgaver" — Figma #3023:761.
@@ -13,9 +15,12 @@ import type { GalleryCategoryData } from "@/lib/sanity/queries";
    pine marquee at bottom (unlike Services/Projects leaf marquees).
    Copy is local; pills + photos come from CMS galleryCategory docs. */
 export function Gallery({ categories }: { categories: GalleryCategoryData[] }) {
+  const locale = useLocale();
+  const { GALLERY, MARQUEE_WORDS } = homeCopy(locale);
   const [filter, setFilter] = useState<string>("alle");
 
-  const filters = [{ id: "alle", label: "Alle" }, ...categories.map((c) => ({ id: c.id, label: c.label }))];
+  const allLabel = locale === "en" ? "All" : "Alle";
+  const filters = [{ id: "alle", label: allLabel }, ...categories.map((c) => ({ id: c.id, label: c.label }))];
   const photos =
     filter === "alle"
       ? categories.flatMap((c) => c.photos)

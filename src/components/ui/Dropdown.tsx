@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { cn } from "@/util/cn";
 import { ChevronIcon } from "@/components/icons";

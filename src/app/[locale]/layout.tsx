@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { hasLocale } from "next-intl";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { Manrope, Montserrat } from "next/font/google";
 import { notFound } from "next/navigation";
@@ -28,18 +28,40 @@ const montserrat = Montserrat({
   fallback: ["Arial", "sans-serif"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://grontland.dk"),
-  title: "Grønt Land DK — Renovering og byggearbejde i København",
-  description:
-    "Grønt Land DK hjælper private boligejere og entreprenører med renovering, facadearbejde, belægning, tømrerarbejde, murerarbejde, malerarbejde og havearbejde i København og Storkøbenhavn.",
-};
+const META = {
+  da: {
+    title: "Grønt Land DK — Renovering og byggearbejde i København",
+    description:
+      "Grønt Land DK hjælper private boligejere og entreprenører med renovering, facadearbejde, belægning, tømrerarbejde, murerarbejde, malerarbejde og havearbejde i København og Storkøbenhavn.",
+  },
+  en: {
+    title: "Grønt Land DK — Renovation and construction in Copenhagen",
+    description:
+      "Grønt Land DK helps homeowners and contractors with renovation, façade work, paving, carpentry, masonry, painting and garden work in Copenhagen and Greater Copenhagen.",
+  },
+} as const;
 
-/* /en is GATED until its content is complete: only da prerenders, and
-   dynamicParams=false makes unknown locales (incl. en) 404. To launch
-   English: return routing.locales here and add the language switcher. */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const m = META[locale === "en" ? "en" : "da"];
+  return {
+    metadataBase: new URL("https://grontland.dk"),
+    title: m.title,
+    description: m.description,
+    alternates: {
+      // da is unprefixed (localePrefix "as-needed"); en lives at /en.
+      languages: { da: "/", en: "/en", "x-default": "/" },
+    },
+  };
+}
+
+// da + en both prerender (localePrefix "as-needed" keeps da unprefixed).
 export function generateStaticParams() {
-  return [{ locale: "da" }];
+  return routing.locales.map((locale) => ({ locale }));
 }
 export const dynamicParams = false;
 
@@ -61,8 +83,10 @@ export default async function RootLayout({
       className={`${manrope.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white font-sans text-pine">
-        <JsonLd data={localBusiness(settings)} />
-        {children}
+        <NextIntlClientProvider>
+          <JsonLd data={localBusiness(settings)} />
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );

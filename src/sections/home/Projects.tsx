@@ -1,8 +1,9 @@
+import { getLocale } from "next-intl/server";
+
 import { Container, Button, Heading, Marquee } from "@/components/ui";
 import { StarIcon } from "@/components/icons";
-import { MARQUEE_WORDS } from "@/constants/home";
-import { PROJECTS_LIST } from "@/constants/projects";
 import { getProjects } from "@/lib/sanity/queries";
+import { homeCopy, projectsCopy } from "@/lib/i18n/copy";
 import { ProjectsSlider } from "./ProjectsSlider";
 
 /* "Udvalgte projekter" — Figma #1018:721 + marquee band #1019:780.
@@ -10,7 +11,9 @@ import { ProjectsSlider } from "./ProjectsSlider";
    slider (3 visible on desktop) with leaf-bordered photos + service badge.
    Copy is local; the project cards come from the CMS. */
 export async function Projects() {
-  const projects = await getProjects();
+  const [projects, locale] = await Promise.all([getProjects(), getLocale()]);
+  const { MARQUEE_WORDS } = homeCopy(locale);
+  const { PROJECTS_LIST } = projectsCopy(locale);
   return (
     <>
       <Marquee

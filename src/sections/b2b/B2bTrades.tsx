@@ -1,10 +1,13 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { Container, Heading } from "@/components/ui";
-import { B2B_TRADES } from "@/constants/b2b";
+import { getLocale } from "next-intl/server";
+
+import { b2bCopy } from "@/lib/i18n/copy";
 
 /* Compact service-link strip — internal links to the trade pages. */
-export function B2bTrades() {
+export async function B2bTrades() {
+  const { B2B_TRADES } = b2bCopy(await getLocale());
   return (
     <section className="bg-white py-16 xl:py-24">
       <Container>

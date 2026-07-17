@@ -7,12 +7,17 @@ import { Header } from "@/layouts/Header";
 import { Process } from "@/sections/home";
 import { PageHero, CtaBand } from "@/sections/shared";
 import { OmIntro, OmValues, OmTeam, OmOnePlan, OmGallery } from "@/sections/om";
-import { OM_META, OM_HERO, OM_CTA } from "@/constants/om";
+import { omCopy } from "@/lib/i18n/copy";
 
-export const metadata: Metadata = {
-  title: OM_META.title,
-  description: OM_META.description,
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const { OM_META } = omCopy(locale);
+  return { title: OM_META.title, description: OM_META.description };
+}
 
 /* /om-os — docs/content/om-os.md: hero → who-we-are + facts → values → team →
    one-plan band → Process (shared with home, anchors #proces) → gallery teaser
@@ -20,6 +25,7 @@ export const metadata: Metadata = {
 export default async function OmOsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const { OM_HERO, OM_CTA } = omCopy(locale);
   return (
     <QuoteModalProvider>
       <Header />

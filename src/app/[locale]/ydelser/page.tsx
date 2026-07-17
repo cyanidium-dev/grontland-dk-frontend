@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import { getYdelserIndex } from "@/lib/sanity/queries";
+import { homeCopy, ui } from "@/lib/i18n/copy";
 import { breadcrumbs } from "@/lib/seo/jsonld";
 import { YdelserIndexGrid } from "@/sections/services/YdelserIndexGrid";
 import { CtaBand, PageHero } from "@/sections/shared";
@@ -27,8 +28,8 @@ export default async function YdelserIndexPage({ params }: { params: Promise<{ l
     <QuoteModalProvider>
       <JsonLd
         data={breadcrumbs([
-          { name: "Forside", path: "/" },
-          { name: "Ydelser", path: "/ydelser" },
+          { name: homeCopy(locale).NAV_MENU[0].label, path: "/" },
+          { name: ui(locale).servicesLabel, path: "/ydelser" },
         ])}
       />
       <Header />

@@ -111,3 +111,116 @@ export const B2B_CTA = {
   primary: { label: "Få team-tilgængelighed", href: "/kontakt" },
   crosslinks: [{ label: "Privat boligejer? Se løsninger for private", href: "/private" }],
 } as const;
+
+/* English copy (docs/content/entreprenorer.md EN) — sections pick da/en by locale. */
+
+export const B2B_META_EN = {
+  title: "Collaboration for contractors — a stable team in Copenhagen",
+  description:
+    "Grønt Land DK joins construction projects in Greater Copenhagen as a subcontractor or team reinforcement. Fixed contact person, ongoing status and documented handover.",
+} as const;
+
+export const B2B_HERO_EN = {
+  label: "For contractors",
+  h1: "A stable team that keeps the schedule",
+  sub: "Grønt Land DK joins contracts with demands on pace, quality and reliable handover — as a subcontractor, a defined work package, or extra capacity at peak load.",
+  ctas: [
+    { label: "Get team availability", href: "/kontakt" },
+    { label: "Call 91 70 01 03", href: "tel:+4591700103" },
+  ],
+  image: { src: "/images/cases/fundament-b2b.png", alt: "Reinforced foundation ready for casting on a construction site" },
+} as const;
+
+export const B2B_SCENARIOS_EN = {
+  h2: "Three ways to collaborate",
+  items: [
+    {
+      title: "Team reinforcement at peak load",
+      desc: "Extra skilled crews in critical phases so your milestones hold — without you having to recruit.",
+    },
+    {
+      title: "Independent work package",
+      desc: "A defined package with clear scope, own responsibility and documented handover.",
+    },
+    {
+      title: "Complete package under a main contractor",
+      desc: "Several trades gathered under one operational contact, coordinated with the other crews on site.",
+    },
+  ],
+} as const;
+
+export const B2B_EXPECTATIONS_EN = {
+  h2: "What you can expect from us",
+  items: [
+    {
+      title: "A fixed contact with decision-making power",
+      desc: "One person who can make decisions in daily operations — not an intermediary.",
+    },
+    {
+      title: "Ongoing status",
+      desc: "A fixed rhythm of status updates, keeping progress visible without extra meetings.",
+    },
+    {
+      title: "Documented quality assurance",
+      desc: "QA and photo documentation as part of the execution, not an afterthought.",
+    },
+    {
+      title: "Fast escalation",
+      desc: "Deviations are reported and handled immediately — internally, without blame games.",
+    },
+  ],
+} as const;
+
+export const B2B_WHY_EN = {
+  h2: "Why one integrated partner?",
+  intro: "Fewer coordination meetings. No blame-shifting between trades when something comes up.",
+  items: [
+    { title: "Full trade depth", desc: "Masonry, carpentry, painting, paving and groundwork — not a single discipline." },
+    { title: "Real ownership", desc: "We own our part of the job, not just the hours." },
+    { title: "Integrated coordination", desc: "The trades follow the same plan and the same standard." },
+    { title: "Stable crewing", desc: "The same crew through the project — not changing faces." },
+    { title: "Efficient problem-solving", desc: "Unforeseen issues are solved internally without external delays." },
+  ],
+  link: { label: "Meet the team behind", href: "/om-os" },
+} as const;
+
+export const B2B_MODEL_EN = {
+  h2: "How a collaboration runs",
+  steps: [
+    { title: "Kickoff", desc: "Scope, interfaces, drawings and the startup frame are clarified." },
+    { title: "Mobilization", desc: "The crew is assembled; production plan and responsibility matrix are fixed." },
+    { title: "Execution", desc: "Regular status, quality control and deviation handling along the way." },
+    { title: "Handover", desc: "Documentation, review and a proper close-out of the contract." },
+  ],
+  cta: { label: "Book a kickoff talk", href: "/kontakt" },
+} as const;
+
+export const B2B_CASE_EN = {
+  h2: "Case: Paving and drainage — ARC Amager Resource Center",
+  text: "As a subcontractor on a larger project at ARC, we established drainage systems, installed line drains and wells, prepared the base build-up and laid concrete paving — in close cooperation with the main contractor and the other trades on site. We took part in both the execution and the ongoing coordination, so the work was handed over correctly and without delays.",
+  slug: "belaegning-arc-amager",
+  ctas: [
+    { label: "See the project", href: "/projekter/belaegning-arc-amager" },
+    { label: "See all projects", href: "/projekter" },
+  ],
+} as const;
+
+export const B2B_TRADES_EN = {
+  h2: "Trades we cover",
+  links: [
+    { label: "Masonry", href: "/ydelser/murerarbejde" },
+    { label: "Carpentry", href: "/ydelser/tomrerarbejde" },
+    { label: "Painting", href: "/ydelser/malerservice" },
+    { label: "Paving", href: "/ydelser/belaegningsarbejde" },
+    { label: "Garden work", href: "/ydelser/havearbejde" },
+    { label: "Demolition & strip-out", href: "/ydelser/demonteringsarbejde" },
+    { label: "Turnkey renovation", href: "/ydelser/totalentreprise" },
+  ],
+} as const;
+
+export const B2B_CTA_EN = {
+  h2: "Need extra capacity?",
+  text: "Describe the project and the timeframe — we get back with the crew's availability by the next business day.",
+  primary: { label: "Get team availability", href: "/kontakt" },
+  crosslinks: [{ label: "Homeowner? See solutions for private customers", href: "/private" }],
+} as const;

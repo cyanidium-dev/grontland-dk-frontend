@@ -6,18 +6,24 @@ import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import { PageHero, NumberedSteps } from "@/sections/shared";
 import { KontaktForm, KontaktAudiences } from "@/sections/kontakt";
-import { KONTAKT_META, KONTAKT_HERO, KONTAKT_STEPS } from "@/constants/kontakt";
+import { kontaktCopy } from "@/lib/i18n/copy";
 
-export const metadata: Metadata = {
-  title: KONTAKT_META.title,
-  description: KONTAKT_META.description,
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const { KONTAKT_META } = kontaktCopy(locale);
+  return { title: KONTAKT_META.title, description: KONTAKT_META.description };
+}
 
 /* /kontakt — docs/content/kontakt.md: hero → form + direct contact →
    what-happens-next steps → audience shortcuts. */
 export default async function KontaktPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const { KONTAKT_HERO, KONTAKT_STEPS } = kontaktCopy(locale);
   return (
     <QuoteModalProvider>
       <Header />

@@ -110,3 +110,115 @@ export const PRIVATE_CTA = {
   primary: { label: "Få et privat tilbud", href: "/kontakt" },
   crosslinks: [{ label: "Er du entreprenør? Se samarbejdsmodellen", href: "/entreprenorer" }],
 } as const;
+
+/* English copy (docs/content/private.md EN) — sections pick da/en by locale. */
+
+export const PRIVATE_META_EN = {
+  title: "Renovation for homeowners in Copenhagen — Grønt Land DK",
+  description:
+    "Terraces, renovation, facades, paving and garden work with a fixed price frame, a clear schedule and one contact person. Get a free quote — we reply by the next business day.",
+} as const;
+
+export const PRIVATE_HERO_EN = {
+  label: "For private customers",
+  h1: "Renovation and outdoor projects with a fixed plan — without stress",
+  sub: "For homeowners in Greater Copenhagen who want a terrace, renovation, facade or paving carried out with clear communication from start to handover.",
+  ctas: [
+    { label: "Get a private quote", href: "/kontakt" },
+    { label: "See our projects", href: "/projekter" },
+  ],
+  image: {
+    src: "/images/cases/havearbejde-private.png",
+    alt: "A well-kept garden with lawn and planting",
+  },
+} as const;
+
+export const PRIVATE_BENEFITS_EN = {
+  h2: "What you get as a private customer",
+  items: [
+    {
+      title: "Fixed price frame",
+      desc: "You know the financial frame before work begins — no unpleasant surprises along the way.",
+    },
+    {
+      title: "Clear schedule",
+      desc: "A realistic plan from the start and ongoing updates if anything changes.",
+    },
+    {
+      title: "One contact person",
+      desc: "No juggling between mason, carpenter and landscaper — one person is responsible all the way.",
+    },
+  ],
+} as const;
+
+export const PRIVATE_TYPES_EN = {
+  h2: "Popular projects for private customers",
+  items: [
+    {
+      title: "Terrace and outdoor areas",
+      desc: "Wooden terraces, garden zones and outdoor areas planned for use and durability.",
+      image: { src: "/images/cases/projekt-terrasse.png", alt: "Load-bearing structure for a timber deck under construction" },
+      service: { label: "See the service", href: "/ydelser/havearbejde" },
+      example: { label: "Example: Jatoba hardwood deck", href: "/projekter/terrasse-og-haveomraade" },
+    },
+    {
+      title: "Home renovation",
+      desc: "Complete renovation with several trades, one plan and one accountable contact.",
+      image: { src: "/images/gallery/total-1.jpg", alt: "Interior renovation with new surfaces" },
+      service: { label: "See the service", href: "/ydelser/totalentreprise" },
+      example: { label: "Example: Concrete stair renovation", href: "/projekter/betontrappe-hellerup" },
+    },
+    {
+      title: "Facade and exterior upgrade",
+      desc: "Rendering, filling and painting that lift the house's look and durability.",
+      image: { src: "/images/cases/projekt-facade.png", alt: "Facade renovation on a private home" },
+      service: { label: "See the service", href: "/ydelser/murerarbejde" },
+      example: { label: "Example: Facade renovation", href: "/projekter/facadeopgave" },
+    },
+    {
+      title: "Paving and driveway",
+      desc: "Driveways, paths and retaining walls with a strong base and correct drainage.",
+      image: { src: "/images/cases/projekt-belaegning.png", alt: "Natural-stone paving by a home" },
+      service: { label: "See the service", href: "/ydelser/belaegningsarbejde" },
+      example: { label: "Example: Paving and groundwork", href: "/projekter/belaegning-ved-bolig" },
+    },
+  ],
+} as const;
+
+export const PRIVATE_PROJECTS_EN = {
+  h2: "Selected private projects",
+  slugs: ["terrasse-og-haveomraade", "belaegning-ved-bolig", "facadeopgave"],
+  ctas: [
+    { label: "See all projects", href: "/projekter" },
+    { label: "Open the gallery", href: "/galleri" },
+  ],
+} as const;
+
+export const PRIVATE_FAQ_EN = {
+  h2: "Frequently asked questions from private customers",
+  items: [
+    {
+      q: "What does a quote cost?",
+      a: "Nothing. You send a short description, we assess the task and give a no-obligation quote.",
+    },
+    {
+      q: "How soon can you start?",
+      a: "It depends on the scope and the season. We give a realistic start date together with the quote.",
+    },
+    {
+      q: "Do I have to coordinate the different tradespeople myself?",
+      a: "No. We combine the trades in one plan, and you have one contact person all the way.",
+    },
+    {
+      q: "Do you clean up after the work?",
+      a: "Yes. Cleanup and disposal are part of the plan, and we review the result together with you at handover.",
+    },
+  ],
+} as const;
+
+export const PRIVATE_CTA_EN = {
+  h2: "Ready to get started?",
+  text: "Describe your project briefly — we get back with an assessment by the next business day.",
+  primary: { label: "Get a private quote", href: "/kontakt" },
+  crosslinks: [{ label: "Are you a contractor? See the collaboration model", href: "/entreprenorer" }],
+} as const;

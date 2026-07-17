@@ -51,6 +51,25 @@ export const PROJECT_CATEGORY_LABEL: Record<ProjectCategory, string> = {
   b2b: "Entreprenør",
 };
 
+export const PROJECT_CATEGORY_LABEL_EN: Record<ProjectCategory, string> = {
+  private: "Private customer",
+  b2b: "Contractor",
+};
+
+/* Code-rendered UI labels (home teaser + listing filters + card link).
+   The listing page's H1/sub/emptyFilter/ctaBand come from the CMS. */
+export const PROJECTS_LIST_EN = {
+  h2: "Selected projects",
+  sub: "See examples of renovation, paving, façades, garden work and other jobs carried out for homeowners and businesses.",
+  cta: { label: "See projects", href: "/projekter" },
+  linkLabel: "See project",
+  filters: [
+    { id: "all" as const, label: "All" },
+    { id: "private" as const, label: "Private" },
+    { id: "b2b" as const, label: "B2B" },
+  ],
+} as const;
+
 export const PROJECTS_LIST = {
   h2: "Udvalgte projekter",
   listingH1: "Projekter",

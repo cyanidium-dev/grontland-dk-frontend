@@ -2,12 +2,15 @@ import Image from "next/image";
 
 import { Heading, Star } from "@/components/ui";
 import { OpenQuoteButton } from "@/components/quote";
-import { QUOTE_FORM } from "@/constants/home";
+import { getLocale } from "next-intl/server";
+
+import { homeCopy } from "@/lib/i18n/copy";
 
 /* Quote CTA band — Figma #3023:1045 (1920×737 at x=-261 on 1280 artboard).
    Desktop coords use artboard crop: viewportX = sectionLocalX - 261.
    Copy #3023:1070, photo #3023:1069, ring decor #3023:1046. */
-export function QuoteCta() {
+export async function QuoteCta() {
+  const QUOTE_FORM = homeCopy(await getLocale()).QUOTE_FORM;
   return (
     <section className="relative overflow-hidden bg-black text-white xl:min-h-[737px]">
       {/* Ring decor #3023:1046 — 1920 MCP inset mapped to 1280 crop (offset 261) */}

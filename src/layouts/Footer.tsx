@@ -1,15 +1,17 @@
-import Link from "next/link";
+import { getLocale } from "next-intl/server";
 
+import { Link } from "@/i18n/navigation";
 import { CodeSiteIcon } from "@/components/brand/CodeSiteIcon";
 import { Logo } from "@/components/brand/Logo";
 import { Container } from "@/components/ui";
 import { getSiteSettings } from "@/lib/sanity/queries";
-import { FOOTER } from "@/constants/home";
+import { homeCopy } from "@/lib/i18n/copy";
 
 /* Footer — Figma #3032:171 (1280×469). Pine 4-col + bottom credit bar.
-   Menus stay in code (routes); contact facts come from CMS siteSettings. */
+   Menu labels localize by locale; contact facts come from CMS siteSettings. */
 export async function Footer() {
-  const s = await getSiteSettings();
+  const [s, locale] = await Promise.all([getSiteSettings(), getLocale()]);
+  const FOOTER = homeCopy(locale).FOOTER;
   const contact = [s.area, `CVR ${s.cvr}`];
   return (
     <footer className="bg-pine py-16 text-white">

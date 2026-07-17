@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { ArrowIcon } from "@/components/icons";
 import { Container } from "@/components/ui";

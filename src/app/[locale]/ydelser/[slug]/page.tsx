@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import { getServiceBySlug, getServiceSlugs } from "@/lib/sanity/queries";
+import { homeCopy, ui } from "@/lib/i18n/copy";
 import { breadcrumbs, faqPage, servicePage } from "@/lib/seo/jsonld";
 import {
   ServiceCases,
@@ -48,6 +49,8 @@ export default async function ServicePageRoute({ params }: PageProps) {
   setRequestLocale(locale);
   const s = await getServiceBySlug(slug);
   if (!s) notFound();
+  const t = ui(locale);
+  const homeLabel = homeCopy(locale).NAV_MENU[0].label;
 
   return (
     <QuoteModalProvider>
@@ -56,8 +59,8 @@ export default async function ServicePageRoute({ params }: PageProps) {
           servicePage({ name: s.nav, description: s.metaDescription, slug: s.slug }),
           faqPage(s.faq.items),
           breadcrumbs([
-            { name: "Forside", path: "/" },
-            { name: "Ydelser", path: "/ydelser" },
+            { name: homeLabel, path: "/" },
+            { name: t.servicesLabel, path: "/ydelser" },
             { name: s.nav, path: `/ydelser/${s.slug}` },
           ]),
         ]}
@@ -73,12 +76,12 @@ export default async function ServicePageRoute({ params }: PageProps) {
         <ServiceFaq service={s} />
         <ServiceSeoText service={s} />
         <CtaBand
-          h2="Skal vi give et tilbud på din opgave?"
-          text="Send en kort beskrivelse og gerne et par billeder. Vi vurderer opgaven og vender tilbage inden 24 timer."
-          primary={{ label: "Få et tilbud", href: "/kontakt" }}
+          h2={t.serviceCtaH2}
+          text={t.serviceCtaText}
+          primary={{ label: t.getQuote, href: "/kontakt" }}
           crosslinks={[
-            { label: "Alle ydelser", href: "/ydelser" },
-            { label: "Se projekter", href: "/projekter" },
+            { label: t.allServices, href: "/ydelser" },
+            { label: t.seeProjects, href: "/projekter" },
           ]}
           image={s.ctaImage ?? undefined}
         />

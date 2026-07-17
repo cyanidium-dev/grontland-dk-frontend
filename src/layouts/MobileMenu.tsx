@@ -1,13 +1,15 @@
 "use client";
 
+import { useLocale } from "next-intl";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { cn } from "@/util/cn";
 import { OpenQuoteButton } from "@/components/quote";
 import { ChevronIcon } from "@/components/icons";
-import { NAV_MENU, SERVICES_MENU } from "@/constants/home";
+import { homeCopy } from "@/lib/i18n/copy";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 /* Mobile/tablet nav (below xl). Morphing burger↔X button + drawer under the
    sticky header with a collapsible "Ydelser" accordion. Pure Tailwind
@@ -17,6 +19,9 @@ import { NAV_MENU, SERVICES_MENU } from "@/constants/home";
    handlers rather than overflow/position, which would disable the sticky
    header; the drawer's own <nav> scrolls internally. */
 export function MobileMenu() {
+  const locale = useLocale();
+  const c = homeCopy(locale);
+  const en = locale === "en";
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   // Hydration-safe "are we on the client?" check so the portal only renders
@@ -75,7 +80,7 @@ export function MobileMenu() {
   }, [open]);
 
   const close = () => setOpen(false);
-  const restNav = NAV_MENU.filter((i) => i.href !== "/");
+  const [homeItem, ...restNav] = c.NAV_MENU;
 
   const drawer = (
     <div
@@ -94,11 +99,11 @@ export function MobileMenu() {
         <ul className="flex flex-col">
           <li>
             <Link
-              href="/"
+              href={homeItem.href}
               onClick={close}
               className="block border-b border-line py-3 text-[15px] font-bold uppercase leading-tight text-pine transition-colors hover:text-leaf"
             >
-              Forside
+              {homeItem.label}
             </Link>
           </li>
 
@@ -109,7 +114,7 @@ export function MobileMenu() {
               aria-expanded={servicesOpen}
               className="flex w-full items-center justify-between py-3 text-[15px] font-bold uppercase leading-tight text-pine transition-colors hover:text-leaf"
             >
-              Ydelser
+              {en ? "Services" : "Ydelser"}
               <ChevronIcon
                 className={cn(
                   "size-4 transition-transform duration-300",
@@ -126,7 +131,7 @@ export function MobileMenu() {
               )}
             >
               <ul className="overflow-hidden">
-                {SERVICES_MENU.map((item) => (
+                {c.SERVICES_MENU.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
@@ -160,8 +165,10 @@ export function MobileMenu() {
           onOpen={close}
           className="mt-5 w-full font-semibold normal-case"
         >
-          Få et tilbud
+          {en ? "Get a quote" : "Få et tilbud"}
         </OpenQuoteButton>
+
+        <LanguageSwitcher className="mt-5 justify-center" />
       </nav>
     </div>
   );

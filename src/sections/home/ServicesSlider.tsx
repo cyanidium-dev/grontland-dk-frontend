@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { Container } from "@/components/ui";
 import { ArrowIcon, ChevronIcon } from "@/components/icons";

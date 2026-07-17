@@ -1,8 +1,10 @@
+import { getLocale } from "next-intl/server";
 import Image from "next/image";
-import Link from "next/link";
 
+import { Link } from "@/i18n/navigation";
 import { Container, Heading, Button } from "@/components/ui";
 import { getSiteSettings } from "@/lib/sanity/queries";
+import { ui } from "@/lib/i18n/copy";
 
 /* Final CTA band for inner pages — black (contrasts the pine footer, like
    ProjectCta). Primary button + phone (from CMS siteSettings) + optional
@@ -21,8 +23,8 @@ export async function CtaBand({
   crosslinks?: readonly { label: string; href: string }[];
   image?: { src: string; alt: string };
 }) {
-  const s = await getSiteSettings();
-  const phone = { label: `Ring ${s.phone}`, href: s.phoneHref };
+  const [s, locale] = await Promise.all([getSiteSettings(), getLocale()]);
+  const phone = { label: `${ui(locale).callPrefix} ${s.phone}`, href: s.phoneHref };
   return (
     <section className="relative overflow-hidden bg-black text-white">
       {image && (

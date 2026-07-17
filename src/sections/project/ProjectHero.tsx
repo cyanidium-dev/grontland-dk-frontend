@@ -1,12 +1,12 @@
-import Link from "next/link";
+import { getLocale } from "next-intl/server";
 
+import { Link } from "@/i18n/navigation";
 import { Container, Heading } from "@/components/ui";
-import {
-  PROJECT_CATEGORY_LABEL,
-  type Project,
-} from "@/constants/projects";
+import { type Project } from "@/constants/projects";
+import { projectsCopy } from "@/lib/i18n/copy";
 
-export function ProjectHero({ project }: { project: Project }) {
+export async function ProjectHero({ project }: { project: Project }) {
+  const { PROJECT_CATEGORY_LABEL } = projectsCopy(await getLocale());
   return (
     <section className="bg-mist py-12 xl:py-16">
       <Container>

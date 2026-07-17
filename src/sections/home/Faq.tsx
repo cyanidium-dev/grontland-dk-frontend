@@ -1,10 +1,13 @@
 import { Container } from "@/components/ui";
 import { StarIcon, ChevronIcon } from "@/components/icons";
-import { FAQ } from "@/constants/home";
+import { getLocale } from "next-intl/server";
+
+import { homeCopy } from "@/lib/i18n/copy";
 
 /* Faq — Figma #3023:1098. Full-width leaf pill banner + star cluster, native
    <details> accordion, ring decor #3023:1099 (rotate 117.04°) bottom-right. */
-export function Faq() {
+export async function Faq() {
+  const FAQ = homeCopy(await getLocale()).FAQ;
   return (
     <section className="relative overflow-x-clip pb-10 pt-16 xl:min-h-[765px] xl:pb-[91px] xl:pt-[68px]">
       {/* Ring decor #3023:1099 — AABB inset from MCP; CSS rotate (not in SVG) */}

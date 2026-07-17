@@ -1,9 +1,11 @@
+import { getLocale } from "next-intl/server";
 import Image from "next/image";
-import Link from "next/link";
 
+import { Link } from "@/i18n/navigation";
 import { GalleryCarousel, type GalleryItem } from "@/components/gallery";
 import { ProjectCard } from "@/components/project";
 import { Container, Heading } from "@/components/ui";
+import { ui } from "@/lib/i18n/copy";
 import type { ServicePageData } from "@/lib/sanity/queries";
 import { FaqList, FeatureGrid, NumberedSteps, PageHero } from "@/sections/shared";
 
@@ -11,16 +13,17 @@ import { FaqList, FeatureGrid, NumberedSteps, PageHero } from "@/sections/shared
    components; section order is fixed by the page route. Data comes from the
    service document (cases + gallery photos embedded by the query). */
 
-export function ServiceHero({ service }: { service: ServicePageData }) {
+export async function ServiceHero({ service }: { service: ServicePageData }) {
+  const t = ui(await getLocale());
   return (
     <>
       <PageHero
-        label="Ydelser"
+        label={t.servicesLabel}
         title={service.h1}
         sub={service.heroSub}
         ctas={[
-          { label: "Få et tilbud", href: "/kontakt" },
-          { label: "Se projekter", href: "/projekter", variant: "leaf" },
+          { label: t.getQuote, href: "/kontakt" },
+          { label: t.seeProjects, href: "/projekter", variant: "leaf" },
         ]}
         image={service.heroImage}
       />
@@ -76,26 +79,28 @@ export function ServicePrices({ service }: { service: ServicePageData }) {
   );
 }
 
-export function ServiceProcess({ service }: { service: ServicePageData }) {
+export async function ServiceProcess({ service }: { service: ServicePageData }) {
+  const t = ui(await getLocale());
   return (
     <NumberedSteps
       h2={service.process.h2}
       steps={service.process.steps}
-      cta={{ label: "Start med en kort besked", href: "/kontakt" }}
+      cta={{ label: t.startMessage, href: "/kontakt" }}
       background="mist"
       backgroundImage={service.processImage ?? undefined}
     />
   );
 }
 
-export function ServiceCases({ service }: { service: ServicePageData }) {
+export async function ServiceCases({ service }: { service: ServicePageData }) {
   if (service.cases.length === 0) return null;
+  const t = ui(await getLocale());
 
   return (
     <section className="bg-white py-16 xl:py-24">
       <Container>
         <Heading as="h2" size="section">
-          Det har vi lavet
+          {t.serviceCasesH2}
         </Heading>
         <div className="mt-10 grid gap-8 sm:grid-cols-2">
           {service.cases.map((project) => (
@@ -107,8 +112,9 @@ export function ServiceCases({ service }: { service: ServicePageData }) {
   );
 }
 
-export function ServiceGalleryStrip({ service }: { service: ServicePageData }) {
+export async function ServiceGalleryStrip({ service }: { service: ServicePageData }) {
   if (service.galleryPhotos.length === 0) return null;
+  const t = ui(await getLocale());
 
   const items: GalleryItem[] = service.galleryPhotos.map((photo) => ({
     _key: photo.src,
@@ -119,13 +125,13 @@ export function ServiceGalleryStrip({ service }: { service: ServicePageData }) {
     <section className="overflow-hidden bg-mist py-16 xl:py-24">
       <Container className="flex flex-wrap items-baseline justify-between gap-4">
         <Heading as="h2" size="section">
-          Billeder fra opgaverne
+          {t.galleryStripH2}
         </Heading>
         <Link
           href="/galleri"
           className="text-[12px] font-bold uppercase tracking-[0.3px] text-moss underline underline-offset-4 hover:text-leaf"
         >
-          Åbn hele galleriet
+          {t.openGallery}
         </Link>
       </Container>
       <div className="mx-auto mt-10 max-w-[416px] sm:max-w-[726px] md:max-w-[867px] lg:max-w-[1141px] xl:max-w-[1494px]">

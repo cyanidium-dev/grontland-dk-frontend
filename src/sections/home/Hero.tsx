@@ -2,13 +2,16 @@ import Image from "next/image";
 
 import { Container, Button, Heading, Dots, ImageCarousel } from "@/components/ui";
 import { OpenQuoteButton } from "@/components/quote";
-import { HERO } from "@/constants/home";
+import { getLocale } from "next-intl/server";
+
+import { homeCopy } from "@/lib/i18n/copy";
 import { HeroProjectCards } from "./HeroProjectCards";
 
 /* Hero — left copy column (dots → heading → description → CTAs → auto slider)
    + right full-bleed image with glass project cards. Concentric-ring decor on
    the seam. Structure mirrors Figma "Главная2" #1018:78. */
-export function Hero() {
+export async function Hero() {
+  const HERO = homeCopy(await getLocale()).HERO;
   return (
     <section className="relative -mt-[72px] overflow-hidden bg-white">
       {/* Right image panel + overlay cards (desktop) — floats below the header,

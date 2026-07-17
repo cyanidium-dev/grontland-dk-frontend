@@ -1,13 +1,16 @@
 import Image from "next/image";
 
 import { Heading, Button, StarChip } from "@/components/ui";
-import { ABOUT } from "@/constants/home";
+import { getLocale } from "next-intl/server";
+
+import { homeCopy } from "@/lib/i18n/copy";
 
 /* About — Figma #3023:964. Mist 2-col: left copy/trades/CTA, right photo with
    four StarChips overlaid (centered). On xl the photo leaves the grid and
    bleeds to the viewport's right edge (like Hero/QuoteCta); the seam stays at
    the centered container's column boundary (50% − 30px). */
-export function About() {
+export async function About() {
+  const ABOUT = homeCopy(await getLocale()).ABOUT;
   return (
     <section className="relative overflow-hidden bg-mist">
       <div className="mx-auto grid w-full max-w-7xl xl:min-h-[829px] xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">

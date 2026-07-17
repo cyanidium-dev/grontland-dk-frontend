@@ -1,11 +1,14 @@
 import Image from "next/image";
 
 import { Container, Heading } from "@/components/ui";
-import { SEOTEXT } from "@/constants/home";
+import { getLocale } from "next-intl/server";
+
+import { homeCopy } from "@/lib/i18n/copy";
 
 /* SeoText — Figma #3023:1016. Black band: left garden photo, ring decor mid,
    right white H2 + body. Short natural SEO block before FAQ. */
-export function SeoText() {
+export async function SeoText() {
+  const SEOTEXT = homeCopy(await getLocale()).SEOTEXT;
   return (
     <section className="relative overflow-hidden bg-black text-white">
       <Container className="relative z-10 py-14 xl:py-[91px]">
