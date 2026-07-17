@@ -5,7 +5,7 @@ import { OpenQuoteButton } from "@/components/quote";
 import { getLocale } from "next-intl/server";
 
 import { getProjects } from "@/lib/sanity/queries";
-import { homeCopy, ui } from "@/lib/i18n/copy";
+import { homeCopy } from "@/lib/i18n/copy";
 import { HeroProjectCards, type HeroProjectCard } from "./HeroProjectCards";
 
 /* Hero — left copy column (dots → heading → description → CTAs → auto slider)
@@ -17,7 +17,7 @@ export async function Hero() {
   const [locale, projects] = await Promise.all([getLocale(), getProjects()]);
   const HERO = homeCopy(locale).HERO;
   const cards: HeroProjectCard[] = projects.map((p) => ({
-    label: ui(locale).projectLabel,
+    label: p.title,
     image: { src: p.cardImage, alt: p.cardImageAlt },
     caption: p.cardDesc,
     href: `/projekter/${p.slug}`,

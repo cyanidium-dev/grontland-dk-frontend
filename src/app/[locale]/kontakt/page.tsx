@@ -42,7 +42,7 @@ export default async function KontaktPage({ params }: { params: Promise<{ locale
               src="/svg/decor-leaf.svg"
               alt=""
               aria-hidden
-              className="pointer-events-none absolute left-[56%] bottom-[-140px] hidden h-[300px] w-[320px] max-w-none -translate-x-1/2 opacity-90 xl:block"
+              className="pointer-events-none absolute bottom-4 left-[54%] hidden h-[260px] w-[280px] max-w-none -translate-x-1/2 opacity-90 xl:block"
             />
           }
         />

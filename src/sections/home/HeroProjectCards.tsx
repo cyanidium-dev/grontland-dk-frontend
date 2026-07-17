@@ -1,10 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/util/cn";
+
+// Runs before paint on the client (positions the strip without a visible
+// jump); falls back to useEffect during SSR to avoid the hydration warning.
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export type HeroProjectCard = {
   label: string;
@@ -33,8 +37,12 @@ function ProjectCard({ card }: { card: HeroProjectCard }) {
         />
       </div>
       <div className="min-w-0">
-        <p className="text-[12px] font-bold uppercase leading-none text-white">{card.label}</p>
-        <p className="mt-1.5 text-[11px] font-light leading-snug text-white/85">{card.caption}</p>
+        <p className="line-clamp-2 text-[12px] font-bold uppercase leading-tight text-white">
+          {card.label}
+        </p>
+        <p className="mt-1.5 line-clamp-3 text-[11px] font-light leading-snug text-white/85">
+          {card.caption}
+        </p>
       </div>
     </Link>
   );
@@ -60,26 +68,33 @@ export function HeroProjectCards({
   const startScroll = useRef(0);
   const loop = [...cards, ...cards, ...cards];
 
-  useEffect(() => {
+  // One copy's width, rounded so the centered start position and the wrap
+  // thresholds use the SAME integer — otherwise scrollLeft (browser-rounded)
+  // lands just under the fractional threshold and wraps on load = jitter.
+  const setW = () => Math.round((ref.current?.scrollWidth ?? 0) / 3);
+
+  useIsoLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
 
     // Start in the middle copy so there's room to scroll either way.
     const center = () => {
-      el.scrollLeft = el.scrollWidth / 3;
+      el.scrollLeft = setW();
     };
     center();
 
     // Keep the scroll position inside the middle copy for a seamless loop.
+    // Hysteresis (wrap only a hair past the boundary) avoids ping-pong when a
+    // gesture leaves scrollLeft sitting exactly on the seam.
     const onScroll = () => {
-      const setW = el.scrollWidth / 3;
-      if (setW <= 0) return;
-      if (el.scrollLeft < setW) {
-        el.scrollLeft += setW;
-        startScroll.current += setW;
-      } else if (el.scrollLeft >= setW * 2) {
-        el.scrollLeft -= setW;
-        startScroll.current -= setW;
+      const w = setW();
+      if (w <= 0) return;
+      if (el.scrollLeft < w - 1) {
+        el.scrollLeft += w;
+        startScroll.current += w;
+      } else if (el.scrollLeft > w * 2 + 1) {
+        el.scrollLeft -= w;
+        startScroll.current -= w;
       }
     };
 
@@ -91,6 +106,7 @@ export function HeroProjectCards({
       el.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cards.length]);
 
   // Mouse click-drag (touch/trackpad already scroll natively).
