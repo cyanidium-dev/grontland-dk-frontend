@@ -77,20 +77,6 @@ export const HERO = {
     { src: "/images/hero/hero-photo-2.png", alt: "Belægning og haveanlæg ved bolig" },
     { src: "/images/hero/hero-photo-3.png", alt: "Haveområde med beplantning og sten" },
   ],
-  // Glass "PROJEKT" cards overlaid on the bottom of the right-side image.
-  overlayCards: [
-    {
-      label: "Projekt",
-      image: { src: "/images/hero/hero-card-terrasse.png", alt: "Træterrasse i Jatoba under opbygning" },
-      caption:
-        "Vi udførte opbygning og montering af en træterrasse i Jatoba ved en privat bolig i Gentofte.",
-    },
-    {
-      label: "Projekt",
-      image: { src: "/images/hero/hero-card-facade.png", alt: "Facadearbejde på privat bolig i Nordsjælland" },
-      caption: "Vi udførte facadearbejde på en privat bolig i Nordsjælland.",
-    },
-  ],
 } as const;
 
 export const AUDIENCES = {
@@ -332,18 +318,6 @@ export const HERO_EN = {
     { src: "/images/hero/hero-photo-1.png", alt: "Trimmed hedges and planting in a landscaped garden" },
     { src: "/images/hero/hero-photo-2.png", alt: "Paving and garden landscaping by a home" },
     { src: "/images/hero/hero-photo-3.png", alt: "Garden area with planting and stone" },
-  ],
-  overlayCards: [
-    {
-      label: "Project",
-      image: { src: "/images/hero/hero-card-terrasse.png", alt: "Jatoba hardwood deck under construction" },
-      caption: "We built and fitted a Jatoba hardwood deck at a private home in Gentofte.",
-    },
-    {
-      label: "Project",
-      image: { src: "/images/hero/hero-card-facade.png", alt: "Facade work on a private home in North Zealand" },
-      caption: "We renovated the facade of a private home in North Zealand.",
-    },
   ],
 } as const;
 

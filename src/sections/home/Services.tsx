@@ -54,7 +54,7 @@ export async function Services() {
       {/* Leaf marquee band */}
       <div className="mt-14 xl:mt-20">
         <Marquee
-          durationSec={40}
+          durationSec={160}
           className="bg-leaf py-4"
           separator={<StarIcon className="mx-6 size-3.5 shrink-0 text-white" />}
           // Repeat the words so one copy is wider than the viewport → seamless loop.

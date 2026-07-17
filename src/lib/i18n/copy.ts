@@ -107,6 +107,7 @@ export function projectsCopy(locale: Locale) {
 const UI = {
   da: {
     callPrefix: "Ring",
+    projectLabel: "Projekt",
     servicesLabel: "Ydelser",
     getQuote: "Få et tilbud",
     seeProjects: "Se projekter",
@@ -127,6 +128,7 @@ const UI = {
   },
   en: {
     callPrefix: "Call",
+    projectLabel: "Project",
     servicesLabel: "Services",
     getQuote: "Get a quote",
     seeProjects: "See projects",

@@ -41,13 +41,16 @@ export async function Audiences() {
     <section className="isolate">
       {/* Header band — Figma #1009:1518; decor #1009:1521 behind mist, bleeds into leaf band */}
       <div className="relative z-0 overflow-visible">
-        {/* Ring decor #1009:1521 — Figma inset on header wrapper; private band z-20 clips mist bleed */}
+        {/* Ring decor #1009:1521 — explicit box (426×400 per the correct Firefox
+            render): 4-side percentage insets + rotate on an <img> are resolved
+            differently by Chrome (over-constrained replaced element), which
+            blew the decor up. Anchor left/top only, fixed size. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/svg/decor-rings-audiences-header.svg"
           alt=""
           aria-hidden
-          className="pointer-events-none absolute z-10 inset-[0.26%_39.15%_-64.38%_41.51%] hidden max-w-none rotate-[-116.47deg] opacity-90 xl:block"
+          className="pointer-events-none absolute z-10 left-[41.51%] top-0 hidden h-[400px] w-[427px] max-w-none rotate-[-116.47deg] opacity-90 xl:block"
         />
         <div className="relative bg-mist py-14 xl:py-20">
           <Container>

@@ -4,18 +4,28 @@ import { Container, Button, Heading, Dots, ImageCarousel } from "@/components/ui
 import { OpenQuoteButton } from "@/components/quote";
 import { getLocale } from "next-intl/server";
 
-import { homeCopy } from "@/lib/i18n/copy";
-import { HeroProjectCards } from "./HeroProjectCards";
+import { getProjects } from "@/lib/sanity/queries";
+import { homeCopy, ui } from "@/lib/i18n/copy";
+import { HeroProjectCards, type HeroProjectCard } from "./HeroProjectCards";
 
 /* Hero — left copy column (dots → heading → description → CTAs → auto slider)
    + right full-bleed image with glass project cards. Concentric-ring decor on
-   the seam. Structure mirrors Figma "Главная2" #1018:78. */
+   the seam. Structure mirrors Figma "Главная2" #1018:78. Cards are real CMS
+   projects linking to their pages; the desktop strip starts at the content
+   container's left edge and runs across the photo panel. */
 export async function Hero() {
-  const HERO = homeCopy(await getLocale()).HERO;
+  const [locale, projects] = await Promise.all([getLocale(), getProjects()]);
+  const HERO = homeCopy(locale).HERO;
+  const cards: HeroProjectCard[] = projects.map((p) => ({
+    label: ui(locale).projectLabel,
+    image: { src: p.cardImage, alt: p.cardImageAlt },
+    caption: p.cardDesc,
+    href: `/projekter/${p.slug}`,
+  }));
   return (
     <section className="relative -mt-[72px] overflow-hidden bg-white">
-      {/* Right image panel + overlay cards (desktop) — floats below the header,
-          vertically inset from the section, above the ring decor (z-10). */}
+      {/* Right image panel (desktop) — floats below the header, vertically
+          inset from the section, above the ring decor. */}
       <div className="absolute right-0 top-0 bottom-8 z-20 hidden w-[43.5%] overflow-hidden rounded-l-[20px] xl:block">
         <Image
           src={HERO.image.src}
@@ -30,9 +40,13 @@ export async function Hero() {
           aria-hidden
           className="absolute inset-0 bg-[linear-gradient(170deg,rgba(0,0,0,0.8)_0%,rgba(0,0,0,0.06)_66%,rgba(0,0,0,0.8)_100%)]"
         />
-        {/* Overlay cards — scrollable/looped strip (drag + touch), no buttons. */}
-        <div className="absolute inset-x-0 bottom-7 z-10">
-          <HeroProjectCards cards={HERO.overlayCards} className="px-7" />
+      </div>
+
+      {/* Project cards strip (desktop) — section-level so it starts at the
+          content container's left edge and runs right across the photo. */}
+      <div className="absolute inset-x-0 bottom-[60px] z-30 hidden xl:block">
+        <div className="mx-auto w-full max-w-7xl px-6 xl:px-8">
+          <HeroProjectCards cards={cards} />
         </div>
       </div>
 
@@ -84,7 +98,7 @@ export async function Hero() {
           className="absolute inset-0 bg-[linear-gradient(170deg,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.05)_55%,rgba(0,0,0,0.7)_100%)]"
         />
         <div className="absolute inset-x-0 bottom-4">
-          <HeroProjectCards cards={HERO.overlayCards} className="px-4" />
+          <HeroProjectCards cards={cards} className="px-4" />
         </div>
       </div>
     </section>

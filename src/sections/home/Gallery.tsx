@@ -81,7 +81,7 @@ export function Gallery({ categories }: { categories: GalleryCategoryData[] }) {
       {/* Pine marquee — Figma #3023:806 (bg-pine, not leaf like Services/Projects) */}
       <div className="mt-14 xl:mt-16">
         <Marquee
-          durationSec={40}
+          durationSec={160}
           className="bg-pine py-4"
           separator={<StarIcon className="mx-6 size-3.5 shrink-0 text-white" />}
           items={Array.from({ length: 5 })

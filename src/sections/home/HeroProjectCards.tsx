@@ -3,18 +3,25 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/util/cn";
 
 export type HeroProjectCard = {
   label: string;
   image: { src: string; alt: string };
   caption: string;
+  href: string;
 };
 
-/* Glass "PROJEKT" card overlaid on the hero image (thumbnail + label + caption). */
+/* Glass "PROJEKT" link card overlaid on the hero (thumbnail + label + caption).
+   Navigation is suppressed after a drag (see onClickCapture in the strip). */
 function ProjectCard({ card }: { card: HeroProjectCard }) {
   return (
-    <figure className="glass flex w-[310px] max-w-[calc(100vw-2rem)] items-center gap-3 rounded-[18px] bg-white/17 p-2.5">
+    <Link
+      href={card.href}
+      draggable={false}
+      className="glass flex w-[310px] max-w-[calc(100vw-2rem)] items-center gap-3 rounded-[18px] bg-white/17 p-2.5 transition-colors hover:bg-white/25"
+    >
       <div className="relative h-[107px] w-[98px] shrink-0 overflow-hidden rounded-[10px]">
         <Image
           src={card.image.src}
@@ -29,7 +36,7 @@ function ProjectCard({ card }: { card: HeroProjectCard }) {
         <p className="text-[12px] font-bold uppercase leading-none text-white">{card.label}</p>
         <p className="mt-1.5 text-[11px] font-light leading-snug text-white/85">{card.caption}</p>
       </div>
-    </figure>
+    </Link>
   );
 }
 
@@ -48,6 +55,7 @@ export function HeroProjectCards({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
+  const moved = useRef(false);
   const startX = useRef(0);
   const startScroll = useRef(0);
   const loop = [...cards, ...cards, ...cards];
@@ -91,6 +99,7 @@ export function HeroProjectCards({
     const el = ref.current;
     if (!el) return;
     dragging.current = true;
+    moved.current = false;
     startX.current = e.clientX;
     startScroll.current = el.scrollLeft;
     try {
@@ -105,7 +114,18 @@ export function HeroProjectCards({
     if (!dragging.current) return;
     const el = ref.current;
     if (!el) return;
+    if (Math.abs(e.clientX - startX.current) > 6) moved.current = true;
     el.scrollLeft = startScroll.current - (e.clientX - startX.current);
+  };
+
+  // Cards are links: swallow the click that ends a drag so navigation only
+  // happens on a genuine (non-drag) click.
+  const onClickCapture = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (moved.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      moved.current = false;
+    }
   };
 
   const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -125,6 +145,7 @@ export function HeroProjectCards({
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
       onPointerCancel={endDrag}
+      onClickCapture={onClickCapture}
       className={cn(
         "no-scrollbar flex gap-4 overflow-x-auto [touch-action:pan-x] select-none cursor-grab active:cursor-grabbing",
         className,

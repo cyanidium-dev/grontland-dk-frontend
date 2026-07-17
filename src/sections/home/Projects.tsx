@@ -17,7 +17,7 @@ export async function Projects() {
   return (
     <>
       <Marquee
-        durationSec={40}
+        durationSec={160}
         className="bg-leaf py-4"
         separator={<StarIcon className="mx-6 size-3.5 shrink-0 text-white" />}
         items={Array.from({ length: 5 })
