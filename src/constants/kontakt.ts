@@ -40,7 +40,6 @@ export const KONTAKT_INFO = {
     { label: "Arbejdsområde", value: "København og Storkøbenhavn" },
     { label: "Virksomhed", value: "Grønt Land DK · CVR 45514374" },
   ],
-  note: "Lørdag efter aftale. Søndag lukket.",
 } as const;
 
 export const KONTAKT_STEPS = {
@@ -72,10 +71,6 @@ export const KONTAKT_AUDIENCES = {
       // Mirrors the home AUDIENCES B2B card.
       image: { src: "/images/cases/fundament-b2b.png", alt: "Armeret fundament klargjort til støbning på byggeplads" },
     },
-  ],
-  links: [
-    { label: "Se vores projekter", href: "/projekter" },
-    { label: "Åbn galleriet", href: "/galleri" },
   ],
 } as const;
 
@@ -120,7 +115,6 @@ export const KONTAKT_INFO_EN = {
     { label: "Service area", value: "Copenhagen and Greater Copenhagen" },
     { label: "Company", value: "Grønt Land DK · CVR 45514374" },
   ],
-  note: "Saturday by appointment. Sunday closed.",
 } as const;
 
 export const KONTAKT_STEPS_EN = {
@@ -150,9 +144,5 @@ export const KONTAKT_AUDIENCES_EN = {
       cta: { label: "See collaboration for contractors", href: "/entreprenorer" },
       image: { src: "/images/cases/fundament-b2b.png", alt: "Reinforced foundation ready for casting on a construction site" },
     },
-  ],
-  links: [
-    { label: "See our projects", href: "/projekter" },
-    { label: "Open the gallery", href: "/galleri" },
   ],
 } as const;

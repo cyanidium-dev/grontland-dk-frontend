@@ -49,7 +49,6 @@ export async function KontaktForm() {
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-sm font-light text-pine/60">{KONTAKT_INFO.note}</p>
           </div>
         </div>
       </Container>

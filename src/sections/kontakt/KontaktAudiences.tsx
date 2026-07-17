@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Link } from "@/i18n/navigation";
 
 import { Container, Heading, Button, InfoBox } from "@/components/ui";
 import { getLocale } from "next-intl/server";
@@ -7,7 +6,7 @@ import { getLocale } from "next-intl/server";
 import { kontaktCopy } from "@/lib/i18n/copy";
 
 /* Routes visitors who landed on /kontakt first — mirrors the home AUDIENCES
-   split, plus proof links to projects/gallery. */
+   split. (Projects/gallery proof links removed per client feedback.) */
 export async function KontaktAudiences() {
   const { KONTAKT_AUDIENCES } = kontaktCopy(await getLocale());
   return (
@@ -46,18 +45,6 @@ export async function KontaktAudiences() {
               </InfoBox>
             ))}
           </div>
-
-          <p className="flex flex-wrap gap-x-6 gap-y-2">
-            {KONTAKT_AUDIENCES.links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[12px] font-bold uppercase tracking-[0.3px] text-moss underline underline-offset-4 transition-colors hover:text-leaf"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </p>
         </div>
       </Container>
     </section>
