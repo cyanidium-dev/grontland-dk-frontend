@@ -24,8 +24,9 @@ export async function Hero() {
   }));
   return (
     <section className="relative -mt-[72px] overflow-hidden bg-white">
-      {/* Right image panel (desktop) — floats below the header, vertically
-          inset from the section, above the ring decor. */}
+      {/* Right image panel + project cards (desktop) — floats below the header,
+          vertically inset; cards are clipped to the panel (overflow-hidden) so
+          they stay constrained by the image, left-aligned to the panel edge. */}
       <div className="absolute right-0 top-0 bottom-8 z-20 hidden w-[43.5%] overflow-hidden rounded-l-[20px] xl:block">
         <Image
           src={HERO.image.src}
@@ -40,13 +41,9 @@ export async function Hero() {
           aria-hidden
           className="absolute inset-0 bg-[linear-gradient(170deg,rgba(0,0,0,0.8)_0%,rgba(0,0,0,0.06)_66%,rgba(0,0,0,0.8)_100%)]"
         />
-      </div>
-
-      {/* Project cards strip (desktop) — section-level so it starts at the
-          content container's left edge and runs right across the photo. */}
-      <div className="absolute inset-x-0 bottom-[60px] z-30 hidden xl:block">
-        <div className="mx-auto w-full max-w-7xl px-6 xl:px-8">
-          <HeroProjectCards cards={cards} />
+        {/* Looped, drag-scrollable card strip anchored to the panel bottom. */}
+        <div className="absolute inset-x-0 bottom-7 z-10">
+          <HeroProjectCards cards={cards} className="px-5" />
         </div>
       </div>
 
