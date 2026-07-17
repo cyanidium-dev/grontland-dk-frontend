@@ -12,9 +12,10 @@ export const KONTAKT_HERO = {
   sub: "Beskriv din opgave kort — så vurderer vi den og vender tilbage senest næste hverdag, ofte hurtigere. Det er gratis og uforpligtende.",
   cta: { label: "Ring 91 70 01 03", href: "tel:+4591700103" },
   // Same photo as the quote CTA bands (home + projekter) — the "få et tilbud" visual.
+  // Figma #3049:128 — landscaped garden with pergola.
   image: {
-    src: "/images/cases/quote-cta-band.png",
-    alt: "Nybelagte betontrin foran bolig med hvid balustrade",
+    src: "/images/kontakt/kontakt-hero.png",
+    alt: "Anlagt have med stenbede, trædesten i græsplænen og pergola",
   },
 } as const;
 
@@ -40,6 +41,8 @@ export const KONTAKT_INFO = {
     { label: "Arbejdsområde", value: "København og Storkøbenhavn" },
     { label: "Virksomhed", value: "Grønt Land DK · CVR 45514374" },
   ],
+  // Figma #3049:154 — fills the gap under the contact cards.
+  image: { src: "/images/kontakt/kontakt-form.png", alt: "Nylagt gråt tegltag" },
 } as const;
 
 export const KONTAKT_STEPS = {
@@ -87,9 +90,10 @@ export const KONTAKT_HERO_EN = {
   h1: "Contact us — get a quote for your project",
   sub: "Describe your project briefly — we assess it and get back to you by the next business day, often sooner. Free and without obligation.",
   cta: { label: "Call 91 70 01 03", href: "tel:+4591700103" },
+  // Figma #3049:128 — landscaped garden with pergola.
   image: {
-    src: "/images/cases/quote-cta-band.png",
-    alt: "New concrete steps with a white balustrade",
+    src: "/images/kontakt/kontakt-hero.png",
+    alt: "Landscaped garden with stone beds, stepping stones in the lawn and a pergola",
   },
 } as const;
 
@@ -115,6 +119,8 @@ export const KONTAKT_INFO_EN = {
     { label: "Service area", value: "Copenhagen and Greater Copenhagen" },
     { label: "Company", value: "Grønt Land DK · CVR 45514374" },
   ],
+  // Figma #3049:154 — fills the gap under the contact cards.
+  image: { src: "/images/kontakt/kontakt-form.png", alt: "Newly laid grey tiled roof" },
 } as const;
 
 export const KONTAKT_STEPS_EN = {

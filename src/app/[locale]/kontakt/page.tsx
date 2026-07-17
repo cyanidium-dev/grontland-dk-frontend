@@ -28,12 +28,23 @@ export default async function KontaktPage({ params }: { params: Promise<{ locale
     <QuoteModalProvider>
       <Header />
       <main className="flex-1">
-        {/* No eyebrow label + leaf CTA per client feedback. */}
+        {/* No eyebrow label + leaf CTA per client feedback. Ring decor at the
+            copy/photo seam per Figma mock #3049:129 (lower half, behind the
+            photo panel — same concentric-rings motif as the home hero). */}
         <PageHero
           title={KONTAKT_HERO.h1}
           sub={KONTAKT_HERO.sub}
           ctas={[{ ...KONTAKT_HERO.cta, variant: "leaf" }]}
           image={KONTAKT_HERO.image}
+          decor={
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src="/svg/decor-leaf.svg"
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute left-1/2 top-[62%] hidden h-[300px] w-[320px] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-90 xl:block"
+            />
+          }
         />
         <KontaktForm />
         <NumberedSteps h2={KONTAKT_STEPS.h2} steps={KONTAKT_STEPS.steps} background="mist" />

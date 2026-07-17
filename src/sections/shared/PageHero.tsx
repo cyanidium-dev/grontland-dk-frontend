@@ -21,15 +21,20 @@ export function PageHero({
   sub,
   ctas = [],
   image,
+  decor,
 }: {
   label?: string;
   title: string;
   sub: string;
   ctas?: readonly PageHeroCta[];
   image?: PageHeroImage;
+  /** Absolutely-positioned ornament (e.g. ring SVG) — rendered above the
+      white bg, below the copy (z-10) and the photo panel (z-20). */
+  decor?: React.ReactNode;
 }) {
   return (
     <section className="relative overflow-hidden bg-white">
+      {decor}
       {/* Right image panel (desktop) — bleeds to the viewport edge; flush with
           the section top and bottom (feedback on /om-os, applied site-wide). */}
       {image && (

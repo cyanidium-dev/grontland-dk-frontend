@@ -1,5 +1,6 @@
-import { Link } from "@/i18n/navigation";
+import Image from "next/image";
 
+import { Link } from "@/i18n/navigation";
 import { Container, Heading, InfoBox } from "@/components/ui";
 import { QuoteModalForm } from "@/components/quote";
 import { getLocale } from "next-intl/server";
@@ -23,7 +24,7 @@ export async function KontaktForm() {
             </InfoBox>
           </div>
 
-          <div>
+          <div className="flex flex-col">
             <Heading as="h2" size="card">
               {KONTAKT_INFO.h2}
             </Heading>
@@ -49,6 +50,16 @@ export async function KontaktForm() {
                 </li>
               ))}
             </ul>
+            {/* Fills the column gap under the cards — Figma #3049:154. */}
+            <div className="relative mt-3 min-h-[220px] flex-1 overflow-hidden rounded-2xl">
+              <Image
+                src={KONTAKT_INFO.image.src}
+                alt={KONTAKT_INFO.image.alt}
+                fill
+                sizes="(min-width: 1280px) 400px, 100vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </Container>
