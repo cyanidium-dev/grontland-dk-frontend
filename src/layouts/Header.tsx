@@ -30,10 +30,10 @@ export async function Header({ variant = "solid" }: { variant?: "solid" | "overl
           : "sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur",
       )}
     >
-      <Container className="flex h-[72px] items-center gap-8">
+      <Container className="flex h-[72px] items-center gap-4">
         <Logo />
 
-        <nav className="hidden items-center gap-6 xl:ml-20 xl:flex">
+        <nav className="hidden items-center gap-6 xl:ml-16 xl:flex">
           <Link
             href={home.href}
             className="text-[14px] font-medium leading-[20px] text-pine transition-colors hover:text-leaf"
@@ -52,8 +52,13 @@ export async function Header({ variant = "solid" }: { variant?: "solid" | "overl
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-3">
-          <LanguageSwitcher className="hidden sm:flex" />
+        {/* Desktop: switcher centered in the gap between nav and CTA via equal
+            flex-grow spacers. Below xl it lives in the mobile drawer instead. */}
+        <div className="ml-auto hidden flex-1 xl:block" aria-hidden />
+        <LanguageSwitcher className="hidden xl:flex" />
+        <div className="hidden flex-1 xl:block" aria-hidden />
+
+        <div className="ml-auto flex items-center gap-3 xl:ml-0">
           <OpenQuoteButton
             variant="black"
             size="sm"
