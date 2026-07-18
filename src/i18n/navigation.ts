@@ -32,9 +32,11 @@ export function Link({ href, children, className, ...rest }: LinkProps) {
       "span",
       {
         // DEMO-DISABLED link — find via data attribute in the DOM.
+        // Rendered visually identical to a live link (no muting/cursor
+        // change); it just doesn't navigate.
         "data-demo-disabled": "true",
         "aria-disabled": true,
-        className: `${className ?? ""} cursor-not-allowed opacity-50`.trim(),
+        className,
       },
       children,
     );
