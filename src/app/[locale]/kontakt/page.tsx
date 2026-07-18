@@ -4,7 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { QuoteModalProvider } from "@/components/quote";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
-import { PageHero, NumberedSteps } from "@/sections/shared";
+import { PageHero, PageHeroSeamDecor, NumberedSteps } from "@/sections/shared";
 import { KontaktForm, KontaktAudiences } from "@/sections/kontakt";
 import { kontaktCopy } from "@/lib/i18n/copy";
 
@@ -36,18 +36,27 @@ export default async function KontaktPage({ params }: { params: Promise<{ locale
           sub={KONTAKT_HERO.sub}
           ctas={[{ ...KONTAKT_HERO.cta, variant: "leaf" }]}
           image={KONTAKT_HERO.image}
+          decor={<PageHeroSeamDecor />}
+        />
+        <KontaktForm />
+        {/* Ring decor over steps — Figma #3053:141 / Group #3053:117
+            (screenshot parent; −129.93° rotation baked into the SVG export,
+            so no CSS rotate). Above the heading band, behind cards 02–03
+            (Container is z-10). */}
+        <NumberedSteps
+          h2={KONTAKT_STEPS.h2}
+          steps={KONTAKT_STEPS.steps}
+          background="mist"
           decor={
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src="/svg/decor-leaf.svg"
+              src="/svg/decor-rings-kontakt-steps.svg"
               alt=""
               aria-hidden
-              className="pointer-events-none absolute bottom-4 left-[54%] hidden h-[260px] w-[280px] max-w-none -translate-x-1/2 opacity-90 xl:block"
+              className="pointer-events-none absolute left-[50.9%] top-[40px] z-0 hidden h-[375px] w-[381px] max-w-none opacity-90 xl:block"
             />
           }
         />
-        <KontaktForm />
-        <NumberedSteps h2={KONTAKT_STEPS.h2} steps={KONTAKT_STEPS.steps} background="mist" />
         <KontaktAudiences />
       </main>
       <Footer />

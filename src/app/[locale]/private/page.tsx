@@ -5,7 +5,7 @@ import { QuoteModalProvider } from "@/components/quote";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import { Process } from "@/sections/home";
-import { PageHero, FeatureGrid, FaqList, CtaBand } from "@/sections/shared";
+import { PageHero, PageHeroSeamDecor, FeatureGrid, FaqList, CtaBand } from "@/sections/shared";
 import { PrivateTypes, PrivateProjects } from "@/sections/private";
 import { privateCopy } from "@/lib/i18n/copy";
 
@@ -30,12 +30,13 @@ export default async function PrivatePage({ params }: { params: Promise<{ locale
     <QuoteModalProvider>
       <Header />
       <main className="flex-1">
+        {/* No eyebrow label — site-wide PageHero pattern (om-os / kontakt). */}
         <PageHero
-          label={PRIVATE_HERO.label}
           title={PRIVATE_HERO.h1}
           sub={PRIVATE_HERO.sub}
           ctas={PRIVATE_HERO.ctas}
           image={PRIVATE_HERO.image}
+          decor={<PageHeroSeamDecor />}
         />
         <FeatureGrid
           h2={PRIVATE_BENEFITS.h2}

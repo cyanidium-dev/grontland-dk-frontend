@@ -4,7 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { QuoteModalProvider } from "@/components/quote";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
-import { PageHero, FeatureGrid, NumberedSteps, CtaBand } from "@/sections/shared";
+import { PageHero, PageHeroSeamDecor, FeatureGrid, NumberedSteps, CtaBand } from "@/sections/shared";
 import { B2bWhy, B2bCase, B2bTrades } from "@/sections/b2b";
 import { b2bCopy } from "@/lib/i18n/copy";
 
@@ -29,12 +29,13 @@ export default async function EntreprenorerPage({ params }: { params: Promise<{ 
     <QuoteModalProvider>
       <Header />
       <main className="flex-1">
+        {/* No eyebrow label — site-wide PageHero pattern (om-os / kontakt). */}
         <PageHero
-          label={B2B_HERO.label}
           title={B2B_HERO.h1}
           sub={B2B_HERO.sub}
           ctas={B2B_HERO.ctas}
           image={B2B_HERO.image}
+          decor={<PageHeroSeamDecor />}
         />
         <FeatureGrid h2={B2B_SCENARIOS.h2} items={B2B_SCENARIOS.items} background="white" columns={3} />
         <FeatureGrid

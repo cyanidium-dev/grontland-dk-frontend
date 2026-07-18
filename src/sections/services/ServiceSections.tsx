@@ -7,7 +7,7 @@ import { ProjectCard } from "@/components/project";
 import { Container, Heading } from "@/components/ui";
 import { ui } from "@/lib/i18n/copy";
 import type { ServicePageData } from "@/lib/sanity/queries";
-import { FaqList, FeatureGrid, NumberedSteps, PageHero } from "@/sections/shared";
+import { FaqList, FeatureGrid, NumberedSteps, PageHero, PageHeroSeamDecor } from "@/sections/shared";
 
 /* Section kit for /ydelser/[slug] — thin wrappers over the shared inner-page
    components; section order is fixed by the page route. Data comes from the
@@ -17,8 +17,8 @@ export async function ServiceHero({ service }: { service: ServicePageData }) {
   const t = ui(await getLocale());
   return (
     <>
+      {/* No eyebrow label — site-wide PageHero pattern (om-os / kontakt). */}
       <PageHero
-        label={t.servicesLabel}
         title={service.h1}
         sub={service.heroSub}
         ctas={[
@@ -26,6 +26,7 @@ export async function ServiceHero({ service }: { service: ServicePageData }) {
           { label: t.seeProjects, href: "/projekter", variant: "leaf" },
         ]}
         image={service.heroImage}
+        decor={<PageHeroSeamDecor />}
       />
       <div className="bg-white pb-10">
         <Container className="flex flex-wrap gap-2">

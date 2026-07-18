@@ -1,31 +1,15 @@
-import { Link } from "@/i18n/navigation";
-
 import { GalleryCarousel, type GalleryItem } from "@/components/gallery";
 import { Button, Container, Heading } from "@/components/ui";
 import type { GalleriPageData } from "@/lib/sanity/queries";
 import { cn } from "@/util/cn";
 
-/* Nbyg-style gallery body: anchor quick-nav + one section per service
-   (title left, description right, coverflow carousel with lightbox, service
-   page button below). Ring decor alternates sides per section. Data comes
-   from galleryCategory documents via /galleri's page query. */
+/* Nbyg-style gallery body: one section per service (title left, description
+   right, coverflow carousel with lightbox, service page button below). Ring
+   decor alternates sides per section. Category jump-nav lives in the hero
+   (PageHero children). Data from galleryCategory docs via /galleri. */
 export function GalleriSections({ sections }: { sections: GalleriPageData["sections"] }) {
   return (
     <div className="bg-white">
-      <Container>
-        <nav aria-label="Gå til kategori" className="flex flex-wrap gap-2 pb-4">
-          {sections.map((s) => (
-            <Link
-              key={s.id}
-              href={`#${s.id}`}
-              className="rounded-full bg-leaf/12 px-4 py-2 text-[12px] font-bold uppercase tracking-[0.3px] text-moss transition-colors hover:bg-leaf/25"
-            >
-              {s.title}
-            </Link>
-          ))}
-        </nav>
-      </Container>
-
       {sections.map((section, i) => {
         if (section.photos.length === 0) return null;
         const items: GalleryItem[] = section.photos.map((p) => ({

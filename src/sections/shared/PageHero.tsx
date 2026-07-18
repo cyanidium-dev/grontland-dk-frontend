@@ -11,6 +11,19 @@ export type PageHeroCta = {
 
 export type PageHeroImage = { src: string; alt: string };
 
+/** Concentric-ring ornament on the copy/photo seam — same placement as /kontakt. */
+export function PageHeroSeamDecor() {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/svg/decor-leaf.svg"
+      alt=""
+      aria-hidden
+      className="pointer-events-none absolute bottom-4 left-[54%] hidden h-[260px] w-[280px] max-w-none -translate-x-1/2 opacity-90 xl:block"
+    />
+  );
+}
+
 /* Inner-page hero — home Hero baseline: white section, copy column left
    (Dots → label → H1 → bordered sub → CTAs), photo as a right-edge-bleeding
    panel with rounded left corner + legibility gradient on xl; photo block
@@ -22,6 +35,7 @@ export function PageHero({
   ctas = [],
   image,
   decor,
+  children,
 }: {
   label?: string;
   title: string;
@@ -29,8 +43,11 @@ export function PageHero({
   ctas?: readonly PageHeroCta[];
   image?: PageHeroImage;
   /** Absolutely-positioned ornament (e.g. ring SVG) — rendered above the
-      white bg, below the copy (z-10) and the photo panel (z-20). */
+      white bg, below the copy (z-10) and the photo panel (z-20). Pass a
+      higher z-index on the node itself when it must sit above the photo. */
   decor?: React.ReactNode;
+  /** Extra content in the copy column after CTAs (e.g. gallery filter pills). */
+  children?: React.ReactNode;
 }) {
   return (
     <section className="relative overflow-hidden bg-white">
@@ -67,11 +84,16 @@ export function PageHero({
           <Heading as="h1" size="hero" className="mb-8 max-w-[580px] break-words hyphens-auto">
             {title}
           </Heading>
-          <p className="mb-9 max-w-[472px] border-l-2 border-pine/50 pl-5 font-light leading-[1.35] text-pine xl:text-[18px]">
+          <p
+            className={cn(
+              "max-w-[472px] border-l-2 border-pine/50 pl-5 font-light leading-[1.35] text-pine xl:text-[18px]",
+              (ctas.length > 0 || children) && "mb-9",
+            )}
+          >
             {sub}
           </p>
           {ctas.length > 0 && (
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <div className={cn("flex flex-col gap-3 sm:flex-row", children && "mb-9")}>
               {ctas.map((cta, i) => (
                 <Button
                   key={cta.href}
@@ -85,6 +107,7 @@ export function PageHero({
               ))}
             </div>
           )}
+          {children}
         </div>
       </Container>
 

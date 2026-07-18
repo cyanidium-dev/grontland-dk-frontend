@@ -26,6 +26,7 @@ export function NumberedSteps({
   cta,
   background = "white",
   backgroundImage,
+  decor,
 }: {
   h2: string;
   intro?: string;
@@ -33,6 +34,8 @@ export function NumberedSteps({
   cta?: { label: string; href: string };
   background?: "white" | "mist";
   backgroundImage?: { src: string; alt: string };
+  /** Absolutely-positioned ornament (e.g. ring SVG) — section-level stacking. */
+  decor?: React.ReactNode;
 }) {
   const onPhoto = Boolean(backgroundImage);
   return (
@@ -58,6 +61,7 @@ export function NumberedSteps({
           />
         </>
       )}
+      {decor}
       <Container className="relative z-10">
         <div className="flex flex-col gap-10">
           <div className="max-w-2xl">

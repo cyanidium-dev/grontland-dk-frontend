@@ -9,7 +9,7 @@ import { getYdelserIndex } from "@/lib/sanity/queries";
 import { homeCopy, ui } from "@/lib/i18n/copy";
 import { breadcrumbs } from "@/lib/seo/jsonld";
 import { YdelserIndexGrid } from "@/sections/services/YdelserIndexGrid";
-import { CtaBand, PageHero } from "@/sections/shared";
+import { CtaBand, PageHero, PageHeroSeamDecor } from "@/sections/shared";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -34,11 +34,12 @@ export default async function YdelserIndexPage({ params }: { params: Promise<{ l
       />
       <Header />
       <main className="flex-1">
+        {/* No eyebrow label — site-wide PageHero pattern (om-os / kontakt). */}
         <PageHero
-          label={page.hero.label ?? undefined}
           title={page.hero.h1}
           sub={page.hero.sub}
           image={page.hero.image ?? undefined}
+          decor={<PageHeroSeamDecor />}
         />
         <YdelserIndexGrid cards={page.cards} />
         {page.cta && (

@@ -5,7 +5,7 @@ import { QuoteModalProvider } from "@/components/quote";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import { Process } from "@/sections/home";
-import { PageHero, CtaBand } from "@/sections/shared";
+import { PageHero, PageHeroSeamDecor, CtaBand } from "@/sections/shared";
 import { OmIntro, OmValues, OmTeam, OmOnePlan, OmGallery } from "@/sections/om";
 import { omCopy } from "@/lib/i18n/copy";
 
@@ -30,7 +30,13 @@ export default async function OmOsPage({ params }: { params: Promise<{ locale: s
     <QuoteModalProvider>
       <Header />
       <main className="flex-1">
-        <PageHero title={OM_HERO.h1} sub={OM_HERO.sub} ctas={OM_HERO.ctas} image={OM_HERO.image} />
+        <PageHero
+          title={OM_HERO.h1}
+          sub={OM_HERO.sub}
+          ctas={OM_HERO.ctas}
+          image={OM_HERO.image}
+          decor={<PageHeroSeamDecor />}
+        />
         <OmIntro />
         <OmValues />
         <OmTeam />
