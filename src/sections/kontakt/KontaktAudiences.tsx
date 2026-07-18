@@ -36,7 +36,9 @@ export async function KontaktAudiences() {
                     <Button
                       href={card.cta.href}
                       variant={i === 0 ? "leaf" : "pine"}
-                      className="w-full sm:w-auto"
+                      // Long EN labels wrapped to 2 lines on mobile; tighter
+                      // padding + smaller text keep them on a single line.
+                      className="w-full whitespace-nowrap max-sm:!px-3 max-sm:!text-[11px] sm:w-auto"
                     >
                       {card.cta.label}
                     </Button>
