@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { Link } from "@/i18n/navigation";
 import { Container, Heading, Button } from "@/components/ui";
+import { OpenQuoteButton } from "@/components/quote";
 import { getSiteSettings } from "@/lib/sanity/queries";
 import { ui } from "@/lib/i18n/copy";
 
@@ -14,12 +15,15 @@ export async function CtaBand({
   h2,
   text,
   primary,
+  primaryModal = false,
   crosslinks = [],
   image,
 }: {
   h2: string;
   text: string;
-  primary: { label: string; href: string };
+  primary: { label: string; href?: string };
+  /** Primary button opens the quote modal instead of navigating (requires QuoteModalProvider). */
+  primaryModal?: boolean;
   crosslinks?: readonly { label: string; href: string }[];
   image?: { src: string; alt: string };
 }) {
@@ -43,9 +47,15 @@ export async function CtaBand({
           </Heading>
           <p className="mt-5 text-base font-light leading-relaxed text-white/70 xl:text-[17px]">{text}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button href={primary.href} variant="leaf" size="md" className="w-full sm:w-auto">
-              {primary.label}
-            </Button>
+            {primaryModal ? (
+              <OpenQuoteButton variant="leaf" size="md" className="w-full sm:w-auto">
+                {primary.label}
+              </OpenQuoteButton>
+            ) : (
+              <Button href={primary.href} variant="leaf" size="md" className="w-full sm:w-auto">
+                {primary.label}
+              </Button>
+            )}
             <Button href={phone.href} variant="white" size="md" className="w-full sm:w-auto">
               {phone.label}
             </Button>

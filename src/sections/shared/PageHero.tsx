@@ -1,12 +1,16 @@
 import Image from "next/image";
 
 import { Container, Heading, Button, Dots, type ButtonVariant } from "@/components/ui";
+import { OpenQuoteButton } from "@/components/quote";
 import { cn } from "@/util/cn";
 
 export type PageHeroCta = {
   label: string;
-  href: string;
+  /** Omitted when `modal` is set (the button opens the quote modal instead). */
+  href?: string;
   variant?: ButtonVariant;
+  /** Opens the quote modal instead of navigating (requires QuoteModalProvider). */
+  modal?: boolean;
 };
 
 export type PageHeroImage = { src: string; alt: string };
@@ -97,17 +101,19 @@ export function PageHero({
           </p>
           {ctas.length > 0 && (
             <div className={cn("flex flex-col gap-3 sm:flex-row", (trustChips.length > 0 || children) && "mb-9")}>
-              {ctas.map((cta, i) => (
-                <Button
-                  key={cta.href}
-                  href={cta.href}
-                  variant={cta.variant ?? (i === 0 ? "black" : "leaf")}
-                  size="md"
-                  className={cn("w-full sm:w-auto", i === 0 && "sm:min-w-[220px]")}
-                >
-                  {cta.label}
-                </Button>
-              ))}
+              {ctas.map((cta, i) => {
+                const variant = cta.variant ?? (i === 0 ? "black" : "leaf");
+                const className = cn("w-full sm:w-auto", i === 0 && "sm:min-w-[220px]");
+                return cta.modal ? (
+                  <OpenQuoteButton key={cta.label} variant={variant} size="md" className={className}>
+                    {cta.label}
+                  </OpenQuoteButton>
+                ) : (
+                  <Button key={cta.href} href={cta.href} variant={variant} size="md" className={className}>
+                    {cta.label}
+                  </Button>
+                );
+              })}
             </div>
           )}
           {trustChips.length > 0 && (

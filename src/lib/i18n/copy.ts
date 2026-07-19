@@ -87,11 +87,10 @@ export function b2bCopy(locale: Locale) {
     B2B_META: en ? b2b.B2B_META_EN : b2b.B2B_META,
     B2B_HERO: en ? b2b.B2B_HERO_EN : b2b.B2B_HERO,
     B2B_SCENARIOS: en ? b2b.B2B_SCENARIOS_EN : b2b.B2B_SCENARIOS,
-    B2B_EXPECTATIONS: en ? b2b.B2B_EXPECTATIONS_EN : b2b.B2B_EXPECTATIONS,
+    B2B_SERVICES: en ? b2b.B2B_SERVICES_EN : b2b.B2B_SERVICES,
     B2B_WHY: en ? b2b.B2B_WHY_EN : b2b.B2B_WHY,
+    B2B_PROJECTS: en ? b2b.B2B_PROJECTS_EN : b2b.B2B_PROJECTS,
     B2B_MODEL: en ? b2b.B2B_MODEL_EN : b2b.B2B_MODEL,
-    B2B_CASE: en ? b2b.B2B_CASE_EN : b2b.B2B_CASE,
-    B2B_TRADES: en ? b2b.B2B_TRADES_EN : b2b.B2B_TRADES,
     B2B_CTA: en ? b2b.B2B_CTA_EN : b2b.B2B_CTA,
   };
 }
