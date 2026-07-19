@@ -44,7 +44,7 @@ export async function ProjectResult({ project }: { project: Project }) {
 
           {/* Photo + ring decor at its bottom-right corner (home SeoText treatment) */}
           <div className="relative shrink-0">
-            <div className="relative h-[260px] w-full overflow-hidden rounded-xl xl:h-[380px] xl:w-[538px]">
+            <div className="relative z-10 h-[260px] w-full overflow-hidden rounded-xl xl:h-[380px] xl:w-[538px]">
               <Image
                 src={image.src}
                 alt={image.alt}
@@ -53,15 +53,15 @@ export async function ProjectResult({ project }: { project: Project }) {
                 className="object-cover"
               />
             </div>
-            {/* Ring decor bleeds off the photo's bottom-right corner onto the
-                band (home SeoText treatment) — only its top-left arc overlaps
-                the image. */}
+            {/* Ring decor tucked behind the photo (z-0), emerging from its
+                bottom-right corner onto the band — home SeoText treatment
+                (same rotation). */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/svg/decor-rings-seo.svg"
               alt=""
               aria-hidden
-              className="pointer-events-none absolute -bottom-16 -right-6 z-10 hidden h-[185px] w-[205px] max-w-none opacity-90 xl:block"
+              className="pointer-events-none absolute -bottom-16 -right-6 z-0 hidden h-[185px] w-[205px] max-w-none origin-center rotate-[-97.15deg] opacity-90 xl:block"
             />
           </div>
         </div>
