@@ -17,6 +17,7 @@ import {
   ProjectHero,
   ProjectRelated,
   ProjectResult,
+  ProjectReviews,
 } from "@/sections/project";
 
 type PageProps = {
@@ -58,6 +59,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <ProjectAbout project={project} />
         <ProjectGallery project={project} />
         <ProjectResult project={project} />
+        <ProjectReviews />
         <ProjectRelated related={project.related ?? []} />
         {page.cta && <ProjectCta cta={page.cta} />}
       </main>

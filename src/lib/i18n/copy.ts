@@ -124,6 +124,11 @@ const UI = {
     projectResultH2: "Resultat",
     projectFocusH3: "Fokus i udførelsen",
     projectGalleryH2: "Galleri",
+    projectReviewsH2: "Kundens ord",
+    projectReviewQuote:
+      "Grønt Land DK leverede et gennemført stykke arbejde — tydelig kommunikation, aftalte tidsplaner blev holdt, og resultatet står skarpt. Vi anbefaler dem gerne.",
+    projectReviewName: "Kunde (placeholder)",
+    projectReviewMeta: "Privatkunde · Storkøbenhavn",
     projectRelatedH2: "Andre projekter",
   },
   en: {
@@ -144,6 +149,11 @@ const UI = {
     projectResultH2: "Result",
     projectFocusH3: "Focus in the work",
     projectGalleryH2: "Gallery",
+    projectReviewsH2: "In the client's words",
+    projectReviewQuote:
+      "Grønt Land DK delivered thorough work — clear communication, agreed schedules were kept, and the result is sharp. We happily recommend them.",
+    projectReviewName: "Customer (placeholder)",
+    projectReviewMeta: "Private customer · Greater Copenhagen",
     projectRelatedH2: "Other projects",
   },
 } as const;

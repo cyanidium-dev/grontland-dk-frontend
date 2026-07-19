@@ -16,15 +16,15 @@ export async function ProjectResult({ project }: { project: Project }) {
     : { src: project.heroImage, alt: project.heroImageAlt };
 
   return (
-    <section className="overflow-hidden bg-white py-16 xl:py-20">
+    <section className="overflow-hidden bg-black py-16 text-white xl:py-20">
       <Container>
         <div className="flex flex-col gap-10 xl:flex-row xl:items-center xl:gap-[86px]">
           {/* Copy */}
           <div className="flex min-w-0 flex-1 flex-col gap-6">
-            <Heading as="h2" size="section">
+            <Heading as="h2" size="section" className="text-white">
               {t.projectResultH2}
             </Heading>
-            <p className="text-base font-light leading-relaxed text-pine/70 xl:text-[18px]">
+            <p className="text-base font-light leading-relaxed text-white/80 xl:text-[18px]">
               {project.result}
             </p>
 
@@ -33,7 +33,7 @@ export async function ProjectResult({ project }: { project: Project }) {
                 <h3 className="text-sm font-bold uppercase tracking-[0.35px] text-leaf">
                   {t.projectFocusH3}
                 </h3>
-                <ul className="mt-4 list-disc space-y-2 pl-5 text-base font-light leading-relaxed text-pine/70">
+                <ul className="mt-4 list-disc space-y-2 pl-5 text-base font-light leading-relaxed text-white/80 marker:text-leaf">
                   {project.focus.map((item) => (
                     <li key={item}>{item}</li>
                   ))}

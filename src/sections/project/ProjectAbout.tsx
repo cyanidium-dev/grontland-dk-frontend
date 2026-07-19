@@ -38,7 +38,7 @@ export async function ProjectAbout({ project }: { project: Project }) {
           </div>
 
           {hasFacts ? (
-            <ul className="flex w-full flex-col gap-3 xl:max-w-[420px]">
+            <ul className="grid w-full flex-1 gap-3 sm:grid-cols-2 xl:content-start">
               {project.facts!.map((fact) => (
                 <li
                   key={fact.label}
