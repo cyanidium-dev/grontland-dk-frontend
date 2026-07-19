@@ -12,7 +12,7 @@ export async function B2bWhy() {
     <section className="bg-pine py-16 text-white xl:py-24">
       <Container>
         <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:gap-24">
-          <div className="max-w-md shrink-0">
+          <div className="shrink-0 xl:max-w-[560px]">
             <Heading as="h2" size="section" className="break-words hyphens-auto text-white">
               {B2B_WHY.h2}
             </Heading>

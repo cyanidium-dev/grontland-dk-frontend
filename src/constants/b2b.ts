@@ -51,7 +51,7 @@ export const B2B_SERVICES = {
 } as const;
 
 export const B2B_WHY = {
-  h2: "Pålidelig kapacitet og projektkoordinering",
+  h2: "Pålidelig kapacitet og koordinering",
   intro:
     "Holdets størrelse tilpasses projektets fase og planlagte milepæle. Arbejdet styres med ugentlige produktionsmål, løbende statusopdateringer og dokumenteret kvalitetssikring.",
   items: [
@@ -155,7 +155,7 @@ export const B2B_SERVICES_EN = {
 } as const;
 
 export const B2B_WHY_EN = {
-  h2: "Reliable construction capacity and project coordination",
+  h2: "Reliable capacity and coordination",
   intro:
     "Crew size is adjusted to the project phase and planned milestones. Work is managed through weekly production targets, regular progress updates and documented quality assurance.",
   items: [
