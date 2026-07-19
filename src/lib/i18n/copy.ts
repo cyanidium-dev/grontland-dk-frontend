@@ -71,9 +71,11 @@ export function privateCopy(locale: Locale) {
   return {
     PRIVATE_META: en ? privateC.PRIVATE_META_EN : privateC.PRIVATE_META,
     PRIVATE_HERO: en ? privateC.PRIVATE_HERO_EN : privateC.PRIVATE_HERO,
-    PRIVATE_BENEFITS: en ? privateC.PRIVATE_BENEFITS_EN : privateC.PRIVATE_BENEFITS,
-    PRIVATE_TYPES: en ? privateC.PRIVATE_TYPES_EN : privateC.PRIVATE_TYPES,
+    PRIVATE_SERVICES: en ? privateC.PRIVATE_SERVICES_EN : privateC.PRIVATE_SERVICES,
     PRIVATE_PROJECTS: en ? privateC.PRIVATE_PROJECTS_EN : privateC.PRIVATE_PROJECTS,
+    PRIVATE_ONE_TEAM: en ? privateC.PRIVATE_ONE_TEAM_EN : privateC.PRIVATE_ONE_TEAM,
+    PRIVATE_PROCESS: en ? privateC.PRIVATE_PROCESS_EN : privateC.PRIVATE_PROCESS,
+    PRIVATE_REVIEWS: en ? privateC.PRIVATE_REVIEWS_EN : privateC.PRIVATE_REVIEWS,
     PRIVATE_FAQ: en ? privateC.PRIVATE_FAQ_EN : privateC.PRIVATE_FAQ,
     PRIVATE_CTA: en ? privateC.PRIVATE_CTA_EN : privateC.PRIVATE_CTA,
   };

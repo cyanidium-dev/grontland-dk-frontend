@@ -43,8 +43,16 @@ function stepStyle(i: number): StepStyle {
   };
 }
 
-export async function Process() {
-  const PROCESS = homeCopy(await getLocale()).PROCESS;
+type ProcessData = {
+  h2: string;
+  steps: readonly { title: string; desc: string }[];
+  cta: { label: string; href: string };
+};
+
+/* Shared 5-step process band. Defaults to the home PROCESS copy; pass `data`
+   for a page-specific variant (e.g. /private). */
+export async function Process({ data }: { data?: ProcessData } = {}) {
+  const PROCESS = data ?? homeCopy(await getLocale()).PROCESS;
   return (
     <section id="proces" className="relative overflow-hidden bg-white py-16 xl:py-24">
       {/* Ring decor #1018:641 — Figma inset + rotate on #1019:924 wrapper (not baked into SVG) */}

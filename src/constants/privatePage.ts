@@ -1,131 +1,190 @@
-/** /private — copy per docs/content/private.md (DA). Audience landing for homeowners. */
+/** /private — audience landing for homeowners. Restructured per
+ *  docs/private-page-restructure-mapping.md (9 sections). Copy da+en. */
 
 export const PRIVATE_META = {
-  title: "Renovering for private boligejere i København — Grønt Land DK",
+  title: "Renovering for private boligejere i Storkøbenhavn — Grønt Land DK",
   description:
-    "Terrasse, renovering, facade, belægning og havearbejde med fast prisramme, tydelig tidsplan og én kontaktperson. Få et gratis tilbud — vi svarer senest næste hverdag.",
+    "Boligrenovering, facade, terrasse, belægning og havearbejde med ét team, én plan og én ansvarlig kontakt. Få en projektvurdering — vi svarer senest næste hverdag.",
 } as const;
 
+// § 1 — Hero
 export const PRIVATE_HERO = {
-  label: "For private kunder",
-  h1: "Renovering og udendørsprojekter med fast plan — uden stress",
-  sub: "Til boligejere i København og Storkøbenhavn, der vil have terrasse, renovering, facade eller belægning udført med tydelig kommunikation fra start til aflevering.",
+  h1: "Renovering og udendørsprojekter for boligejere i Storkøbenhavn",
+  sub: "Fra boligrenovering og facader til terrasser, belægning og havearbejde — ét team, én plan og én ansvarlig kontakt fra start til aflevering.",
   ctas: [
-    { label: "Få et privat tilbud", href: "/kontakt" },
-    { label: "Se vores projekter", href: "/projekter" },
+    { label: "Få en projektvurdering", href: "/kontakt" },
+    { label: "Se private projekter", href: "/projekter" },
   ],
-  // Same photo as the home AUDIENCES private card — continuity for the audience.
+  trustChips: [
+    "Storkøbenhavn",
+    "Svar inden for én hverdag",
+    "Én kontakt for alle fag",
+    "CVR 45514374",
+  ],
   image: {
     src: "/images/cases/havearbejde-private.png",
     alt: "Plejet have med græsplæne og beplantning",
   },
 } as const;
 
-export const PRIVATE_BENEFITS = {
-  h2: "Det får du som privatkunde",
-  items: [
-    {
-      title: "Fast prisramme",
-      desc: "Du kender den økonomiske ramme, før arbejdet går i gang — ingen ubehagelige overraskelser undervejs.",
-    },
-    {
-      title: "Tydelig tidsplan",
-      desc: "En realistisk plan fra starten og løbende opdatering, hvis noget ændrer sig.",
-    },
-    {
-      title: "Én kontaktperson",
-      desc: "Du skal ikke jonglere mellem murer, tømrer og anlægsgartner — én person har ansvaret hele vejen.",
-    },
-  ],
+// § 2 — Services (cards come from CMS service docs; only heading/sub here)
+export const PRIVATE_SERVICES = {
+  h2: "Hvad kan vi hjælpe dig med?",
+  sub: "Fra enkeltopgaver til komplet renovering med flere fag — Grønt Land DK klarer både indvendige og udvendige projekter i København og Storkøbenhavn.",
 } as const;
 
-export const PRIVATE_TYPES = {
-  h2: "Populære opgaver for private",
-  items: [
-    {
-      title: "Terrasse og udearealer",
-      desc: "Træterrasser, havezoner og udearealer planlagt efter brug og holdbarhed.",
-      image: { src: "/images/cases/projekt-terrasse.png", alt: "Bærende konstruktion til træterrasse under opbygning" },
-      service: { label: "Se ydelsen", href: "/ydelser/havearbejde" },
-      example: { label: "Eksempel: Træterrasse i Jatoba", href: "/projekter/terrasse-og-haveomraade" },
-    },
-    {
-      title: "Renovering af bolig",
-      desc: "Samlet renovering med flere fag, én plan og én ansvarlig kontakt.",
-      image: { src: "/images/gallery/total-1.jpg", alt: "Indvendig renovering med nye overflader" },
-      service: { label: "Se ydelsen", href: "/ydelser/totalentreprise" },
-      example: { label: "Eksempel: Renovering af betontrappe", href: "/projekter/betontrappe-hellerup" },
-    },
-    {
-      title: "Facade og udvendig opgradering",
-      desc: "Pudsning, spartling og maling, der løfter husets udtryk og holdbarhed.",
-      image: { src: "/images/cases/projekt-facade.png", alt: "Facaderenovering på privat bolig" },
-      service: { label: "Se ydelsen", href: "/ydelser/murerarbejde" },
-      example: { label: "Eksempel: Facaderenovering", href: "/projekter/facadeopgave" },
-    },
-    {
-      title: "Belægning og indkørsel",
-      desc: "Indkørsler, stier og støttemure med stærkt underlag og korrekt afvanding.",
-      image: { src: "/images/cases/projekt-belaegning.png", alt: "Belægning i natursten ved bolig" },
-      service: { label: "Se ydelsen", href: "/ydelser/belaegningsarbejde" },
-      example: { label: "Eksempel: Belægning og terrænarbejde", href: "/projekter/belaegning-ved-bolig" },
-    },
-  ],
-} as const;
-
+// § 3 — Completed projects (data from CMS by slug)
 export const PRIVATE_PROJECTS = {
-  h2: "Udvalgte private projekter",
-  slugs: ["terrasse-og-haveomraade", "belaegning-ved-bolig", "facadeopgave"],
+  h2: "Se, hvad vi har udført for andre boligejere",
+  slugs: [
+    "terrasse-og-haveomraade",
+    "belaegning-ved-bolig",
+    "facadeopgave",
+    "betontrappe-hellerup",
+  ],
   ctas: [
     { label: "Se alle projekter", href: "/projekter" },
     { label: "Åbn galleriet", href: "/galleri" },
   ],
 } as const;
 
-export const PRIVATE_FAQ = {
-  h2: "Ofte stillede spørgsmål fra private",
+// § 4 — Why one contractor (problem + solution bullets)
+export const PRIVATE_ONE_TEAM = {
+  h2: "Ét team i stedet for flere separate håndværkere",
+  problem:
+    "Renovering kræver ofte murer, tømrer, maler og en specialist i udearbejde. Hyrer du dem hver for sig, står du selv med tidsplanen, kommunikationen og med at finde den skyldige, når noget bliver forsinket.",
+  intro: "Med Grønt Land DK får du i stedet:",
+  items: [
+    { title: "Én ansvarlig kontakt", desc: "Én person holder styr på hele projektet." },
+    { title: "Fælles plan for alle fag", desc: "Alle specialister arbejder efter samme plan." },
+    { title: "Koordineret tidsplan", desc: "Faserne planlægges, så de passer sammen." },
+    { title: "Færre pauser mellem faser", desc: "Mindre spildtid mellem etaperne." },
+    { title: "Samlet kvalitetskontrol", desc: "Én standard for hele arbejdet." },
+    { title: "Fælles gennemgang", desc: "Vi tjekker resultatet sammen ved aflevering." },
+  ],
+} as const;
+
+// § 6 — Process (private variant of the shared Process block)
+export const PRIVATE_PROCESS = {
+  h2: "En klar proces fra første besked til aflevering",
+  steps: [
+    { title: "Du beskriver projektet", desc: "Du sender en beskrivelse, adresse og fotos." },
+    {
+      title: "Vi vurderer omfanget",
+      desc: "Vi fastlægger de nødvendige arbejder, materialer og fag.",
+    },
+    { title: "Du får plan og tilbud", desc: "Du modtager pris, omfang og en foreløbig tidsplan." },
+    {
+      title: "Teamet udfører arbejdet",
+      desc: "Én kontakt holder dig opdateret og koordinerer fagene.",
+    },
+    {
+      title: "Gennemgang og aflevering",
+      desc: "Vi tjekker resultatet sammen med dig og afleverer projektet.",
+    },
+  ],
+  cta: { label: "Få en projektvurdering", href: "/kontakt" },
+} as const;
+
+// § 7 — Reviews. PLACEHOLDER data seeded from the old grontland.dk
+// "Det siger kunderne" quotes (anonymized: no real names/links).
+// TODO(client): replace with real, verifiable reviews (name + link).
+export const PRIVATE_REVIEWS = {
+  h2: "Hvad boligejere siger om at arbejde med os",
+  placeholder: true,
   items: [
     {
-      q: "Hvad koster det at få lavet et tilbud?",
-      a: "Ingenting. Du sender en kort beskrivelse, vi vurderer opgaven og giver et uforpligtende tilbud.",
+      quote: "God kommunikation hele vejen, og arbejdet blev afleveret som aftalt.",
+      name: "Kunde (placeholder)",
+      city: "Tårnby",
+      service: "Terrasseprojekt",
+      href: null,
     },
     {
-      q: "Hvor hurtigt kan I gå i gang?",
-      a: "Det afhænger af opgavens omfang og sæsonen. Vi giver en realistisk opstartsdato sammen med tilbuddet.",
+      quote: "Vi fik en klar plan og kunne stole på tidsplanen.",
+      name: "Kunde (placeholder)",
+      city: "Kastrup",
+      service: "Renovering",
+      href: null,
     },
     {
-      q: "Skal jeg selv koordinere de forskellige håndværkere?",
-      a: "Nej. Vi samler fagene i én plan, og du har én kontaktperson hele vejen.",
-    },
-    {
-      q: "Rydder I op efter arbejdet?",
-      a: "Ja. Oprydning og bortskaffelse er en del af planen, og vi gennemgår resultatet sammen med dig ved afleveringen.",
+      quote: "Professionelt forløb uden unødvendige overraskelser.",
+      name: "Kunde (placeholder)",
+      city: "København",
+      service: "Projekt",
+      href: null,
     },
   ],
 } as const;
 
-export const PRIVATE_CTA = {
-  h2: "Klar til at komme i gang?",
-  text: "Beskriv din opgave kort — så vender vi tilbage med en vurdering senest næste hverdag.",
-  primary: { label: "Få et privat tilbud", href: "/kontakt" },
-  crosslinks: [{ label: "Er du entreprenør? Se samarbejdsmodellen", href: "/entreprenorer" }],
+// § 8 — FAQ (9 questions)
+export const PRIVATE_FAQ = {
+  h2: "Spørgsmål før du går i gang med renoveringen",
+  items: [
+    {
+      q: "Er den første vurdering gratis?",
+      a: "Ja. Du sender en kort beskrivelse, og vi vurderer opgaven uforpligtende og gratis.",
+    },
+    { q: "Hvilke områder dækker I?", a: "København og Storkøbenhavn." },
+    {
+      q: "Hvordan beregnes den endelige pris?",
+      a: "Ud fra opgavens omfang, materialer og adgangsforhold. Du får en fast ramme, før arbejdet går i gang.",
+    },
+    {
+      q: "Kan I klare flere fag i ét projekt?",
+      a: "Ja. Vi samler fagene i én plan med én ansvarlig kontakt.",
+    },
+    {
+      q: "Hvem køber og leverer materialerne?",
+      a: "Det gør vi som udgangspunkt, medmindre du selv ønsker at levere bestemte materialer.",
+    },
+    {
+      q: "Hvor hurtigt kan I gå i gang?",
+      a: "Det afhænger af omfang og sæson. Vi giver en realistisk opstartsdato sammen med tilbuddet.",
+    },
+    {
+      q: "Rydder I op og fjerner byggeaffald?",
+      a: "Ja. Oprydning og bortskaffelse er en del af planen.",
+    },
+    {
+      q: "Hvordan godkendes ændringer undervejs?",
+      a: "Ændringer aftales med dig — både omfang og pris — før de udføres.",
+    },
+    {
+      q: "Hvad sker der, hvis der findes fejl efter aflevering?",
+      a: "Kontakt os, så udbedrer vi fejl, der skyldes udførelsen.",
+    },
+  ],
 } as const;
 
-/* English copy (docs/content/private.md EN) — sections pick da/en by locale. */
+// § 9 — Final CTA (phone comes from CMS siteSettings via CtaBand)
+export const PRIVATE_CTA = {
+  h2: "Fortæl os om dit projekt",
+  text: "Send en kort beskrivelse og et par billeder. Vi vurderer projektet og kontakter dig senest næste hverdag.",
+  primary: { label: "Få en projektvurdering", href: "/kontakt" },
+  crosslinks: [],
+} as const;
+
+/* ------------------------------------------------------------------ English */
 
 export const PRIVATE_META_EN = {
-  title: "Renovation for homeowners in Copenhagen — Grønt Land DK",
+  title: "Renovation for homeowners in Greater Copenhagen — Grønt Land DK",
   description:
-    "Terraces, renovation, facades, paving and garden work with a fixed price frame, a clear schedule and one contact person. Get a free quote — we reply by the next business day.",
+    "Home renovation, façades, terraces, paving and garden work with one team, one plan and one responsible contact. Get a project assessment — we reply by the next business day.",
 } as const;
 
 export const PRIVATE_HERO_EN = {
-  label: "For private customers",
-  h1: "Renovation and outdoor projects with a fixed plan — without stress",
-  sub: "For homeowners in Greater Copenhagen who want a terrace, renovation, facade or paving carried out with clear communication from start to handover.",
+  h1: "Renovation and outdoor projects for homeowners in Greater Copenhagen",
+  sub: "From home renovation and façades to terraces, paving and garden work — one team, one plan and one responsible contact from start to handover.",
   ctas: [
-    { label: "Get a private quote", href: "/kontakt" },
-    { label: "See our projects", href: "/projekter" },
+    { label: "Get a project assessment", href: "/kontakt" },
+    { label: "View private projects", href: "/projekter" },
+  ],
+  trustChips: [
+    "Greater Copenhagen",
+    "Reply within one business day",
+    "One contact for all trades",
+    "CVR 45514374",
   ],
   image: {
     src: "/images/cases/havearbejde-private.png",
@@ -133,92 +192,134 @@ export const PRIVATE_HERO_EN = {
   },
 } as const;
 
-export const PRIVATE_BENEFITS_EN = {
-  h2: "What you get as a private customer",
-  items: [
-    {
-      title: "Fixed price frame",
-      desc: "You know the financial frame before work begins — no unpleasant surprises along the way.",
-    },
-    {
-      title: "Clear schedule",
-      desc: "A realistic plan from the start and ongoing updates if anything changes.",
-    },
-    {
-      title: "One contact person",
-      desc: "No juggling between mason, carpenter and landscaper — one person is responsible all the way.",
-    },
-  ],
-} as const;
-
-export const PRIVATE_TYPES_EN = {
-  h2: "Popular projects for private customers",
-  items: [
-    {
-      title: "Terrace and outdoor areas",
-      desc: "Wooden terraces, garden zones and outdoor areas planned for use and durability.",
-      image: { src: "/images/cases/projekt-terrasse.png", alt: "Load-bearing structure for a timber deck under construction" },
-      service: { label: "See the service", href: "/ydelser/havearbejde" },
-      example: { label: "Example: Jatoba hardwood deck", href: "/projekter/terrasse-og-haveomraade" },
-    },
-    {
-      title: "Home renovation",
-      desc: "Complete renovation with several trades, one plan and one accountable contact.",
-      image: { src: "/images/gallery/total-1.jpg", alt: "Interior renovation with new surfaces" },
-      service: { label: "See the service", href: "/ydelser/totalentreprise" },
-      example: { label: "Example: Concrete stair renovation", href: "/projekter/betontrappe-hellerup" },
-    },
-    {
-      title: "Facade and exterior upgrade",
-      desc: "Rendering, filling and painting that lift the house's look and durability.",
-      image: { src: "/images/cases/projekt-facade.png", alt: "Facade renovation on a private home" },
-      service: { label: "See the service", href: "/ydelser/murerarbejde" },
-      example: { label: "Example: Facade renovation", href: "/projekter/facadeopgave" },
-    },
-    {
-      title: "Paving and driveway",
-      desc: "Driveways, paths and retaining walls with a strong base and correct drainage.",
-      image: { src: "/images/cases/projekt-belaegning.png", alt: "Natural-stone paving by a home" },
-      service: { label: "See the service", href: "/ydelser/belaegningsarbejde" },
-      example: { label: "Example: Paving and groundwork", href: "/projekter/belaegning-ved-bolig" },
-    },
-  ],
+export const PRIVATE_SERVICES_EN = {
+  h2: "What can we help you with?",
+  sub: "From individual jobs to complete renovation involving several trades — Grønt Land DK handles both indoor and outdoor projects in Copenhagen and Greater Copenhagen.",
 } as const;
 
 export const PRIVATE_PROJECTS_EN = {
-  h2: "Selected private projects",
-  slugs: ["terrasse-og-haveomraade", "belaegning-ved-bolig", "facadeopgave"],
+  h2: "See what we have completed for other homeowners",
+  slugs: [
+    "terrasse-og-haveomraade",
+    "belaegning-ved-bolig",
+    "facadeopgave",
+    "betontrappe-hellerup",
+  ],
   ctas: [
     { label: "See all projects", href: "/projekter" },
     { label: "Open the gallery", href: "/galleri" },
   ],
 } as const;
 
-export const PRIVATE_FAQ_EN = {
-  h2: "Frequently asked questions from private customers",
+export const PRIVATE_ONE_TEAM_EN = {
+  h2: "One team instead of several separate contractors",
+  problem:
+    "Renovation often needs a mason, a carpenter, a painter and an outdoor-work specialist. Hire them separately and you are left managing the schedule, the communication and finding who is at fault when something is delayed.",
+  intro: "With Grønt Land DK you get instead:",
+  items: [
+    { title: "One responsible contact", desc: "One person keeps track of the whole project." },
+    { title: "A shared plan for all trades", desc: "Every specialist works to the same plan." },
+    { title: "A coordinated schedule", desc: "The phases are planned to fit together." },
+    { title: "Fewer gaps between phases", desc: "Less downtime between stages." },
+    { title: "Single quality control", desc: "One standard across the whole job." },
+    { title: "Joint inspection", desc: "We check the result together at handover." },
+  ],
+} as const;
+
+export const PRIVATE_PROCESS_EN = {
+  h2: "A clear process from the first message to handover",
+  steps: [
+    { title: "You describe the project", desc: "You send a description, address and photos." },
+    {
+      title: "We assess the scope",
+      desc: "We determine the required work, materials and trades.",
+    },
+    {
+      title: "You receive a plan and quote",
+      desc: "You get the price, scope and a preliminary schedule.",
+    },
+    {
+      title: "The team carries out the work",
+      desc: "One contact keeps you updated and coordinates the trades.",
+    },
+    {
+      title: "Final inspection and handover",
+      desc: "We check the result together with you and hand over the project.",
+    },
+  ],
+  cta: { label: "Get a project assessment", href: "/kontakt" },
+} as const;
+
+export const PRIVATE_REVIEWS_EN = {
+  h2: "What homeowners say about working with us",
+  placeholder: true,
   items: [
     {
-      q: "What does a quote cost?",
-      a: "Nothing. You send a short description, we assess the task and give a no-obligation quote.",
+      quote: "Good communication throughout and the work was delivered as agreed.",
+      name: "Customer (placeholder)",
+      city: "Tårnby",
+      service: "Terrace project",
+      href: null,
     },
     {
-      q: "How soon can you start?",
-      a: "It depends on the scope and the season. We give a realistic start date together with the quote.",
+      quote: "We got a clear plan and could rely on the timeline.",
+      name: "Customer (placeholder)",
+      city: "Kastrup",
+      service: "Renovation",
+      href: null,
     },
     {
-      q: "Do I have to coordinate the different tradespeople myself?",
-      a: "No. We combine the trades in one plan, and you have one contact person all the way.",
+      quote: "A professional process without unnecessary surprises.",
+      name: "Customer (placeholder)",
+      city: "Copenhagen",
+      service: "Project",
+      href: null,
+    },
+  ],
+} as const;
+
+export const PRIVATE_FAQ_EN = {
+  h2: "Questions before starting a renovation",
+  items: [
+    {
+      q: "Is the initial assessment free?",
+      a: "Yes. You send a short description and we assess the job free and without obligation.",
+    },
+    { q: "Which areas do you cover?", a: "Copenhagen and Greater Copenhagen." },
+    {
+      q: "How is the final price calculated?",
+      a: "From the scope of the job, materials and access. You get a fixed frame before work begins.",
     },
     {
-      q: "Do you clean up after the work?",
-      a: "Yes. Cleanup and disposal are part of the plan, and we review the result together with you at handover.",
+      q: "Can you handle several trades in one project?",
+      a: "Yes. We combine the trades in one plan with one responsible contact.",
+    },
+    {
+      q: "Who purchases and delivers the materials?",
+      a: "We do by default, unless you prefer to supply certain materials yourself.",
+    },
+    {
+      q: "How soon can the work begin?",
+      a: "It depends on scope and season. We give a realistic start date together with the quote.",
+    },
+    {
+      q: "Do you clean up and remove construction waste?",
+      a: "Yes. Cleanup and disposal are part of the plan.",
+    },
+    {
+      q: "How are changes during the project approved?",
+      a: "Changes — both scope and price — are agreed with you before they are carried out.",
+    },
+    {
+      q: "What happens if defects are found after handover?",
+      a: "Contact us and we put right any defects caused by the workmanship.",
     },
   ],
 } as const;
 
 export const PRIVATE_CTA_EN = {
-  h2: "Ready to get started?",
-  text: "Describe your project briefly — we get back with an assessment by the next business day.",
-  primary: { label: "Get a private quote", href: "/kontakt" },
-  crosslinks: [{ label: "Are you a contractor? See the collaboration model", href: "/entreprenorer" }],
+  h2: "Tell us about your project",
+  text: "Send a short description and a few photos. We will assess the project and contact you by the next business day.",
+  primary: { label: "Get a project assessment", href: "/kontakt" },
+  crosslinks: [],
 } as const;

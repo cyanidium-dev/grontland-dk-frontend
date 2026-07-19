@@ -33,6 +33,7 @@ export function PageHero({
   title,
   sub,
   ctas = [],
+  trustChips = [],
   image,
   decor,
   children,
@@ -41,6 +42,8 @@ export function PageHero({
   title: string;
   sub: string;
   ctas?: readonly PageHeroCta[];
+  /** Short trust line under the CTAs (e.g. area / reply time / CVR). */
+  trustChips?: readonly string[];
   image?: PageHeroImage;
   /** Absolutely-positioned ornament (e.g. ring SVG) — rendered above the
       white bg, below the copy (z-10) and the photo panel (z-20). Pass a
@@ -93,7 +96,7 @@ export function PageHero({
             {sub}
           </p>
           {ctas.length > 0 && (
-            <div className={cn("flex flex-col gap-3 sm:flex-row", children && "mb-9")}>
+            <div className={cn("flex flex-col gap-3 sm:flex-row", (trustChips.length > 0 || children) && "mb-9")}>
               {ctas.map((cta, i) => (
                 <Button
                   key={cta.href}
@@ -106,6 +109,18 @@ export function PageHero({
                 </Button>
               ))}
             </div>
+          )}
+          {trustChips.length > 0 && (
+            <ul className={cn("flex flex-wrap gap-2", children && "mb-9")}>
+              {trustChips.map((chip) => (
+                <li
+                  key={chip}
+                  className="rounded-full bg-leaf/12 px-4 py-2 text-[12px] font-bold uppercase tracking-[0.3px] text-moss"
+                >
+                  {chip}
+                </li>
+              ))}
+            </ul>
           )}
           {children}
         </div>
