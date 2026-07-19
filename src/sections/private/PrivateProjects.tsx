@@ -22,7 +22,7 @@ export async function PrivateProjects() {
             {PRIVATE_PROJECTS.h2}
           </Heading>
 
-          <ul className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <ul className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {projects.map((project) => (
               <li key={project.slug}>
                 <ProjectCard project={project} />
