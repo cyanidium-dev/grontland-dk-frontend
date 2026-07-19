@@ -53,12 +53,15 @@ export async function ProjectResult({ project }: { project: Project }) {
                 className="object-cover"
               />
             </div>
+            {/* Ring decor bleeds off the photo's bottom-right corner onto the
+                band (home SeoText treatment) — only its top-left arc overlaps
+                the image. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/svg/decor-rings-seo.svg"
               alt=""
               aria-hidden
-              className="pointer-events-none absolute -bottom-5 right-4 z-10 hidden h-[150px] w-[165px] max-w-none opacity-90 xl:block"
+              className="pointer-events-none absolute -bottom-16 -right-6 z-10 hidden h-[185px] w-[205px] max-w-none opacity-90 xl:block"
             />
           </div>
         </div>
