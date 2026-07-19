@@ -60,6 +60,7 @@ export default async function EntreprenorerPage({ params }: { params: Promise<{ 
           text={B2B_CTA.text}
           primary={B2B_CTA.primary}
           primaryModal
+          image={B2B_CTA.image}
           crosslinks={B2B_CTA.crosslinks}
         />
       </main>

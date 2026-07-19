@@ -97,6 +97,10 @@ export const B2B_CTA = {
   h2: "Tjek holdets tilgængelighed i København",
   text: "Send os projektets placering, de nødvendige fag, omfanget og den ønskede startdato. Vi gennemgår oplysningerne og svarer inden for 24 timer.",
   primary: { label: "Tjek tilgængelighed" },
+  image: {
+    src: "/images/cases/belaegning-kyst.jpg",
+    alt: "Belægning og afvanding under udførelse ved et kystnært byggeprojekt",
+  },
   crosslinks: [{ label: "Privat boligejer? Se løsninger for private", href: "/private" }],
 } as const;
 
@@ -197,5 +201,9 @@ export const B2B_CTA_EN = {
   h2: "Check construction crew availability in Copenhagen",
   text: "Send us the project location, required trades, scope and preferred start date. We will review the information and reply within 24 hours.",
   primary: { label: "Check availability" },
+  image: {
+    src: "/images/cases/belaegning-kyst.jpg",
+    alt: "Paving and drainage under way at a coastal construction project",
+  },
   crosslinks: [{ label: "Homeowner? See solutions for private customers", href: "/private" }],
 } as const;

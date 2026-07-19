@@ -13,7 +13,7 @@ export async function B2bWhy() {
       <Container>
         <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:gap-24">
           <div className="max-w-md shrink-0">
-            <Heading as="h2" size="section" className="text-white">
+            <Heading as="h2" size="section" className="break-words hyphens-auto text-white">
               {B2B_WHY.h2}
             </Heading>
             <div aria-hidden className="my-6 size-[26px] rounded-full bg-leaf" />
@@ -34,7 +34,7 @@ export async function B2bWhy() {
             </Button>
           </div>
 
-          <ul className="grid w-full gap-3 sm:grid-cols-2">
+          <ul className="flex w-full flex-col gap-3">
             {B2B_WHY.items.map((item) => (
               <li key={item.title}>
                 <StarChip
@@ -42,7 +42,7 @@ export async function B2bWhy() {
                   boxVariant="light"
                   starVariant="leaf"
                   textSize="sm"
-                  className="h-full border border-line"
+                  className="border border-line"
                 />
               </li>
             ))}
