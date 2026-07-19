@@ -15,7 +15,7 @@ export async function ProjectAbout({ project }: { project: Project }) {
     <section className="bg-pine py-16 text-white xl:py-24">
       <Container>
         <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:gap-16">
-          <div className="min-w-0 xl:max-w-[560px]">
+          <div className="min-w-0 flex-1">
             <Heading as="h2" size="section" className="text-white">
               {t.projectAboutH2}
             </Heading>
@@ -38,7 +38,7 @@ export async function ProjectAbout({ project }: { project: Project }) {
           </div>
 
           {hasFacts ? (
-            <ul className="grid w-full flex-1 gap-3 sm:grid-cols-2 xl:content-start">
+            <ul className="flex w-full flex-col gap-3 xl:w-1/3 xl:shrink-0">
               {project.facts!.map((fact) => (
                 <li
                   key={fact.label}
