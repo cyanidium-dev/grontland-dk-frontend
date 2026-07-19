@@ -4,9 +4,7 @@ import { useLocale } from "next-intl";
 import { useEffect, useRef } from "react";
 
 import { ChevronIcon } from "@/components/icons";
-// Ungated Link: the switcher links to the current path, which may itself be a
-// DEMO-DISABLED route — it must never be gated. See i18n/navigation.ts.
-import { LocalizedLink as Link, usePathname } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/util/cn";
 
 /* Native <details> dropdown language switch — ported from the code-site
