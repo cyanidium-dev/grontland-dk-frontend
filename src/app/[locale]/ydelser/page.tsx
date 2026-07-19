@@ -47,6 +47,7 @@ export default async function YdelserIndexPage({ params }: { params: Promise<{ l
             h2={page.cta.h2}
             text={page.cta.text}
             primary={page.cta.primary}
+            primaryModal
             crosslinks={page.cta.crosslinks ?? []}
             image={page.cta.image ?? undefined}
           />

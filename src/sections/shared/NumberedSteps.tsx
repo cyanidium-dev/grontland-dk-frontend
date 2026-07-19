@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { Container, Heading, Button, InfoBox } from "@/components/ui";
 import type { InfoBoxVariant } from "@/components/ui";
+import { OpenQuoteButton } from "@/components/quote";
 import { cn } from "@/util/cn";
 
 type StepStyle = { box: InfoBoxVariant; bordered: boolean; num: string; title: string; desc: string };
@@ -24,6 +25,7 @@ export function NumberedSteps({
   intro,
   steps,
   cta,
+  ctaModal = false,
   background = "white",
   backgroundImage,
   decor,
@@ -31,7 +33,9 @@ export function NumberedSteps({
   h2: string;
   intro?: string;
   steps: readonly { title: string; desc: string }[];
-  cta?: { label: string; href: string };
+  cta?: { label: string; href?: string };
+  /** CTA opens the quote modal instead of navigating (requires QuoteModalProvider). */
+  ctaModal?: boolean;
   background?: "white" | "mist";
   backgroundImage?: { src: string; alt: string };
   /** Absolutely-positioned ornament (e.g. ring SVG) — section-level stacking. */
@@ -112,9 +116,15 @@ export function NumberedSteps({
 
           {cta && (
             <div>
-              <Button href={cta.href} variant="leaf" size="md" className="w-full sm:w-auto">
-                {cta.label}
-              </Button>
+              {ctaModal ? (
+                <OpenQuoteButton variant="leaf" size="md" className="w-full sm:w-auto">
+                  {cta.label}
+                </OpenQuoteButton>
+              ) : (
+                <Button href={cta.href} variant="leaf" size="md" className="w-full sm:w-auto">
+                  {cta.label}
+                </Button>
+              )}
             </div>
           )}
         </div>

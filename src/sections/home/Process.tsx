@@ -1,5 +1,6 @@
 import { Container, Heading, Button, Dots, InfoBox } from "@/components/ui";
 import type { InfoBoxVariant } from "@/components/ui";
+import { OpenQuoteButton } from "@/components/quote";
 import { cn } from "@/util/cn";
 import { getLocale } from "next-intl/server";
 
@@ -50,8 +51,12 @@ type ProcessData = {
 };
 
 /* Shared 5-step process band. Defaults to the home PROCESS copy; pass `data`
-   for a page-specific variant (e.g. /private). */
-export async function Process({ data }: { data?: ProcessData } = {}) {
+   for a page-specific variant (e.g. /private). `ctaModal` makes the CTA open
+   the quote modal instead of navigating (requires QuoteModalProvider). */
+export async function Process({
+  data,
+  ctaModal = false,
+}: { data?: ProcessData; ctaModal?: boolean } = {}) {
   const PROCESS = data ?? homeCopy(await getLocale()).PROCESS;
   return (
     <section id="proces" className="relative overflow-hidden bg-white py-16 xl:py-24">
@@ -108,9 +113,15 @@ export async function Process({ data }: { data?: ProcessData } = {}) {
           </ol>
 
           <div>
-            <Button href={PROCESS.cta.href} variant="leaf" size="md" className="w-full sm:w-auto">
-              {PROCESS.cta.label}
-            </Button>
+            {ctaModal ? (
+              <OpenQuoteButton variant="leaf" size="md" className="w-full sm:w-auto">
+                {PROCESS.cta.label}
+              </OpenQuoteButton>
+            ) : (
+              <Button href={PROCESS.cta.href} variant="leaf" size="md" className="w-full sm:w-auto">
+                {PROCESS.cta.label}
+              </Button>
+            )}
           </div>
         </div>
       </Container>

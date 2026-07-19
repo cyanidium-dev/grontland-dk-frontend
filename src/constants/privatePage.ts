@@ -12,7 +12,7 @@ export const PRIVATE_HERO = {
   h1: "Renovering og udendørsprojekter for boligejere i Storkøbenhavn",
   sub: "Fra boligrenovering og facader til terrasser, belægning og havearbejde — ét team, én plan og én ansvarlig kontakt fra start til aflevering.",
   ctas: [
-    { label: "Få en projektvurdering", href: "/kontakt" },
+    { label: "Få en projektvurdering", modal: true },
     { label: "Se private projekter", href: "/projekter" },
   ],
   trustChips: [
@@ -177,7 +177,7 @@ export const PRIVATE_HERO_EN = {
   h1: "Renovation and outdoor projects for homeowners in Greater Copenhagen",
   sub: "From home renovation and façades to terraces, paving and garden work — one team, one plan and one responsible contact from start to handover.",
   ctas: [
-    { label: "Get a project assessment", href: "/kontakt" },
+    { label: "Get a project assessment", modal: true },
     { label: "View private projects", href: "/projekter" },
   ],
   trustChips: [

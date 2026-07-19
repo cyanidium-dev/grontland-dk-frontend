@@ -78,7 +78,8 @@ export default async function ServicePageRoute({ params }: PageProps) {
         <CtaBand
           h2={t.serviceCtaH2}
           text={t.serviceCtaText}
-          primary={{ label: t.getQuote, href: "/kontakt" }}
+          primary={{ label: t.getQuote }}
+          primaryModal
           crosslinks={[
             { label: t.allServices, href: "/ydelser" },
             { label: t.seeProjects, href: "/projekter" },

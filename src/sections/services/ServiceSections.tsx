@@ -22,7 +22,7 @@ export async function ServiceHero({ service }: { service: ServicePageData }) {
         title={service.h1}
         sub={service.heroSub}
         ctas={[
-          { label: t.getQuote, href: "/kontakt" },
+          { label: t.getQuote, modal: true },
           { label: t.seeProjects, href: "/projekter", variant: "leaf" },
         ]}
         image={service.heroImage}
@@ -86,7 +86,8 @@ export async function ServiceProcess({ service }: { service: ServicePageData }) 
     <NumberedSteps
       h2={service.process.h2}
       steps={service.process.steps}
-      cta={{ label: t.startMessage, href: "/kontakt" }}
+      cta={{ label: t.startMessage }}
+      ctaModal
       background="mist"
       backgroundImage={service.processImage ?? undefined}
     />

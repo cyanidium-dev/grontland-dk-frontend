@@ -54,7 +54,7 @@ export default async function PrivatePage({ params }: { params: Promise<{ locale
         {/* 5 — Team (shared with /om-os) */}
         <OmTeam />
         {/* 6 — Process (private variant) */}
-        <Process data={PRIVATE_PROCESS} />
+        <Process data={PRIVATE_PROCESS} ctaModal />
         {/* 7 — Reviews (placeholder) */}
         <PrivateReviews />
         {/* 8 — FAQ */}
@@ -64,6 +64,7 @@ export default async function PrivatePage({ params }: { params: Promise<{ locale
           h2={PRIVATE_CTA.h2}
           text={PRIVATE_CTA.text}
           primary={PRIVATE_CTA.primary}
+          primaryModal
           crosslinks={PRIVATE_CTA.crosslinks}
         />
       </main>

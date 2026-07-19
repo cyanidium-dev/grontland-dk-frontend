@@ -47,6 +47,7 @@ export default async function OmOsPage({ params }: { params: Promise<{ locale: s
           h2={OM_CTA.h2}
           text={OM_CTA.text}
           primary={OM_CTA.primary}
+          primaryModal
           crosslinks={OM_CTA.crosslinks}
           image={OM_CTA.image}
         />

@@ -12,7 +12,7 @@ export const OM_HERO = {
   h1: "Entreprenør i København — flere fag under samme tag",
   sub: "Grønt Land DK er en entreprenørvirksomhed, der udfører renovering, byggeopgaver og udearealer i København og Storkøbenhavn — for private boligejere og entreprenører.",
   ctas: [
-    { label: "Få et tilbud", href: "/kontakt" },
+    { label: "Få et tilbud", modal: true },
     { label: "Se vores projekter", href: "/projekter" },
   ],
   // Figma feedback #3035:127 — villa entrance, gate + cobblestone path.
@@ -151,7 +151,7 @@ export const OM_HERO_EN = {
   h1: "Contractor in Copenhagen — several trades under one roof",
   sub: "Grønt Land DK is a contracting company carrying out renovation, construction work and outdoor projects in Greater Copenhagen — for homeowners and contractors.",
   ctas: [
-    { label: "Get a quote", href: "/kontakt" },
+    { label: "Get a quote", modal: true },
     { label: "See our projects", href: "/projekter" },
   ],
   image: {
