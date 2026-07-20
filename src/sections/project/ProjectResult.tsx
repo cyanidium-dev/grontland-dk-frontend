@@ -5,9 +5,8 @@ import { Container, Heading } from "@/components/ui";
 import type { Project } from "@/constants/projects";
 import { ui } from "@/lib/i18n/copy";
 
-/* "Resultat" — home-SeoText layout, mirrored: the write-up on the left, the
-   result photo on the right with the ring decor over its bottom-right corner.
-   Image is the gallery "result" shot, falling back to the hero image. */
+/* "Resultat" — ~430px write-up on the left; result photo grows to fill the
+   remaining width. Ring decor on the photo's bottom-right (home SeoText). */
 export async function ProjectResult({ project }: { project: Project }) {
   const t = ui(await getLocale());
   const resultShot = project.gallery.find((g) => g.kind === "result");
@@ -20,7 +19,7 @@ export async function ProjectResult({ project }: { project: Project }) {
       <Container>
         <div className="flex flex-col gap-10 xl:flex-row xl:items-center xl:gap-[86px]">
           {/* Copy */}
-          <div className="flex min-w-0 flex-1 flex-col gap-6">
+          <div className="flex min-w-0 flex-col gap-6 xl:w-[430px] xl:max-w-[430px] xl:shrink-0">
             <Heading as="h2" size="section" className="text-white">
               {t.projectResultH2}
             </Heading>
@@ -43,13 +42,13 @@ export async function ProjectResult({ project }: { project: Project }) {
           </div>
 
           {/* Photo + ring decor at its bottom-right corner (home SeoText treatment) */}
-          <div className="relative shrink-0">
-            <div className="relative z-10 h-[260px] w-full overflow-hidden rounded-xl xl:h-[380px] xl:w-[538px]">
+          <div className="relative w-full xl:min-w-0 xl:flex-1">
+            <div className="relative z-10 h-[260px] w-full overflow-hidden rounded-xl xl:h-[380px]">
               <Image
                 src={image.src}
                 alt={image.alt}
                 fill
-                sizes="(min-width: 1280px) 538px, 100vw"
+                sizes="(min-width: 1280px) 700px, 100vw"
                 className="object-cover"
               />
             </div>

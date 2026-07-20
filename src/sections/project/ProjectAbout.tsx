@@ -4,9 +4,8 @@ import { Container, Heading } from "@/components/ui";
 import type { Project } from "@/constants/projects";
 import { ui } from "@/lib/i18n/copy";
 
-/* "Om projektet" — pine contrast band (same layout family as the b2b
-   capabilities block): the write-up on the left, the project facts as a
-   stat list on the right. */
+/* "Om projektet" — pine contrast band: ~540px write-up on the left edge,
+   ~540px facts list on the right edge (justify-between at xl). */
 export async function ProjectAbout({ project }: { project: Project }) {
   const t = ui(await getLocale());
   const hasFacts = project.facts && project.facts.length > 0;
@@ -14,8 +13,8 @@ export async function ProjectAbout({ project }: { project: Project }) {
   return (
     <section className="bg-pine py-16 text-white xl:py-24">
       <Container>
-        <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:gap-16">
-          <div className="min-w-0 flex-1">
+        <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:justify-between xl:gap-8">
+          <div className="min-w-0 xl:w-[540px] xl:max-w-[540px] xl:shrink-0">
             <Heading as="h2" size="section" className="text-white">
               {t.projectAboutH2}
             </Heading>
@@ -38,7 +37,7 @@ export async function ProjectAbout({ project }: { project: Project }) {
           </div>
 
           {hasFacts ? (
-            <ul className="flex w-full flex-col gap-3 xl:w-1/3 xl:shrink-0">
+            <ul className="flex w-full flex-col gap-3 xl:w-[540px] xl:max-w-[540px] xl:shrink-0">
               {project.facts!.map((fact) => (
                 <li
                   key={fact.label}

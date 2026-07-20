@@ -1,7 +1,7 @@
 import { getLocale } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
-import { Container, Heading } from "@/components/ui";
+import { Button, Container, Heading } from "@/components/ui";
 import { type Project } from "@/constants/projects";
 import { projectsCopy } from "@/lib/i18n/copy";
 
@@ -36,12 +36,14 @@ export async function ProjectHero({ project }: { project: Project }) {
             <Heading as="h1" size="section" className="mt-3">
               {project.title}
             </Heading>
-            <Link
+            <Button
               href={project.serviceHref}
-              className="mt-4 inline-block text-sm font-medium text-moss underline underline-offset-4 transition-colors hover:text-leaf"
+              variant="leaf"
+              size="md"
+              className="mt-4 w-full sm:w-auto"
             >
               {project.serviceLabel}
-            </Link>
+            </Button>
             <p className="mt-6 max-w-xl text-base font-light leading-relaxed text-pine/70 xl:text-[18px]">
               {project.intro}
             </p>
