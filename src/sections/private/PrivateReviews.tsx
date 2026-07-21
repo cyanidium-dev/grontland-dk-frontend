@@ -15,7 +15,10 @@ export async function PrivateReviews() {
       {/* Two rings (Figma 3067:321 / 3067:344). The left one is meant to hang
           past the band, so the section clips only the x axis. */}
       <RingDecor rotate={-130.97} className="bottom-[203px] left-[calc(50%+348px)]" />
-      <RingDecor rotate={-128.24} className="bottom-[-52px] left-[calc(50%-676px)]" />
+      {/* Mirrored against the right-hand ring on purpose — this is the opposite
+          corner of a symmetric pair, so it takes the +51.76 branch (spout to
+          the upper-right) rather than the -128.24 the other three use. */}
+      <RingDecor rotate={51.76} className="bottom-[-52px] left-[calc(50%-676px)]" />
       <Container className="relative z-10">
         <div className="flex flex-col gap-10">
           <Heading as="h2" size="section">
