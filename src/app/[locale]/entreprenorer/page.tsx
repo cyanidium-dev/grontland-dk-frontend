@@ -5,7 +5,13 @@ import { QuoteModalProvider } from "@/components/quote";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import { PageHero, PageHeroSeamDecor, FeatureGrid, NumberedSteps, CtaBand } from "@/sections/shared";
-import { B2bServices, B2bWhy, B2bProjects } from "@/sections/b2b";
+import {
+  B2bScenariosDecor,
+  B2bScenariosDots,
+  B2bServices,
+  B2bWhy,
+  B2bProjects,
+} from "@/sections/b2b";
 import { b2bCopy } from "@/lib/i18n/copy";
 
 export async function generateMetadata({
@@ -45,6 +51,9 @@ export default async function EntreprenorerPage({ params }: { params: Promise<{ 
           items={B2B_SCENARIOS.items}
           background="white"
           columns={3}
+          cardStyle="accent"
+          decor={<B2bScenariosDecor />}
+          headerAside={<B2bScenariosDots />}
         />
         {/* 3 — Services (8 CMS service cards) */}
         <B2bServices />
