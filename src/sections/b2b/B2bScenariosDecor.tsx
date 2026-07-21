@@ -27,15 +27,3 @@ export function B2bScenariosDecor() {
     </div>
   );
 }
-
-/* Three dots echoing the card palette, right-aligned against the heading
-   (Figma 3067:229 — 18px circles, 6px apart). */
-export function B2bScenariosDots() {
-  return (
-    <div aria-hidden className="hidden shrink-0 gap-[6px] xl:flex">
-      <span className="size-[18px] rounded-full bg-leaf" />
-      <span className="size-[18px] rounded-full bg-moss" />
-      <span className="size-[18px] rounded-full bg-pine" />
-    </div>
-  );
-}

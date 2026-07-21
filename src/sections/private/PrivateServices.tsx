@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowIcon } from "@/components/icons";
 import { Link } from "@/i18n/navigation";
 import { Container, Heading } from "@/components/ui";
+import { RingDecor } from "@/sections/shared";
 import { getServiceCards } from "@/lib/sanity/queries";
 import { privateCopy } from "@/lib/i18n/copy";
 
@@ -14,8 +15,10 @@ export async function PrivateServices() {
   const { PRIVATE_SERVICES } = privateCopy(locale);
 
   return (
-    <section className="bg-white py-16 xl:py-24">
-      <Container>
+    <section className="relative overflow-x-clip bg-white py-16 xl:py-24">
+      {/* Same grid as the b2b services block, so the decor shares its offsets. */}
+      <RingDecor rotate={-119.75} className="bottom-[656px] left-[calc(50%+209px)]" />
+      <Container className="relative z-10">
         <div className="max-w-2xl">
           <Heading as="h2" size="section">
             {PRIVATE_SERVICES.h2}

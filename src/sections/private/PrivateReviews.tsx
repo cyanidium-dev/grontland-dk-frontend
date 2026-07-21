@@ -2,6 +2,7 @@ import { getLocale } from "next-intl/server";
 
 import { StarIcon } from "@/components/icons";
 import { Container, Heading } from "@/components/ui";
+import { RingDecor } from "@/sections/shared";
 import { privateCopy } from "@/lib/i18n/copy";
 
 /* § 7 — Customer reviews. Currently PLACEHOLDER copy (see constants):
@@ -10,8 +11,12 @@ export async function PrivateReviews() {
   const { PRIVATE_REVIEWS } = privateCopy(await getLocale());
 
   return (
-    <section className="bg-white py-16 xl:py-24">
-      <Container>
+    <section className="relative overflow-x-clip bg-white py-16 xl:py-24">
+      {/* Two rings (Figma 3067:321 / 3067:344). The left one is meant to hang
+          past the band, so the section clips only the x axis. */}
+      <RingDecor rotate={-130.97} className="bottom-[203px] left-[calc(50%+348px)]" />
+      <RingDecor rotate={-128.24} className="bottom-[-52px] left-[calc(50%-676px)]" />
+      <Container className="relative z-10">
         <div className="flex flex-col gap-10">
           <Heading as="h2" size="section">
             {PRIVATE_REVIEWS.h2}

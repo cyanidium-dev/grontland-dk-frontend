@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowIcon } from "@/components/icons";
 import { Link } from "@/i18n/navigation";
 import { Container, Heading } from "@/components/ui";
+import { RingDecor } from "@/sections/shared";
 import { getServiceCards } from "@/lib/sanity/queries";
 import { b2bCopy } from "@/lib/i18n/copy";
 
@@ -14,8 +15,11 @@ export async function B2bServices() {
   const { B2B_SERVICES } = b2bCopy(locale);
 
   return (
-    <section className="bg-mist py-16 xl:py-24">
-      <Container>
+    <section className="relative overflow-x-clip bg-mist py-16 xl:py-24">
+      {/* overflow-x-clip, not overflow-hidden: kills any sideways bleed without
+          becoming a scroll container, so the decor keeps its vertical bleed. */}
+      <RingDecor rotate={-119.75} className="bottom-[656px] left-[calc(50%+209px)]" />
+      <Container className="relative z-10">
         <div className="max-w-2xl">
           <Heading as="h2" size="section">
             {B2B_SERVICES.h2}
