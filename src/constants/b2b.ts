@@ -62,12 +62,10 @@ export const B2B_WHY = {
     { title: "Hurtig håndtering af afvigelser", desc: "Afvigelser meldes og løses med det samme." },
     { title: "Stabilt hold hele vejen", desc: "Samme hold gennem projektet — ikke skiftende ansigter." },
   ],
-  leads: [
-    { name: "Oleg", role: "Finish og tømrer" },
-    { name: "Andrej", role: "Belægning, dræn og beton" },
-    { name: "Aleksandr", role: "Anlæg — 25+ års erfaring" },
-  ],
-  link: { label: "Mød teamet bag", href: "/om-os" },
+  image: {
+    src: "/images/cases/kapacitet-b2b.jpg",
+    alt: "Anlagt bed med stauder og buske langs en flisebelagt gangsti",
+  },
 } as const;
 
 export const B2B_PROJECTS = {
@@ -166,12 +164,10 @@ export const B2B_WHY_EN = {
     { title: "Fast deviation handling", desc: "Deviations are reported and resolved immediately." },
     { title: "Stable team throughout", desc: "The same crew through the project — not changing faces." },
   ],
-  leads: [
-    { name: "Oleg", role: "Finishing & carpentry" },
-    { name: "Andrej", role: "Paving, drainage & concrete" },
-    { name: "Aleksandr", role: "Landscape — 25+ years" },
-  ],
-  link: { label: "Meet the team behind", href: "/om-os" },
+  image: {
+    src: "/images/cases/kapacitet-b2b.jpg",
+    alt: "Planted bed with shrubs alongside a paved walkway",
+  },
 } as const;
 
 export const B2B_PROJECTS_EN = {

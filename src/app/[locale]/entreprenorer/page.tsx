@@ -13,6 +13,7 @@ import {
   AccentDots,
 } from "@/sections/shared";
 import { B2bScenariosDecor, B2bServices, B2bWhy, B2bProjects } from "@/sections/b2b";
+import { OmTeam } from "@/sections/om";
 import { b2bCopy } from "@/lib/i18n/copy";
 
 export async function generateMetadata({
@@ -60,6 +61,9 @@ export default async function EntreprenorerPage({ params }: { params: Promise<{ 
         <B2bServices />
         {/* 4 — Capabilities & responsibility (pine band) */}
         <B2bWhy />
+        {/* 4b — The team behind it, straight after the capacity band (the same
+            block the about and private pages use). */}
+        <OmTeam />
         {/* 5 — Subcontracting projects */}
         <B2bProjects />
         {/* 6 — Process */}
