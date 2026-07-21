@@ -12,7 +12,10 @@ const VARIANTS: Record<ButtonVariant, string> = {
   pine: "bg-pine text-white",
   black: "bg-black text-white", // #201F23 — primary CTA in the design
   white: "bg-white text-pine",
-  outline: "border border-pine/25 text-pine hover:border-pine",
+  // Opaque on purpose: both usages sit over the ring decor, and a transparent
+  // fill let it show through. White reads correctly on the white and mist
+  // bands alike (same convention as InfoBox's bordered white boxes on mist).
+  outline: "border border-pine/25 bg-white text-pine hover:border-pine",
 };
 
 // md = the Figma hero button (50px, 12px upper). sm = header CTA (42px, 14px).
