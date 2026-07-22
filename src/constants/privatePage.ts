@@ -54,11 +54,10 @@ export const PRIVATE_ONE_TEAM = {
   problem:
     "Renovering kræver ofte murer, tømrer, maler og en specialist i udearbejde. Hyrer du dem hver for sig, står du selv med tidsplanen, kommunikationen og med at finde den skyldige, når noget bliver forsinket.",
   intro: "Med Grønt Land DK får du i stedet:",
-  // TODO: swap for the Figma 3067:319 asset once Figma is reachable — this
-  // reuses the home OneTeam photo as a placeholder.
+  // Figma 3067:319 background — byte-identical to the existing om-cta photo.
   background: {
-    src: "/images/cases/oneteam-bg.jpg",
-    alt: "Anlagt græsplæne med stenbelægning og beplantning",
+    src: "/images/om/om-cta.jpg",
+    alt: "Havesti med fliser mellem stedsegrønne buske og beplantning",
   },
   items: [
     { title: "Én ansvarlig kontakt", desc: "Én person holder styr på hele projektet." },
@@ -222,11 +221,10 @@ export const PRIVATE_ONE_TEAM_EN = {
   problem:
     "Renovation often needs a mason, a carpenter, a painter and an outdoor-work specialist. Hire them separately and you are left managing the schedule, the communication and finding who is at fault when something is delayed.",
   intro: "With Grønt Land DK you get instead:",
-  // TODO: swap for the Figma 3067:319 asset once Figma is reachable — this
-  // reuses the home OneTeam photo as a placeholder.
+  // Figma 3067:319 background — byte-identical to the existing om-cta photo.
   background: {
-    src: "/images/cases/oneteam-bg.jpg",
-    alt: "Landscaped lawn with stone paving and planting",
+    src: "/images/om/om-cta.jpg",
+    alt: "Garden path with paving between evergreen shrubs and planting",
   },
   items: [
     { title: "One responsible contact", desc: "One person keeps track of the whole project." },
