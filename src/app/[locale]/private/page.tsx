@@ -6,7 +6,7 @@ import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import { OmTeam } from "@/sections/om";
 import { Process } from "@/sections/home";
-import { PageHero, PageHeroSeamDecor, FaqList, CtaBand } from "@/sections/shared";
+import { PageHero, PageHeroSeamDecor, FaqSection, CtaBand } from "@/sections/shared";
 import {
   PrivateServices,
   PrivateProjects,
@@ -58,7 +58,7 @@ export default async function PrivatePage({ params }: { params: Promise<{ locale
         {/* 7 — Reviews (placeholder) */}
         <PrivateReviews />
         {/* 8 — FAQ */}
-        <FaqList h2={PRIVATE_FAQ.h2} items={PRIVATE_FAQ.items} />
+        <FaqSection h2={PRIVATE_FAQ.h2} items={PRIVATE_FAQ.items} locale={locale} />
         {/* 9 — Final CTA (phone from CMS siteSettings) */}
         <CtaBand
           h2={PRIVATE_CTA.h2}

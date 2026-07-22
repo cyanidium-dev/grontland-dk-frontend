@@ -7,7 +7,7 @@ import { ProjectCard } from "@/components/project";
 import { Container, Heading } from "@/components/ui";
 import { ui } from "@/lib/i18n/copy";
 import type { ServicePageData } from "@/lib/sanity/queries";
-import { FaqList, FeatureGrid, NumberedSteps, PageHero, PageHeroSeamDecor } from "@/sections/shared";
+import { FaqSection, FeatureGrid, NumberedSteps, PageHero, PageHeroSeamDecor } from "@/sections/shared";
 
 /* Section kit for /ydelser/[slug] — thin wrappers over the shared inner-page
    components; section order is fixed by the page route. Data comes from the
@@ -143,8 +143,8 @@ export async function ServiceGalleryStrip({ service }: { service: ServicePageDat
   );
 }
 
-export function ServiceFaq({ service }: { service: ServicePageData }) {
-  return <FaqList h2={service.faq.h2} items={service.faq.items} />;
+export async function ServiceFaq({ service }: { service: ServicePageData }) {
+  return <FaqSection h2={service.faq.h2} items={service.faq.items} locale={await getLocale()} />;
 }
 
 export function ServiceSeoText({ service }: { service: ServicePageData }) {
