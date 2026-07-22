@@ -18,6 +18,7 @@ export async function CtaBand({
   primaryModal = false,
   crosslinks = [],
   image,
+  textMaxWidth = "max-w-2xl",
 }: {
   h2: string;
   text: string;
@@ -26,6 +27,9 @@ export async function CtaBand({
   primaryModal?: boolean;
   crosslinks?: readonly { label: string; href: string }[];
   image?: { src: string; alt: string };
+  /** Tailwind max-width for the copy column. Narrow it (e.g. "max-w-[540px]")
+   *  when a wide photo shares the band so the text keeps clear of it. */
+  textMaxWidth?: string;
 }) {
   const [s, locale] = await Promise.all([getSiteSettings(), getLocale()]);
   const phone = { label: `${ui(locale).callPrefix} ${s.phone}`, href: s.phoneHref };
@@ -41,7 +45,7 @@ export async function CtaBand({
         </div>
       )}
       <Container className="relative z-10 py-16 md:py-20">
-        <div className="max-w-2xl">
+        <div className={textMaxWidth}>
           <Heading as="h2" size="section" className="text-white">
             {h2}
           </Heading>

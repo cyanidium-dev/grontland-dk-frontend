@@ -168,6 +168,11 @@ export const PRIVATE_CTA = {
   text: "Send en kort beskrivelse og et par billeder. Vi vurderer projektet og kontakter dig senest næste hverdag.",
   primary: { label: "Få en projektvurdering", href: "/kontakt" },
   crosslinks: [],
+  // Figma 3067:369
+  image: {
+    src: "/images/cases/cta-private.jpg",
+    alt: "Anlægsgartner i færd med havearbejde ved plæne og staudebed",
+  },
 } as const;
 
 /* ------------------------------------------------------------------ English */
@@ -332,4 +337,9 @@ export const PRIVATE_CTA_EN = {
   text: "Send a short description and a few photos. We will assess the project and contact you by the next business day.",
   primary: { label: "Get a project assessment", href: "/kontakt" },
   crosslinks: [],
+  // Figma 3067:369
+  image: {
+    src: "/images/cases/cta-private.jpg",
+    alt: "Landscaper doing garden work by a lawn and perennial bed",
+  },
 } as const;

@@ -66,6 +66,8 @@ export default async function PrivatePage({ params }: { params: Promise<{ locale
           primary={PRIVATE_CTA.primary}
           primaryModal
           crosslinks={PRIVATE_CTA.crosslinks}
+          image={PRIVATE_CTA.image}
+          textMaxWidth="max-w-[540px]"
         />
       </main>
       <Footer />
