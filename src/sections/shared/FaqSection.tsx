@@ -55,15 +55,17 @@ export function FaqSection({
       const section = sectionRef.current;
       if (!list || !section) return;
       const listTop = list.getBoundingClientRect().top - section.getBoundingClientRect().top;
-      const foldedBottom = listTop + foldedCount * ITEM_H + (foldedCount - 1) * ITEM_GAP;
-      // right offset reproduces the home block's bounding-top (rotation expands
-      // the box upward, so this is the element top, not the visual top).
-      setDecorTop({ right: foldedBottom - 257, left: foldedBottom - 185 });
+      const bottom = (count: number) => listTop + count * ITEM_H + (count - 1) * ITEM_GAP;
+      // Right ring is pinned to the folded list (never moves on open); the right
+      // offset reproduces the home block's bounding-top (rotation expands the box
+      // upward, so this is the element top, not the visual top). The left ring is
+      // only shown while open, so it anchors to the *expanded* list's bottom-left.
+      setDecorTop({ right: bottom(foldedCount) - 257, left: bottom(items.length) - 185 });
     };
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, [foldedCount]);
+  }, [foldedCount, items.length]);
 
   const labels = LABELS[locale] ?? LABELS.da;
 
@@ -81,9 +83,9 @@ export function FaqSection({
           className="absolute left-[1095px] h-[393px] w-[324px] max-w-none origin-center rotate-[117.04deg] opacity-90"
           style={{ top: decorTop ? decorTop.right : "50%" }}
         />
-        {/* Second ring, bottom-left — only when the list actually collapses
-            (mirrors the private-reviews left decor). */}
-        {collapsible && (
+        {/* Second ring, bottom-left — only while the list is open, anchored to
+            the expanded list's bottom-left corner (mirrors private-reviews). */}
+        {expanded && (
           /* eslint-disable-next-line @next/next/no-img-element */
           <img
             src="/svg/decor-rings.svg"
