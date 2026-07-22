@@ -1,13 +1,20 @@
 import { getLocale } from "next-intl/server";
 import Image from "next/image";
 
-import { Link } from "@/i18n/navigation";
 import { GalleryCarousel, type GalleryItem } from "@/components/gallery";
 import { ProjectCard } from "@/components/project";
-import { Container, Heading } from "@/components/ui";
+import { Button, Container, Heading } from "@/components/ui";
 import { ui } from "@/lib/i18n/copy";
 import type { ServicePageData } from "@/lib/sanity/queries";
-import { FaqSection, FeatureGrid, NumberedSteps, PageHero, PageHeroSeamDecor } from "@/sections/shared";
+import {
+  AccentDots,
+  FaqSection,
+  FeatureGrid,
+  NumberedSteps,
+  PageHero,
+  PageHeroSeamDecor,
+  RingDecor,
+} from "@/sections/shared";
 
 /* Section kit for /ydelser/[slug] — thin wrappers over the shared inner-page
    components; section order is fixed by the page route. Data comes from the
@@ -25,21 +32,10 @@ export async function ServiceHero({ service }: { service: ServicePageData }) {
           { label: t.getQuote, modal: true },
           { label: t.seeProjects, href: "/projekter", variant: "leaf" },
         ]}
+        trustChips={service.trustChips}
         image={service.heroImage}
         decor={<PageHeroSeamDecor />}
       />
-      <div className="bg-white pb-10">
-        <Container className="flex flex-wrap gap-2">
-          {service.trustChips.map((chip) => (
-            <span
-              key={chip}
-              className="rounded-full bg-leaf/12 px-4 py-2 text-[12px] font-bold uppercase tracking-[0.3px] text-moss"
-            >
-              {chip}
-            </span>
-          ))}
-        </Container>
-      </div>
     </>
   );
 }
@@ -51,6 +47,12 @@ export function ServiceScope({ service }: { service: ServicePageData }) {
       items={service.scope.items}
       background="mist"
       columns={3}
+      headerAside={<AccentDots />}
+      /* Figma 3101:179 — the projects-family ring (-130.97, bbox 380.9x375.8)
+         centre-right over the heading and first card row. Bottom-anchored so
+         the per-slug/locale heading wrap doesn't drift it (cards are the last
+         element, as in B2bScenariosDecor). Behind the cards by convention. */
+      decor={<RingDecor rotate={-130.97} className="bottom-[213px] left-[calc(50%+48px)]" />}
     />
   );
 }
@@ -58,8 +60,14 @@ export function ServiceScope({ service }: { service: ServicePageData }) {
 export function ServicePrices({ service }: { service: ServicePageData }) {
   if (!service.prices) return null;
   return (
-    <section className="bg-white py-16 xl:py-24">
-      <Container className="max-w-3xl">
+    <section className="relative overflow-x-clip bg-white py-16 xl:py-24">
+      {/* Figma 3101:180 — two rings flanking the narrow price table, top-anchored
+          (the heading is one line here, and extra table rows only grow the
+          section downward). Angles solved from the placed bboxes (360.6x330.2 /
+          323.2x278.4) and sign-confirmed against each group's own render. */}
+      <RingDecor rotate={-110.56} className="left-[calc(50%-602px)] top-[53px]" />
+      <RingDecor rotate={-82.66} className="left-[calc(50%+369px)] top-[96px]" />
+      <Container className="relative z-10 max-w-3xl">
         <Heading as="h2" size="section">
           {service.prices.h2}
         </Heading>
@@ -125,16 +133,13 @@ export async function ServiceGalleryStrip({ service }: { service: ServicePageDat
 
   return (
     <section className="overflow-hidden bg-mist py-16 xl:py-24">
-      <Container className="flex flex-wrap items-baseline justify-between gap-4">
+      <Container className="flex flex-wrap items-center justify-between gap-4">
         <Heading as="h2" size="section">
           {t.galleryStripH2}
         </Heading>
-        <Link
-          href="/galleri"
-          className="text-[12px] font-bold uppercase tracking-[0.3px] text-moss underline underline-offset-4 hover:text-leaf"
-        >
+        <Button href="/galleri" size="md" className="w-full shrink-0 sm:w-auto">
           {t.openGallery}
-        </Link>
+        </Button>
       </Container>
       <div className="mx-auto mt-10 max-w-[416px] sm:max-w-[726px] md:max-w-[867px] lg:max-w-[1141px] xl:max-w-[1494px]">
         <GalleryCarousel items={items} />
@@ -150,12 +155,22 @@ export async function ServiceFaq({ service }: { service: ServicePageData }) {
 export function ServiceSeoText({ service }: { service: ServicePageData }) {
   const [primary, secondary] = service.seoText.images ?? [];
   return (
-    <section className="bg-mist py-16 xl:py-20">
+    <section className="overflow-x-clip bg-mist py-16 xl:py-20">
       <Container>
         <div className="flex flex-col gap-8 xl:flex-row xl:items-center xl:gap-16">
-          <div className="flex w-full shrink-0 flex-col gap-4 xl:w-[460px]">
+          <div className="relative flex w-full shrink-0 flex-col gap-4 xl:w-[460px]">
+            {/* Figma 3101:181 — the ring at ~72% scale (bbox 264.6x246.3)
+                hugging the second photo's bottom-left, behind the images. The
+                column is the anchor (not the section) because xl:items-center
+                moves the column with the copy height. */}
+            {secondary && (
+              <RingDecor
+                rotate={114.84}
+                className="bottom-[5px] left-[-4px] h-[211px] w-[174px]"
+              />
+            )}
             {primary && (
-              <div className="relative h-[240px] overflow-hidden rounded-xl xl:h-[280px]">
+              <div className="relative z-10 h-[240px] overflow-hidden rounded-xl xl:h-[280px]">
                 <Image
                   src={primary.src}
                   alt={primary.alt}
@@ -166,7 +181,7 @@ export function ServiceSeoText({ service }: { service: ServicePageData }) {
               </div>
             )}
             {secondary && (
-              <div className="relative hidden h-[160px] overflow-hidden rounded-xl sm:block xl:h-[180px] xl:w-[75%] xl:self-end">
+              <div className="relative z-10 hidden h-[160px] overflow-hidden rounded-xl sm:block xl:h-[180px] xl:w-[75%] xl:self-end">
                 <Image
                   src={secondary.src}
                   alt={secondary.alt}

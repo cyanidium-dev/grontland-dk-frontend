@@ -115,7 +115,9 @@ export function FeatureGrid({
       className={cn(
         "py-16 xl:py-24",
         onMist ? "bg-mist" : "bg-white",
-        decor && "relative overflow-hidden",
+        // x-clip (not hidden): sideways decor bleed must not scroll, but
+        // vertical bleed is part of the design and must never be cut.
+        decor && "relative overflow-x-clip",
       )}
     >
       {decor}
