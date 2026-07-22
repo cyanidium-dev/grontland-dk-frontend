@@ -54,6 +54,12 @@ export const PRIVATE_ONE_TEAM = {
   problem:
     "Renovering kræver ofte murer, tømrer, maler og en specialist i udearbejde. Hyrer du dem hver for sig, står du selv med tidsplanen, kommunikationen og med at finde den skyldige, når noget bliver forsinket.",
   intro: "Med Grønt Land DK får du i stedet:",
+  // TODO: swap for the Figma 3067:319 asset once Figma is reachable — this
+  // reuses the home OneTeam photo as a placeholder.
+  background: {
+    src: "/images/cases/oneteam-bg.jpg",
+    alt: "Anlagt græsplæne med stenbelægning og beplantning",
+  },
   items: [
     { title: "Én ansvarlig kontakt", desc: "Én person holder styr på hele projektet." },
     { title: "Fælles plan for alle fag", desc: "Alle specialister arbejder efter samme plan." },
@@ -216,6 +222,12 @@ export const PRIVATE_ONE_TEAM_EN = {
   problem:
     "Renovation often needs a mason, a carpenter, a painter and an outdoor-work specialist. Hire them separately and you are left managing the schedule, the communication and finding who is at fault when something is delayed.",
   intro: "With Grønt Land DK you get instead:",
+  // TODO: swap for the Figma 3067:319 asset once Figma is reachable — this
+  // reuses the home OneTeam photo as a placeholder.
+  background: {
+    src: "/images/cases/oneteam-bg.jpg",
+    alt: "Landscaped lawn with stone paving and planting",
+  },
   items: [
     { title: "One responsible contact", desc: "One person keeps track of the whole project." },
     { title: "A shared plan for all trades", desc: "Every specialist works to the same plan." },
