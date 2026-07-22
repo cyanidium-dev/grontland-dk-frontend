@@ -64,14 +64,19 @@ export function ServicePrices({ service }: { service: ServicePageData }) {
       {/* Figma 3101:180 — two rings flanking the narrow price table, top-anchored
           (the heading is one line here, and extra table rows only grow the
           section downward). Angles solved from the placed bboxes (360.6x330.2 /
-          323.2x278.4) and sign-confirmed against each group's own render. */}
-      <RingDecor rotate={-110.56} className="left-[calc(50%-602px)] top-[53px]" />
+          323.2x278.4); signs read from each group's own render via the
+          spout-clock protocol (base artwork spout sits at 12 o'clock, so a CSS
+          rotation of N puts it at clock-angle N): left spout ~4 o'clock =
+          +110.56, right spout just above 9 = -82.66. */}
+      <RingDecor rotate={110.56} className="left-[calc(50%-602px)] top-[53px]" />
       <RingDecor rotate={-82.66} className="left-[calc(50%+369px)] top-[96px]" />
       <Container className="relative z-10 max-w-3xl">
         <Heading as="h2" size="section">
           {service.prices.h2}
         </Heading>
-        <dl className="mt-8 divide-y divide-line rounded-2xl border border-line">
+        {/* bg-white is load-bearing: the flanking rings sit behind this card,
+            and without an opaque fill they show through the rows. */}
+        <dl className="mt-8 divide-y divide-line rounded-2xl border border-line bg-white">
           {service.prices.rows.map((row) => (
             <div
               key={row.label}
@@ -162,10 +167,12 @@ export function ServiceSeoText({ service }: { service: ServicePageData }) {
             {/* Figma 3101:181 — the ring at ~72% scale (bbox 264.6x246.3)
                 hugging the second photo's bottom-left, behind the images. The
                 column is the anchor (not the section) because xl:items-center
-                moves the column with the copy height. */}
+                moves the column with the copy height. Sign via the spout-clock
+                protocol: cascade dense along the top, spout ~2 o'clock =
+                +65.16 (114.84 put the spout below centre — mirror-adjacent). */}
             {secondary && (
               <RingDecor
-                rotate={114.84}
+                rotate={65.16}
                 className="bottom-[5px] left-[-4px] h-[211px] w-[174px]"
               />
             )}
