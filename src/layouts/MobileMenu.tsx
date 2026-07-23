@@ -91,6 +91,9 @@ export function MobileMenu() {
           : "pointer-events-none -translate-y-2 opacity-0",
       )}
       aria-hidden={!open}
+      // inert keeps the hidden drawer's links/buttons out of the tab order —
+      // aria-hidden alone leaves them focusable (Lighthouse aria-hidden-focus).
+      inert={!open}
     >
       <nav
         aria-label="Mobilmenu"
@@ -129,6 +132,9 @@ export function MobileMenu() {
                   ? "grid-rows-[1fr] opacity-100"
                   : "grid-rows-[0fr] opacity-0",
               )}
+              // Collapsed accordion content is invisible but would otherwise
+              // keep its 8 links in the tab order.
+              inert={!servicesOpen}
             >
               <ul className="overflow-hidden">
                 {c.SERVICES_MENU.map((item) => (
