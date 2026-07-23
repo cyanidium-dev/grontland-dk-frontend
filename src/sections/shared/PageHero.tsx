@@ -63,14 +63,17 @@ export function PageHero({
           the section top and bottom (feedback on /om-os, applied site-wide). */}
       {image && (
         <div className="absolute inset-y-0 right-0 z-20 hidden w-[43.5%] overflow-hidden rounded-l-[20px] xl:block">
+          {/* sizes collapses to 1px below xl — see Hero.tsx for why the
+              values must be px-only (vw entries floor the srcset at 384w). */}
           <Image
             src={image.src}
             alt={image.alt}
             fill
             priority
+            fetchPriority="high"
             quality={85}
             className="object-cover"
-            sizes="50vw"
+            sizes="(min-width: 1920px) 845px, (min-width: 1280px) 563px, 1px"
           />
           <div
             aria-hidden
@@ -136,7 +139,8 @@ export function PageHero({
       {/* Mobile: photo below the copy, like home */}
       {image && (
         <div className="relative mx-4 mb-4 h-[340px] overflow-hidden rounded-[20px] xl:hidden">
-          <Image src={image.src} alt={image.alt} fill quality={85} className="object-cover" sizes="100vw" />
+          {/* q75: 340px card + gradient overlay hide the q85 difference */}
+          <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="100vw" />
           <div
             aria-hidden
             className="absolute inset-0 bg-[linear-gradient(170deg,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.05)_55%,rgba(0,0,0,0.7)_100%)]"

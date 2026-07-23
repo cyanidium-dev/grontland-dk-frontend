@@ -28,14 +28,20 @@ export async function Hero() {
           vertically inset; cards are clipped to the panel (overflow-hidden) so
           they stay constrained by the image, left-aligned to the panel edge. */}
       <div className="absolute right-0 top-0 bottom-8 z-20 hidden w-[43.5%] overflow-hidden rounded-l-[20px] xl:block">
+        {/* sizes collapses to 1px below xl: this instance is display:none on
+            mobile but still downloads (and priority-preloads) — the 1px slot
+            makes phones fetch the 16w variant instead. px-only values on
+            purpose: any vw entry makes Next floor the srcset at ~384w, so the
+            1px trick only works with px (44vw of 1280/1920 ≈ 563/845px). */}
         <Image
           src={HERO.image.src}
           alt={HERO.image.alt}
           fill
           priority
+          fetchPriority="high"
           quality={85}
           className="object-cover"
-          sizes="50vw"
+          sizes="(min-width: 1920px) 845px, (min-width: 1280px) 563px, 1px"
         />
         {/* Figma dark gradient — darkens top + bottom for legibility. */}
         <div
@@ -75,20 +81,24 @@ export async function Hero() {
             </Button>
           </div>
 
-          {/* Auto image slider — vertical-flip (bottom→top) overlapping photo stack */}
+          {/* Auto image slider — vertical-flip (bottom→top) overlapping photo
+              stack. firstPriority: on mobile the front card is the page's LCP
+              (the big hero panel is xl-only), so it must be preloaded, not
+              lazy (Lighthouse "LCP request discovery"). */}
           <div className="max-w-[480px]">
-            <ImageCarousel images={[...HERO.slider]} direction="vertical-flip" />
+            <ImageCarousel images={[...HERO.slider]} direction="vertical-flip" firstPriority />
           </div>
         </div>
       </Container>
 
-      {/* Mobile: image with a single project card below the copy */}
+      {/* Mobile: image with a single project card below the copy. q75 (not 85):
+          the 340px card + gradient overlay hide the difference, and this was
+          the page's heaviest image in Lighthouse. */}
       <div className="relative mx-4 mb-4 h-[340px] overflow-hidden rounded-[20px] xl:hidden">
         <Image
           src={HERO.image.src}
           alt={HERO.image.alt}
           fill
-          quality={85}
           className="object-cover"
           sizes="100vw"
         />

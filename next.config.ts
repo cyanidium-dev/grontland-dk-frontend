@@ -12,8 +12,9 @@ const nextConfig: NextConfig = {
     // the optimizer cache (the API never upscales). 1920 stays as headroom for
     // future high-res uploads.
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    // 85 is for main/hero photos; 75 is the default for everything else.
-    qualities: [75, 85],
+    // 85 = main/hero photos, 75 = default, 65 = images under gradient
+    // overlays or rendered small (decorative sliders, text backgrounds).
+    qualities: [65, 75, 85],
     // Sanity asset URLs are content-hashed and local images are re-named on
     // change, so long-lived optimizer cache entries can never serve stale art.
     minimumCacheTTL: 2678400,

@@ -15,6 +15,7 @@ export async function OneTeam() {
         src={ONETEAM.background.src}
         alt={ONETEAM.background.alt}
         fill
+        quality={65}
         className="object-cover"
         sizes="100vw"
       />

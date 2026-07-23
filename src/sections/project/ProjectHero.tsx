@@ -56,6 +56,7 @@ export async function ProjectHero({ project }: { project: Project }) {
               alt={project.heroImageAlt}
               fill
               priority
+              fetchPriority="high"
               quality={85}
               sizes="(min-width: 768px) 50vw, 100vw"
               className="object-cover"

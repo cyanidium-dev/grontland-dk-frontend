@@ -30,11 +30,16 @@ export function ImageCarousel({
   variant = "right",
   direction = "horizontal",
   className = "",
+  firstPriority = false,
 }: {
   images: CarouselImage[];
   variant?: "left" | "right";
   direction?: "horizontal" | "vertical" | "vertical-flip";
   className?: string;
+  /** Preload + eager-load the first (front) image — set when the carousel is
+      the largest above-the-fold element, e.g. the home hero on mobile where
+      Lighthouse picks the front card as LCP. */
+  firstPriority?: boolean;
 }) {
   const [active, setActive] = useState(0);
   const total = images.length;
@@ -85,8 +90,11 @@ export function ImageCarousel({
               src={card.image.src}
               alt={card.image.alt ?? ""}
               fill
+              quality={65}
+              priority={firstPriority && idx === 0}
+              fetchPriority={firstPriority && idx === 0 ? "high" : undefined}
               className="object-cover"
-              sizes="(max-width: 1024px) 80vw, 564px"
+              sizes="(max-width: 1024px) 80vw, 480px"
             />
           </div>
         ))}
