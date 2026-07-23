@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { localeAlternates } from "@/lib/seo/meta";
 import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
@@ -15,7 +17,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const page = await getYdelserIndex();
-  return { title: page.metaTitle, description: page.metaDescription };
+  return {
+    title: page.metaTitle,
+    description: page.metaDescription,
+    alternates: localeAlternates(locale, "/ydelser"),
+  };
 }
 
 /* /ydelser — hub page: hero → card grid (one card per service doc) → CTA. */

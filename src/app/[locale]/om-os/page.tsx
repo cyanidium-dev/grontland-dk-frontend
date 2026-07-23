@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { localeAlternates } from "@/lib/seo/meta";
 import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
@@ -16,7 +18,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const { OM_META } = omCopy(locale);
-  return { title: OM_META.title, description: OM_META.description };
+  return {
+    title: OM_META.title,
+    description: OM_META.description,
+    alternates: localeAlternates(locale, "/om-os"),
+  };
 }
 
 /* /om-os — docs/content/om-os.md: hero → who-we-are + facts → values → team →

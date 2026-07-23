@@ -7,11 +7,15 @@ import { type Project } from "@/constants/projects";
 import { projectsCopy } from "@/lib/i18n/copy";
 
 export async function ProjectHero({ project }: { project: Project }) {
-  const { PROJECT_CATEGORY_LABEL } = projectsCopy(await getLocale());
+  const locale = await getLocale();
+  const { PROJECT_CATEGORY_LABEL } = projectsCopy(locale);
   return (
     <section className="bg-mist py-12 xl:py-16">
       <Container>
-        <nav aria-label="Brødkrumme" className="text-sm text-pine/50">
+        <nav
+          aria-label={locale === "en" ? "Breadcrumb" : "Brødkrumme"}
+          className="text-sm text-pine/50"
+        >
           <Link href="/projekter" className="transition-colors hover:text-leaf">
             Projekter
           </Link>

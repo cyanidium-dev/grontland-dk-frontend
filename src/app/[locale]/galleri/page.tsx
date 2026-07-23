@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { localeAlternates } from "@/lib/seo/meta";
 import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
@@ -13,7 +15,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const page = await getGalleriPage();
-  return { title: page.metaTitle, description: page.metaDescription };
+  return {
+    title: page.metaTitle,
+    description: page.metaDescription,
+    alternates: localeAlternates(locale, "/galleri"),
+  };
 }
 
 /* /galleri — hero (pills + Figma decor/photo) → per-service sections → SEO
@@ -35,7 +41,11 @@ export default async function GalleriPage({ params }: { params: Promise<{ locale
           sub={page.hero.sub}
           image={{
             src: "/images/galleri/galleri-hero.jpg",
-            alt: page.hero.image?.alt ?? "Belægning i sildebensmønster fra en rigtig opgave",
+            alt:
+              page.hero.image?.alt ??
+              (locale === "en"
+                ? "Herringbone paving from a real job"
+                : "Belægning i sildebensmønster fra en rigtig opgave"),
           }}
           decor={
             // eslint-disable-next-line @next/next/no-img-element
@@ -47,7 +57,10 @@ export default async function GalleriPage({ params }: { params: Promise<{ locale
             />
           }
         >
-          <nav aria-label="Gå til kategori" className="flex flex-wrap gap-2">
+          <nav
+            aria-label={locale === "en" ? "Go to category" : "Gå til kategori"}
+            className="flex flex-wrap gap-2"
+          >
             {page.sections.map((s) => (
               <Link
                 key={s.id}

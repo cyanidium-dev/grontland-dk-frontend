@@ -1,10 +1,12 @@
 import Image from "next/image";
+import { useLocale } from "next-intl";
 
 import { Container, Heading, Dots } from "@/components/ui";
 
-const FALLBACK_IMAGE = {
-  src: "/images/galleri/galleri-seo.jpg",
-  alt: "Grønt Land DK medarbejder på en haveopgave",
+const FALLBACK_SRC = "/images/galleri/galleri-seo.jpg";
+const FALLBACK_ALT = {
+  da: "Grønt Land DK medarbejder på en haveopgave",
+  en: "Grønt Land DK employee on a garden job",
 };
 
 /* Gallery SEO band — Figma #3053:107. Mist section: left-bleed photo, right
@@ -18,7 +20,10 @@ export function GalleriSeoText({
   text: string;
   image?: { src: string; alt: string } | null;
 }) {
-  const photo = image?.src ? image : FALLBACK_IMAGE;
+  const locale = useLocale();
+  const photo = image?.src
+    ? image
+    : { src: FALLBACK_SRC, alt: FALLBACK_ALT[locale === "en" ? "en" : "da"] };
 
   return (
     <section className="relative overflow-hidden bg-mist">

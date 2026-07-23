@@ -40,7 +40,7 @@ export function MobileMenu() {
     // taking the close button with it. Instead we swallow scroll gestures that
     // originate outside the drawer's scroll area.
     const inDrawer = (target: EventTarget | null) => {
-      const nav = document.querySelector('[aria-label="Mobilmenu"]');
+      const nav = document.querySelector("[data-mobile-menu-nav]");
       return !!(nav && target instanceof Node && nav.contains(target));
     };
 
@@ -96,7 +96,8 @@ export function MobileMenu() {
       inert={!open}
     >
       <nav
-        aria-label="Mobilmenu"
+        data-mobile-menu-nav
+        aria-label={en ? "Mobile menu" : "Mobilmenu"}
         className="mx-auto flex h-full max-w-7xl flex-col overflow-y-auto overscroll-contain px-6 pb-6 pt-4"
       >
         <ul className="flex flex-col">

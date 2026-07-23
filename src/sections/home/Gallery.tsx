@@ -55,7 +55,11 @@ export function Gallery({ categories }: { categories: GalleryCategoryData[] }) {
           <Button href={GALLERY.cta.href} variant="leaf" className="w-full shrink-0 sm:w-[284px]">
             {GALLERY.cta.label}
           </Button>
-          <div role="group" aria-label="Filtrer galleri" className="flex flex-wrap gap-2">
+          <div
+            role="group"
+            aria-label={locale === "en" ? "Filter gallery" : "Filtrer galleri"}
+            className="flex flex-wrap gap-2"
+          >
             {filters.map((item) => (
               <FilterPill
                 key={item.id}

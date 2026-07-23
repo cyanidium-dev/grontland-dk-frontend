@@ -1,14 +1,12 @@
 "use client";
 
+import { useLocale } from "next-intl";
 import { useState } from "react";
 
 import { ProjectCard } from "@/components/project";
 import { Container, FilterPill, Heading } from "@/components/ui";
-import {
-  PROJECTS_LIST,
-  type Project,
-  type ProjectFilterId,
-} from "@/constants/projects";
+import { type Project, type ProjectFilterId } from "@/constants/projects";
+import { projectsCopy } from "@/lib/i18n/copy";
 
 /* Listing body — copy + projects come from the CMS (projekterPage +
    project docs); the audience filter pills stay code (category enum). */
@@ -23,6 +21,10 @@ export function ProjectsListing({
   emptyFilter: string | null;
   projects: Project[];
 }) {
+  const locale = useLocale();
+  // Localized copy (was imported straight from the da constants, which leaked
+  // Danish filter labels onto the EN listing).
+  const { PROJECTS_LIST } = projectsCopy(locale);
   const [filter, setFilter] = useState<ProjectFilterId>("all");
   const visible = filter === "all" ? projects : projects.filter((p) => p.category === filter);
 
@@ -40,7 +42,7 @@ export function ProjectsListing({
 
         <div
           role="group"
-          aria-label="Filtrer projekter"
+          aria-label={locale === "en" ? "Filter projects" : "Filtrer projekter"}
           className="mt-8 flex flex-wrap gap-2"
         >
           {PROJECTS_LIST.filters.map((item) => (

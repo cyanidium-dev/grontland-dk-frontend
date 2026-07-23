@@ -68,6 +68,7 @@ export const PROJECTS_LIST_EN = {
     { id: "private" as const, label: "Private" },
     { id: "b2b" as const, label: "B2B" },
   ],
+  emptyFilter: "No projects in this category yet.",
 } as const;
 
 export const PROJECTS_LIST = {

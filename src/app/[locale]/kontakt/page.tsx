@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { localeAlternates } from "@/lib/seo/meta";
 import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
@@ -15,7 +17,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const { KONTAKT_META } = kontaktCopy(locale);
-  return { title: KONTAKT_META.title, description: KONTAKT_META.description };
+  return {
+    title: KONTAKT_META.title,
+    description: KONTAKT_META.description,
+    alternates: localeAlternates(locale, "/kontakt"),
+  };
 }
 
 /* /kontakt — docs/content/kontakt.md: hero → form + direct contact →

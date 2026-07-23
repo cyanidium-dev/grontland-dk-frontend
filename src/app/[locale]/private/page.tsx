@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { localeAlternates } from "@/lib/seo/meta";
 import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
@@ -22,7 +24,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const { PRIVATE_META } = privateCopy(locale);
-  return { title: PRIVATE_META.title, description: PRIVATE_META.description };
+  return {
+    title: PRIVATE_META.title,
+    description: PRIVATE_META.description,
+    alternates: localeAlternates(locale, "/private"),
+  };
 }
 
 /* /private — restructured per docs/private-page-restructure-mapping.md:

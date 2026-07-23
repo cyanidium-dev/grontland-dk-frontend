@@ -3,6 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { QuoteModalProvider } from "@/components/quote";
+import { localeAlternates } from "@/lib/seo/meta";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import {
@@ -34,12 +35,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   setRequestLocale(locale);
   const project = await getProjectBySlug(slug);
   if (!project) return { title: "Projekt | Grønt Land DK" };
+  const path = `/projekter/${slug}`;
   return {
     title: `${project.title} | Grønt Land DK`,
     description: project.seoDescription,
+    alternates: localeAlternates(locale, path),
     openGraph: {
       title: `${project.title} | Grønt Land DK`,
       description: project.seoDescription,
+      url: locale === "en" ? `/en${path}` : path,
       images: [{ url: project.heroImage, alt: project.heroImageAlt }],
     },
   };

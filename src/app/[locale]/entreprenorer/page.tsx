@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { localeAlternates } from "@/lib/seo/meta";
 import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
@@ -23,7 +25,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const { B2B_META } = b2bCopy(locale);
-  return { title: B2B_META.title, description: B2B_META.description };
+  return {
+    title: B2B_META.title,
+    description: B2B_META.description,
+    alternates: localeAlternates(locale, "/entreprenorer"),
+  };
 }
 
 /* /entreprenorer — per Contractors.md: hero (trust chips + modal CTA) →

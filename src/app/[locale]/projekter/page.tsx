@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { localeAlternates } from "@/lib/seo/meta";
 import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
@@ -11,7 +13,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const page = await getProjekterPage();
-  return { title: page.metaTitle, description: page.metaDescription };
+  return {
+    title: page.metaTitle,
+    description: page.metaDescription,
+    alternates: localeAlternates(locale, "/projekter"),
+  };
 }
 
 export default async function ProjekterPage({ params }: { params: Promise<{ locale: string }> }) {
