@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "next-intl";
 import type { ReactNode } from "react";
 
 import { cn } from "@/util/cn";
@@ -15,6 +16,7 @@ export function Modal({
   children: ReactNode;
   className?: string;
 }) {
+  const en = useLocale() === "en";
   return (
     <div
       className={cn(
@@ -25,6 +27,9 @@ export function Modal({
       role="dialog"
       aria-modal="true"
       aria-hidden={!isOpen}
+      // Closed modal keeps its close button out of the tab order (same
+      // aria-hidden-focus rule as the mobile drawer).
+      inert={!isOpen}
     >
       <div
         className={cn(
@@ -36,7 +41,7 @@ export function Modal({
         <button
           type="button"
           onClick={onClose}
-          aria-label="Luk"
+          aria-label={en ? "Close" : "Luk"}
           className="absolute top-5 right-4 z-30 flex size-8 cursor-pointer items-center justify-center text-white transition-opacity hover:opacity-70 md:top-5 md:right-5"
         >
           <svg

@@ -22,13 +22,24 @@ export const localBusiness = (s: SiteSettings) => ({
   openingHours: "Mo-Fr 08:00-17:00",
 });
 
-export const servicePage = (p: { name: string; description: string; slug: string }) => ({
+/* Locale-prefixed absolute URL: da unprefixed, en under /en (client spec —
+   the EN service schema must point at the /en URL, not the Danish one). */
+const localeUrl = (locale: string, path: string) =>
+  `${BASE}${locale === "en" ? "/en" : ""}${path === "/" ? "" : path}` || BASE;
+
+export const servicePage = (p: {
+  name: string;
+  description: string;
+  slug: string;
+  locale: string;
+}) => ({
   "@context": "https://schema.org",
   "@type": "Service",
   name: p.name,
   description: p.description,
-  url: `${BASE}/ydelser/${p.slug}`,
-  areaServed: "København og Storkøbenhavn",
+  url: localeUrl(p.locale, `/ydelser/${p.slug}`),
+  areaServed:
+    p.locale === "en" ? "Copenhagen and Greater Copenhagen" : "København og Storkøbenhavn",
   provider: { "@type": "HomeAndConstructionBusiness", name: "Grønt Land DK", url: BASE },
 });
 
@@ -42,13 +53,16 @@ export const faqPage = (items: readonly { q: string; a: string }[]) => ({
   })),
 });
 
-export const breadcrumbs = (trail: readonly { name: string; path: string }[]) => ({
+export const breadcrumbs = (
+  trail: readonly { name: string; path: string }[],
+  locale: string,
+) => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: trail.map((t, i) => ({
     "@type": "ListItem",
     position: i + 1,
     name: t.name,
-    item: `${BASE}${t.path}`,
+    item: localeUrl(locale, t.path),
   })),
 });

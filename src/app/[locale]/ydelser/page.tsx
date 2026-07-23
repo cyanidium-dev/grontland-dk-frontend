@@ -27,10 +27,13 @@ export default async function YdelserIndexPage({ params }: { params: Promise<{ l
   return (
     <QuoteModalProvider>
       <JsonLd
-        data={breadcrumbs([
-          { name: homeCopy(locale).NAV_MENU[0].label, path: "/" },
-          { name: ui(locale).servicesLabel, path: "/ydelser" },
-        ])}
+        data={breadcrumbs(
+          [
+            { name: homeCopy(locale).NAV_MENU[0].label, path: "/" },
+            { name: ui(locale).servicesLabel, path: "/ydelser" },
+          ],
+          locale,
+        )}
       />
       <Header />
       <main className="flex-1">

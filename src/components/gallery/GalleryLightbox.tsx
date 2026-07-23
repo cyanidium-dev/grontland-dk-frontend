@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useLocale } from "next-intl";
 import { useEffect } from "react";
 
 import { ChevronIcon } from "@/components/icons";
@@ -24,6 +25,7 @@ export function GalleryLightbox({
   onActiveIndexChange: (index: number) => void;
   onClose: () => void;
 }) {
+  const en = useLocale() === "en";
   const total = items.length;
   const current = items[activeIndex];
 
@@ -61,7 +63,7 @@ export function GalleryLightbox({
             <Image
               key={current._key}
               src={current.image.link}
-              alt={current.image.alt || "Galleri billede"}
+              alt={current.image.alt || (en ? "Gallery image" : "Galleri billede")}
               fill
               className="object-contain"
               sizes="(max-width: 768px) 100vw, 930px"
@@ -78,7 +80,7 @@ export function GalleryLightbox({
         >
           <button
             type="button"
-            aria-label="Forrige billede"
+            aria-label={en ? "Previous image" : "Forrige billede"}
             onClick={goPrev}
             className="pointer-events-auto flex size-[54px] cursor-pointer items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
           >
@@ -86,7 +88,7 @@ export function GalleryLightbox({
           </button>
           <button
             type="button"
-            aria-label="Næste billede"
+            aria-label={en ? "Next image" : "Næste billede"}
             onClick={goNext}
             className="pointer-events-auto flex size-[54px] cursor-pointer items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
           >

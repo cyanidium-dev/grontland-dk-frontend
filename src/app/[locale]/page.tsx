@@ -20,7 +20,7 @@ import { getGalleryCategories } from "@/lib/sanity/queries";
 
 import type { Metadata } from "next";
 
-import { OG_IMAGE, SITE_META } from "@/lib/seo/meta";
+import { localeAlternates, OG_IMAGE, SITE_META } from "@/lib/seo/meta";
 
 /* Canonical + region-qualified hreflang for the home page (client SEO spec):
    da-DK is the primary + x-default, en-DK the English-in-Denmark variant.
@@ -36,10 +36,7 @@ export async function generateMetadata({
   const m = SITE_META[en ? "en" : "da"];
   const path = en ? "/en" : "/";
   return {
-    alternates: {
-      canonical: path,
-      languages: { "da-DK": "/", "en-DK": "/en", "x-default": "/" },
-    },
+    alternates: localeAlternates(locale, ""),
     openGraph: {
       type: "website",
       siteName: "Grønt Land DK",
