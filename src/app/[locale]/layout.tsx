@@ -9,7 +9,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { routing } from "@/i18n/routing";
 import { getSiteSettings } from "@/lib/sanity/queries";
 import { localBusiness } from "@/lib/seo/jsonld";
-import { OG_IMAGE, SITE_META } from "@/lib/seo/meta";
+import { OG_IMAGE, SITE_META, SITE_URL } from "@/lib/seo/meta";
 
 // Manrope — body + display headings (300–800 covers Light…Bold used in the design).
 const manrope = Manrope({
@@ -41,7 +41,7 @@ export async function generateMetadata({
   // subpage hreflang comes from sitemap.ts — a layout-wide set would wrongly
   // point every subpage at "/" and conflict with the sitemap's pairs).
   return {
-    metadataBase: new URL("https://grontland.dk"),
+    metadataBase: new URL(SITE_URL),
     title: m.title,
     description: m.description,
     openGraph: {

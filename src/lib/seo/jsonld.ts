@@ -3,8 +3,9 @@
  * (single source; see lib/sanity/queries.ts).
  */
 import type { SiteSettings } from "@/lib/sanity/queries";
+import { SITE_URL } from "@/lib/seo/meta";
 
-const BASE = "https://grontland.dk";
+const BASE = SITE_URL;
 
 export const localBusiness = (s: SiteSettings) => ({
   "@context": "https://schema.org",

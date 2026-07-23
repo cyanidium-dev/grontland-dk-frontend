@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 
 import { getProjectSlugs, getServiceSlugs } from "@/lib/sanity/queries";
+import { SITE_URL } from "@/lib/seo/meta";
 
-const BASE = "https://grontland.dk";
+const BASE = SITE_URL;
 
 /* Emit each route once per locale. da is unprefixed (localePrefix
    "as-needed"), en lives under /en; both paths cross-reference via
