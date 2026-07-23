@@ -37,7 +37,7 @@ const META = {
   en: {
     title: "Grønt Land DK — Renovation and construction in Copenhagen",
     description:
-      "Grønt Land DK helps homeowners and contractors with renovation, façade work, paving, carpentry, masonry, painting and garden work in Copenhagen and Greater Copenhagen.",
+      "Renovation and construction in Copenhagen for homeowners and contractors. Paving, masonry, carpentry, painting, façades and garden work.",
   },
 } as const;
 

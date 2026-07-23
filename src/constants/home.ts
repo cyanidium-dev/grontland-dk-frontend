@@ -188,7 +188,7 @@ export const ABOUT = {
 // words, not a separate SEO wall).
 export const SEOTEXT = {
   h2: "Renovering og byggeopgaver i København",
-  text: "Grønt Land DK er en entreprenørvirksomhed, der udfører renovering og byggeopgaver i København og Storkøbenhavn — for både private boligejere og entreprenører. Vi arbejder med havearbejde, belægningsarbejde, facadearbejde, malerservice, tømrerarbejde, murerarbejde, demonteringsarbejde og totalentreprise, hvor flere fag samles i én plan med én ansvarlig kontakt. Uanset om opgaven er en ny terrasse, en renoveret facade, ny belægning i indkørslen eller en samlet renovering af boligen, planlægger vi arbejdet fra start til aflevering med en tydelig tidsramme og en klar aftale. Entreprenører bruger os som et stabilt team til delopgaver og ekstra kapacitet på byggeprojekter. Send en kort beskrivelse af din opgave — så vurderer vi den og vender tilbage med næste skridt.",
+  text: "Grønt Land DK er en entreprenørvirksomhed, der udfører renovering og byggeopgaver i København og Storkøbenhavn — for både private boligejere og entreprenører. Vi arbejder med havearbejde, belægningsarbejde, facadearbejde, malerservice, tømrerarbejde, murerarbejde, demonteringsarbejde, rengøringsarbejde og totalentreprise, hvor flere fag samles i én plan med én ansvarlig kontakt. Uanset om opgaven er en ny terrasse, en renoveret facade, ny belægning i indkørslen eller en samlet renovering af boligen, planlægger vi arbejdet fra start til aflevering med en tydelig tidsramme og en klar aftale. Entreprenører bruger os som et stabilt team til delopgaver og ekstra kapacitet på byggeprojekter. Send en kort beskrivelse af din opgave — så vurderer vi den og vender tilbage med næste skridt.",
   image: "/images/cases/havearbejde-private.png",
   imageAlt: "Plejet have med græsplæne og beplantning",
 } as const;
@@ -203,7 +203,7 @@ export const FAQ = {
     { q: "Hvilke områder dækker I?", a: "Vi arbejder i København og Storkøbenhavn." },
     {
       q: "Hvilke typer arbejde udfører I?",
-      a: "Vi udfører blandt andet havearbejde, belægningsarbejde, facadearbejde, malerservice, tømrerarbejde, murerarbejde og totalentreprise.",
+      a: "Vi udfører blandt andet havearbejde, belægningsarbejde, facadearbejde, malerservice, tømrerarbejde, murerarbejde, demonteringsarbejde, rengøringsarbejde og totalentreprise.",
     },
     {
       q: "Kan I håndtere flere fag i samme projekt?",
@@ -238,6 +238,8 @@ export const QUOTE_FORM = {
     "Malerservice",
     "Tømrerarbejde",
     "Murerarbejde",
+    "Demonteringsarbejde",
+    "Rengøringsarbejde",
     "Totalentreprise",
     "Andet",
   ],
@@ -309,7 +311,7 @@ export const FOOTER_EN = {
 } as const;
 
 export const HERO_EN = {
-  h1: "Complete renovation and construction work in Copenhagen",
+  h1: "Renovation and construction company in Copenhagen",
   sub: "Grønt Land DK helps homeowners and contractors with renovation, façade work, paving, carpentry, masonry, painting and garden work in Copenhagen and Greater Copenhagen.",
   ctaPrimary: { label: "Get a quote", href: "/kontakt" },
   ctaSecondary: { label: "See services", href: "/ydelser" },
@@ -326,7 +328,7 @@ export const AUDIENCES_EN = {
   cards: [
     {
       title: "For private customers",
-      text: "For homeowners who need renovation, a deck, a facade, paving, garden work or other jobs around the home.",
+      text: "For homeowners who need renovation, a deck, a façade, paving, garden work or other jobs around the home.",
       cta: { label: "See solutions for private customers", href: "/private" },
       image: "/images/cases/havearbejde-private.png",
       imageAlt: "A well-kept garden with lawn and planting",
@@ -361,28 +363,34 @@ export const ONETEAM_EN = {
 
 export const SERVICES_EN = {
   h2: "Our services",
-  sub: "We take on interior and exterior work — from garden work and paving to facades, painting, carpentry, masonry and turnkey renovation.",
+  sub: "We take on interior and exterior work — from garden work and paving to façades, painting, carpentry, masonry and turnkey renovation.",
   cta: { label: "See all services", href: "/ydelser" },
 } as const;
 
 export const PROCESS_EN = {
-  h2: "How the work proceeds",
+  h2: "How we work",
   cta: { label: "Start with a short message", href: "/kontakt" },
   steps: [
     {
-      title: "You send an inquiry",
+      title: "You send an enquiry",
       desc: "Describe the task and location, and attach photos if relevant.",
     },
     {
       title: "We assess the task",
       desc: "We clarify scope, materials, access, timeline and required trades.",
     },
-    { title: "You get a quote", desc: "A clear frame for price, process and next steps." },
+    {
+      title: "You get a quote",
+      desc: "You receive a clear quote covering the price, scope, process and next steps.",
+    },
     {
       title: "We carry out the work",
       desc: "The team follows the agreed plan with ongoing communication.",
     },
-    { title: "We hand over the project", desc: "The work is reviewed and handed over properly." },
+    {
+      title: "We hand over the project",
+      desc: "Together, we review the completed work before handover.",
+    },
   ],
 } as const;
 
@@ -395,22 +403,22 @@ export const MARQUEE_WORDS_EN = [
 
 export const GALLERY_EN = {
   h2: "Gallery of completed work",
-  sub: "See photos of facades, paving, renovation, garden work, carpentry and more.",
+  sub: "See photos of façades, paving, renovation, garden work, carpentry and more.",
   cta: { label: "Open the gallery", href: "/galleri" },
 } as const;
 
 export const ABOUT_EN = {
   h2: "About Grønt Land DK",
-  text: "Grønt Land DK works with renovation, construction and outdoor areas in Copenhagen and Greater Copenhagen. The team brings several trades into one plan, so the client gets a simpler process, clearer responsibility and better coherence from start to handover.",
+  text: "Grønt Land DK works with renovation, construction and outdoor areas in Copenhagen and Greater Copenhagen. The team coordinates several trades under one plan, giving the client a simpler process, clear responsibility and a more consistent result from start to handover.",
   facts: [
     { label: "Service area", value: "Copenhagen and Greater Copenhagen" },
     { label: "Customer types", value: "private customers and contractors" },
-    { label: "Focus", value: "renovation, facades, paving, garden work and turnkey jobs" },
+    { label: "Focus", value: "renovation, façades, paving, garden work and turnkey jobs" },
     { label: "Principle", value: "clear agreements and proper handover" },
   ],
   team: {
     h3: "A team that takes responsibility on site",
-    text: "At Grønt Land DK you meet tradespeople who understand both planning and practical execution. The team covers several trades and works to one shared plan.",
+    text: "At Grønt Land DK, you work with tradespeople who understand both planning and practical execution. The team covers several trades and works to one shared plan.",
     trades: ["Masonry", "Carpentry", "Painting", "Paving", "Garden work"],
   },
   cta: { label: "Read more about us", href: "/om-os" },
@@ -419,8 +427,8 @@ export const ABOUT_EN = {
 } as const;
 
 export const SEOTEXT_EN = {
-  h2: "Renovation and construction work in Copenhagen",
-  text: "Grønt Land DK is a contracting company carrying out renovation and construction work in Copenhagen and Greater Copenhagen — for homeowners and contractors alike. We work with garden work, paving, facades, painting, carpentry, masonry, strip-out and turnkey renovation, where several trades come together in one plan with one responsible contact. Whether the job is a new deck, a renovated facade, new paving for the driveway or a full renovation of the home, we plan the work from start to handover with a clear timeline and a clear agreement. Contractors use us as a stable team for work packages and extra capacity on construction projects. Send a short description of your job — we assess it and come back with the next step.",
+  h2: "Renovation services for homeowners and contractors",
+  text: "Grønt Land DK is a renovation and construction company serving Copenhagen and Greater Copenhagen. We help homeowners and contractors with garden work, paving, façade renovation, painting, carpentry, masonry, demolition, cleaning and turnkey renovation. When several trades are involved, we coordinate the work under one plan and one responsible contact. Whether you need a new deck, driveway paving, façade work or a full home renovation, you get a clear scope, timeline and quote from the start. We also support contractors with defined work packages and extra capacity on construction projects. Send us a short description of your project, and we’ll get back to you with the next step.",
   image: "/images/cases/havearbejde-private.png",
   imageAlt: "A well-kept garden with lawn and planting",
 } as const;
@@ -435,7 +443,7 @@ export const FAQ_EN = {
     { q: "Which areas do you cover?", a: "We work in Copenhagen and Greater Copenhagen." },
     {
       q: "What kinds of work do you do?",
-      a: "Garden work, paving, facade work, painting, carpentry, masonry and turnkey renovation, among others.",
+      a: "We carry out garden work, paving, façade work, painting, carpentry, masonry, demolition, cleaning and turnkey renovation.",
     },
     {
       q: "Can you handle several trades in one project?",
@@ -455,7 +463,7 @@ export const FAQ_EN = {
 export const QUOTE_FORM_EN = {
   h2: "Get a quote for your project",
   h2Lines: ["Get a quote for", "your project"] as const,
-  sub: "Send a short description of the job, and we come back with the next step.",
+  sub: "Send us a short description of your project, and we’ll get back to you with the next steps.",
   fields: { name: "Name", phone: "Phone", email: "Email" },
   whoLabel: "I am:",
   whoOptions: ["A private customer", "A contractor / business"],
@@ -464,23 +472,25 @@ export const QUOTE_FORM_EN = {
   taskOptions: [
     "Garden work",
     "Paving",
-    "Facade work",
+    "Façade work",
     "Painting",
     "Carpentry",
     "Masonry",
+    "Demolition & strip-out",
+    "Cleaning",
     "Turnkey renovation",
     "Other",
   ],
   message: "Message",
   upload: "Upload photos",
   uploadHint: "Drag photos here, or click to choose",
-  button: "Send inquiry",
+  button: "Send enquiry",
   micro: "We reply with a clear next step.",
   cta: { label: "Contact us" },
   image: "/images/cases/quote-cta-band.jpg",
   imageAlt: "New concrete steps with a white balustrade",
   reassurance: [
-    { label: "Reply", value: "We reply within 24 hours" },
+    { label: "Response time", value: "Within 24 hours" },
     { label: "Area", value: "Copenhagen and Greater Copenhagen" },
     { label: "CVR", value: "45514374" },
   ],
