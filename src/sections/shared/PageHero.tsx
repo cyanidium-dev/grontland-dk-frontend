@@ -68,6 +68,7 @@ export function PageHero({
             alt={image.alt}
             fill
             priority
+            quality={85}
             className="object-cover"
             sizes="50vw"
           />
@@ -135,7 +136,7 @@ export function PageHero({
       {/* Mobile: photo below the copy, like home */}
       {image && (
         <div className="relative mx-4 mb-4 h-[340px] overflow-hidden rounded-[20px] xl:hidden">
-          <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="100vw" />
+          <Image src={image.src} alt={image.alt} fill quality={85} className="object-cover" sizes="100vw" />
           <div
             aria-hidden
             className="absolute inset-0 bg-[linear-gradient(170deg,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.05)_55%,rgba(0,0,0,0.7)_100%)]"

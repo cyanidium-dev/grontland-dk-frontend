@@ -14,7 +14,7 @@ export const KONTAKT_HERO = {
   // Same photo as the quote CTA bands (home + projekter) — the "få et tilbud" visual.
   // Figma #3049:128 — landscaped garden with pergola.
   image: {
-    src: "/images/kontakt/kontakt-hero.png",
+    src: "/images/kontakt/kontakt-hero.jpg",
     alt: "Anlagt have med stenbede, trædesten i græsplænen og pergola",
   },
 } as const;
@@ -42,7 +42,7 @@ export const KONTAKT_INFO = {
     { label: "Virksomhed", value: "Grønt Land DK · CVR 45514374" },
   ],
   // Figma #3049:154 — fills the gap under the contact cards.
-  image: { src: "/images/kontakt/kontakt-form.png", alt: "Nylagt gråt tegltag" },
+  image: { src: "/images/kontakt/kontakt-form.jpg", alt: "Nylagt gråt tegltag" },
 } as const;
 
 export const KONTAKT_STEPS = {
@@ -92,7 +92,7 @@ export const KONTAKT_HERO_EN = {
   cta: { label: "Call 91 70 01 03", href: "tel:+4591700103" },
   // Figma #3049:128 — landscaped garden with pergola.
   image: {
-    src: "/images/kontakt/kontakt-hero.png",
+    src: "/images/kontakt/kontakt-hero.jpg",
     alt: "Landscaped garden with stone beds, stepping stones in the lawn and a pergola",
   },
 } as const;
@@ -120,7 +120,7 @@ export const KONTAKT_INFO_EN = {
     { label: "Company", value: "Grønt Land DK · CVR 45514374" },
   ],
   // Figma #3049:154 — fills the gap under the contact cards.
-  image: { src: "/images/kontakt/kontakt-form.png", alt: "Newly laid grey tiled roof" },
+  image: { src: "/images/kontakt/kontakt-form.jpg", alt: "Newly laid grey tiled roof" },
 } as const;
 
 export const KONTAKT_STEPS_EN = {

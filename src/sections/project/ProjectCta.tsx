@@ -9,7 +9,7 @@ import type { CtaBandData } from "@/lib/sanity/queries";
 export function ProjectCta({ cta }: { cta: CtaBandData }) {
   const { h2, text: sub, primary, image: img } = cta;
   const button = primary.label;
-  const image = img?.src ?? "/images/cases/quote-cta-band.png";
+  const image = img?.src ?? "/images/cases/quote-cta-band.jpg";
   const imageAlt = img?.alt ?? "Nybelagte betontrin foran bolig med hvid balustrade";
 
   return (

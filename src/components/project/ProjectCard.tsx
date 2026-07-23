@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLocale } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
@@ -13,12 +14,13 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link href={`/projekter/${project.slug}`} className="group block">
       <div className="relative">
-        <div className="relative aspect-[4/3] w-full rounded-2xl border-4 border-leaf">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border-4 border-leaf">
+          <Image
             src={project.cardImage}
             alt={project.cardImageAlt}
-            className="h-full w-full rounded-xl object-cover"
+            fill
+            sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="rounded-xl object-cover"
           />
         </div>
         <StarChip

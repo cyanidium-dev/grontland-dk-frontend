@@ -86,7 +86,7 @@ export const PROJECTS_LIST = {
     h2: "Diskuter dit projekt",
     sub: "Fortæl kort om opgaven — så vender vi tilbage med næste skridt, uanset om du er privat kunde eller entreprenør.",
     button: "Få et tilbud",
-    image: "/images/cases/quote-cta-band.png",
+    image: "/images/cases/quote-cta-band.jpg",
     imageAlt: "Nybelagte betontrin foran bolig med hvid balustrade",
   },
 } as const;

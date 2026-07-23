@@ -2,6 +2,8 @@
 
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 
+import Image from "next/image";
+
 import { ChevronIcon } from "@/components/icons";
 import { cn } from "@/util/cn";
 
@@ -57,11 +59,13 @@ function CoverflowSlide({
       {failed ? (
         <div className="h-full w-full rounded-[14px] bg-white ring-1 ring-inset ring-line" aria-hidden />
       ) : (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <Image
           src={item.image.link}
           alt={item.image.alt || `Galleri billede ${index + 1}`}
-          className="h-full w-full rounded-[14px] object-cover"
+          fill
+          sizes="(min-width: 1024px) 727px, 90vw"
+          quality={85}
+          className="rounded-[14px] object-cover"
           onError={() => setFailed(true)}
         />
       )}

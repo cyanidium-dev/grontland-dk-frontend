@@ -247,7 +247,7 @@ export const QUOTE_FORM = {
   button: "Send forespørgsel",
   micro: "Vi vender tilbage med en klar næste handling.",
   cta: { label: "Kontakt os" },
-  image: "/images/cases/quote-cta-band.png",
+  image: "/images/cases/quote-cta-band.jpg",
   imageAlt: "Nybelagte betontrin foran bolig med hvid balustrade",
   reassurance: [
     { label: "Svar", value: "Vi svarer inden 24 timer" },
@@ -477,7 +477,7 @@ export const QUOTE_FORM_EN = {
   button: "Send inquiry",
   micro: "We reply with a clear next step.",
   cta: { label: "Contact us" },
-  image: "/images/cases/quote-cta-band.png",
+  image: "/images/cases/quote-cta-band.jpg",
   imageAlt: "New concrete steps with a white balustrade",
   reassurance: [
     { label: "Reply", value: "We reply within 24 hours" },

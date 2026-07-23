@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getLocale } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
@@ -50,11 +51,14 @@ export async function ProjectHero({ project }: { project: Project }) {
           </div>
 
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border-4 border-leaf">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={project.heroImage}
               alt={project.heroImageAlt}
-              className="h-full w-full object-cover"
+              fill
+              priority
+              quality={85}
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
             />
           </div>
         </div>

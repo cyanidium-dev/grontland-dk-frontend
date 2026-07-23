@@ -33,6 +33,7 @@ export async function Hero() {
           alt={HERO.image.alt}
           fill
           priority
+          quality={85}
           className="object-cover"
           sizes="50vw"
         />
@@ -87,6 +88,7 @@ export async function Hero() {
           src={HERO.image.src}
           alt={HERO.image.alt}
           fill
+          quality={85}
           className="object-cover"
           sizes="100vw"
         />
