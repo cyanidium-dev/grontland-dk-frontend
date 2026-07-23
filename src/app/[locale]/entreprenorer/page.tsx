@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 
-import { localeAlternates } from "@/lib/seo/meta";
+import { pageMetadata } from "@/lib/seo/meta";
 import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { navBreadcrumbs } from "@/lib/seo/jsonld";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import {
@@ -25,11 +27,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const { B2B_META } = b2bCopy(locale);
-  return {
-    title: B2B_META.title,
-    description: B2B_META.description,
-    alternates: localeAlternates(locale, "/entreprenorer"),
-  };
+  return pageMetadata({ locale, path: "/entreprenorer", title: B2B_META.title, description: B2B_META.description });
 }
 
 /* /entreprenorer — per Contractors.md: hero (trust chips + modal CTA) →
@@ -41,6 +39,7 @@ export default async function EntreprenorerPage({ params }: { params: Promise<{ 
   const { B2B_HERO, B2B_SCENARIOS, B2B_MODEL, B2B_CTA } = b2bCopy(locale);
   return (
     <QuoteModalProvider>
+      <JsonLd data={navBreadcrumbs(locale, "/entreprenorer")} />
       <Header />
       <main className="flex-1">
         {/* 1 — Hero (trust chips under the CTAs; first CTA opens the quote modal) */}

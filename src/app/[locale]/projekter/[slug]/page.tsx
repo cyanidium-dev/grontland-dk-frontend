@@ -3,7 +3,9 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { QuoteModalProvider } from "@/components/quote";
-import { localeAlternates } from "@/lib/seo/meta";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { navBreadcrumbs } from "@/lib/seo/jsonld";
+import { pageMetadata } from "@/lib/seo/meta";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import {
@@ -35,18 +37,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   setRequestLocale(locale);
   const project = await getProjectBySlug(slug);
   if (!project) return { title: "Projekt | Grønt Land DK" };
-  const path = `/projekter/${slug}`;
-  return {
+  return pageMetadata({
+    locale,
+    path: `/projekter/${slug}`,
     title: `${project.title} | Grønt Land DK`,
     description: project.seoDescription,
-    alternates: localeAlternates(locale, path),
-    openGraph: {
-      title: `${project.title} | Grønt Land DK`,
-      description: project.seoDescription,
-      url: locale === "en" ? `/en${path}` : path,
-      images: [{ url: project.heroImage, alt: project.heroImageAlt }],
-    },
-  };
+    image: { url: project.heroImage, alt: project.heroImageAlt },
+  });
 }
 
 export default async function ProjectDetailPage({ params }: PageProps) {
@@ -57,6 +54,12 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   return (
     <QuoteModalProvider>
+      <JsonLd
+        data={navBreadcrumbs(locale, "/projekter", {
+          name: project.title,
+          path: `/projekter/${slug}`,
+        })}
+      />
       <Header />
       <main className="flex-1">
         <ProjectHero project={project} />

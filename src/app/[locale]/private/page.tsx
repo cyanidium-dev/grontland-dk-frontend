@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 
-import { localeAlternates } from "@/lib/seo/meta";
+import { pageMetadata } from "@/lib/seo/meta";
 import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqPage, navBreadcrumbs } from "@/lib/seo/jsonld";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import { OmTeam } from "@/sections/om";
@@ -24,11 +26,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const { PRIVATE_META } = privateCopy(locale);
-  return {
-    title: PRIVATE_META.title,
-    description: PRIVATE_META.description,
-    alternates: localeAlternates(locale, "/private"),
-  };
+  return pageMetadata({ locale, path: "/private", title: PRIVATE_META.title, description: PRIVATE_META.description });
 }
 
 /* /private — restructured per docs/private-page-restructure-mapping.md:
@@ -40,6 +38,7 @@ export default async function PrivatePage({ params }: { params: Promise<{ locale
   const { PRIVATE_HERO, PRIVATE_PROCESS, PRIVATE_FAQ, PRIVATE_CTA } = privateCopy(locale);
   return (
     <QuoteModalProvider>
+      <JsonLd data={[navBreadcrumbs(locale, "/private"), faqPage(PRIVATE_FAQ.items)]} />
       <Header />
       <main className="flex-1">
         {/* 1 — Hero (trust chips under the CTAs) */}

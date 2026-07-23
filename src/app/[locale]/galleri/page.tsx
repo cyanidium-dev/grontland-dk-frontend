@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 
-import { localeAlternates } from "@/lib/seo/meta";
+import { pageMetadata } from "@/lib/seo/meta";
 import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { navBreadcrumbs } from "@/lib/seo/jsonld";
 import { Link } from "@/i18n/navigation";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
@@ -15,11 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const page = await getGalleriPage();
-  return {
-    title: page.metaTitle,
-    description: page.metaDescription,
-    alternates: localeAlternates(locale, "/galleri"),
-  };
+  return pageMetadata({ locale, path: "/galleri", title: page.metaTitle, description: page.metaDescription });
 }
 
 /* /galleri — hero (pills + Figma decor/photo) → per-service sections → SEO
@@ -31,6 +29,7 @@ export default async function GalleriPage({ params }: { params: Promise<{ locale
 
   return (
     <QuoteModalProvider>
+      <JsonLd data={navBreadcrumbs(locale, "/galleri")} />
       <Header />
       <main className="flex-1">
         {/* No eyebrow label (site-wide PageHero pattern). Ring decor #3053:84

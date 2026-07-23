@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 /* Site-level meta strings, shared by the root layout (defaults) and the home
    page (which must re-state the full Open Graph set because Next's metadata
    merge is shallow — a page-level `openGraph` replaces the layout's). */
@@ -38,3 +40,33 @@ export const localeAlternates = (locale: string, path: string) => {
     languages: { "da-DK": da, "en-DK": en, "x-default": da },
   };
 };
+
+/** One-stop page metadata: title/description + self-canonical/hreflang + a
+    complete per-page Open Graph set (Next's metadata merge is shallow, so
+    every page that wants og:url must re-state the whole OG object — this
+    helper is that statement). `image` overrides the site og-home fallback. */
+export function pageMetadata(opts: {
+  locale: string;
+  /** Locale-less route path — "" for home, "/ydelser/x", … */
+  path: string;
+  title: string;
+  description?: string | null;
+  image?: { url: string; alt?: string | null } | null;
+}): Metadata {
+  const { locale, path, title, description, image } = opts;
+  const en = locale === "en";
+  return {
+    title,
+    description: description ?? undefined,
+    alternates: localeAlternates(locale, path),
+    openGraph: {
+      type: "website",
+      siteName: "Grønt Land DK",
+      title,
+      description: description ?? undefined,
+      url: en ? `/en${path}` : path || "/",
+      locale: en ? "en_DK" : "da_DK",
+      images: [image ? { url: image.url, alt: image.alt ?? title } : { ...OG_IMAGE, alt: title }],
+    },
+  };
+}

@@ -9,7 +9,7 @@ import { Header } from "@/layouts/Header";
 import { getServiceBySlug, getServiceSlugs } from "@/lib/sanity/queries";
 import { homeCopy, ui } from "@/lib/i18n/copy";
 import { breadcrumbs, faqPage, servicePage } from "@/lib/seo/jsonld";
-import { localeAlternates } from "@/lib/seo/meta";
+import { pageMetadata } from "@/lib/seo/meta";
 import {
   ServiceCases,
   ServiceFaq,
@@ -34,18 +34,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   setRequestLocale(locale);
   const s = await getServiceBySlug(slug);
   if (!s) return { title: "Ydelser | Grønt Land DK" };
-  const path = `/ydelser/${slug}`;
-  return {
+  return pageMetadata({
+    locale,
+    path: `/ydelser/${slug}`,
     title: s.metaTitle,
     description: s.metaDescription,
-    alternates: localeAlternates(locale, path),
-    openGraph: {
-      title: s.metaTitle,
-      description: s.metaDescription,
-      url: locale === "en" ? `/en${path}` : path,
-      images: [{ url: s.heroImage.src, alt: s.heroImage.alt }],
-    },
-  };
+    image: { url: s.heroImage.src, alt: s.heroImage.alt },
+  });
 }
 
 export default async function ServicePageRoute({ params }: PageProps) {

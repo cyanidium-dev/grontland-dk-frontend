@@ -2,6 +2,7 @@
  * JSON-LD builders. Contact facts come from the CMS siteSettings singleton
  * (single source; see lib/sanity/queries.ts).
  */
+import { homeCopy } from "@/lib/i18n/copy";
 import type { SiteSettings } from "@/lib/sanity/queries";
 import { SITE_URL } from "@/lib/seo/meta";
 
@@ -52,6 +53,22 @@ export const faqPage = (items: readonly { q: string; a: string }[]) => ({
     acceptedAnswer: { "@type": "Answer", text: i.a },
   })),
 });
+
+/** Breadcrumb schema for a top-level nav section (and optionally a detail
+    leaf below it) — names come from the localized NAV_MENU, so every page
+    gets a consistent Home → Section (→ Detail) trail with one call. */
+export const navBreadcrumbs = (
+  locale: string,
+  path: string,
+  leaf?: { name: string; path: string },
+) => {
+  const nav = homeCopy(locale).NAV_MENU;
+  const trail: { name: string; path: string }[] = [{ name: nav[0].label, path: "/" }];
+  const section = nav.find((i) => i.href === path);
+  if (section) trail.push({ name: section.label, path });
+  if (leaf) trail.push(leaf);
+  return breadcrumbs(trail, locale);
+};
 
 export const breadcrumbs = (
   trail: readonly { name: string; path: string }[],

@@ -16,7 +16,11 @@ import { sanityFetch } from "./fetch";
 const l = (field: string) => `coalesce(${field}[$locale], ${field}.da)`;
 
 /* Shared projection snippets */
-const IMG = `{"src": asset->url, "alt": ${l("alt")}}`;
+/* Image src projects the FULL object (asset ref + editor crop/hotspot) —
+   sanityFetch's resolveImageUrls turns it into a urlFor() URL string, so
+   Studio crops are honored while consumers keep the plain {src, alt} shape. */
+const IMG_SRC = `{asset, crop, hotspot}`;
+const IMG = `{"src": ${IMG_SRC}, "alt": ${l("alt")}}`;
 const CTA = `{"label": ${l("label")}, href}`;
 
 async function localeFetch<T>(query: string, params: Record<string, unknown> = {}): Promise<T> {
@@ -91,9 +95,9 @@ const PROJECT = `{
   "serviceHref": "/ydelser/" + primaryService->slug.current,
   "services": services[]->{"label": ${l("nav")}, "href": "/ydelser/" + slug.current},
   "cardDesc": ${l("cardDesc")},
-  "cardImage": cardImage.asset->url,
+  "cardImage": cardImage${IMG_SRC},
   "cardImageAlt": ${l("cardImage.alt")},
-  "heroImage": heroImage.asset->url,
+  "heroImage": heroImage${IMG_SRC},
   "heroImageAlt": ${l("heroImage.alt")},
   "seoDescription": ${l("seo.description")},
   "intro": ${l("intro")},
@@ -102,7 +106,7 @@ const PROJECT = `{
   "focus": focus[]{"v": coalesce(@[$locale], @.da)}[].v,
   "result": ${l("result")},
   "facts": facts[]{"label": ${l("label")}, "value": ${l("value")}},
-  "gallery": gallery[]{"src": image.asset->url, "alt": ${l("image.alt")}, kind},
+  "gallery": gallery[]{"src": image${IMG_SRC}, "alt": ${l("image.alt")}, kind},
   "relatedSlugs": related[]->slug.current
 }`;
 
@@ -254,7 +258,7 @@ export function getServiceCards(): Promise<ServiceCard[]> {
       "name": ${l("nav")},
       "desc": coalesce(cardDesc[$locale], cardDesc.da, hero.sub[$locale], hero.sub.da),
       "href": "/ydelser/" + slug.current,
-      "image": hero.image.asset->url,
+      "image": hero.image${IMG_SRC},
       "imageAlt": ${l("hero.image.alt")}
     }`,
   );

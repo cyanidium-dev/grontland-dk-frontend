@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 
-import { localeAlternates } from "@/lib/seo/meta";
+import { pageMetadata } from "@/lib/seo/meta";
 import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { navBreadcrumbs } from "@/lib/seo/jsonld";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import { Process } from "@/sections/home";
@@ -18,11 +20,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const { OM_META } = omCopy(locale);
-  return {
-    title: OM_META.title,
-    description: OM_META.description,
-    alternates: localeAlternates(locale, "/om-os"),
-  };
+  return pageMetadata({ locale, path: "/om-os", title: OM_META.title, description: OM_META.description });
 }
 
 /* /om-os — docs/content/om-os.md: hero → who-we-are + facts → values → team →
@@ -34,6 +32,7 @@ export default async function OmOsPage({ params }: { params: Promise<{ locale: s
   const { OM_HERO, OM_CTA } = omCopy(locale);
   return (
     <QuoteModalProvider>
+      <JsonLd data={navBreadcrumbs(locale, "/om-os")} />
       <Header />
       <main className="flex-1">
         <PageHero

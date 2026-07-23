@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 
-import { localeAlternates } from "@/lib/seo/meta";
+import { pageMetadata } from "@/lib/seo/meta";
 import { setRequestLocale } from "next-intl/server";
 
 import { QuoteModalProvider } from "@/components/quote";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { navBreadcrumbs } from "@/lib/seo/jsonld";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import { getProjekterPage, getProjects } from "@/lib/sanity/queries";
@@ -13,11 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const page = await getProjekterPage();
-  return {
-    title: page.metaTitle,
-    description: page.metaDescription,
-    alternates: localeAlternates(locale, "/projekter"),
-  };
+  return pageMetadata({ locale, path: "/projekter", title: page.metaTitle, description: page.metaDescription });
 }
 
 export default async function ProjekterPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -27,6 +25,7 @@ export default async function ProjekterPage({ params }: { params: Promise<{ loca
 
   return (
     <QuoteModalProvider>
+      <JsonLd data={navBreadcrumbs(locale, "/projekter")} />
       <Header />
       <main className="flex-1">
         <ProjectsListing
