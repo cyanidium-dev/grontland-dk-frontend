@@ -18,6 +18,40 @@ import {
 
 import { getGalleryCategories } from "@/lib/sanity/queries";
 
+import type { Metadata } from "next";
+
+import { OG_IMAGE, SITE_META } from "@/lib/seo/meta";
+
+/* Canonical + region-qualified hreflang for the home page (client SEO spec):
+   da-DK is the primary + x-default, en-DK the English-in-Denmark variant.
+   The OG set is re-stated in full — Next's metadata merge is shallow, so a
+   page-level `openGraph` (needed for og:url) replaces the layout's. */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const en = locale === "en";
+  const m = SITE_META[en ? "en" : "da"];
+  const path = en ? "/en" : "/";
+  return {
+    alternates: {
+      canonical: path,
+      languages: { "da-DK": "/", "en-DK": "/en", "x-default": "/" },
+    },
+    openGraph: {
+      type: "website",
+      siteName: "Grønt Land DK",
+      title: m.title,
+      description: m.description,
+      url: path,
+      locale: en ? "en_DK" : "da_DK",
+      images: [{ ...OG_IMAGE, alt: m.title }],
+    },
+  };
+}
+
 /* Home — section order per Preview/docs/Структура главной страницы.md:
    Hero → Services → Audiences → OneTeam → Process → Projects → Gallery →
    About → SeoText → Faq → QuoteCta. Copy is local (constants/home.ts);

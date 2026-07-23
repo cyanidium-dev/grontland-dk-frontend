@@ -65,7 +65,7 @@ export const FOOTER = {
 } as const;
 
 export const HERO = {
-  h1: "Komplet renovering og byggearbejde i København",
+  h1: "Renoverings- og byggefirma i København",
   sub: "Grønt Land DK hjælper private boligejere og entreprenører med renovering, facadearbejde, belægning, tømrerarbejde, murerarbejde, malerarbejde og havearbejde i København og Storkøbenhavn.",
   ctaPrimary: { label: "Få et tilbud", href: "/kontakt" },
   ctaSecondary: { label: "Se ydelser", href: "/ydelser" },
@@ -141,12 +141,18 @@ export const PROCESS = {
       title: "Vi vurderer opgaven",
       desc: "Vi afklarer omfang, materialer, adgang, tidsramme og nødvendige fag.",
     },
-    { title: "Du får et tilbud", desc: "Du får en tydelig ramme for pris, proces og næste skridt." },
+    {
+      title: "Du får et tilbud",
+      desc: "Du får et tydeligt tilbud med pris, omfang, proces og næste skridt.",
+    },
     {
       title: "Vi udfører arbejdet",
       desc: "Teamet arbejder efter den aftalte plan med løbende kommunikation.",
     },
-    { title: "Vi afleverer projektet", desc: "Opgaven gennemgås, og resultatet afleveres ordentligt." },
+    {
+      title: "Vi afleverer projektet",
+      desc: "Vi gennemgår det færdige arbejde sammen inden aflevering.",
+    },
   ],
 } as const;
 
@@ -187,7 +193,7 @@ export const ABOUT = {
 // Short, natural SEO block placed just before the FAQ (per PDF spec: ~120-180
 // words, not a separate SEO wall).
 export const SEOTEXT = {
-  h2: "Renovering og byggeopgaver i København",
+  h2: "Renovering for boligejere og entreprenører",
   text: "Grønt Land DK er en entreprenørvirksomhed, der udfører renovering og byggeopgaver i København og Storkøbenhavn — for både private boligejere og entreprenører. Vi arbejder med havearbejde, belægningsarbejde, facadearbejde, malerservice, tømrerarbejde, murerarbejde, demonteringsarbejde, rengøringsarbejde og totalentreprise, hvor flere fag samles i én plan med én ansvarlig kontakt. Uanset om opgaven er en ny terrasse, en renoveret facade, ny belægning i indkørslen eller en samlet renovering af boligen, planlægger vi arbejdet fra start til aflevering med en tydelig tidsramme og en klar aftale. Entreprenører bruger os som et stabilt team til delopgaver og ekstra kapacitet på byggeprojekter. Send en kort beskrivelse af din opgave — så vurderer vi den og vender tilbage med næste skridt.",
   image: "/images/cases/havearbejde-private.png",
   imageAlt: "Plejet have med græsplæne og beplantning",
@@ -252,7 +258,7 @@ export const QUOTE_FORM = {
   image: "/images/cases/quote-cta-band.jpg",
   imageAlt: "Nybelagte betontrin foran bolig med hvid balustrade",
   reassurance: [
-    { label: "Svar", value: "Vi svarer inden 24 timer" },
+    { label: "Svartid", value: "Inden 24 timer" },
     { label: "Område", value: "København og Storkøbenhavn" },
     { label: "CVR", value: "45514374" },
   ],

@@ -6,11 +6,13 @@ const BASE = "https://grontland.dk";
 
 /* Emit each route once per locale. da is unprefixed (localePrefix
    "as-needed"), en lives under /en; both paths cross-reference via
-   alternates.languages for hreflang. */
+   alternates.languages for hreflang. Region-qualified codes + x-default match
+   the page-level <link> set exactly — mixed da vs da-DK annotations would be
+   conflicting signals and Google drops conflicting hreflang pairs. */
 function entry(path: string, priority: number, changeFrequency: "monthly" | "yearly") {
   const da = `${BASE}${path}`;
   const en = `${BASE}/en${path === "" ? "" : path}`;
-  const languages = { da: da || BASE, en };
+  const languages = { "da-DK": da || BASE, "en-DK": en, "x-default": da || BASE };
   return [
     { url: da || BASE, changeFrequency, priority, alternates: { languages } },
     { url: en, changeFrequency, priority: priority * 0.9, alternates: { languages } },

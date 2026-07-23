@@ -14,6 +14,9 @@ export const localBusiness = (s: SiteSettings) => ({
   telephone: s.phoneHref.replace("tel:", ""),
   email: s.email,
   vatID: `DK${s.cvr}`,
+  // Denmark as the country; the served area (Copenhagen / Greater
+  // Copenhagen) stays locale-aware via siteSettings (client SEO spec).
+  address: { "@type": "PostalAddress", addressLocality: "København", addressCountry: "DK" },
   areaServed: s.area,
   openingHours: "Mo-Fr 08:00-17:00",
 });

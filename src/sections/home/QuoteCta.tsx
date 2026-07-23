@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Fragment } from "react";
 
 import { Heading, Star } from "@/components/ui";
 import { OpenQuoteButton } from "@/components/quote";
@@ -47,10 +48,14 @@ export async function QuoteCta() {
                 size="card"
                 className="text-[28px] leading-none text-white xl:text-[44px] xl:leading-[44px]"
               >
-                {QUOTE_FORM.h2Lines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
+                {/* The joining " " keeps the accessible name / textContent
+                    readable ("…for your project", not "…foryour project");
+                    it collapses visually between the block spans. */}
+                {QUOTE_FORM.h2Lines.map((line, i) => (
+                  <Fragment key={line}>
+                    {i > 0 && " "}
+                    <span className="block">{line}</span>
+                  </Fragment>
                 ))}
               </Heading>
               <p className="max-w-[358px] font-light leading-[22.95px] text-white/75 xl:text-[17px]">

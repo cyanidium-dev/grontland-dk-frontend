@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useLocale } from "next-intl";
 import { useEffect, useLayoutEffect, useRef } from "react";
 
 import { Link } from "@/i18n/navigation";
@@ -61,6 +62,7 @@ export function HeroProjectCards({
   cards: readonly HeroProjectCard[];
   className?: string;
 }) {
+  const locale = useLocale();
   const ref = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const moved = useRef(false);
@@ -106,7 +108,6 @@ export function HeroProjectCards({
       el.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cards.length]);
 
   // Mouse click-drag (touch/trackpad already scroll natively).
@@ -166,10 +167,12 @@ export function HeroProjectCards({
         "no-scrollbar flex gap-4 overflow-x-auto [touch-action:pan-x] select-none cursor-grab active:cursor-grabbing",
         className,
       )}
-      aria-label="Udvalgte projekter"
+      aria-label={locale === "en" ? "Selected projects" : "Udvalgte projekter"}
     >
+      {/* Copies 2-3 exist only for the seamless loop: aria-hidden takes them
+          out of the a11y tree and inert takes their links out of tab order. */}
       {loop.map((card, i) => (
-        <div key={i} className="shrink-0" aria-hidden={i >= cards.length}>
+        <div key={i} className="shrink-0" aria-hidden={i >= cards.length} inert={i >= cards.length}>
           <ProjectCard card={card} />
         </div>
       ))}

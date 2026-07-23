@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { routing } from "@/i18n/routing";
 import { getSiteSettings } from "@/lib/sanity/queries";
 import { localBusiness } from "@/lib/seo/jsonld";
+import { OG_IMAGE, SITE_META } from "@/lib/seo/meta";
 
 // Manrope — body + display headings (300–800 covers Light…Bold used in the design).
 const manrope = Manrope({
@@ -28,33 +29,28 @@ const montserrat = Montserrat({
   fallback: ["Arial", "sans-serif"],
 });
 
-const META = {
-  da: {
-    title: "Grønt Land DK — Renovering og byggearbejde i København",
-    description:
-      "Grønt Land DK hjælper private boligejere og entreprenører med renovering, facadearbejde, belægning, tømrerarbejde, murerarbejde, malerarbejde og havearbejde i København og Storkøbenhavn.",
-  },
-  en: {
-    title: "Grønt Land DK — Renovation and construction in Copenhagen",
-    description:
-      "Renovation and construction in Copenhagen for homeowners and contractors. Paving, masonry, carpentry, painting, façades and garden work.",
-  },
-} as const;
-
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const m = META[locale === "en" ? "en" : "da"];
+  const en = locale === "en";
+  const m = SITE_META[en ? "en" : "da"];
+  // No alternates here: canonical/hreflang are per-page (home sets its own;
+  // subpage hreflang comes from sitemap.ts — a layout-wide set would wrongly
+  // point every subpage at "/" and conflict with the sitemap's pairs).
   return {
     metadataBase: new URL("https://grontland.dk"),
     title: m.title,
     description: m.description,
-    alternates: {
-      // da is unprefixed (localePrefix "as-needed"); en lives at /en.
-      languages: { da: "/", en: "/en", "x-default": "/" },
+    openGraph: {
+      type: "website",
+      siteName: "Grønt Land DK",
+      title: m.title,
+      description: m.description,
+      locale: en ? "en_DK" : "da_DK",
+      images: [{ ...OG_IMAGE, alt: m.title }],
     },
   };
 }

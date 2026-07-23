@@ -177,7 +177,7 @@ export function MobileMenu() {
     <div className="xl:hidden">
       <button
         type="button"
-        aria-label={open ? "Luk menu" : "Åbn menu"}
+        aria-label={open ? (en ? "Close menu" : "Luk menu") : (en ? "Open menu" : "Åbn menu")}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className="relative z-60 flex size-11 items-center justify-center outline-none"

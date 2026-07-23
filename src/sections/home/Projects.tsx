@@ -19,6 +19,7 @@ export async function Projects() {
       <Marquee
         durationSec={160}
         className="bg-leaf py-4"
+        label={MARQUEE_WORDS.join(" · ")}
         separator={<StarIcon className="mx-6 size-3.5 shrink-0 text-white" />}
         items={Array.from({ length: 5 })
           .flatMap(() => MARQUEE_WORDS.map((w) => w))

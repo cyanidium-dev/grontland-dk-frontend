@@ -24,6 +24,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   const active = useLocale();
   const pathname = usePathname();
   const current = LOCALES.find((l) => l.key === active) ?? LOCALES[0];
+  const switchLabel = active === "en" ? "Change language" : "Skift sprog";
 
   // Close on route change (covers the switch we trigger ourselves).
   useEffect(() => {
@@ -51,7 +52,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   return (
     <details ref={ref} className={cn("group/locale relative", className)}>
       <summary
-        aria-label="Skift sprog"
+        aria-label={switchLabel}
         className="flex min-h-11 cursor-pointer list-none items-center gap-1.5 text-[13px] font-semibold uppercase tracking-[0.08em] text-pine/70 transition-colors hover:text-pine group-open/locale:text-pine [&::-webkit-details-marker]:hidden"
       >
         {current.short}
@@ -59,7 +60,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
       </summary>
       <div
         role="menu"
-        aria-label="Skift sprog"
+        aria-label={switchLabel}
         className="absolute right-0 top-[calc(100%+12px)] z-50 flex min-w-[140px] flex-col gap-0.5 rounded-2xl border border-line bg-white p-2 shadow-[0_12px_40px_rgba(31,61,46,0.14)]"
       >
         {LOCALES.map((l) => {
