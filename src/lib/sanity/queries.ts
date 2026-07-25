@@ -187,7 +187,7 @@ const SERVICE_PAGE = `{
   "process": process{"h2": ${l("h2")}, "steps": steps[]{"title": ${l("title")}, "desc": ${l("desc")}}},
   "processImage": process.backgroundImage${IMG},
   "ctaImage": ctaImage${IMG},
-  "cases": cases[]->${PROJECT},
+  "cases": coalesce(cases[]->${PROJECT}, []),
   "galleryPhotos": galleryCategory->photos[]${IMG},
   "faq": faq{"h2": ${l("h2")}, "items": items[]{"q": ${l("q")}, "a": ${l("a")}}},
   "seoText": seoText${SEO_TEXT}
