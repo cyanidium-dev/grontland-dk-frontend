@@ -4,7 +4,7 @@
 export const PRIVATE_META = {
   title: "Renovering for private boligejere i Storkøbenhavn — Grønt Land DK",
   description:
-    "Boligrenovering, facade, terrasse, belægning og havearbejde med ét team, én plan og én ansvarlig kontakt. Få en projektvurdering — vi svarer senest næste hverdag.",
+    "Boligrenovering, facade, terrasse, belægning og havearbejde med ét team, én plan og én ansvarlig kontakt. Få en projektvurdering — vi svarer inden 24 timer.",
 } as const;
 
 // § 1 — Hero
@@ -165,7 +165,7 @@ export const PRIVATE_FAQ = {
 // § 9 — Final CTA (phone comes from CMS siteSettings via CtaBand)
 export const PRIVATE_CTA = {
   h2: "Fortæl os om dit projekt",
-  text: "Send en kort beskrivelse og et par billeder. Vi vurderer projektet og kontakter dig senest næste hverdag.",
+  text: "Send en kort beskrivelse og et par billeder. Vi vurderer projektet og kontakter dig inden 24 timer.",
   primary: { label: "Få en projektvurdering", href: "/kontakt" },
   crosslinks: [],
   // Figma 3067:369
@@ -180,7 +180,7 @@ export const PRIVATE_CTA = {
 export const PRIVATE_META_EN = {
   title: "Renovation for homeowners in Greater Copenhagen — Grønt Land DK",
   description:
-    "Home renovation, façades, terraces, paving and garden work with one team, one plan and one responsible contact. Get a project assessment — we reply by the next business day.",
+    "Home renovation, façades, terraces, paving and garden work with one team, one plan and one responsible contact. Get a project assessment — we reply within 24 hours.",
 } as const;
 
 export const PRIVATE_HERO_EN = {
@@ -303,7 +303,7 @@ export const PRIVATE_FAQ_EN = {
     { q: "Which areas do you cover?", a: "Copenhagen and Greater Copenhagen." },
     {
       q: "How is the final price calculated?",
-      a: "From the scope of the job, materials and access. You get a fixed frame before work begins.",
+      a: "From the scope of the job, materials and access. You receive a fixed quote before work begins.",
     },
     {
       q: "Can you handle several trades in one project?",
@@ -334,7 +334,7 @@ export const PRIVATE_FAQ_EN = {
 
 export const PRIVATE_CTA_EN = {
   h2: "Tell us about your project",
-  text: "Send a short description and a few photos. We will assess the project and contact you by the next business day.",
+  text: "Send a short description and a few photos. We will assess the project and contact you within 24 hours.",
   primary: { label: "Get a project assessment", href: "/kontakt" },
   crosslinks: [],
   // Figma 3067:369

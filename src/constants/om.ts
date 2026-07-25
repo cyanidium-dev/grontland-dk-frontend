@@ -30,7 +30,7 @@ export const OM_INTRO = {
     src: "/images/om/om-intro.jpg",
     alt: "Vægbeklædning i poleret natursten monteret indendørs",
   },
-  text: "Grønt Land DK er en entreprenørvirksomhed, der arbejder med indvendige og udvendige opgaver — fra totalrenovering og murerarbejde til belægning, havearbejde og facader. Hos os får projektet én ansvarlig plan i stedet for flere adskilte håndværkere. Vi tager ejerskab for opgaven, holder tæt dialog undervejs og afleverer til den aftalte tid og pris. Det er den måde, vi ønsker at drive håndværk på: ordentligt arbejde, klare aftaler og et samarbejde, hvor kunden er i centrum.",
+  text: "Grønt Land DK er en entreprenørvirksomhed, der arbejder med indvendige og udvendige opgaver — fra totalrenovering og murerarbejde til belægning, havearbejde og facader. Hos os får projektet én ansvarlig plan i stedet for flere adskilte håndværkere. Vi tager ejerskab for opgaven, holder tæt dialog undervejs og afleverer som aftalt. Det er den måde, vi ønsker at drive håndværk på: ordentligt arbejde, klare aftaler og et samarbejde, hvor kunden er i centrum.",
   facts: [
     { label: "Arbejdsområde", value: "København og Storkøbenhavn" },
     { label: "Kundetyper", value: "private kunder og entreprenører" },
@@ -126,7 +126,7 @@ export const OM_GALLERY = {
 
 export const OM_CTA = {
   h2: "Skal vi kigge på din opgave?",
-  text: "Send en kort beskrivelse — så vurderer vi opgaven og vender tilbage senest næste hverdag.",
+  text: "Send en kort beskrivelse — så vurderer vi opgaven og vender tilbage inden 24 timer.",
   primary: { label: "Få et tilbud", href: "/kontakt" },
   // Figma feedback #3035:186 — dark paved garden path along hedges.
   image: {
@@ -166,7 +166,7 @@ export const OM_INTRO_EN = {
     src: "/images/om/om-intro.jpg",
     alt: "Polished natural-stone wall cladding fitted indoors",
   },
-  text: "Grønt Land DK is a contracting company working on indoor and outdoor projects — from full renovations and masonry to paving, garden work and facades. With us, a project gets one accountable plan instead of several separate tradespeople. We take ownership of the task, keep a close dialogue along the way and hand over at the agreed time and price. That is how we want to run a trade business: proper work, clear agreements and a collaboration with the customer at the centre.",
+  text: "Grønt Land DK is a contracting company working on indoor and outdoor projects — from full renovations and masonry to paving, garden work and façades. With us, a project gets one accountable plan instead of several separate tradespeople. We take ownership of the task, keep a close dialogue along the way and hand over as agreed. That is how we want to run a trade business: proper work, clear agreements and a collaboration with the customer at the centre.",
   facts: [
     { label: "Service area", value: "Greater Copenhagen" },
     { label: "Customer types", value: "private customers and contractors" },
@@ -253,13 +253,13 @@ export const OM_ONEPLAN_EN = {
 
 export const OM_GALLERY_EN = {
   h2: "See the results of our work",
-  sub: "Photos from facades, paving, renovation and garden work.",
+  sub: "Photos from façades, paving, renovation and garden work.",
   cta: { label: "Open the gallery", href: "/galleri" },
 } as const;
 
 export const OM_CTA_EN = {
   h2: "Shall we look at your project?",
-  text: "Send a short description — we assess the task and get back to you by the next business day.",
+  text: "Send a short description — we assess the task and get back to you within 24 hours.",
   primary: { label: "Get a quote", href: "/kontakt" },
   image: {
     src: "/images/om/om-cta.jpg",

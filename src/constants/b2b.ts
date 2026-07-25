@@ -59,8 +59,8 @@ export const B2B_WHY = {
     { title: "Kontakt med beslutningskraft", desc: "Én ansvarlig, der kan træffe beslutninger i driften." },
     { title: "Ugentlige status- og risikoopdateringer", desc: "Fremdrift og risici meldes i fast rytme." },
     { title: "Dokumenteret kvalitetssikring", desc: "KS og fotodokumentation som en del af udførelsen." },
-    { title: "Hurtig håndtering af afvigelser", desc: "Afvigelser meldes og løses med det samme." },
-    { title: "Stabilt hold hele vejen", desc: "Samme hold gennem projektet — ikke skiftende ansigter." },
+    { title: "Hurtig håndtering af afvigelser", desc: "Afvigelser meldes og håndteres hurtigt." },
+    { title: "Stabilt hold hele vejen", desc: "Et stabilt hold gennem hele projektet." },
   ],
   image: {
     src: "/images/cases/kapacitet-b2b.jpg",
@@ -159,10 +159,10 @@ export const B2B_WHY_EN = {
   items: [
     { title: "Scalable construction crews", desc: "Crewing adjusts to the project phase and milestones." },
     { title: "Contact with decision-making authority", desc: "One responsible person who can make operational decisions." },
-    { title: "Weekly progress and risk updates", desc: "Progress and risks are reported in a fixed rhythm." },
+    { title: "Weekly progress and risk updates", desc: "Progress and risks are reported at agreed intervals." },
     { title: "Documented quality assurance", desc: "QA and photo documentation as part of the execution." },
-    { title: "Fast deviation handling", desc: "Deviations are reported and resolved immediately." },
-    { title: "Stable team throughout", desc: "The same crew through the project — not changing faces." },
+    { title: "Fast deviation handling", desc: "Deviations are reported and addressed promptly." },
+    { title: "Stable team throughout", desc: "A consistent crew throughout the project." },
   ],
   image: {
     src: "/images/cases/kapacitet-b2b.jpg",

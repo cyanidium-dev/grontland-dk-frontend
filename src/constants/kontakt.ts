@@ -3,13 +3,13 @@
 export const KONTAKT_META = {
   title: "Kontakt Grønt Land DK — få et tilbud på renovering i København",
   description:
-    "Send en kort beskrivelse af din opgave og få svar senest næste hverdag. Renovering, belægning, facade, havearbejde og totalentreprise i København og Storkøbenhavn.",
+    "Send en kort beskrivelse af din opgave og få svar inden 24 timer. Renovering, belægning, facade, havearbejde og totalentreprise i København og Storkøbenhavn.",
 } as const;
 
 export const KONTAKT_HERO = {
   label: "Kontakt",
   h1: "Kontakt os — få et tilbud på din opgave",
-  sub: "Beskriv din opgave kort — så vurderer vi den og vender tilbage senest næste hverdag, ofte hurtigere. Det er gratis og uforpligtende.",
+  sub: "Beskriv din opgave kort — så vurderer vi den og vender tilbage inden 24 timer. Det er gratis og uforpligtende.",
   cta: { label: "Ring 91 70 01 03", href: "tel:+4591700103" },
   // Same photo as the quote CTA bands (home + projekter) — the "få et tilbud" visual.
   // Figma #3049:128 — landscaped garden with pergola.
@@ -36,7 +36,7 @@ export const KONTAKT_INFO = {
       label: "E-mail",
       value: "grontlanddk@gmail.com",
       href: "mailto:grontlanddk@gmail.com",
-      hint: "Vi svarer senest næste hverdag",
+      hint: "Vi svarer inden 24 timer",
     },
     { label: "Arbejdsområde", value: "København og Storkøbenhavn" },
     { label: "Virksomhed", value: "Grønt Land DK · CVR 45514374" },
@@ -82,13 +82,13 @@ export const KONTAKT_AUDIENCES = {
 export const KONTAKT_META_EN = {
   title: "Contact Grønt Land DK — get a quote for renovation in Copenhagen",
   description:
-    "Send a short description of your project and get a reply by the next business day. Renovation, paving, facades, garden work and turnkey contracting in Greater Copenhagen.",
+    "Send a short description of your project and get a reply within 24 hours. Renovation, paving, façades, garden work and turnkey renovation in Greater Copenhagen.",
 } as const;
 
 export const KONTAKT_HERO_EN = {
   label: "Contact",
   h1: "Contact us — get a quote for your project",
-  sub: "Describe your project briefly — we assess it and get back to you by the next business day, often sooner. Free and without obligation.",
+  sub: "Describe your project briefly — we assess it and get back to you within 24 hours. Free and without obligation.",
   cta: { label: "Call 91 70 01 03", href: "tel:+4591700103" },
   // Figma #3049:128 — landscaped garden with pergola.
   image: {
@@ -114,7 +114,7 @@ export const KONTAKT_INFO_EN = {
       label: "Email",
       value: "grontlanddk@gmail.com",
       href: "mailto:grontlanddk@gmail.com",
-      hint: "We reply by the next business day",
+      hint: "We reply within 24 hours",
     },
     { label: "Service area", value: "Copenhagen and Greater Copenhagen" },
     { label: "Company", value: "Grønt Land DK · CVR 45514374" },
@@ -140,7 +140,7 @@ export const KONTAKT_AUDIENCES_EN = {
   cards: [
     {
       title: "For private customers",
-      text: "See how we handle renovation, terraces, facades and outdoor areas for homeowners.",
+      text: "See how we handle renovation, terraces, façades and outdoor areas for homeowners.",
       cta: { label: "See solutions for private customers", href: "/private" },
       image: { src: "/images/cases/havearbejde-private.png", alt: "A well-kept garden with lawn and planting" },
     },
