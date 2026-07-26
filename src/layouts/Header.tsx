@@ -25,9 +25,12 @@ export async function Header({ variant = "solid" }: { variant?: "solid" | "overl
   return (
     <header
       className={cn(
+        // Both variants sit at z-50, above the z-40 mobile drawer: the header's
+        // language panel drops over the drawer area, so a z-40 solid bar would
+        // let the (later-in-DOM, portalled) drawer paint on top of it.
         overlay
           ? "sticky top-0 z-50 bg-white/75 backdrop-blur-md"
-          : "sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur",
+          : "sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur",
       )}
     >
       <Container className="flex h-[72px] items-center gap-4">
@@ -53,12 +56,16 @@ export async function Header({ variant = "solid" }: { variant?: "solid" | "overl
         </nav>
 
         {/* Desktop: switcher centered in the gap between nav and CTA via equal
-            flex-grow spacers. Below xl it lives in the mobile drawer instead. */}
+            flex-grow spacers. */}
         <div className="ml-auto hidden flex-1 xl:block" aria-hidden />
         <LanguageSwitcher className="hidden xl:flex" />
         <div className="hidden flex-1 xl:block" aria-hidden />
 
         <div className="ml-auto flex items-center gap-3 xl:ml-0">
+          {/* Below xl the switcher stays in the header bar (left of the CTA and
+              burger) rather than inside the drawer, so language is reachable
+              without opening the menu. */}
+          <LanguageSwitcher className="flex xl:hidden" />
           <OpenQuoteButton
             variant="black"
             size="sm"

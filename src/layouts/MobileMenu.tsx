@@ -9,7 +9,6 @@ import { cn } from "@/util/cn";
 import { OpenQuoteButton } from "@/components/quote";
 import { ChevronIcon } from "@/components/icons";
 import { homeCopy } from "@/lib/i18n/copy";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 
 /* Mobile/tablet nav (below xl). Morphing burger↔X button + drawer under the
    sticky header with a collapsible "Ydelser" accordion. Pure Tailwind
@@ -174,8 +173,6 @@ export function MobileMenu() {
         >
           {en ? "Get a quote" : "Få et tilbud"}
         </OpenQuoteButton>
-
-        <LanguageSwitcher className="mt-5 justify-center" />
       </nav>
     </div>
   );
