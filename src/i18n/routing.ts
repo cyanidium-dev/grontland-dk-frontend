@@ -1,11 +1,9 @@
 import { defineRouting } from "next-intl/routing";
 
-/* da/en per docs/i18n-options.md (Option A): "as-needed" keeps every Danish
-   URL exactly as before (no prefix, no redirects); English lives at /en/…
-   Danish slugs are shared by both locales. /en static generation is GATED
-   in app/[locale]/layout.tsx until the English content is complete. */
+/* DA-only (client 2026-08-05). Keep [locale] + "as-needed" so Danish URLs stay
+   unprefixed; /en is 301'd in next.config. Revert this commit to restore EN. */
 export const routing = defineRouting({
-  locales: ["da", "en"],
+  locales: ["da"],
   defaultLocale: "da",
   localePrefix: "as-needed",
   localeDetection: false,

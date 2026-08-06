@@ -13,7 +13,7 @@ export async function ProjectHero({ project }: { project: Project }) {
     <section className="bg-mist py-12 xl:py-16">
       <Container>
         <nav
-          aria-label={locale === "en" ? "Breadcrumb" : "Brødkrumme"}
+          aria-label="Brødkrumme"
           className="text-sm text-pine/50"
         >
           <Link href="/projekter" className="transition-colors hover:text-leaf">

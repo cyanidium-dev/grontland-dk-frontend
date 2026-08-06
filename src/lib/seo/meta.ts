@@ -18,26 +18,17 @@ export const SITE_META = {
     description:
       "Grønt Land DK hjælper private boligejere og entreprenører med renovering, facadearbejde, belægning, tømrerarbejde, murerarbejde, malerarbejde og havearbejde i København og Storkøbenhavn.",
   },
-  en: {
-    title: "Grønt Land DK — Renovation and construction in Copenhagen",
-    description:
-      "Renovation and construction in Copenhagen for homeowners and contractors. Paving, masonry, carpentry, painting, façades and garden work.",
-  },
 } as const;
 
 export const OG_IMAGE = { url: "/og-home.jpg", width: 1200, height: 630 } as const;
 
-/** Self-canonical + region-qualified hreflang pair for a route (client SEO
-    spec): da is unprefixed and doubles as x-default, en lives under /en.
-    `path` is the locale-less route path ("" for home, "/ydelser/x", …).
-    Matches the sitemap's alternates exactly — mixed codes (da vs da-DK)
-    count as conflicting hreflang signals and get dropped. */
-export const localeAlternates = (locale: string, path: string) => {
+/** Self-canonical + da-DK / x-default hreflang for a route. `path` is the
+    locale-less route path ("" for home, "/ydelser/x", …). */
+export const localeAlternates = (_locale: string, path: string) => {
   const da = path || "/";
-  const en = `/en${path}`;
   return {
-    canonical: locale === "en" ? en : da,
-    languages: { "da-DK": da, "en-DK": en, "x-default": da },
+    canonical: da,
+    languages: { "da-DK": da, "x-default": da },
   };
 };
 
@@ -54,7 +45,6 @@ export function pageMetadata(opts: {
   image?: { url: string; alt?: string | null } | null;
 }): Metadata {
   const { locale, path, title, description, image } = opts;
-  const en = locale === "en";
   return {
     title,
     description: description ?? undefined,
@@ -64,8 +54,8 @@ export function pageMetadata(opts: {
       siteName: "Grønt Land DK",
       title,
       description: description ?? undefined,
-      url: en ? `/en${path}` : path || "/",
-      locale: en ? "en_DK" : "da_DK",
+      url: path || "/",
+      locale: "da_DK",
       images: [image ? { url: image.url, alt: image.alt ?? title } : { ...OG_IMAGE, alt: title }],
     },
   };

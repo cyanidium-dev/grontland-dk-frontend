@@ -41,10 +41,7 @@ export default async function GalleriPage({ params }: { params: Promise<{ locale
           image={{
             src: "/images/galleri/galleri-hero.jpg",
             alt:
-              page.hero.image?.alt ??
-              (locale === "en"
-                ? "Herringbone paving from a real job"
-                : "Belægning i sildebensmønster fra en rigtig opgave"),
+              page.hero.image?.alt ?? "Belægning i sildebensmønster fra en rigtig opgave",
           }}
           decor={
             // eslint-disable-next-line @next/next/no-img-element
@@ -57,7 +54,7 @@ export default async function GalleriPage({ params }: { params: Promise<{ locale
           }
         >
           <nav
-            aria-label={locale === "en" ? "Go to category" : "Gå til kategori"}
+            aria-label="Gå til kategori"
             className="flex flex-wrap gap-2"
           >
             {page.sections.map((s) => (

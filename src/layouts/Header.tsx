@@ -6,28 +6,21 @@ import { Container, Dropdown } from "@/components/ui";
 import { OpenQuoteButton } from "@/components/quote";
 import { Logo } from "@/components/brand/Logo";
 import { homeCopy } from "@/lib/i18n/copy";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileMenu } from "./MobileMenu";
 
 /* Desktop header: logo + nav (with a "Ydelser" dropdown) on the left, CTA on
    the right. `overlay` floats it transparently over the hero; `solid` is the
    default sticky bar for inner pages. Below xl, a morphing burger opens the
-   mobile drawer (see MobileMenu). Nav labels localize by request locale. */
+   mobile drawer (see MobileMenu). */
 export async function Header({ variant = "solid" }: { variant?: "solid" | "overlay" }) {
   const overlay = variant === "overlay";
   const locale = await getLocale();
   const c = homeCopy(locale);
-  const en = locale === "en";
-  const ydelserLabel = en ? "Services" : "Ydelser";
-  const ctaLabel = en ? "Get a quote" : "Få et tilbud";
   const [home, ...rest] = c.NAV_MENU;
 
   return (
     <header
       className={cn(
-        // Both variants sit at z-50, above the z-40 mobile drawer: the header's
-        // language panel drops over the drawer area, so a z-40 solid bar would
-        // let the (later-in-DOM, portalled) drawer paint on top of it.
         overlay
           ? "sticky top-0 z-50 bg-white/75 backdrop-blur-md"
           : "sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur",
@@ -43,7 +36,7 @@ export async function Header({ variant = "solid" }: { variant?: "solid" | "overl
           >
             {home.label}
           </Link>
-          <Dropdown label={ydelserLabel} items={[...c.SERVICES_MENU]} />
+          <Dropdown label="Ydelser" items={[...c.SERVICES_MENU]} />
           {rest.map((item) => (
             <Link
               key={item.href}
@@ -55,23 +48,13 @@ export async function Header({ variant = "solid" }: { variant?: "solid" | "overl
           ))}
         </nav>
 
-        {/* Desktop: switcher centered in the gap between nav and CTA via equal
-            flex-grow spacers. */}
-        <div className="ml-auto hidden flex-1 xl:block" aria-hidden />
-        <LanguageSwitcher className="hidden xl:flex" />
-        <div className="hidden flex-1 xl:block" aria-hidden />
-
-        <div className="ml-auto flex items-center gap-3 xl:ml-0">
-          {/* Below xl the switcher stays in the header bar (left of the CTA and
-              burger) rather than inside the drawer, so language is reachable
-              without opening the menu. */}
-          <LanguageSwitcher className="flex xl:hidden" />
+        <div className="ml-auto flex items-center gap-3">
           <OpenQuoteButton
             variant="black"
             size="sm"
             className="hidden min-w-[176px] font-semibold normal-case sm:inline-flex"
           >
-            {ctaLabel}
+            Få et tilbud
           </OpenQuoteButton>
           <MobileMenu />
         </div>

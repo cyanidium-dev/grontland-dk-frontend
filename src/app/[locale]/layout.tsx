@@ -34,9 +34,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const { locale } = await params;
-  const en = locale === "en";
-  const m = SITE_META[en ? "en" : "da"];
+  await params;
+  const m = SITE_META.da;
   // No alternates here: canonical/hreflang are per-page (home sets its own;
   // subpage hreflang comes from sitemap.ts — a layout-wide set would wrongly
   // point every subpage at "/" and conflict with the sitemap's pairs).
@@ -49,13 +48,13 @@ export async function generateMetadata({
       siteName: "Grønt Land DK",
       title: m.title,
       description: m.description,
-      locale: en ? "en_DK" : "da_DK",
+      locale: "da_DK",
       images: [{ ...OG_IMAGE, alt: m.title }],
     },
   };
 }
 
-// da + en both prerender (localePrefix "as-needed" keeps da unprefixed).
+// DA-only (localePrefix "as-needed" keeps da unprefixed).
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }

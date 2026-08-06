@@ -3,8 +3,8 @@ import { getRequestConfig } from "next-intl/server";
 
 import { routing } from "./routing";
 
-/* Chrome-string messages (nav, buttons, form labels). Content localization
-   lives in the CMS (field-level da/en) — messages stay small. */
+/* Chrome-string messages (nav, buttons, form labels). CMS content still uses
+   localeString coalesce; site is DA-only on the frontend. */
 export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
   const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;

@@ -19,7 +19,7 @@ export function Gallery({ categories }: { categories: GalleryCategoryData[] }) {
   const { GALLERY, MARQUEE_WORDS } = homeCopy(locale);
   const [filter, setFilter] = useState<string>("alle");
 
-  const allLabel = locale === "en" ? "All" : "Alle";
+  const allLabel = "Alle";
   const filters = [{ id: "alle", label: allLabel }, ...categories.map((c) => ({ id: c.id, label: c.label }))];
   const photos =
     filter === "alle"
@@ -57,7 +57,7 @@ export function Gallery({ categories }: { categories: GalleryCategoryData[] }) {
           </Button>
           <div
             role="group"
-            aria-label={locale === "en" ? "Filter gallery" : "Filtrer galleri"}
+            aria-label="Filtrer galleri"
             className="flex flex-wrap gap-2"
           >
             {filters.map((item) => (

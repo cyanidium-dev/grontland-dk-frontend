@@ -20,7 +20,6 @@ import { homeCopy } from "@/lib/i18n/copy";
 export function MobileMenu() {
   const locale = useLocale();
   const c = homeCopy(locale);
-  const en = locale === "en";
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   // Hydration-safe "are we on the client?" check so the portal only renders
@@ -96,7 +95,7 @@ export function MobileMenu() {
     >
       <nav
         data-mobile-menu-nav
-        aria-label={en ? "Mobile menu" : "Mobilmenu"}
+        aria-label="Mobilmenu"
         className="mx-auto flex h-full max-w-7xl flex-col overflow-y-auto overscroll-contain px-6 pb-6 pt-4"
       >
         <ul className="flex flex-col">
@@ -117,7 +116,7 @@ export function MobileMenu() {
               aria-expanded={servicesOpen}
               className="flex w-full items-center justify-between py-3 text-[15px] font-bold uppercase leading-tight text-pine transition-colors hover:text-leaf"
             >
-              {en ? "Services" : "Ydelser"}
+              Ydelser
               <ChevronIcon
                 className={cn(
                   "size-4 transition-transform duration-300",
@@ -171,7 +170,7 @@ export function MobileMenu() {
           onOpen={close}
           className="mt-5 w-full font-semibold normal-case"
         >
-          {en ? "Get a quote" : "Få et tilbud"}
+          Få et tilbud
         </OpenQuoteButton>
       </nav>
     </div>
@@ -181,7 +180,7 @@ export function MobileMenu() {
     <div className="xl:hidden">
       <button
         type="button"
-        aria-label={open ? (en ? "Close menu" : "Luk menu") : (en ? "Open menu" : "Åbn menu")}
+        aria-label={open ? "Luk menu" : "Åbn menu"}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className="relative z-60 flex size-11 items-center justify-center outline-none"

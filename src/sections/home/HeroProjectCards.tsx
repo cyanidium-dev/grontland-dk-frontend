@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useLocale } from "next-intl";
 import { useEffect, useLayoutEffect, useRef } from "react";
 
 import { Link } from "@/i18n/navigation";
@@ -62,7 +61,6 @@ export function HeroProjectCards({
   cards: readonly HeroProjectCard[];
   className?: string;
 }) {
-  const locale = useLocale();
   const ref = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const moved = useRef(false);
@@ -167,7 +165,7 @@ export function HeroProjectCards({
         "no-scrollbar flex gap-4 overflow-x-auto [touch-action:pan-x] select-none cursor-grab active:cursor-grabbing",
         className,
       )}
-      aria-label={locale === "en" ? "Selected projects" : "Udvalgte projekter"}
+      aria-label="Udvalgte projekter"
     >
       {/* Copies 2-3 exist only for the seamless loop: aria-hidden takes them
           out of the a11y tree and inert takes their links out of tab order. */}

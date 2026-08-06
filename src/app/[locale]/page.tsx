@@ -33,7 +33,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const m = SITE_META[locale === "en" ? "en" : "da"];
+  const m = SITE_META.da;
   return pageMetadata({ locale, path: "", title: m.title, description: m.description });
 }
 

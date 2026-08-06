@@ -16,17 +16,14 @@ export const localBusiness = (s: SiteSettings) => ({
   telephone: s.phoneHref.replace("tel:", ""),
   email: s.email,
   vatID: `DK${s.cvr}`,
-  // Denmark as the country; the served area (Copenhagen / Greater
-  // Copenhagen) stays locale-aware via siteSettings (client SEO spec).
   address: { "@type": "PostalAddress", addressLocality: "København", addressCountry: "DK" },
   areaServed: s.area,
   openingHours: "Mo-Fr 08:00-17:00",
 });
 
-/* Locale-prefixed absolute URL: da unprefixed, en under /en (client spec —
-   the EN service schema must point at the /en URL, not the Danish one). */
-const localeUrl = (locale: string, path: string) =>
-  `${BASE}${locale === "en" ? "/en" : ""}${path === "/" ? "" : path}` || BASE;
+/* Absolute URL (DA unprefixed). `locale` kept for call-site compatibility. */
+const localeUrl = (_locale: string, path: string) =>
+  `${BASE}${path === "/" ? "" : path}` || BASE;
 
 export const servicePage = (p: {
   name: string;
@@ -39,8 +36,7 @@ export const servicePage = (p: {
   name: p.name,
   description: p.description,
   url: localeUrl(p.locale, `/ydelser/${p.slug}`),
-  areaServed:
-    p.locale === "en" ? "Copenhagen and Greater Copenhagen" : "København og Storkøbenhavn",
+  areaServed: "København og Storkøbenhavn",
   provider: { "@type": "HomeAndConstructionBusiness", name: "Grønt Land DK", url: BASE },
 });
 
@@ -55,8 +51,8 @@ export const faqPage = (items: readonly { q: string; a: string }[]) => ({
 });
 
 /** Breadcrumb schema for a top-level nav section (and optionally a detail
-    leaf below it) — names come from the localized NAV_MENU, so every page
-    gets a consistent Home → Section (→ Detail) trail with one call. */
+    leaf below it) — names come from NAV_MENU, so every page gets a consistent
+    Home → Section (→ Detail) trail with one call. */
 export const navBreadcrumbs = (
   locale: string,
   path: string,

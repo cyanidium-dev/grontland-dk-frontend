@@ -42,7 +42,7 @@ export function ProjectsListing({
 
         <div
           role="group"
-          aria-label={locale === "en" ? "Filter projects" : "Filtrer projekter"}
+          aria-label="Filtrer projekter"
           className="mt-8 flex flex-wrap gap-2"
         >
           {PROJECTS_LIST.filters.map((item) => (
