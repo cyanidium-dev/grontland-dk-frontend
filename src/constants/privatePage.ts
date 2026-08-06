@@ -17,7 +17,7 @@ export const PRIVATE_HERO = {
   ],
   trustChips: [
     "Storkøbenhavn",
-    "Svar inden for én hverdag",
+    "Svar inden 24 timer",
     "Én kontakt for alle fag",
     "CVR 45514374",
   ],
