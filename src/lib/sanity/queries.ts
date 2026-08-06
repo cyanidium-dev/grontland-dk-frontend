@@ -158,7 +158,6 @@ export type ServicePageData = {
   heroImage: Img;
   trustChips: string[];
   scope: { h2: string; items: { title: string; desc: string }[] };
-  prices: { h2: string; note: string; rows: { label: string; value: string }[] } | null;
   process: { h2: string; steps: { title: string; desc: string }[] };
   processImage: Img | null;
   ctaImage: Img | null;
@@ -178,7 +177,6 @@ const SERVICE_PAGE = `{
   "heroImage": hero.image${IMG},
   "trustChips": hero.trustChips,
   "scope": scope{"h2": ${l("h2")}, "items": items[]{"title": ${l("title")}, "desc": ${l("desc")}}},
-  "prices": prices{"h2": ${l("h2")}, "note": ${l("note")}, "rows": rows[]{"label": ${l("label")}, "value": ${l("value")}}},
   "process": process{"h2": ${l("h2")}, "steps": steps[]{"title": ${l("title")}, "desc": ${l("desc")}}},
   "processImage": process.backgroundImage${IMG},
   "ctaImage": ctaImage${IMG},

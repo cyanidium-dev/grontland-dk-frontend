@@ -56,42 +56,6 @@ export function ServiceScope({ service }: { service: ServicePageData }) {
   );
 }
 
-export function ServicePrices({ service }: { service: ServicePageData }) {
-  if (!service.prices) return null;
-  return (
-    <section className="relative overflow-x-clip bg-white py-16 xl:py-24">
-      {/* Figma 3101:180 — two rings flanking the narrow price table, top-anchored
-          (the heading is one line here, and extra table rows only grow the
-          section downward). Angles solved from the placed bboxes (360.6x330.2 /
-          323.2x278.4); signs read from each group's own render via the
-          spout-clock protocol (base artwork spout sits at 12 o'clock, so a CSS
-          rotation of N puts it at clock-angle N): left spout ~4 o'clock =
-          +110.56, right spout just above 9 = -82.66. */}
-      <RingDecor rotate={110.56} className="left-[calc(50%-602px)] top-[53px]" />
-      <RingDecor rotate={-82.66} className="left-[calc(50%+369px)] top-[96px]" />
-      <Container className="relative z-10 max-w-3xl">
-        <Heading as="h2" size="section">
-          {service.prices.h2}
-        </Heading>
-        {/* bg-white is load-bearing: the flanking rings sit behind this card,
-            and without an opaque fill they show through the rows. */}
-        <dl className="mt-8 divide-y divide-line rounded-2xl border border-line bg-white">
-          {service.prices.rows.map((row) => (
-            <div
-              key={row.label}
-              className="flex items-baseline justify-between gap-6 px-6 py-4"
-            >
-              <dt className="text-sm font-medium text-pine">{row.label}</dt>
-              <dd className="whitespace-nowrap text-sm font-bold text-moss">{row.value}</dd>
-            </div>
-          ))}
-        </dl>
-        <p className="mt-4 text-sm font-light text-pine/60">{service.prices.note}</p>
-      </Container>
-    </section>
-  );
-}
-
 export async function ServiceProcess({ service }: { service: ServicePageData }) {
   const t = ui();
   return (

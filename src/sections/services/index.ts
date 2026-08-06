@@ -3,7 +3,6 @@ export {
   ServiceFaq,
   ServiceGalleryStrip,
   ServiceHero,
-  ServicePrices,
   ServiceProcess,
   ServiceScope,
   ServiceSeoText,

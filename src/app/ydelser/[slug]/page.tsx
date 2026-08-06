@@ -14,7 +14,6 @@ import {
   ServiceFaq,
   ServiceGalleryStrip,
   ServiceHero,
-  ServicePrices,
   ServiceProcess,
   ServiceScope,
   ServiceSeoText,
@@ -67,7 +66,6 @@ export default async function ServicePageRoute({ params }: PageProps) {
       <main className="flex-1">
         <ServiceHero service={s} />
         <ServiceScope service={s} />
-        <ServicePrices service={s} />
         <ServiceProcess service={s} />
         <ServiceCases service={s} />
         <ServiceGalleryStrip service={s} />
