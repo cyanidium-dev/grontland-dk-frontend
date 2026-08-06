@@ -1,5 +1,3 @@
-import { getLocale } from "next-intl/server";
-
 import { StarIcon } from "@/components/icons";
 import { Container, Heading } from "@/components/ui";
 import { ui } from "@/lib/i18n/copy";
@@ -11,7 +9,7 @@ import { ui } from "@/lib/i18n/copy";
    #3063:75 with rotates 123.18° / −115.28°). Reuses decor-rings-faq.svg.
    TODO(client): supply real, attributable reviews. */
 export async function ProjectReviews() {
-  const t = ui(await getLocale());
+  const t = ui();
 
   return (
     <section className="relative overflow-hidden bg-white py-16 xl:py-20">

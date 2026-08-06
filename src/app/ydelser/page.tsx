@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 
 import { pageMetadata } from "@/lib/seo/meta";
-import { setRequestLocale } from "next-intl/server";
-
 import { QuoteModalProvider } from "@/components/quote";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Footer } from "@/layouts/Footer";
@@ -13,17 +11,13 @@ import { breadcrumbs } from "@/lib/seo/jsonld";
 import { YdelserIndexGrid } from "@/sections/services/YdelserIndexGrid";
 import { CtaBand, PageHero, PageHeroSeamDecor } from "@/sections/shared";
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const { locale } = await params;
-  setRequestLocale(locale);
+export async function generateMetadata(): Promise<Metadata> {
   const page = await getYdelserIndex();
-  return pageMetadata({ locale, path: "/ydelser", title: page.metaTitle, description: page.metaDescription });
+  return pageMetadata({ locale: "da", path: "/ydelser", title: page.metaTitle, description: page.metaDescription });
 }
 
 /* /ydelser — hub page: hero → card grid (one card per service doc) → CTA. */
-export default async function YdelserIndexPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+export default async function YdelserIndexPage() {
   const page = await getYdelserIndex();
 
   return (
@@ -31,10 +25,10 @@ export default async function YdelserIndexPage({ params }: { params: Promise<{ l
       <JsonLd
         data={breadcrumbs(
           [
-            { name: homeCopy(locale).NAV_MENU[0].label, path: "/" },
-            { name: ui(locale).servicesLabel, path: "/ydelser" },
+            { name: homeCopy().NAV_MENU[0].label, path: "/" },
+            { name: ui().servicesLabel, path: "/ydelser" },
           ],
-          locale,
+          "da",
         )}
       />
       <Header />

@@ -1,16 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useLocale } from "next-intl";
-
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { StarChip } from "@/components/ui";
 import { type Project } from "@/constants/projects";
 import { projectsCopy } from "@/lib/i18n/copy";
 
 /** Shared project card — home, listing, and related strip. Category shows only in the StarChip strip. */
 export function ProjectCard({ project }: { project: Project }) {
-  const { PROJECTS_LIST } = projectsCopy(useLocale());
+  const { PROJECTS_LIST } = projectsCopy();
   return (
     <Link href={`/projekter/${project.slug}`} className="group block">
       <div className="relative">

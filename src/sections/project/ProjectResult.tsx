@@ -1,4 +1,3 @@
-import { getLocale } from "next-intl/server";
 import Image from "next/image";
 
 import { Container, Heading } from "@/components/ui";
@@ -8,7 +7,7 @@ import { ui } from "@/lib/i18n/copy";
 /* "Resultat" — ~430px write-up on the left; result photo grows to fill the
    remaining width. Ring decor on the photo's bottom-right (home SeoText). */
 export async function ProjectResult({ project }: { project: Project }) {
-  const t = ui(await getLocale());
+  const t = ui();
   const resultShot = project.gallery.find((g) => g.kind === "result");
   const image = resultShot
     ? { src: resultShot.src, alt: resultShot.alt }

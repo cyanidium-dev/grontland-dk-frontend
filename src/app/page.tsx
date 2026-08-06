@@ -2,7 +2,6 @@ import { QuoteModalProvider } from "@/components/quote";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqPage } from "@/lib/seo/jsonld";
 import { homeCopy } from "@/lib/i18n/copy";
-import { setRequestLocale } from "next-intl/server";
 import { Header } from "@/layouts/Header";
 import { Footer } from "@/layouts/Footer";
 import {
@@ -27,28 +26,21 @@ import { pageMetadata, SITE_META } from "@/lib/seo/meta";
 
 /* Canonical + region-qualified hreflang + full per-page OG for the home page
    (client SEO spec) — all via the shared pageMetadata helper. */
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
+export async function generateMetadata(): Promise<Metadata> {
   const m = SITE_META.da;
-  return pageMetadata({ locale, path: "", title: m.title, description: m.description });
+  return pageMetadata({ locale: "da", path: "", title: m.title, description: m.description });
 }
 
 /* Home — section order per Preview/docs/Структура главной страницы.md:
    Hero → Services → Audiences → OneTeam → Process → Projects → Gallery →
    About → SeoText → Faq → QuoteCta. Copy is local (constants/home.ts);
    the service cards, project cards and gallery photos come from the CMS. */
-export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+export default async function HomePage() {
   const categories = await getGalleryCategories();
   return (
     <QuoteModalProvider>
       {/* FAQ schema mirrors the visible FAQ section (same constants). */}
-      <JsonLd data={faqPage(homeCopy(locale).FAQ.items)} />
+      <JsonLd data={faqPage(homeCopy().FAQ.items)} />
       <div className="relative">
         <Header variant="overlay" />
         <main className="flex-1">

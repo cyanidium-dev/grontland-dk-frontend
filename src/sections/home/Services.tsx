@@ -1,5 +1,3 @@
-import { getLocale } from "next-intl/server";
-
 import { Container, Button, Dots, Heading, Marquee } from "@/components/ui";
 import { StarIcon } from "@/components/icons";
 import { getServiceCards } from "@/lib/sanity/queries";
@@ -12,8 +10,8 @@ import { ServicesSlider } from "./ServicesSlider";
    Copy is local; the service cards come from the CMS (same source as
    /ydelser), so new or renamed services appear here automatically. */
 export async function Services() {
-  const [items, locale] = await Promise.all([getServiceCards(), getLocale()]);
-  const { SERVICES, MARQUEE_WORDS } = homeCopy(locale);
+  const items = await getServiceCards();
+  const { SERVICES, MARQUEE_WORDS } = homeCopy();
   return (
     <section className="relative bg-white pt-16 xl:pt-24">
       {/* Ring decoration (Services-specific asset) — aligned to the content box

@@ -1,15 +1,13 @@
 import Image from "next/image";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 
 import { Container, Heading, InfoBox } from "@/components/ui";
-import { getLocale } from "next-intl/server";
-
 import { omCopy } from "@/lib/i18n/copy";
 
 /* Team leads — authentic facts from the old site's team page. Work photo per
    trade area as card header until the client provides portraits. */
 export async function OmTeam() {
-  const { OM_TEAM } = omCopy(await getLocale());
+  const { OM_TEAM } = omCopy();
   return (
     <section className="bg-white py-16 xl:py-24">
       <Container>

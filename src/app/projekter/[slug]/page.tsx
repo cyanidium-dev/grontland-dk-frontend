@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { QuoteModalProvider } from "@/components/quote";
@@ -24,7 +23,7 @@ import {
 } from "@/sections/project";
 
 type PageProps = {
-  params: Promise<{ locale: string; slug: string }>;
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
@@ -33,12 +32,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale, slug } = await params;
-  setRequestLocale(locale);
+  const { slug } = await params;
   const project = await getProjectBySlug(slug);
   if (!project) return { title: "Projekt | Grønt Land DK" };
-  return pageMetadata({
-    locale,
+  return pageMetadata({ locale: "da",
     path: `/projekter/${slug}`,
     title: `${project.title} | Grønt Land DK`,
     description: project.seoDescription,
@@ -47,15 +44,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ProjectDetailPage({ params }: PageProps) {
-  const { locale, slug } = await params;
-  setRequestLocale(locale);
+  const { slug } = await params;
   const [project, page] = await Promise.all([getProjectBySlug(slug), getProjekterPage()]);
   if (!project) notFound();
 
   return (
     <QuoteModalProvider>
       <JsonLd
-        data={navBreadcrumbs(locale, "/projekter", {
+        data={navBreadcrumbs("da", "/projekter", {
           name: project.title,
           path: `/projekter/${slug}`,
         })}

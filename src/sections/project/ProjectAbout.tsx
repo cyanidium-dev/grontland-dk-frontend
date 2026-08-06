@@ -1,5 +1,3 @@
-import { getLocale } from "next-intl/server";
-
 import { Container, Heading } from "@/components/ui";
 import type { Project } from "@/constants/projects";
 import { ui } from "@/lib/i18n/copy";
@@ -7,7 +5,7 @@ import { ui } from "@/lib/i18n/copy";
 /* "Om projektet" — pine contrast band: ~540px write-up on the left edge,
    ~540px facts list on the right edge (justify-between at xl). */
 export async function ProjectAbout({ project }: { project: Project }) {
-  const t = ui(await getLocale());
+  const t = ui();
   const hasFacts = project.facts && project.facts.length > 0;
 
   return (

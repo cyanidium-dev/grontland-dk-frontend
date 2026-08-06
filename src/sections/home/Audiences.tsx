@@ -1,8 +1,6 @@
 import Image from "next/image";
 
 import { Container, Button, StarChip, Heading } from "@/components/ui";
-import { getLocale } from "next-intl/server";
-
 import { homeCopy } from "@/lib/i18n/copy";
 
 /* Figma image fill crop inside a fixed frame (#1009:1547, #1009:1596). */
@@ -36,7 +34,7 @@ function FigmaCroppedPhoto({
 /* Audiences ("Hvem hjælper vi?") — Figma #1009:1517 (file zq0o0GOkllffjjIomgnQ5p).
    Header #1009:1518 + decor #1009:1521; private #1009:1544; B2B #1009:1562 + decor #1009:1564. */
 export async function Audiences() {
-  const AUDIENCES = homeCopy(await getLocale()).AUDIENCES;
+  const AUDIENCES = homeCopy().AUDIENCES;
   return (
     <section className="isolate">
       {/* Header band — Figma #1009:1518; decor #1009:1521 behind mist, bleeds into leaf band */}

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { QuoteModalProvider } from "@/components/quote";
@@ -22,7 +21,7 @@ import {
 } from "@/sections/services";
 import { CtaBand } from "@/sections/shared";
 
-type PageProps = { params: Promise<{ locale: string; slug: string }> };
+type PageProps = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
   const slugs = await getServiceSlugs();
@@ -30,12 +29,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { locale, slug } = await params;
-  setRequestLocale(locale);
+  const { slug } = await params;
   const s = await getServiceBySlug(slug);
   if (!s) return { title: "Ydelser | Grønt Land DK" };
-  return pageMetadata({
-    locale,
+  return pageMetadata({ locale: "da",
     path: `/ydelser/${slug}`,
     title: s.metaTitle,
     description: s.metaDescription,
@@ -44,18 +41,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ServicePageRoute({ params }: PageProps) {
-  const { locale, slug } = await params;
-  setRequestLocale(locale);
+  const { slug } = await params;
   const s = await getServiceBySlug(slug);
   if (!s) notFound();
-  const t = ui(locale);
-  const homeLabel = homeCopy(locale).NAV_MENU[0].label;
+  const t = ui();
+  const homeLabel = homeCopy().NAV_MENU[0].label;
 
   return (
     <QuoteModalProvider>
       <JsonLd
         data={[
-          servicePage({ name: s.nav, description: s.metaDescription, slug: s.slug, locale }),
+          servicePage({ name: s.nav, description: s.metaDescription, slug: s.slug, locale: "da" }),
           faqPage(s.faq.items),
           breadcrumbs(
             [
@@ -63,7 +59,7 @@ export default async function ServicePageRoute({ params }: PageProps) {
               { name: t.servicesLabel, path: "/ydelser" },
               { name: s.nav, path: `/ydelser/${s.slug}` },
             ],
-            locale,
+            "da",
           ),
         ]}
       />

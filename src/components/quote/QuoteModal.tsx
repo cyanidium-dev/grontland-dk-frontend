@@ -1,6 +1,5 @@
 "use client";
 
-import { useLocale } from "next-intl";
 import { useEffect, useRef, type ReactNode } from "react";
 
 export function QuoteModal({
@@ -12,9 +11,8 @@ export function QuoteModal({
   onClose: () => void;
   children: ReactNode;
 }) {
-  const en = useLocale() === "en";
-  const label = en ? "Get a quote for your project" : "Få et tilbud på dit projekt";
-  const closeLabel = en ? "Close" : "Luk";
+  const label = "Få et tilbud på dit projekt";
+  const closeLabel = "Luk";
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

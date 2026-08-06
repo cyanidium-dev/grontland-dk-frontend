@@ -1,35 +1,29 @@
 import type { Metadata } from "next";
 
 import { pageMetadata } from "@/lib/seo/meta";
-import { setRequestLocale } from "next-intl/server";
-
 import { QuoteModalProvider } from "@/components/quote";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { navBreadcrumbs } from "@/lib/seo/jsonld";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { Footer } from "@/layouts/Footer";
 import { Header } from "@/layouts/Header";
 import { getGalleriPage } from "@/lib/sanity/queries";
 import { GalleriSections, GalleriSeoText } from "@/sections/galleri";
 import { CtaBand, PageHero } from "@/sections/shared";
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const { locale } = await params;
-  setRequestLocale(locale);
+export async function generateMetadata(): Promise<Metadata> {
   const page = await getGalleriPage();
-  return pageMetadata({ locale, path: "/galleri", title: page.metaTitle, description: page.metaDescription });
+  return pageMetadata({ locale: "da", path: "/galleri", title: page.metaTitle, description: page.metaDescription });
 }
 
 /* /galleri — hero (pills + Figma decor/photo) → per-service sections → SEO
    band with left-bleed photo → final CTA. */
-export default async function GalleriPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+export default async function GalleriPage() {
   const page = await getGalleriPage();
 
   return (
     <QuoteModalProvider>
-      <JsonLd data={navBreadcrumbs(locale, "/galleri")} />
+      <JsonLd data={navBreadcrumbs("da", "/galleri")} />
       <Header />
       <main className="flex-1">
         {/* No eyebrow label (site-wide PageHero pattern). Ring decor #3053:84

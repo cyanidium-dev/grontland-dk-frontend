@@ -1,6 +1,5 @@
 "use client";
 
-import { useLocale } from "next-intl";
 import { useRef } from "react";
 
 import { Container } from "@/components/ui";
@@ -14,7 +13,6 @@ const GAP = 20;
    slider pattern as ServicesSlider (scroll-snap track, no dependency).
    3 cards fit on desktop; fixed-width cards scroll on narrower viewports. */
 export function ProjectsSlider({ projects }: { projects: readonly Project[] }) {
-  const en = useLocale() === "en";
   const trackRef = useRef<HTMLUListElement>(null);
 
   const scroll = (dir: 1 | -1) => {
@@ -48,7 +46,7 @@ export function ProjectsSlider({ projects }: { projects: readonly Project[] }) {
         <div className="mt-8 flex justify-center gap-3">
           <button
             type="button"
-            aria-label={en ? "Previous" : "Forrige"}
+            aria-label={"Forrige"}
             onClick={() => scroll(-1)}
             className="flex size-[54px] cursor-pointer items-center justify-center rounded-full border border-line bg-white text-pine transition-colors hover:border-pine"
           >
@@ -56,7 +54,7 @@ export function ProjectsSlider({ projects }: { projects: readonly Project[] }) {
           </button>
           <button
             type="button"
-            aria-label={en ? "Next" : "Næste"}
+            aria-label={"Næste"}
             onClick={() => scroll(1)}
             className="flex size-[54px] cursor-pointer items-center justify-center rounded-full bg-leaf text-white transition-colors hover:brightness-110"
           >

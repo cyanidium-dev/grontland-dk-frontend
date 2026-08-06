@@ -1,4 +1,3 @@
-import { getLocale } from "next-intl/server";
 import Image from "next/image";
 
 import { GalleryCarousel, type GalleryItem } from "@/components/gallery";
@@ -21,7 +20,7 @@ import {
    service document (cases + gallery photos embedded by the query). */
 
 export async function ServiceHero({ service }: { service: ServicePageData }) {
-  const t = ui(await getLocale());
+  const t = ui();
   return (
     <>
       {/* No eyebrow label — site-wide PageHero pattern (om-os / kontakt). */}
@@ -94,7 +93,7 @@ export function ServicePrices({ service }: { service: ServicePageData }) {
 }
 
 export async function ServiceProcess({ service }: { service: ServicePageData }) {
-  const t = ui(await getLocale());
+  const t = ui();
   return (
     <NumberedSteps
       h2={service.process.h2}
@@ -109,7 +108,7 @@ export async function ServiceProcess({ service }: { service: ServicePageData }) 
 
 export async function ServiceCases({ service }: { service: ServicePageData }) {
   if (service.cases.length === 0) return null;
-  const t = ui(await getLocale());
+  const t = ui();
 
   return (
     <section className="bg-white py-16 xl:py-24">
@@ -129,7 +128,7 @@ export async function ServiceCases({ service }: { service: ServicePageData }) {
 
 export async function ServiceGalleryStrip({ service }: { service: ServicePageData }) {
   if (service.galleryPhotos.length === 0) return null;
-  const t = ui(await getLocale());
+  const t = ui();
 
   const items: GalleryItem[] = service.galleryPhotos.map((photo) => ({
     _key: photo.src,
@@ -154,7 +153,7 @@ export async function ServiceGalleryStrip({ service }: { service: ServicePageDat
 }
 
 export async function ServiceFaq({ service }: { service: ServicePageData }) {
-  return <FaqSection h2={service.faq.h2} items={service.faq.items} locale={await getLocale()} />;
+  return <FaqSection h2={service.faq.h2} items={service.faq.items} />;
 }
 
 export function ServiceSeoText({ service }: { service: ServicePageData }) {

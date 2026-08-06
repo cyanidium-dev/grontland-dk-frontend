@@ -1,9 +1,8 @@
 "use client";
 
-import { useLocale } from "next-intl";
 import { useRef } from "react";
 import Image from "next/image";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 
 import { Container } from "@/components/ui";
 import { ArrowIcon, ChevronIcon } from "@/components/icons";
@@ -17,7 +16,6 @@ const GAP = 20;
 /* Horizontally-scrollable service cards + prev/next arrows (custom slider,
    no dependency). All 4 fit on desktop; scrolls on narrower viewports. */
 export function ServicesSlider({ items }: { items: readonly Item[] }) {
-  const en = useLocale() === "en";
   const trackRef = useRef<HTMLUListElement>(null);
 
   const scroll = (dir: 1 | -1) =>
@@ -66,7 +64,7 @@ export function ServicesSlider({ items }: { items: readonly Item[] }) {
         <div className="mt-8 flex justify-center gap-3">
           <button
             type="button"
-            aria-label={en ? "Previous" : "Forrige"}
+            aria-label={"Forrige"}
             onClick={() => scroll(-1)}
             className="flex size-[54px] cursor-pointer items-center justify-center rounded-full border border-line bg-white text-pine transition-colors hover:border-pine"
           >
@@ -74,7 +72,7 @@ export function ServicesSlider({ items }: { items: readonly Item[] }) {
           </button>
           <button
             type="button"
-            aria-label={en ? "Next" : "Næste"}
+            aria-label={"Næste"}
             onClick={() => scroll(1)}
             className="flex size-[54px] cursor-pointer items-center justify-center rounded-full bg-leaf text-white transition-colors hover:brightness-110"
           >

@@ -3,8 +3,6 @@
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 
 import Image from "next/image";
-import { useLocale } from "next-intl";
-
 import { ChevronIcon } from "@/components/icons";
 import { cn } from "@/util/cn";
 
@@ -26,7 +24,6 @@ function CoverflowSlide({
   overlapStride: number;
   onSlideClick: () => void;
 }) {
-  const en = useLocale() === "en";
   const [failed, setFailed] = useState(false);
   const absDistance = Math.abs(distance);
   const isActive = distance === 0;
@@ -56,7 +53,7 @@ function CoverflowSlide({
             }
           : undefined
       }
-      aria-label={isActive ? `${en ? "Open image" : "Åbn billede"}: ${item.image.alt}` : undefined}
+      aria-label={isActive ? `${"Åbn billede"}: ${item.image.alt}` : undefined}
     >
       {failed ? (
         <div className="h-full w-full rounded-[14px] bg-white ring-1 ring-inset ring-line" aria-hidden />
@@ -86,7 +83,6 @@ export function CoverflowCarousel({
   onActiveIndexChange: (index: number) => void;
   onSlideClick: () => void;
 }) {
-  const en = useLocale() === "en";
   const rootRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const [metrics, setMetrics] = useState({
@@ -152,7 +148,7 @@ export function CoverflowCarousel({
       <div className="pointer-events-none absolute inset-x-4 top-1/2 z-40 flex -translate-y-1/2 justify-between sm:inset-x-8 lg:inset-x-12">
         <button
           type="button"
-          aria-label={en ? "Previous image" : "Forrige billede"}
+          aria-label={"Forrige billede"}
           onClick={goPrev}
           className="pointer-events-auto flex size-[54px] cursor-pointer items-center justify-center rounded-full border border-line bg-white text-pine transition-colors hover:border-pine"
         >
@@ -160,7 +156,7 @@ export function CoverflowCarousel({
         </button>
         <button
           type="button"
-          aria-label={en ? "Next image" : "Næste billede"}
+          aria-label={"Næste billede"}
           onClick={goNext}
           className="pointer-events-auto flex size-[54px] cursor-pointer items-center justify-center rounded-full bg-leaf text-white transition-colors hover:brightness-110"
         >

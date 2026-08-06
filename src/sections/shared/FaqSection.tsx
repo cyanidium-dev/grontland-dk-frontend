@@ -23,19 +23,14 @@ const MIN_HIDDEN = 2;
 const ITEM_H = 65; // one <details> row (px)
 const ITEM_GAP = 12; // gap-3 between rows (px)
 
-const LABELS: Record<string, { more: string; less: string }> = {
-  da: { more: "Vis flere spørgsmål", less: "Vis færre" },
-  en: { more: "Show more questions", less: "Show less" },
-};
+const LABELS = { more: "Vis flere spørgsmål", less: "Vis færre" };
 
 export function FaqSection({
   h2,
   items,
-  locale,
 }: {
   h2: string;
   items: readonly { q: string; a: string }[];
-  locale: string;
 }) {
   const collapsible = items.length - INITIAL_VISIBLE >= MIN_HIDDEN;
   const foldedCount = collapsible ? INITIAL_VISIBLE : items.length;
@@ -67,7 +62,7 @@ export function FaqSection({
     return () => window.removeEventListener("resize", measure);
   }, [foldedCount, items.length]);
 
-  const labels = LABELS[locale] ?? LABELS.da;
+  const labels = LABELS;
 
   return (
     <section

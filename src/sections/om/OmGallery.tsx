@@ -1,5 +1,3 @@
-import { getLocale } from "next-intl/server";
-
 import type { GalleryItem } from "@/components/gallery";
 import { GalleryStrip } from "@/sections/shared";
 import { getGalleryCategories } from "@/lib/sanity/queries";
@@ -11,8 +9,8 @@ import { omCopy } from "@/lib/i18n/copy";
 const PER_SERVICE = 2;
 
 export async function OmGallery() {
-  const [categories, locale] = await Promise.all([getGalleryCategories(), getLocale()]);
-  const OM_GALLERY = omCopy(locale).OM_GALLERY;
+  const categories = await getGalleryCategories();
+  const OM_GALLERY = omCopy().OM_GALLERY;
   const items: GalleryItem[] = categories.flatMap((c) =>
     c.photos
       .slice(0, PER_SERVICE)

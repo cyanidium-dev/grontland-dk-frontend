@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 
 import { pageMetadata } from "@/lib/seo/meta";
-import { setRequestLocale } from "next-intl/server";
-
 import { QuoteModalProvider } from "@/components/quote";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { navBreadcrumbs } from "@/lib/seo/jsonld";
@@ -13,26 +11,19 @@ import { PageHero, PageHeroSeamDecor, CtaBand } from "@/sections/shared";
 import { OmIntro, OmValues, OmTeam, OmOnePlan, OmGallery } from "@/sections/om";
 import { omCopy } from "@/lib/i18n/copy";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const { OM_META } = omCopy(locale);
-  return pageMetadata({ locale, path: "/om-os", title: OM_META.title, description: OM_META.description });
+export async function generateMetadata(): Promise<Metadata> {
+  const { OM_META } = omCopy();
+  return pageMetadata({ locale: "da", path: "/om-os", title: OM_META.title, description: OM_META.description });
 }
 
 /* /om-os — docs/content/om-os.md: hero → who-we-are + facts → values → team →
    one-plan band → Process (shared with home, anchors #proces) → gallery teaser
    → final CTA. About + Team merged per client. */
-export default async function OmOsPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const { OM_HERO, OM_CTA } = omCopy(locale);
+export default async function OmOsPage() {
+  const { OM_HERO, OM_CTA } = omCopy();
   return (
     <QuoteModalProvider>
-      <JsonLd data={navBreadcrumbs(locale, "/om-os")} />
+      <JsonLd data={navBreadcrumbs("da", "/om-os")} />
       <Header />
       <main className="flex-1">
         <PageHero

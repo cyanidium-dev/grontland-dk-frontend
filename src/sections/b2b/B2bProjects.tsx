@@ -1,5 +1,3 @@
-import { getLocale } from "next-intl/server";
-
 import { ProjectCard } from "@/components/project";
 import { Container, Heading, Button } from "@/components/ui";
 import { AccentDots, RingDecor } from "@/sections/shared";
@@ -10,8 +8,8 @@ import { b2bCopy } from "@/lib/i18n/copy";
    CMS; two trade-relevant private cases fill the row as reference work (curated
    order). id="projekter" is the hero "View subcontracting projects" anchor. */
 export async function B2bProjects() {
-  const [all, locale] = await Promise.all([getProjects(), getLocale()]);
-  const { B2B_PROJECTS } = b2bCopy(locale);
+  const all = await getProjects();
+  const { B2B_PROJECTS } = b2bCopy();
   const projects = B2B_PROJECTS.slugs
     .map((slug) => all.find((p) => p.slug === slug))
     .filter((project) => project !== undefined);

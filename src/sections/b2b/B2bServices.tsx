@@ -1,8 +1,7 @@
-import { getLocale } from "next-intl/server";
 import Image from "next/image";
 
 import { ArrowIcon } from "@/components/icons";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { Container, Heading } from "@/components/ui";
 import { RingDecor } from "@/sections/shared";
 import { getServiceCards } from "@/lib/sanity/queries";
@@ -11,8 +10,8 @@ import { b2bCopy } from "@/lib/i18n/copy";
 /* § 3 — "Construction trades and subcontracting services" — the 8 service cards
    from the CMS (same source as the home slider), for the contractor page. */
 export async function B2bServices() {
-  const [cards, locale] = await Promise.all([getServiceCards(), getLocale()]);
-  const { B2B_SERVICES } = b2bCopy(locale);
+  const cards = await getServiceCards();
+  const { B2B_SERVICES } = b2bCopy();
 
   return (
     <section className="relative overflow-x-clip bg-mist py-16 xl:py-24">

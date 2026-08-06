@@ -58,7 +58,7 @@ export const navBreadcrumbs = (
   path: string,
   leaf?: { name: string; path: string },
 ) => {
-  const nav = homeCopy(locale).NAV_MENU;
+  const nav = homeCopy().NAV_MENU;
   const trail: { name: string; path: string }[] = [{ name: nav[0].label, path: "/" }];
   const section = nav.find((i) => i.href === path);
   if (section) trail.push({ name: section.label, path });

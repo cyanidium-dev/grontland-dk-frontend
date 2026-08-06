@@ -1,14 +1,12 @@
 import Image from "next/image";
 
 import { Container, Heading, Button } from "@/components/ui";
-import { getLocale } from "next-intl/server";
-
 import { omCopy } from "@/lib/i18n/copy";
 
 /* Contrast band (home OneTeam treatment): full-bleed photo + gradient.
    First CTA anchors to the Process section below (#proces). */
 export async function OmOnePlan() {
-  const { OM_ONEPLAN } = omCopy(await getLocale());
+  const { OM_ONEPLAN } = omCopy();
   return (
     <section className="relative overflow-hidden py-16 text-white xl:py-24">
       <Image

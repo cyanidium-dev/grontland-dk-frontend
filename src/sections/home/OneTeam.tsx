@@ -1,14 +1,12 @@
 import Image from "next/image";
 
 import { Container, Heading, StarChip } from "@/components/ui";
-import { getLocale } from "next-intl/server";
-
 import { homeCopy } from "@/lib/i18n/copy";
 
 /* OneTeam ("Flere fag samlet i én plan") — Figma #1009:1604 (file zq0o0GOkllffjjIomgnQ5p).
    Full-bleed photo + gradient; left intro 340px; right StarChip stack 420px. */
 export async function OneTeam() {
-  const ONETEAM = homeCopy(await getLocale()).ONETEAM;
+  const ONETEAM = homeCopy().ONETEAM;
   return (
     <section className="relative overflow-hidden py-16 text-white xl:min-h-[580px] xl:py-24">
       <Image

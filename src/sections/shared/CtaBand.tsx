@@ -1,7 +1,6 @@
-import { getLocale } from "next-intl/server";
 import Image from "next/image";
 
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { Container, Heading, Button } from "@/components/ui";
 import { OpenQuoteButton } from "@/components/quote";
 import { getSiteSettings } from "@/lib/sanity/queries";
@@ -31,8 +30,8 @@ export async function CtaBand({
    *  when a wide photo shares the band so the text keeps clear of it. */
   textMaxWidth?: string;
 }) {
-  const [s, locale] = await Promise.all([getSiteSettings(), getLocale()]);
-  const phone = { label: `${ui(locale).callPrefix} ${s.phone}`, href: s.phoneHref };
+  const s = await getSiteSettings();
+  const phone = { label: `${ui().callPrefix} ${s.phone}`, href: s.phoneHref };
   return (
     <section className="relative overflow-hidden bg-black text-white">
       {image && (

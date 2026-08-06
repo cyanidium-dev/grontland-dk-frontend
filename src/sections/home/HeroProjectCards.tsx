@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useLayoutEffect, useRef } from "react";
 
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { cn } from "@/util/cn";
 
 // Runs before paint on the client (positions the strip without a visible

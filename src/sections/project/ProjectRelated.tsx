@@ -1,5 +1,3 @@
-import { getLocale } from "next-intl/server";
-
 import { Container, Heading } from "@/components/ui";
 import { ProjectCard } from "@/components/project";
 import type { Project } from "@/constants/projects";
@@ -12,7 +10,7 @@ export async function ProjectRelated({ related }: { related: Project[] }) {
     <section className="bg-mist py-16 xl:py-20">
       <Container>
         <Heading as="h2" size="section">
-          {ui(await getLocale()).projectRelatedH2}
+          {ui().projectRelatedH2}
         </Heading>
         <ul className="mt-10 grid gap-6 xl:grid-cols-3">
           {related.map((item) => (

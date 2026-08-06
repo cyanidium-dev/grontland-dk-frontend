@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-import { useLocale } from "next-intl";
-
 import { Container, Heading, Button, FilterPill, Marquee } from "@/components/ui";
 import { StarIcon } from "@/components/icons";
 import { GalleryCarousel, type GalleryItem } from "@/components/gallery";
@@ -15,8 +13,7 @@ import type { GalleryCategoryData } from "@/lib/sanity/queries";
    pine marquee at bottom (unlike Services/Projects leaf marquees).
    Copy is local; pills + photos come from CMS galleryCategory docs. */
 export function Gallery({ categories }: { categories: GalleryCategoryData[] }) {
-  const locale = useLocale();
-  const { GALLERY, MARQUEE_WORDS } = homeCopy(locale);
+  const { GALLERY, MARQUEE_WORDS } = homeCopy();
   const [filter, setFilter] = useState<string>("alle");
 
   const allLabel = "Alle";

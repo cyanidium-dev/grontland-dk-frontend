@@ -1,19 +1,15 @@
 /**
  * CMS reads — every query projects documents into the site's existing
  * TypeScript shapes, so sections/components keep their props and only the
- * data source changes. Locale-aware: text fields project
- * coalesce(field[$locale], field.da), and the locale comes from the request
- * (next-intl getLocale), so call sites don't pass it. Slug-only queries are
- * locale-free (usable from sitemap.ts, which runs outside a request).
+ * data source changes. Text fields are plain DA strings (locales flattened
+ * 2026-08). Slug-only queries need no request context (sitemap.ts).
  */
-import { getLocale } from "next-intl/server";
-
 import type { Project } from "@/constants/projects";
 
 import { sanityFetch } from "./fetch";
 
-/* Locale-aware GROQ text accessor: field → coalesce(field[$locale], field.da) */
-const l = (field: string) => `coalesce(${field}[$locale], ${field}.da)`;
+/* GROQ path helper — kept so projections stay readable after the locale strip. */
+const l = (field: string) => field;
 
 /* Shared projection snippets */
 /* Image src projects the FULL object (asset ref + editor crop/hotspot) —
@@ -23,9 +19,8 @@ const IMG_SRC = `{asset, crop, hotspot}`;
 const IMG = `{"src": ${IMG_SRC}, "alt": ${l("alt")}}`;
 const CTA = `{"label": ${l("label")}, href}`;
 
-async function localeFetch<T>(query: string, params: Record<string, unknown> = {}): Promise<T> {
-  const locale = await getLocale();
-  return sanityFetch<T>(query, { ...params, locale });
+function localeFetch<T>(query: string, params: Record<string, unknown> = {}): Promise<T> {
+  return sanityFetch<T>(query, params);
 }
 
 // ---------------------------------------------------------------------------
@@ -78,7 +73,7 @@ export type CtaBandData = {
 
 export type SeoTextData = { h2: string; text: string; images: Img[] | null };
 
-const HERO = `{"label": ${l("label")}, "h1": ${l("h1")}, "sub": ${l("sub")}, "image": image${IMG}, "ctas": ctas[]${CTA}, "trustChips": trustChips[]{"v": coalesce(@[$locale], @.da)}[].v}`;
+const HERO = `{"label": ${l("label")}, "h1": ${l("h1")}, "sub": ${l("sub")}, "image": image${IMG}, "ctas": ctas[]${CTA}, "trustChips": trustChips}`;
 const CTA_BAND = `{"h2": ${l("h2")}, "text": ${l("text")}, "primary": primary${CTA}, "crosslinks": crosslinks[]${CTA}, "image": image${IMG}}`;
 const SEO_TEXT = `{"h2": ${l("h2")}, "text": ${l("text")}, "images": images[]${IMG}}`;
 
@@ -91,7 +86,7 @@ const PROJECT = `{
   location,
   "objectType": ${l("objectType")},
   category,
-  "serviceLabel": coalesce(serviceLabel[$locale], serviceLabel.da, primaryService->nav[$locale], primaryService->nav.da),
+  "serviceLabel": coalesce(serviceLabel, primaryService->nav),
   "serviceHref": "/ydelser/" + primaryService->slug.current,
   "services": services[]->{"label": ${l("nav")}, "href": "/ydelser/" + slug.current},
   "cardDesc": ${l("cardDesc")},
@@ -102,8 +97,8 @@ const PROJECT = `{
   "seoDescription": ${l("seo.description")},
   "intro": ${l("intro")},
   "task": ${l("task")},
-  "work": work[]{"v": coalesce(@[$locale], @.da)}[].v,
-  "focus": focus[]{"v": coalesce(@[$locale], @.da)}[].v,
+  "work": work,
+  "focus": focus,
   "result": ${l("result")},
   "facts": facts[]{"label": ${l("label")}, "value": ${l("value")}},
   "gallery": gallery[]{"src": image${IMG_SRC}, "alt": ${l("image.alt")}, kind},
@@ -181,7 +176,7 @@ const SERVICE_PAGE = `{
   "h1": ${l("hero.h1")},
   "heroSub": ${l("hero.sub")},
   "heroImage": hero.image${IMG},
-  "trustChips": hero.trustChips[]{"v": coalesce(@[$locale], @.da)}[].v,
+  "trustChips": hero.trustChips,
   "scope": scope{"h2": ${l("h2")}, "items": items[]{"title": ${l("title")}, "desc": ${l("desc")}}},
   "prices": prices{"h2": ${l("h2")}, "note": ${l("note")}, "rows": rows[]{"label": ${l("label")}, "value": ${l("value")}}},
   "process": process{"h2": ${l("h2")}, "steps": steps[]{"title": ${l("title")}, "desc": ${l("desc")}}},
@@ -219,7 +214,7 @@ export function getYdelserIndex(): Promise<YdelserIndexData> {
       "cards": *[_type == "service"] | order(order asc) {
         "slug": slug.current,
         "title": ${l("nav")},
-        "desc": coalesce(cardDesc[$locale], cardDesc.da, hero.sub[$locale], hero.sub.da),
+        "desc": coalesce(cardDesc, hero.sub),
         "image": hero.image${IMG}
       }
     }`,
@@ -256,7 +251,7 @@ export function getServiceCards(): Promise<ServiceCard[]> {
   return localeFetch<ServiceCard[]>(
     `*[_type == "service"] | order(order asc) {
       "name": ${l("nav")},
-      "desc": coalesce(cardDesc[$locale], cardDesc.da, hero.sub[$locale], hero.sub.da),
+      "desc": coalesce(cardDesc, hero.sub),
       "href": "/ydelser/" + slug.current,
       "image": hero.image${IMG_SRC},
       "imageAlt": ${l("hero.image.alt")}

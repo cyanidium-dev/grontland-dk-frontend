@@ -1,15 +1,13 @@
 import Image from "next/image";
 
 import { Container, Heading, StarChip } from "@/components/ui";
-import { getLocale } from "next-intl/server";
-
 import { b2bCopy } from "@/lib/i18n/copy";
 
 /* § 4 — Capabilities & responsibility. Contrast band (pine): the reliable-capacity
    argument, six proof chips, and a work photo. The team itself is the OmTeam
    block that follows this section. */
 export async function B2bWhy() {
-  const { B2B_WHY } = b2bCopy(await getLocale());
+  const { B2B_WHY } = b2bCopy();
   return (
     <section className="bg-pine py-16 text-white xl:py-24">
       <Container>

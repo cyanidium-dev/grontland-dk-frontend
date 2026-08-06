@@ -1,6 +1,5 @@
 "use client";
 
-import { useLocale } from "next-intl";
 import type { ReactNode } from "react";
 
 import { cn } from "@/util/cn";
@@ -16,7 +15,6 @@ export function Modal({
   children: ReactNode;
   className?: string;
 }) {
-  const en = useLocale() === "en";
   return (
     <div
       className={cn(
@@ -41,7 +39,7 @@ export function Modal({
         <button
           type="button"
           onClick={onClose}
-          aria-label={en ? "Close" : "Luk"}
+          aria-label={"Luk"}
           className="absolute top-5 right-4 z-30 flex size-8 cursor-pointer items-center justify-center text-white transition-opacity hover:opacity-70 md:top-5 md:right-5"
         >
           <svg

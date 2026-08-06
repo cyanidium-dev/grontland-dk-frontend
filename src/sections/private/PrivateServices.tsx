@@ -1,8 +1,7 @@
-import { getLocale } from "next-intl/server";
 import Image from "next/image";
 
 import { ArrowIcon } from "@/components/icons";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { Container, Heading } from "@/components/ui";
 import { RingDecor } from "@/sections/shared";
 import { getServiceCards } from "@/lib/sanity/queries";
@@ -11,8 +10,8 @@ import { privateCopy } from "@/lib/i18n/copy";
 /* § 2 — "What can we help you with?" — the 8 service cards from the CMS (same
    source as the home service slider), in a grid for the private page. */
 export async function PrivateServices() {
-  const [cards, locale] = await Promise.all([getServiceCards(), getLocale()]);
-  const { PRIVATE_SERVICES } = privateCopy(locale);
+  const cards = await getServiceCards();
+  const { PRIVATE_SERVICES } = privateCopy();
 
   return (
     <section className="relative overflow-x-clip bg-white py-16 xl:py-24">

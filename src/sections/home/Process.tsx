@@ -2,8 +2,6 @@ import { Container, Heading, Button, Dots, InfoBox } from "@/components/ui";
 import type { InfoBoxVariant } from "@/components/ui";
 import { OpenQuoteButton } from "@/components/quote";
 import { cn } from "@/util/cn";
-import { getLocale } from "next-intl/server";
-
 import { homeCopy } from "@/lib/i18n/copy";
 
 /* "Sådan foregår arbejdet" — Figma #1019:924 / #1018:583 (file zq0o0GOkllffjjIomgnQ5p).
@@ -57,7 +55,7 @@ export async function Process({
   data,
   ctaModal = false,
 }: { data?: ProcessData; ctaModal?: boolean } = {}) {
-  const PROCESS = data ?? homeCopy(await getLocale()).PROCESS;
+  const PROCESS = data ?? homeCopy().PROCESS;
   return (
     <section id="proces" className="relative overflow-hidden bg-white py-16 xl:py-24">
       {/* Ring decor #1018:641 — Figma inset + rotate on #1019:924 wrapper (not baked into SVG) */}

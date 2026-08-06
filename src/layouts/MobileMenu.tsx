@@ -1,9 +1,8 @@
 "use client";
 
-import { useLocale } from "next-intl";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 
 import { cn } from "@/util/cn";
 import { OpenQuoteButton } from "@/components/quote";
@@ -18,8 +17,7 @@ import { homeCopy } from "@/lib/i18n/copy";
    handlers rather than overflow/position, which would disable the sticky
    header; the drawer's own <nav> scrolls internally. */
 export function MobileMenu() {
-  const locale = useLocale();
-  const c = homeCopy(locale);
+  const c = homeCopy();
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   // Hydration-safe "are we on the client?" check so the portal only renders

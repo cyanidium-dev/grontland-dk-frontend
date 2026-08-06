@@ -2,8 +2,6 @@ import Image from "next/image";
 
 import { Container, Button, Heading, Dots, ImageCarousel } from "@/components/ui";
 import { OpenQuoteButton } from "@/components/quote";
-import { getLocale } from "next-intl/server";
-
 import { getProjects } from "@/lib/sanity/queries";
 import { homeCopy } from "@/lib/i18n/copy";
 import { HeroProjectCards, type HeroProjectCard } from "./HeroProjectCards";
@@ -14,8 +12,8 @@ import { HeroProjectCards, type HeroProjectCard } from "./HeroProjectCards";
    projects linking to their pages; the desktop strip starts at the content
    container's left edge and runs across the photo panel. */
 export async function Hero() {
-  const [locale, projects] = await Promise.all([getLocale(), getProjects()]);
-  const HERO = homeCopy(locale).HERO;
+  const projects = await getProjects();
+  const HERO = homeCopy().HERO;
   const cards: HeroProjectCard[] = projects.map((p) => ({
     label: p.title,
     image: { src: p.cardImage, alt: p.cardImageAlt },

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 
 import { pageMetadata } from "@/lib/seo/meta";
-import { setRequestLocale } from "next-intl/server";
-
 import { QuoteModalProvider } from "@/components/quote";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { navBreadcrumbs } from "@/lib/seo/jsonld";
@@ -20,26 +18,19 @@ import { B2bScenariosDecor, B2bServices, B2bWhy, B2bProjects } from "@/sections/
 import { OmTeam } from "@/sections/om";
 import { b2bCopy } from "@/lib/i18n/copy";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const { B2B_META } = b2bCopy(locale);
-  return pageMetadata({ locale, path: "/entreprenorer", title: B2B_META.title, description: B2B_META.description });
+export async function generateMetadata(): Promise<Metadata> {
+  const { B2B_META } = b2bCopy();
+  return pageMetadata({ locale: "da", path: "/entreprenorer", title: B2B_META.title, description: B2B_META.description });
 }
 
 /* /entreprenorer — per Contractors.md: hero (trust chips + modal CTA) →
    collaboration formats → services (CMS cards) → capabilities band → projects
    → process → final CTA (modal). No testimonials by design. */
-export default async function EntreprenorerPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const { B2B_HERO, B2B_SCENARIOS, B2B_MODEL, B2B_CTA } = b2bCopy(locale);
+export default async function EntreprenorerPage() {
+  const { B2B_HERO, B2B_SCENARIOS, B2B_MODEL, B2B_CTA } = b2bCopy();
   return (
     <QuoteModalProvider>
-      <JsonLd data={navBreadcrumbs(locale, "/entreprenorer")} />
+      <JsonLd data={navBreadcrumbs("da", "/entreprenorer")} />
       <Header />
       <main className="flex-1">
         {/* 1 — Hero (trust chips under the CTAs; first CTA opens the quote modal) */}

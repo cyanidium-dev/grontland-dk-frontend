@@ -1,5 +1,3 @@
-import { getLocale } from "next-intl/server";
-
 import { ProjectCard } from "@/components/project";
 import { Container, Heading, Button } from "@/components/ui";
 import { AccentDots, RingDecor } from "@/sections/shared";
@@ -9,8 +7,8 @@ import { privateCopy } from "@/lib/i18n/copy";
 /* Featured private cases — shared ProjectCard on curated slugs (copy local,
    project data from the CMS, kept in the curated order). */
 export async function PrivateProjects() {
-  const [all, locale] = await Promise.all([getProjects(), getLocale()]);
-  const PRIVATE_PROJECTS = privateCopy(locale).PRIVATE_PROJECTS;
+  const all = await getProjects();
+  const PRIVATE_PROJECTS = privateCopy().PRIVATE_PROJECTS;
   const projects = PRIVATE_PROJECTS.slugs
     .map((slug) => all.find((p) => p.slug === slug))
     .filter((project) => project !== undefined);

@@ -1,8 +1,7 @@
 /**
- * DA-only copy resolvers for the "local" pages (home, om-os, kontakt, private,
- * entreprenorer) whose copy stays in constants. `locale` stays on the signature
- * so call sites need no churn after the EN strip (voided intentionally).
- * CMS-driven pages localize in GROQ (lib/sanity/queries.ts).
+ * DA copy resolvers for the "local" pages (home, om-os, kontakt, private,
+ * entreprenorer) whose copy stays in constants. CMS-driven pages read
+ * plain DA strings via GROQ (lib/sanity/queries.ts).
  */
 import * as home from "@/constants/home";
 import * as om from "@/constants/om";
@@ -11,10 +10,7 @@ import * as privateC from "@/constants/privatePage";
 import * as b2b from "@/constants/b2b";
 import { PROJECTS_LIST, PROJECT_CATEGORY_LABEL } from "@/constants/projects";
 
-type Locale = string;
-
-export function homeCopy(locale: Locale) {
-  void locale;
+export function homeCopy() {
   return {
     NAV_MENU: home.NAV_MENU,
     SERVICES_MENU: home.SERVICES_MENU,
@@ -33,8 +29,7 @@ export function homeCopy(locale: Locale) {
   };
 }
 
-export function omCopy(locale: Locale) {
-  void locale;
+export function omCopy() {
   return {
     OM_META: om.OM_META,
     OM_HERO: om.OM_HERO,
@@ -47,8 +42,7 @@ export function omCopy(locale: Locale) {
   };
 }
 
-export function kontaktCopy(locale: Locale) {
-  void locale;
+export function kontaktCopy() {
   return {
     KONTAKT_META: kontakt.KONTAKT_META,
     KONTAKT_HERO: kontakt.KONTAKT_HERO,
@@ -59,8 +53,7 @@ export function kontaktCopy(locale: Locale) {
   };
 }
 
-export function privateCopy(locale: Locale) {
-  void locale;
+export function privateCopy() {
   return {
     PRIVATE_META: privateC.PRIVATE_META,
     PRIVATE_HERO: privateC.PRIVATE_HERO,
@@ -74,8 +67,7 @@ export function privateCopy(locale: Locale) {
   };
 }
 
-export function b2bCopy(locale: Locale) {
-  void locale;
+export function b2bCopy() {
   return {
     B2B_META: b2b.B2B_META,
     B2B_HERO: b2b.B2B_HERO,
@@ -88,8 +80,7 @@ export function b2bCopy(locale: Locale) {
   };
 }
 
-export function projectsCopy(locale: Locale) {
-  void locale;
+export function projectsCopy() {
   return {
     PROJECTS_LIST,
     PROJECT_CATEGORY_LABEL,
@@ -124,7 +115,6 @@ const UI = {
   projectRelatedH2: "Andre projekter",
 } as const;
 
-export function ui(locale: Locale) {
-  void locale;
+export function ui() {
   return UI;
 }

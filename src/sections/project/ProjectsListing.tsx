@@ -1,6 +1,5 @@
 "use client";
 
-import { useLocale } from "next-intl";
 import { useState } from "react";
 
 import { ProjectCard } from "@/components/project";
@@ -21,10 +20,9 @@ export function ProjectsListing({
   emptyFilter: string | null;
   projects: Project[];
 }) {
-  const locale = useLocale();
   // Localized copy (was imported straight from the da constants, which leaked
   // Danish filter labels onto the EN listing).
-  const { PROJECTS_LIST } = projectsCopy(locale);
+  const { PROJECTS_LIST } = projectsCopy();
   const [filter, setFilter] = useState<ProjectFilterId>("all");
   const visible = filter === "all" ? projects : projects.filter((p) => p.category === filter);
 

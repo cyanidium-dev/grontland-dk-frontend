@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
 import { Manrope, Montserrat } from "next/font/google";
-import { notFound } from "next/navigation";
-import "../globals.css";
+import "./globals.css";
 
 import { JsonLd } from "@/components/seo/JsonLd";
-import { routing } from "@/i18n/routing";
 import { getSiteSettings } from "@/lib/sanity/queries";
 import { localBusiness } from "@/lib/seo/jsonld";
 import { OG_IMAGE, SITE_META, SITE_URL } from "@/lib/seo/meta";
@@ -29,12 +25,7 @@ const montserrat = Montserrat({
   fallback: ["Arial", "sans-serif"],
 });
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  await params;
+export async function generateMetadata(): Promise<Metadata> {
   const m = SITE_META.da;
   // No alternates here: canonical/hreflang are per-page (home sets its own;
   // subpage hreflang comes from sitemap.ts — a layout-wide set would wrongly
@@ -54,34 +45,20 @@ export async function generateMetadata({
   };
 }
 
-// DA-only (localePrefix "as-needed" keeps da unprefixed).
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
-export const dynamicParams = false;
-
 export default async function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 }>) {
-  const { locale } = await params;
-  if (!hasLocale(routing.locales, locale)) notFound();
-  setRequestLocale(locale);
-
   const settings = await getSiteSettings();
   return (
     <html
-      lang={locale}
+      lang="da"
       className={`${manrope.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white font-sans text-pine">
-        <NextIntlClientProvider>
-          <JsonLd data={localBusiness(settings)} />
-          {children}
-        </NextIntlClientProvider>
+        <JsonLd data={localBusiness(settings)} />
+        {children}
       </body>
     </html>
   );

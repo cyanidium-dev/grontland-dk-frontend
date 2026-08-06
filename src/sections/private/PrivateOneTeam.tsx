@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { getLocale } from "next-intl/server";
-
 import { Container, Heading, StarChip } from "@/components/ui";
 import { privateCopy } from "@/lib/i18n/copy";
 
@@ -11,7 +9,7 @@ import { privateCopy } from "@/lib/i18n/copy";
    ~1.6x the intro height (the four-item home block balances at 1.05); the
    2-col grid matches that balance almost exactly. */
 export async function PrivateOneTeam() {
-  const { PRIVATE_ONE_TEAM } = privateCopy(await getLocale());
+  const { PRIVATE_ONE_TEAM } = privateCopy();
 
   return (
     <section className="relative overflow-hidden py-16 text-white xl:min-h-[580px] xl:py-24">

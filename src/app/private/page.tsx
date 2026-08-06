@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 
 import { pageMetadata } from "@/lib/seo/meta";
-import { setRequestLocale } from "next-intl/server";
-
 import { QuoteModalProvider } from "@/components/quote";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqPage, navBreadcrumbs } from "@/lib/seo/jsonld";
@@ -19,26 +17,19 @@ import {
 } from "@/sections/private";
 import { privateCopy } from "@/lib/i18n/copy";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const { PRIVATE_META } = privateCopy(locale);
-  return pageMetadata({ locale, path: "/private", title: PRIVATE_META.title, description: PRIVATE_META.description });
+export async function generateMetadata(): Promise<Metadata> {
+  const { PRIVATE_META } = privateCopy();
+  return pageMetadata({ locale: "da", path: "/private", title: PRIVATE_META.title, description: PRIVATE_META.description });
 }
 
 /* /private — restructured per docs/private-page-restructure-mapping.md:
    hero → services → completed projects → why one team → team → process →
    reviews (placeholder) → FAQ → final CTA. */
-export default async function PrivatePage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const { PRIVATE_HERO, PRIVATE_PROCESS, PRIVATE_FAQ, PRIVATE_CTA } = privateCopy(locale);
+export default async function PrivatePage() {
+  const { PRIVATE_HERO, PRIVATE_PROCESS, PRIVATE_FAQ, PRIVATE_CTA } = privateCopy();
   return (
     <QuoteModalProvider>
-      <JsonLd data={[navBreadcrumbs(locale, "/private"), faqPage(PRIVATE_FAQ.items)]} />
+      <JsonLd data={[navBreadcrumbs("da", "/private"), faqPage(PRIVATE_FAQ.items)]} />
       <Header />
       <main className="flex-1">
         {/* 1 — Hero (trust chips under the CTAs) */}
@@ -63,7 +54,7 @@ export default async function PrivatePage({ params }: { params: Promise<{ locale
         {/* 7 — Reviews (placeholder) */}
         <PrivateReviews />
         {/* 8 — FAQ */}
-        <FaqSection h2={PRIVATE_FAQ.h2} items={PRIVATE_FAQ.items} locale={locale} />
+        <FaqSection h2={PRIVATE_FAQ.h2} items={PRIVATE_FAQ.items} />
         {/* 9 — Final CTA (phone from CMS siteSettings) */}
         <CtaBand
           h2={PRIVATE_CTA.h2}

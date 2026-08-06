@@ -1,6 +1,4 @@
-import { getLocale } from "next-intl/server";
-
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { cn } from "@/util/cn";
 import { Container, Dropdown } from "@/components/ui";
 import { OpenQuoteButton } from "@/components/quote";
@@ -14,8 +12,7 @@ import { MobileMenu } from "./MobileMenu";
    mobile drawer (see MobileMenu). */
 export async function Header({ variant = "solid" }: { variant?: "solid" | "overlay" }) {
   const overlay = variant === "overlay";
-  const locale = await getLocale();
-  const c = homeCopy(locale);
+  const c = homeCopy();
   const [home, ...rest] = c.NAV_MENU;
 
   return (

@@ -1,5 +1,3 @@
-import { getLocale } from "next-intl/server";
-
 import { StarIcon } from "@/components/icons";
 import { Container, Heading } from "@/components/ui";
 import { RingDecor } from "@/sections/shared";
@@ -8,7 +6,7 @@ import { privateCopy } from "@/lib/i18n/copy";
 /* § 7 — Customer reviews. Currently PLACEHOLDER copy (see constants):
    real, verifiable reviews (name + platform link) replace these later. */
 export async function PrivateReviews() {
-  const { PRIVATE_REVIEWS } = privateCopy(await getLocale());
+  const { PRIVATE_REVIEWS } = privateCopy();
 
   return (
     <section className="relative overflow-x-clip bg-white py-16 xl:py-24">
