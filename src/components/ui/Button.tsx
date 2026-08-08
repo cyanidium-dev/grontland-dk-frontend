@@ -37,6 +37,7 @@ type AsButton = CommonProps & {
   href?: undefined;
   type?: "button" | "submit";
   onClick?: () => void;
+  disabled?: boolean;
 };
 
 type AsLink = CommonProps & {
@@ -79,11 +80,17 @@ export function Button(props: ButtonProps) {
     );
   }
 
+  const disabled = !("href" in props && props.href !== undefined) && props.disabled;
+
   return (
     <button
       type={props.type ?? "button"}
       onClick={props.onClick}
-      className={cn("cursor-pointer", classes)}
+      disabled={disabled}
+      className={cn(
+        "cursor-pointer disabled:pointer-events-none disabled:opacity-60",
+        classes,
+      )}
     >
       {children}
       {withArrow && <Arrow />}

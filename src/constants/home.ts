@@ -253,6 +253,13 @@ export const QUOTE_FORM = {
   upload: "Upload billeder",
   uploadHint: "Træk billeder hertil, eller klik for at vælge",
   button: "Send forespørgsel",
+  sending: "Sender…",
+  successTitle: "Tak — vi har modtaget din forespørgsel",
+  successBody: "Vi vender tilbage med en klar næste handling inden 24 timer.",
+  errorGeneric:
+    "Noget gik galt. Prøv igen, eller ring 91 70 01 03 / skriv til grontlanddk@gmail.com.",
+  errorUnavailable:
+    "Forespørgslen kan ikke sendes lige nu. Ring 91 70 01 03, eller skriv til grontlanddk@gmail.com.",
   micro: "Vi vender tilbage med en klar næste handling.",
   cta: { label: "Kontakt os" },
   image: "/images/cases/quote-cta-band.jpg",
