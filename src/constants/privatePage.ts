@@ -41,6 +41,7 @@ export const PRIVATE_PROJECTS = {
     "belaegning-ved-bolig",
     "facadeopgave",
     "betontrappe-hellerup",
+    "totalrenovering-skodsborg",
   ],
   ctas: [
     { label: "Se alle projekter", href: "/projekter" },
