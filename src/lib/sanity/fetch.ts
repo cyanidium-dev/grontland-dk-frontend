@@ -21,15 +21,15 @@ function resolveImageUrls<T>(node: T): T {
   return node;
 }
 
-/* All CMS reads go through here: hourly time-based revalidation site-wide
-   plus the shared "sanity" tag, so a future webhook route can
-   revalidateTag("sanity") for instant updates. */
+/* All CMS reads go through here: a 6 h time-based fallback site-wide
+   (never shorter: it burns the Vercel Hobby ISR-writes quota) plus the
+   shared "sanity" tag, which the publish webhook /api/revalidate resets. */
 export async function sanityFetch<T>(
   query: string,
   params: Record<string, unknown> = {},
 ): Promise<T> {
   const result = await client.fetch<T>(query, params, {
-    next: { revalidate: 3600, tags: ["sanity"] },
+    next: { revalidate: 21600, tags: ["sanity"] },
   });
   return resolveImageUrls(result);
 }
